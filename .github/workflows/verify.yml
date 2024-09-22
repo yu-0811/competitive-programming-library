@@ -1,13 +1,12 @@
 permissions:
   contents: write
-  
 
 name: verify
 
 on:
   push:
     branches:
-    - main
+      - main
   pull_request:
 
 jobs:
@@ -25,6 +24,11 @@ jobs:
     - name: Install dependencies
       run: pip3 install -U online-judge-verify-helper
 
+    - name: Fetch gh-pages branch and merge
+      run: |
+        git fetch origin gh-pages
+        git checkout gh-pages || git checkout -b gh-pages
+        git pull origin gh-pages  # リモートの最新状態を取得
 
     - name: Run tests
       env:
