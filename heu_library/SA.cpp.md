@@ -97,7 +97,7 @@ data:
   isVerificationFile: false
   path: heu_library/SA.cpp
   requiredBy: []
-  timestamp: '2024-09-22 23:04:50+09:00'
+  timestamp: '2024-09-22 23:28:56+09:00'
   verificationStatus: LIBRARY_NO_TESTS
   verifiedWith: []
 documentation_of: heu_library/SA.cpp
