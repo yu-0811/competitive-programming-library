@@ -34,7 +34,7 @@ class UnionFind():
 
   # x,yが同じグループか(連結か)を返す関数
   # O(α(N))
-  def same(self, x, y): return self.root(x) == self.root(y)
+  def isSame(self, x, y): return self.root(x) == self.root(y)
 
   # xが属するグループの要素をリストで返す
   # O(N)

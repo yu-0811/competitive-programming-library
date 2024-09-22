@@ -13,7 +13,7 @@ def main() -> None:
         if t == 0:
             uft.union(u, v)
         else:
-            print(int(uft.same(u, v)))
+            print(int(uft.isSame(u, v)))
 
 
 if __name__ == "__main__":
