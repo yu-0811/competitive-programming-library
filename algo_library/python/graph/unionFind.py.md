@@ -55,7 +55,7 @@ data:
   isVerificationFile: false
   path: algo_library/python/graph/unionFind.py
   requiredBy: []
-  timestamp: '2024-09-22 23:28:56+09:00'
+  timestamp: '2024-09-22 23:32:32+09:00'
   verificationStatus: LIBRARY_ALL_AC
   verifiedWith:
   - union_find_yosupo.test.py
@@ -64,11 +64,9 @@ layout: document
 title: Union find (dsu)
 ---
 
-N 頂点無向グラフに対して
+N 頂点無向グラフに対して以下の操作を $O(\alpha(N))$ で処理できる
 * 辺の追加
 * 2 頂点が連結かの判定
-
-を $O(\alpha(N))$ で行える
 
 経路圧縮と union by size を採用している。  
 根の親の値 (parents) に連結成分のサイズの情報を持たせる実装をしている。
