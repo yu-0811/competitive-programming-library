@@ -26,7 +26,7 @@ jobs:
       run: pip3 install -U online-judge-verify-helper
 
     - name: Pull latest changes (merge)
-      run: git pull --no-rebase origin gh-pages
+      run: git pull origin gh-pages --allow-unrelated-histories
 
 
     - name: Run tests
