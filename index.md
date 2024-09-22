@@ -38,7 +38,7 @@ data:
       title: algo_library/python/graph/csr.py
     - icon: ':warning:'
       path: algo_library/python/graph/scc.py
-      title: algo_library/python/graph/scc.py
+      title: SCC
     - icon: ':heavy_check_mark:'
       path: algo_library/python/graph/unionFind.py
       title: Union find (dsu)
