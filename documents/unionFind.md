@@ -3,11 +3,9 @@ title: Union find (dsu)
 documentation_of: ../algo_library/python/graph/unionFind.py
 ---
 
-N 頂点無向グラフに対して
+N 頂点無向グラフに対して以下の操作を $O(\alpha(N))$ で処理できる
 * 辺の追加
 * 2 頂点が連結かの判定
-
-を $O(\alpha(N))$ で行える
 
 経路圧縮と union by size を採用している。  
 根の親の値 (parents) に連結成分のサイズの情報を持たせる実装をしている。
