@@ -1,6 +1,6 @@
 ---
 title: Union find (dsu)
-documentation_of: algo_library\python\graph\unionFind.py
+documentation_of: ../algo_library/python/graph/unionFind.py
 ---
 
 N 頂点無向グラフに対して
