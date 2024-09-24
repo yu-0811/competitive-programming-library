@@ -28,15 +28,15 @@ data:
   dependsOn:
   - algo_library/python/graph/unionFind.py
   isVerificationFile: true
-  path: union_find_yosupo.test.py
+  path: tests/union_find_yosupo.test.py
   requiredBy: []
-  timestamp: '2024-09-22 23:40:41+09:00'
+  timestamp: '2024-09-24 23:23:27+09:00'
   verificationStatus: TEST_ACCEPTED
   verifiedWith: []
-documentation_of: union_find_yosupo.test.py
+documentation_of: tests/union_find_yosupo.test.py
 layout: document
 redirect_from:
-- /verify/union_find_yosupo.test.py
-- /verify/union_find_yosupo.test.py.html
-title: union_find_yosupo.test.py
+- /verify/tests/union_find_yosupo.test.py
+- /verify/tests/union_find_yosupo.test.py.html
+title: tests/union_find_yosupo.test.py
 ---
