@@ -85,7 +85,8 @@ data:
   verifiedWith: []
 documentation_of: algo_library/python/graph/scc.py
 layout: document
-title: SCC
+redirect_from:
+- /library/algo_library/python/graph/scc.py
+- /library/algo_library/python/graph/scc.py.html
+title: algo_library/python/graph/scc.py
 ---
-
-後で書く

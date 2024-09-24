@@ -17,11 +17,10 @@ data:
     \  File \"/opt/hostedtoolcache/Python/3.11.0/x64/lib/python3.11/site-packages/onlinejudge_verify/languages/python.py\"\
     , line 96, in bundle\n    raise NotImplementedError\nNotImplementedError\n"
   code: "# verification-helper: PROBLEM https://judge.yosupo.jp/problem/scc\nimport\
-    \ sys\ndef input():return sys.stdin.readline().rstrip()\ndef ii(): return int(input())\n\
-    def ms(): return map(int, input().split())\ndef li(): return list(map(int,input().split()))\n\
-    #/////////////////////////////////\n\nfrom algo_library.python.graph.scc import\
-    \ SCC\n\nN,M = ms()\nscc = SCC(N)\nfor _ in range(M):\n  a,b = ms()\n  scc.addEdge(a,b)\n\
-    \ngroups = scc.doSCC()\nprint(len(groups))\nfor ans in groups:\n  print(len(ans),*ans)"
+    \ sys\ninput = sys.stdin.buffer.readline\n\nfrom algo_library.python.graph.scc\
+    \ import SCC\n\nN,M = map(int,input().split())\nscc = SCC(N)\nfor _ in range(M):\n\
+    \  a,b = map(int,input().split())\n  scc.addEdge(a,b)\n\ngroups = scc.doSCC()\n\
+    print(len(groups))\nfor ans in groups:\n  print(len(ans),*ans)"
   dependsOn: []
   isVerificationFile: true
   path: tests/graph/scc_yosupo.test.py

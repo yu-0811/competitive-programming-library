@@ -3,7 +3,7 @@ data:
   _extendedDependsOn:
   - icon: ':heavy_check_mark:'
     path: algo_library/python/graph/unionFind.py
-    title: Union find (dsu)
+    title: algo_library/python/graph/unionFind.py
   _extendedRequiredBy: []
   _extendedVerifiedWith: []
   _isVerificationFailed: false
@@ -30,7 +30,7 @@ data:
   isVerificationFile: true
   path: tests/graph/unionFind_yosupo.test.py
   requiredBy: []
-  timestamp: '2024-09-24 23:49:11+09:00'
+  timestamp: '2024-09-24 23:58:13+09:00'
   verificationStatus: TEST_ACCEPTED
   verifiedWith: []
 documentation_of: tests/graph/unionFind_yosupo.test.py

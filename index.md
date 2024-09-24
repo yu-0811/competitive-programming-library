@@ -38,10 +38,10 @@ data:
       title: algo_library/python/graph/csr.py
     - icon: ':warning:'
       path: algo_library/python/graph/scc.py
-      title: SCC
+      title: algo_library/python/graph/scc.py
     - icon: ':heavy_check_mark:'
       path: algo_library/python/graph/unionFind.py
-      title: Union find (dsu)
+      title: algo_library/python/graph/unionFind.py
   - name: algo_library/python/hash
     pages:
     - icon: ':warning:'
@@ -76,7 +76,7 @@ data:
     pages:
     - icon: ':warning:'
       path: heu_library/SA.cpp
-      title: heu_library/SA.cpp
+      title: "Simulated Annealing (\u713C\u304D\u306A\u307E\u3057\u6CD5)"
     - icon: ':warning:'
       path: heu_library/random.cpp
       title: heu_library/random.cpp

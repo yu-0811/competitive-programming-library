@@ -25,7 +25,7 @@ data:
   isVerificationFile: false
   path: algo_library/python/math/eratosthenes.py
   requiredBy: []
-  timestamp: '2024-09-24 23:49:11+09:00'
+  timestamp: '2024-09-24 23:58:13+09:00'
   verificationStatus: LIBRARY_NO_TESTS
   verifiedWith: []
 documentation_of: algo_library/python/math/eratosthenes.py
