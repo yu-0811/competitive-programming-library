@@ -4,8 +4,8 @@ data:
   _extendedRequiredBy: []
   _extendedVerifiedWith:
   - icon: ':heavy_check_mark:'
-    path: tests/union_find_yosupo.test.py
-    title: tests/union_find_yosupo.test.py
+    path: tests/graph/unionFind_yosupo.test.py
+    title: tests/graph/unionFind_yosupo.test.py
   _isVerificationFailed: false
   _pathExtension: py
   _verificationStatusIcon: ':heavy_check_mark:'
@@ -55,10 +55,10 @@ data:
   isVerificationFile: false
   path: algo_library/python/graph/unionFind.py
   requiredBy: []
-  timestamp: '2024-09-24 23:23:27+09:00'
+  timestamp: '2024-09-24 23:49:11+09:00'
   verificationStatus: LIBRARY_ALL_AC
   verifiedWith:
-  - tests/union_find_yosupo.test.py
+  - tests/graph/unionFind_yosupo.test.py
 documentation_of: algo_library/python/graph/unionFind.py
 layout: document
 title: Union find (dsu)

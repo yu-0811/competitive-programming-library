@@ -86,10 +86,13 @@ data:
     - icon: ':heavy_check_mark:'
       path: example.test.cpp
       title: example.test.cpp
-  - name: tests
+  - name: tests/graph
     pages:
+    - icon: ':x:'
+      path: tests/graph/scc_yosupo.test.py
+      title: tests/graph/scc_yosupo.test.py
     - icon: ':heavy_check_mark:'
-      path: tests/union_find_yosupo.test.py
-      title: tests/union_find_yosupo.test.py
+      path: tests/graph/unionFind_yosupo.test.py
+      title: tests/graph/unionFind_yosupo.test.py
 layout: toppage
 ---
