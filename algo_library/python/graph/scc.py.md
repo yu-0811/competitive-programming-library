@@ -72,10 +72,7 @@ data:
     \      \n    return groupNum, groupId\n  \n  def doSCC(self):\n    groupNum, groupId\
     \ = self._decomposeToSCC()\n    # groups[i] = \u30B0\u30EB\u30FC\u30D7ID i \u306B\
     \u5C5E\u3059\u308B\u9802\u70B9\u306E\u96C6\u5408\n    groups = [[] for _ in range(groupNum)]\n\
-    \    for v in range(self.N):\n      groups[groupId[v]].append(v)\n    return groups\n\
-    \  \n  \n# \u4F7F\u7528\u4F8B///////////////////////\nN,M = map(int,input().split())\n\
-    scc = SCC(N)\nfor _ in range(M):\n  a,b = map(int,input().split())\n  scc.addEdge(a-1,b-1)\n\
-    \ngroups = scc.doSCC()"
+    \    for v in range(self.N):\n      groups[groupId[v]].append(v)\n    return groups"
   dependsOn: []
   isVerificationFile: false
   path: algo_library/python/graph/scc.py

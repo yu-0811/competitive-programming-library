@@ -88,7 +88,7 @@ data:
       title: example.test.cpp
   - name: tests/graph
     pages:
-    - icon: ':x:'
+    - icon: ':heavy_check_mark:'
       path: tests/graph/scc_yosupo.test.py
       title: tests/graph/scc_yosupo.test.py
     - icon: ':heavy_check_mark:'
