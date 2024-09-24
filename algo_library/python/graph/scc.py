@@ -103,13 +103,3 @@ class SCC:
     for v in range(self.N):
       groups[groupId[v]].append(v)
     return groups
-  
-  
-# 使用例///////////////////////
-N,M = map(int,input().split())
-scc = SCC(N)
-for _ in range(M):
-  a,b = map(int,input().split())
-  scc.addEdge(a-1,b-1)
-
-groups = scc.doSCC()
