@@ -21,7 +21,7 @@ data:
   isVerificationFile: false
   path: algo_library/python/megruBisect.py
   requiredBy: []
-  timestamp: '2024-09-25 00:05:31+09:00'
+  timestamp: '2024-09-29 01:47:28+09:00'
   verificationStatus: LIBRARY_NO_TESTS
   verifiedWith: []
 documentation_of: algo_library/python/megruBisect.py

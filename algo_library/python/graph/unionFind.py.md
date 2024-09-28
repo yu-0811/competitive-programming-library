@@ -46,16 +46,17 @@ data:
     \u8FD4\u3059\u95A2\u6570\n  # O(\u03B1(N))\n  def isSame(self, x, y): return self.root(x)\
     \ == self.root(y)\n\n  # x\u304C\u5C5E\u3059\u308B\u30B0\u30EB\u30FC\u30D7\u306E\
     \u8981\u7D20\u3092\u30EA\u30B9\u30C8\u3067\u8FD4\u3059\n  # O(N)\n  def members(self,\
-    \ x):\n      root = self.root(x)\n      return [i for i in range(self.n) if self.root(i)\
-    \ == root]\n\n  # \u3059\u3079\u3066\u306E\u6839\u306E\u8981\u7D20\u3092\u30EA\
-    \u30B9\u30C8\u3067\u8FD4\u3059\n  # O(N)\n  def roots(self): return [i for i,\
-    \ x in enumerate(self.parents) if x < 0]\n\n  # \u30B0\u30EB\u30FC\u30D7\u306E\
-    \u6570\u3092\u8FD4\u3059\n  # O(N)\n  def group_count(self): return len(self.roots())"
+    \ x):\n      root = self.root(x)\n      return [i for i in range(1,self.n+1) if\
+    \ self.root(i) == root]\n\n  # \u3059\u3079\u3066\u306E\u6839\u306E\u8981\u7D20\
+    \u3092\u30EA\u30B9\u30C8\u3067\u8FD4\u3059\n  # O(N \xD7 \u03B1(N))\n  def roots(self):\
+    \ return [i for i, x in enumerate(self.parents) if x < 0]\n\n  # \u30B0\u30EB\u30FC\
+    \u30D7\u306E\u6570\u3092\u8FD4\u3059\n  # O(N \xD7 \u03B1(N))\n  def group_count(self):\
+    \ return len(self.roots())"
   dependsOn: []
   isVerificationFile: false
   path: algo_library/python/graph/unionFind.py
   requiredBy: []
-  timestamp: '2024-09-25 00:05:31+09:00'
+  timestamp: '2024-09-29 01:47:28+09:00'
   verificationStatus: LIBRARY_ALL_AC
   verifiedWith:
   - tests/graph/unionFind_yosupo.test.py
