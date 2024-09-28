@@ -40,12 +40,12 @@ class UnionFind():
   # O(N)
   def members(self, x):
       root = self.root(x)
-      return [i for i in range(self.n) if self.root(i) == root]
+      return [i for i in range(1,self.n+1) if self.root(i) == root]
 
   # すべての根の要素をリストで返す
-  # O(N)
+  # O(N × α(N))
   def roots(self): return [i for i, x in enumerate(self.parents) if x < 0]
 
   # グループの数を返す
-  # O(N)
+  # O(N × α(N))
   def group_count(self): return len(self.roots())
