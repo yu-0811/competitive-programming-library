@@ -30,6 +30,9 @@ data:
       title: algo_library/python/data-structure/segtree.py
   - name: algo_library/python/graph
     pages:
+    - icon: ':heavy_check_mark:'
+      path: algo_library/python/graph/PotentialUnionFind.py
+      title: algo_library/python/graph/PotentialUnionFind.py
     - icon: ':warning:'
       path: algo_library/python/graph/WarshallFloyd.py
       title: algo_library/python/graph/WarshallFloyd.py
@@ -88,6 +91,9 @@ data:
       title: example.test.cpp
   - name: tests/graph
     pages:
+    - icon: ':heavy_check_mark:'
+      path: tests/graph/PotentialUnionFind_yosupo.test.py
+      title: tests/graph/PotentialUnionFind_yosupo.test.py
     - icon: ':heavy_check_mark:'
       path: tests/graph/scc_yosupo.test.py
       title: tests/graph/scc_yosupo.test.py

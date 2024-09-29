@@ -20,7 +20,7 @@ data:
   isVerificationFile: false
   path: algo_library/python/math/celiDiv.py
   requiredBy: []
-  timestamp: '2024-09-29 01:47:28+09:00'
+  timestamp: '2024-09-29 12:20:22+09:00'
   verificationStatus: LIBRARY_NO_TESTS
   verifiedWith: []
 documentation_of: algo_library/python/math/celiDiv.py
