@@ -34,6 +34,9 @@ data:
       path: algo_library/python/graph/PotentialUnionFind.py
       title: algo_library/python/graph/PotentialUnionFind.py
     - icon: ':warning:'
+      path: algo_library/python/graph/TopologicalSort.py
+      title: algo_library/python/graph/TopologicalSort.py
+    - icon: ':warning:'
       path: algo_library/python/graph/WarshallFloyd.py
       title: algo_library/python/graph/WarshallFloyd.py
     - icon: ':warning:'

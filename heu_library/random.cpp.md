@@ -32,7 +32,7 @@ data:
   isVerificationFile: false
   path: heu_library/random.cpp
   requiredBy: []
-  timestamp: '2024-09-29 12:20:22+09:00'
+  timestamp: '2024-09-29 14:24:30+09:00'
   verificationStatus: LIBRARY_NO_TESTS
   verifiedWith: []
 documentation_of: heu_library/random.cpp
