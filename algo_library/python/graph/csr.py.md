@@ -33,12 +33,20 @@ data:
     \u5C0F\u306E index (0-index)\n  for i in range(1,N+1):\n    start[i] += start[i-1]\n\
     \n  # pointer[i] := \u59CB\u70B9\u3092 i \u3068\u3059\u308B\u8FBA\u306E endList\
     \ \u3078\u306E\u633F\u5165\u4F4D\u7F6E\n  pointer = start[:]\n  for u,v in graphEdges:\n\
-    \    endList[pointer[u]] = v\n    pointer[u] += 1\n    \n  return start, endList"
+    \    endList[pointer[u]] = v\n    pointer[u] += 1\n    \n  return start, endList\n\
+    \nfrom itertools import accumulate\nclass Graph:\n  def __init__(self,n,m):\n\
+    \    self.N = n+1\n    self.M = m\n    self.start = [0]*(self.N+1)\n    self.buf\
+    \ = list()\n    self.endList = [None] * m \n    \n  def add_edge(self,u,v,cost=None):\n\
+    \    self.buf.append((u,v,cost))\n    self.start[u] += 1\n    if len(self.buf)==self.M:\
+    \ self.build()\n  \n  def build(self):\n    self.start = list(accumulate(self.start))\n\
+    \    for u,v,c in self.buf:\n      self.start[u] -= 1\n      if c==None: self.endList[self.start[u]]\
+    \ = v\n      else: self.endList[self.start[u]] = (v,c)\n  \n  def get_edges(self,u):\n\
+    \    return self.endList[self.start[u]:self.start[u+1]]"
   dependsOn: []
   isVerificationFile: false
   path: algo_library/python/graph/csr.py
   requiredBy: []
-  timestamp: '2024-09-29 14:24:30+09:00'
+  timestamp: '2024-10-15 21:36:27+09:00'
   verificationStatus: LIBRARY_NO_TESTS
   verifiedWith: []
 documentation_of: algo_library/python/graph/csr.py

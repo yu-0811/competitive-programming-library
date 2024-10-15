@@ -30,6 +30,9 @@ data:
       title: algo_library/python/data-structure/segtree.py
   - name: algo_library/python/graph
     pages:
+    - icon: ':warning:'
+      path: algo_library/python/graph/LCA.py
+      title: algo_library/python/graph/LCA.py
     - icon: ':heavy_check_mark:'
       path: algo_library/python/graph/PotentialUnionFind.py
       title: algo_library/python/graph/PotentialUnionFind.py
@@ -62,8 +65,8 @@ data:
   - name: algo_library/python/math
     pages:
     - icon: ':warning:'
-      path: algo_library/python/math/celiDiv.py
-      title: algo_library/python/math/celiDiv.py
+      path: algo_library/python/math/ceilDiv.py
+      title: algo_library/python/math/ceilDiv.py
     - icon: ':warning:'
       path: algo_library/python/math/eratosthenes.py
       title: algo_library/python/math/eratosthenes.py
