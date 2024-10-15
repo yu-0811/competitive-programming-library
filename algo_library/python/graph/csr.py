@@ -25,3 +25,27 @@ def csr(N: int, graphEdges: list[list[int]]):
     pointer[u] += 1
     
   return start, endList
+
+from itertools import accumulate
+class Graph:
+  def __init__(self,n,m):
+    self.N = n+1
+    self.M = m
+    self.start = [0]*(self.N+1)
+    self.buf = list()
+    self.endList = [None] * m 
+    
+  def add_edge(self,u,v,cost=None):
+    self.buf.append((u,v,cost))
+    self.start[u] += 1
+    if len(self.buf)==self.M: self.build()
+  
+  def build(self):
+    self.start = list(accumulate(self.start))
+    for u,v,c in self.buf:
+      self.start[u] -= 1
+      if c==None: self.endList[self.start[u]] = v
+      else: self.endList[self.start[u]] = (v,c)
+  
+  def get_edges(self,u):
+    return self.endList[self.start[u]:self.start[u+1]]
