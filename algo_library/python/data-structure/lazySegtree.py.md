@@ -98,7 +98,7 @@ data:
   isVerificationFile: false
   path: algo_library/python/data-structure/lazySegtree.py
   requiredBy: []
-  timestamp: '2024-10-15 21:36:27+09:00'
+  timestamp: '2024-10-17 17:29:32+09:00'
   verificationStatus: LIBRARY_NO_TESTS
   verifiedWith: []
 documentation_of: algo_library/python/data-structure/lazySegtree.py

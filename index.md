@@ -7,6 +7,9 @@ data:
       path: algo_library/cpp/RollingHash.cpp
       title: algo_library/cpp/RollingHash.cpp
     - icon: ':warning:'
+      path: algo_library/cpp/doubing.cpp
+      title: algo_library/cpp/doubing.cpp
+    - icon: ':warning:'
       path: algo_library/cpp/matrixPower.cpp
       title: algo_library/cpp/matrixPower.cpp
   - name: algo_library/python
@@ -14,6 +17,9 @@ data:
     - icon: ':warning:'
       path: algo_library/python/crossAccumulate.py
       title: algo_library/python/crossAccumulate.py
+    - icon: ':warning:'
+      path: algo_library/python/doubling.py
+      title: algo_library/python/doubling.py
     - icon: ':warning:'
       path: algo_library/python/megruBisect.py
       title: algo_library/python/megruBisect.py
