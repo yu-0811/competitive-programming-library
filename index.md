@@ -87,6 +87,9 @@ data:
     - icon: ':warning:'
       path: algo_library/python/string/Z-algo.py
       title: algo_library/python/string/Z-algo.py
+    - icon: ':warning:'
+      path: algo_library/python/string/changeable_RollingHash.py
+      title: algo_library/python/string/changeable_RollingHash.py
   - name: heu_library
     pages:
     - icon: ':warning:'

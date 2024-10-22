@@ -69,10 +69,11 @@ data:
     \    if order[v]==-1: dfs(v)\n    # \u7E2E\u7D04\u5F8C\u306E\u30B0\u30E9\u30D5\
     \u3067 groupId \u3092\u30C8\u30DD\u30ED\u30B8\u30AB\u30EB\u30BD\u30FC\u30C8\u9806\
     \u306B\u3059\u308B\n    for v in range(self.N):\n      groupId[v] = groupNum-1-groupId[v]\n\
-    \      \n    return groupNum, groupId\n  \n  def doSCC(self):\n    groupNum, groupId\
-    \ = self._decomposeToSCC()\n    # groups[i] = \u30B0\u30EB\u30FC\u30D7ID i \u306B\
-    \u5C5E\u3059\u308B\u9802\u70B9\u306E\u96C6\u5408\n    groups = [[] for _ in range(groupNum)]\n\
-    \    for v in range(self.N):\n      groups[groupId[v]].append(v)\n    return groups"
+    \      \n    return groupNum, groupId\n  \n  # groups[i] = \u30B0\u30EB\u30FC\u30D7\
+    ID i \u306B\u5C5E\u3059\u308B\u9802\u70B9\u306E\u96C6\u5408\u3092 \u8FD4\u3059\
+    \n  def doSCC(self):\n    groupNum, groupId = self._decomposeToSCC()\n    groups\
+    \ = [[] for _ in range(groupNum)]\n    for v in range(self.N):\n      groups[groupId[v]].append(v)\n\
+    \    return groups"
   dependsOn: []
   isVerificationFile: false
   path: algo_library/python/graph/scc.py
