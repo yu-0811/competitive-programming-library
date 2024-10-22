@@ -96,9 +96,9 @@ class SCC:
       
     return groupNum, groupId
   
+  # groups[i] = グループID i に属する頂点の集合を 返す
   def doSCC(self):
     groupNum, groupId = self._decomposeToSCC()
-    # groups[i] = グループID i に属する頂点の集合
     groups = [[] for _ in range(groupNum)]
     for v in range(self.N):
       groups[groupId[v]].append(v)
