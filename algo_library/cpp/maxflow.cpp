@@ -1,6 +1,7 @@
 #include <bits/stdc++.h>
 using namespace std;
 #define rep(i, n) for (int i = 0; i < (int)(n); i++)
+#define print_vec(v) { rep(i, v.size()) cout << v[i] << " "; cout << endl; }
 #define ll long long
 const int MOD = 998244353;
 const int INF = 1000000000;
@@ -14,6 +15,18 @@ class maximumflow{
     public:
         vector<vector<maxflow_edge>> G;
         vector<bool> vis;
+
+        void init(int N){
+            G.resize(N+1);
+            vis.resize(N+1,false);
+        }
+
+        void add_edge(int a, int b, int c){
+            int ga_size = G[a].size();
+            int gb_size = G[b].size();
+            G[a].emplace_back(maxflow_edge{b,c,gb_size});
+            G[b].emplace_back(maxflow_edge{a,0,ga_size});
+        }
 
         int dfs(int v, int goal, int f){
             if (v==goal) return f;
@@ -32,16 +45,6 @@ class maximumflow{
         }
 
         int maxflow(int N, int M, int start, int goal){
-            G.resize(N+1);
-            vis.resize(N+1,false);
-            // 入力受け取り
-            for (int i=0; i<M; i++){
-                int a,b,c; cin >> a >> b >> c;
-                int ga_size = G[a].size();
-                int gb_size = G[b].size();
-                G[a].emplace_back(maxflow_edge{b,c,gb_size});
-                G[b].emplace_back(maxflow_edge{a,0,ga_size});
-            }
             int total_flow = 0;
             while (true){
                 for (int i=0; i<=N; i++) vis[i] = false;
