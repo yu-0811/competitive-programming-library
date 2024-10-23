@@ -12,6 +12,9 @@ data:
     - icon: ':warning:'
       path: algo_library/cpp/matrixPower.cpp
       title: algo_library/cpp/matrixPower.cpp
+    - icon: ':warning:'
+      path: algo_library/cpp/maxflow.cpp
+      title: algo_library/cpp/maxflow.cpp
   - name: algo_library/python
     pages:
     - icon: ':warning:'
@@ -51,6 +54,9 @@ data:
     - icon: ':warning:'
       path: algo_library/python/graph/csr.py
       title: algo_library/python/graph/csr.py
+    - icon: ':warning:'
+      path: algo_library/python/graph/maxflow.py
+      title: algo_library/python/graph/maxflow.py
     - icon: ':warning:'
       path: algo_library/python/graph/scc.py
       title: algo_library/python/graph/scc.py

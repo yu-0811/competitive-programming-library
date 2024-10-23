@@ -68,7 +68,7 @@ data:
   isVerificationFile: false
   path: algo_library/python/graph/PotentialUnionFind.py
   requiredBy: []
-  timestamp: '2024-10-22 12:38:34+09:00'
+  timestamp: '2024-10-23 23:31:18+09:00'
   verificationStatus: LIBRARY_ALL_AC
   verifiedWith:
   - tests/graph/PotentialUnionFind_yosupo.test.py
