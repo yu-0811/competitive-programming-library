@@ -88,11 +88,17 @@ data:
     - icon: ':warning:'
       path: algo_library/python/math/matrixPower.py
       title: algo_library/python/math/matrixPower.py
+    - icon: ':warning:'
+      path: algo_library/python/math/modComb.py
+      title: algo_library/python/math/modComb.py
   - name: algo_library/python/string
     pages:
     - icon: ':warning:'
       path: algo_library/python/string/RollingHash.py
       title: algo_library/python/string/RollingHash.py
+    - icon: ':warning:'
+      path: algo_library/python/string/SuffixArray.py
+      title: algo_library/python/string/SuffixArray.py
     - icon: ':warning:'
       path: algo_library/python/string/Z-algo.py
       title: algo_library/python/string/Z-algo.py

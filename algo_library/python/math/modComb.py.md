@@ -14,20 +14,24 @@ data:
     \         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n\
     \  File \"/opt/hostedtoolcache/Python/3.11.0/x64/lib/python3.11/site-packages/onlinejudge_verify/languages/python.py\"\
     , line 96, in bundle\n    raise NotImplementedError\nNotImplementedError\n"
-  code: "def megru_bisect(ng,ok):\n  def judge(mid):\n  \n  while abs(ok-ng)>1:\n\
-    \    mid = (ok+ng)//2\n    if judge(mid): # \u6761\u4EF6\u3092\u6E80\u305F\u3059\
-    \u306A\u3089\n      ok = mid\n    else:\n      ng = mid\n\n  return ng,ok"
+  code: "# \u7D44\u5408\u305B\u7DCF\u6570\u30E9\u30A4\u30D6\u30E9\u30EA\nmod = 998244353\n\
+    \nMAX = pow(10,6) # n \u306E\u6700\u5927\u5024\nfact = [1, 1] \nfactinv = [1,\
+    \ 1]  \ninv = [0, 1] \nfor i in range(2, MAX+1):\n    fact.append((fact[i-1] *\
+    \ i) % mod)\n    inv.append((mod-inv[mod % i] * (mod // i)) % mod)\n    factinv.append((factinv[i-1]\
+    \ * inv[i]) % mod)\n    \ndef modComb(n,k): # nCk % mod\u3092\u8FD4\u3059\n  if\
+    \ (k < 0 or n<0) or (n < k):return 0\n  if k==1: return n\n  k = min(k,n-k)\n\
+    \  return fact[n]*factinv[k]%mod*factinv[n-k]%mod"
   dependsOn: []
   isVerificationFile: false
-  path: algo_library/python/megruBisect.py
+  path: algo_library/python/math/modComb.py
   requiredBy: []
   timestamp: '2024-11-16 18:16:13+09:00'
   verificationStatus: LIBRARY_NO_TESTS
   verifiedWith: []
-documentation_of: algo_library/python/megruBisect.py
+documentation_of: algo_library/python/math/modComb.py
 layout: document
 redirect_from:
-- /library/algo_library/python/megruBisect.py
-- /library/algo_library/python/megruBisect.py.html
-title: algo_library/python/megruBisect.py
+- /library/algo_library/python/math/modComb.py
+- /library/algo_library/python/math/modComb.py.html
+title: algo_library/python/math/modComb.py
 ---
