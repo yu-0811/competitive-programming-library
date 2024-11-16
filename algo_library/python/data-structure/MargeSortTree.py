@@ -1,13 +1,11 @@
-from bisect import bisect_right
+from bisect import bisect_right,bisect_left
 
 class MergeSortTree:
     def __init__(self, data):
         self.n = len(data)
         self.size = 1 << self.n.bit_length()
         self.tree = [[] for _ in range(2 * self.size)]
-        self._build(data)
 
-    def _build(self, data):
         for i in range(self.n):
             self.tree[self.size + i] = [data[i]]
         # 子ノードの要素をソートしてすべて持つように構築
@@ -31,20 +29,33 @@ class MergeSortTree:
                 r += 1
             
     # 区間 [l, r) で値が x 以下の要素数を求める
-    def query(self, l, r, x):
+    def query_leq(self, l, r, x):
         l += self.size 
         r += self.size 
         res = 0
         while l < r:
             if (l&1):
-                res += self._count_less_equal(self.tree[l], x)
+                res += bisect_right(self.tree[l], x)
                 l += 1
             if (r&1):
-                res += self._count_less_equal(self.tree[r-1], x)
+                res += bisect_right(self.tree[r-1], x)
                 r -= 1
             l >>= 1
             r >>= 1
         return res
-
-    def _count_less_equal(self,array, x):
-        return bisect_right(array, x)
+    
+    # 区間[l, r) で値が a 以上 b 未満の要素数を求める
+    def query_range(self, l, r, a, b):
+        l += self.size 
+        r += self.size 
+        res = 0
+        while l < r:
+            if (l&1):
+                res += bisect_left(self.tree[l], b) - bisect_left(self.tree[l], a)
+                l += 1
+            if (r&1):
+                res += bisect_left(self.tree[r-1], b) - bisect_left(self.tree[r-1], a)
+                r -= 1
+            l >>= 1
+            r >>= 1
+        return res
