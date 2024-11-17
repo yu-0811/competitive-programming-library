@@ -14,15 +14,7 @@ data:
     \         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n\
     \  File \"/opt/hostedtoolcache/Python/3.11.0/x64/lib/python3.11/site-packages/onlinejudge_verify/languages/python.py\"\
     , line 96, in bundle\n    raise NotImplementedError\nNotImplementedError\n"
-  code: "# oj t -c \"python3 main.py\"\nimport sys,math\nfrom collections import defaultdict,deque\n\
-    from itertools import combinations,permutations,accumulate,product\nfrom bisect\
-    \ import bisect_left,bisect_right\nfrom heapq import heappop,heappush,heapify\n\
-    #from more_itertools import distinct_permutations,distinct_combinations\n#from\
-    \ sortedcontainers import SortedList,SortedSet\ndef input():return sys.stdin.readline().rstrip()\n\
-    def ii(): return int(input())\ndef ms(): return map(int, input().split())\ndef\
-    \ li(): return list(map(int,input().split()))\ninf = pow(10,18)\nmod = 998244353\n\
-    #/////////////////////////////////\nclass lazy_segtree(): # \u3059\u3079\u3066\
-    \ 0-index\n  def _update(self,k):self.data[k]=self.op(self.data[2*k],self.data[2*k+1])\n\
+  code: "class lazy_segtree(): # \u3059\u3079\u3066 0-index\n  def _update(self,k):self.data[k]=self.op(self.data[2*k],self.data[2*k+1])\n\
     \  def _all_apply(self,k,f):\n      self.data[k]=self.mapping(f,self.data[k])\n\
     \      if (k<self.size):self.lz[k]=self.composition(f,self.lz[k])\n  def _push(self,k):\n\
     \      self._all_apply(2*k,self.lz[k])\n      self._all_apply(2*k+1,self.lz[k])\n\
@@ -75,30 +67,27 @@ data:
     \      sm=self.e\n      while(1):\n          r-=1\n          while(r>1 and (r%2)):r>>=1\n\
     \          if not(check(self.op(self.data[r],sm))):\n              while(r<self.size):\n\
     \                  self._push(r)\n                  r=(2*r+1)\n              \
-    \    if g(self.op(self.data[r],sm)):\n                      sm=self.op(self.data[r],sm)\n\
+    \    if check(self.op(self.data[r],sm)):\n                      sm=self.op(self.data[r],sm)\n\
     \                      r-=1\n              return r+1-self.size\n          sm=self.op(self.data[r],sm)\n\
     \          if (r&-r)==r:break\n      return 0\n\n# data \u306E\u5358\u4F4D\u5143\
-    \ne = \n# lazy \u306E\u5358\u4F4D\u5143\n# \u533A\u9593\u66F4\u65B0\u306A\u3089\
+    \ne = 0\n# lazy \u306E\u5358\u4F4D\u5143\n# \u533A\u9593\u66F4\u65B0\u306A\u3089\
     \ lazy \u3068\u3057\u3066\u3068\u308A\u3048\u306A\u3044\u5024\u306B\u3059\u308B\
-    \nide = \n\n# \u533A\u9593\u306B\u5BFE\u3057\u3066\u884C\u3044\u305F\u3044\u6F14\
-    \u7B97\ndef operate(a,b):\n  return\n\n# \u9045\u5EF6\u3055\u305B\u3066\u3044\u305F\
-    \u64CD\u4F5C\u3092data\u306B\u4F1D\u642C\u3055\u305B\u308B\u95A2\u6570\n# f \u304C\
-    \u9045\u5EF6\u3055\u305B\u305F\u64CD\u4F5C\u3001x \u304Cdata\n# ex. \u533A\u9593\
-    \u52A0\u7B97\u306A\u3089 f+x\ndef mapping(f,x):\n  # \u533A\u9593\u66F4\u65B0\u306A\
-    \u3089\n  # if f==ide: return x\n  return\n\n# \u65E2\u306B\u9045\u5EF6\u3055\u305B\
-    \u3066\u3044\u305F\u64CD\u4F5C\u306B\u3055\u3089\u306B\u64CD\u4F5C\u3092\u8FFD\
-    \u52A0\u3059\u308B\u95A2\u6570\n# f \u304C\u8FFD\u52A0\u3059\u308B\u64CD\u4F5C\
-    \u3001g \u304C\u3044\u307E\u307E\u3067\u306E\u64CD\u4F5C\ndef composition(f,g):\
-    \ \n  # \u533A\u9593\u66F4\u65B0\u306A\u3089\n  # if f==ide: return g\n  return\n\
-    \ \nN,Q = ms()\n\n# (\u521D\u671F\u72B6\u614B, operate, data\u306E\u5358\u4F4D\
-    \u5143, mapping, composition, lazy\u306E\u5358\u4F4D\u5143)\nseg = lazy_segtree([pow(2,31)-1]*N,operate,e,mapping,composition,ide)\n\
-    \nfor _ in range(Q):\n  f,*p = ms()\n  if f==0:\n    s,t,x = p\n    seg.apply(s,t+1,x)\n\
-    \  else:\n    s,t = p\n    print(seg.prod(s,t+1))"
+    \nide = 0\n\n# \u533A\u9593\u306B\u5BFE\u3057\u3066\u884C\u3044\u305F\u3044\u6F14\
+    \u7B97\ndef operate(a,b):\n  return a+b\n\n# \u9045\u5EF6\u3055\u305B\u3066\u3044\
+    \u305F\u64CD\u4F5C\u3092data\u306B\u4F1D\u642C\u3055\u305B\u308B\u95A2\u6570\n\
+    # f \u304C\u9045\u5EF6\u3055\u305B\u305F\u64CD\u4F5C\u3001x \u304Cdata\n# ex.\
+    \ \u533A\u9593\u52A0\u7B97\u306A\u3089 f+x\ndef mapping(f,x):\n  # \u533A\u9593\
+    \u66F4\u65B0\u306A\u3089\n  # if f==ide: return x\n  return f+x\n\n# \u65E2\u306B\
+    \u9045\u5EF6\u3055\u305B\u3066\u3044\u305F\u64CD\u4F5C\u306B\u3055\u3089\u306B\
+    \u64CD\u4F5C\u3092\u8FFD\u52A0\u3059\u308B\u95A2\u6570\n# f \u304C\u8FFD\u52A0\
+    \u3059\u308B\u64CD\u4F5C\u3001g \u304C\u3044\u307E\u307E\u3067\u306E\u64CD\u4F5C\
+    \ndef composition(f,g): \n  # \u533A\u9593\u66F4\u65B0\u306A\u3089\n  # if f==ide:\
+    \ return g\n  return f+g\n\n\n"
   dependsOn: []
   isVerificationFile: false
   path: algo_library/python/data-structure/lazySegtree.py
   requiredBy: []
-  timestamp: '2024-11-17 11:08:11+09:00'
+  timestamp: '2024-11-17 18:18:31+09:00'
   verificationStatus: LIBRARY_NO_TESTS
   verifiedWith: []
 documentation_of: algo_library/python/data-structure/lazySegtree.py
