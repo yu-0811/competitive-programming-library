@@ -1,18 +1,3 @@
-# oj t -c "python3 main.py"
-import sys,math
-from collections import defaultdict,deque
-from itertools import combinations,permutations,accumulate,product
-from bisect import bisect_left,bisect_right
-from heapq import heappop,heappush,heapify
-#from more_itertools import distinct_permutations,distinct_combinations
-#from sortedcontainers import SortedList,SortedSet
-def input():return sys.stdin.readline().rstrip()
-def ii(): return int(input())
-def ms(): return map(int, input().split())
-def li(): return list(map(int,input().split()))
-inf = pow(10,18)
-mod = 998244353
-#/////////////////////////////////
 class lazy_segtree(): # すべて 0-index
   def _update(self,k):self.data[k]=self.op(self.data[2*k],self.data[2*k+1])
   def _all_apply(self,k,f):
@@ -149,7 +134,7 @@ class lazy_segtree(): # すべて 0-index
               while(r<self.size):
                   self._push(r)
                   r=(2*r+1)
-                  if g(self.op(self.data[r],sm)):
+                  if check(self.op(self.data[r],sm)):
                       sm=self.op(self.data[r],sm)
                       r-=1
               return r+1-self.size
@@ -158,14 +143,14 @@ class lazy_segtree(): # すべて 0-index
       return 0
 
 # data の単位元
-e = 
+e = 0
 # lazy の単位元
 # 区間更新なら lazy としてとりえない値にする
-ide = 
+ide = 0
 
 # 区間に対して行いたい演算
 def operate(a,b):
-  return
+  return a+b
 
 # 遅延させていた操作をdataに伝搬させる関数
 # f が遅延させた操作、x がdata
@@ -173,25 +158,13 @@ def operate(a,b):
 def mapping(f,x):
   # 区間更新なら
   # if f==ide: return x
-  return
+  return f+x
 
 # 既に遅延させていた操作にさらに操作を追加する関数
 # f が追加する操作、g がいままでの操作
 def composition(f,g): 
   # 区間更新なら
   # if f==ide: return g
-  return
- 
-N,Q = ms()
+  return f+g
 
-# (初期状態, operate, dataの単位元, mapping, composition, lazyの単位元)
-seg = lazy_segtree([pow(2,31)-1]*N,operate,e,mapping,composition,ide)
 
-for _ in range(Q):
-  f,*p = ms()
-  if f==0:
-    s,t,x = p
-    seg.apply(s,t+1,x)
-  else:
-    s,t = p
-    print(seg.prod(s,t+1))
