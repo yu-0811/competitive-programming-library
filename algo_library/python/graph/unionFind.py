@@ -19,6 +19,7 @@ class UnionFind():
       return self.parents[x]
 
   # O(α(N))
+  # マージ後の根を返す
   def union(self, x, y):
     x = self.root(x); y = self.root(y)
     if x == y: return # x,y が同じグループならなにもしない
@@ -27,6 +28,7 @@ class UnionFind():
     if self.parents[x] > self.parents[y]: x, y = y, x # x が小さい方になるようにする
     self.parents[x] += self.parents[y] # サイズを更新
     self.parents[y] = x
+    return x
 
   # 要素xが属するグループの要素数を返す
   # O(α(N))
@@ -40,12 +42,12 @@ class UnionFind():
   # O(N)
   def members(self, x):
       root = self.root(x)
-      return [i for i in range(1,self.n+1) if self.root(i) == root]
+      return [i for i in range(self.n) if self.root(i) == root]
 
   # すべての根の要素をリストで返す
-  # O(N × α(N))
+  # O(N)
   def roots(self): return [i for i, x in enumerate(self.parents) if x < 0]
 
   # グループの数を返す
-  # O(N × α(N))
+  # O(N)
   def group_count(self): return len(self.roots())
