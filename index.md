@@ -32,6 +32,9 @@ data:
       path: algo_library/python/data-structure/MargeSortTree.py
       title: algo_library/python/data-structure/MargeSortTree.py
     - icon: ':warning:'
+      path: algo_library/python/data-structure/Mos_algorithm.py
+      title: algo_library/python/data-structure/Mos_algorithm.py
+    - icon: ':warning:'
       path: algo_library/python/data-structure/SortedMultiset.py
       title: algo_library/python/data-structure/SortedMultiset.py
     - icon: ':warning:'
