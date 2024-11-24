@@ -4,6 +4,9 @@ data:
   - name: algo_library/cpp
     pages:
     - icon: ':warning:'
+      path: algo_library/cpp/Mos_algorithm.cpp
+      title: algo_library/cpp/Mos_algorithm.cpp
+    - icon: ':warning:'
       path: algo_library/cpp/RollingHash.cpp
       title: algo_library/cpp/RollingHash.cpp
     - icon: ':warning:'
