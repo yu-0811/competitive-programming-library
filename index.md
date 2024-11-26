@@ -117,14 +117,12 @@ data:
       path: heu_library/SA.cpp
       title: "Simulated Annealing (\u713C\u304D\u306A\u307E\u3057\u6CD5)"
     - icon: ':warning:'
+      path: heu_library/beam_search.cpp
+      title: heu_library/beam_search.cpp
+    - icon: ':warning:'
       path: heu_library/random.cpp
       title: heu_library/random.cpp
   verificationCategories:
-  - name: .
-    pages:
-    - icon: ':heavy_check_mark:'
-      path: example.test.cpp
-      title: example.test.cpp
   - name: tests/graph
     pages:
     - icon: ':heavy_check_mark:'
