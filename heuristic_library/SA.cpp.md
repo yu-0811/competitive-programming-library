@@ -8,10 +8,10 @@ data:
   _verificationStatusIcon: ':warning:'
   attributes:
     links: []
-  bundledCode: "#line 1 \"heu_library/SA.cpp\"\n#include <bits/stdc++.h>\n#line 3\
-    \ \"heu_library/SA.cpp\"\nusing namespace std;\n#define rep(i, n) for (int i =\
-    \ 0; i < (int)(n); i++)\n#define ll long long\n\n// \u6642\u9593\u8A08\u6E2C\n\
-    class Timer {\n    chrono::time_point<chrono::steady_clock> start;\npublic:\n\
+  bundledCode: "#line 1 \"heuristic_library/SA.cpp\"\n#include <bits/stdc++.h>\n#line\
+    \ 3 \"heuristic_library/SA.cpp\"\nusing namespace std;\n#define rep(i, n) for\
+    \ (int i = 0; i < (int)(n); i++)\n#define ll long long\n\n// \u6642\u9593\u8A08\
+    \u6E2C\nclass Timer {\n    chrono::time_point<chrono::steady_clock> start;\npublic:\n\
     \    Timer() : start(chrono::steady_clock::now()) {}\n    long long get_ms() {\
     \ // \u7D4C\u904E\u6642\u9593\u3092\u8FD4\u3059\n        auto now_time = chrono::steady_clock::now();\n\
     \        return chrono::duration_cast<chrono::milliseconds>(now_time - start).count();\n\
@@ -95,14 +95,15 @@ data:
     \  }\n}"
   dependsOn: []
   isVerificationFile: false
-  path: heu_library/SA.cpp
+  path: heuristic_library/SA.cpp
   requiredBy: []
-  timestamp: '2024-11-26 23:09:25+09:00'
+  timestamp: '2024-11-26 23:23:24+09:00'
   verificationStatus: LIBRARY_NO_TESTS
   verifiedWith: []
-documentation_of: heu_library/SA.cpp
+documentation_of: heuristic_library/SA.cpp
 layout: document
-title: "Simulated Annealing (\u713C\u304D\u306A\u307E\u3057\u6CD5)"
+redirect_from:
+- /library/heuristic_library/SA.cpp
+- /library/heuristic_library/SA.cpp.html
+title: heuristic_library/SA.cpp
 ---
-
-後で書く

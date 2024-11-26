@@ -8,7 +8,7 @@ data:
   _verificationStatusIcon: ':warning:'
   attributes:
     links: []
-  bundledCode: "#line 1 \"heu_library/beam_search.cpp\"\n#include <bits/stdc++.h>\n\
+  bundledCode: "#line 1 \"heuristic_library/beam_search.cpp\"\n#include <bits/stdc++.h>\n\
     using namespace std;\n#define rep(i, n) for (int i = 0; i < (int)(n); i++)\n#define\
     \ ll long long\n\nconst int beam_width = 70000;\n\nstruct State {\n    int score;\n\
     \    bitset<100> move_history;\n    \n    State() : score(0), move_history(0)\
@@ -65,15 +65,15 @@ data:
     \ next.clear();\n    }\n\n    return now[0].move_history;\n}"
   dependsOn: []
   isVerificationFile: false
-  path: heu_library/beam_search.cpp
+  path: heuristic_library/beam_search.cpp
   requiredBy: []
-  timestamp: '2024-11-26 23:09:25+09:00'
+  timestamp: '2024-11-26 23:23:24+09:00'
   verificationStatus: LIBRARY_NO_TESTS
   verifiedWith: []
-documentation_of: heu_library/beam_search.cpp
+documentation_of: heuristic_library/beam_search.cpp
 layout: document
 redirect_from:
-- /library/heu_library/beam_search.cpp
-- /library/heu_library/beam_search.cpp.html
-title: heu_library/beam_search.cpp
+- /library/heuristic_library/beam_search.cpp
+- /library/heuristic_library/beam_search.cpp.html
+title: heuristic_library/beam_search.cpp
 ---

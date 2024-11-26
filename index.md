@@ -111,17 +111,17 @@ data:
     - icon: ':warning:'
       path: algo_library/python/string/changeable_RollingHash.py
       title: algo_library/python/string/changeable_RollingHash.py
-  - name: heu_library
+  - name: heuristic_library
     pages:
     - icon: ':warning:'
-      path: heu_library/SA.cpp
-      title: "Simulated Annealing (\u713C\u304D\u306A\u307E\u3057\u6CD5)"
+      path: heuristic_library/SA.cpp
+      title: heuristic_library/SA.cpp
     - icon: ':warning:'
-      path: heu_library/beam_search.cpp
-      title: heu_library/beam_search.cpp
+      path: heuristic_library/beam_search.cpp
+      title: heuristic_library/beam_search.cpp
     - icon: ':warning:'
-      path: heu_library/random.cpp
-      title: heu_library/random.cpp
+      path: heuristic_library/random.cpp
+      title: heuristic_library/random.cpp
   verificationCategories:
   - name: tests/graph
     pages:
