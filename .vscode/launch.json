@@ -8,8 +8,8 @@
       "args": [],
       "stopAtEntry": false,
       "externalConsole": true,
-      "cwd": "c:/Users/terad/code/competitive-programming-library",
-      "program": "c:/Users/terad/code/competitive-programming-library/build/Debug/outDebug",
+      "cwd": "c:/Users/terad/code/competitive-programming-library/heuristic_library",
+      "program": "c:/Users/terad/code/competitive-programming-library/heuristic_library/build/Debug/outDebug",
       "MIMode": "gdb",
       "miDebuggerPath": "gdb",
       "setupCommands": [
