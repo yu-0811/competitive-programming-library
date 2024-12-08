@@ -57,7 +57,7 @@ data:
     - icon: ':warning:'
       path: algorithm_library/python/graph/TopologicalSort.py
       title: algorithm_library/python/graph/TopologicalSort.py
-    - icon: ':warning:'
+    - icon: ':heavy_check_mark:'
       path: algorithm_library/python/graph/UnionFind.py
       title: algorithm_library/python/graph/UnionFind.py
     - icon: ':warning:'
@@ -131,10 +131,10 @@ data:
     - icon: ':heavy_check_mark:'
       path: tests/graph/PotentialUnionFind_yosupo.test.py
       title: tests/graph/PotentialUnionFind_yosupo.test.py
-    - icon: ':heavy_check_mark:'
+    - icon: ':x:'
       path: tests/graph/scc_yosupo.test.py
       title: tests/graph/scc_yosupo.test.py
-    - icon: ':x:'
+    - icon: ':heavy_check_mark:'
       path: tests/graph/unionFind_yosupo.test.py
       title: tests/graph/unionFind_yosupo.test.py
 layout: toppage

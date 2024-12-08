@@ -22,7 +22,7 @@ data:
   isVerificationFile: false
   path: algorithm_library/python/algorithm/doubling.py
   requiredBy: []
-  timestamp: '2024-12-08 12:18:52+09:00'
+  timestamp: '2024-12-08 12:22:34+09:00'
   verificationStatus: LIBRARY_NO_TESTS
   verifiedWith: []
 documentation_of: algorithm_library/python/algorithm/doubling.py

@@ -2,10 +2,13 @@
 data:
   _extendedDependsOn: []
   _extendedRequiredBy: []
-  _extendedVerifiedWith: []
+  _extendedVerifiedWith:
+  - icon: ':heavy_check_mark:'
+    path: tests/graph/unionFind_yosupo.test.py
+    title: tests/graph/unionFind_yosupo.test.py
   _isVerificationFailed: false
   _pathExtension: py
-  _verificationStatusIcon: ':warning:'
+  _verificationStatusIcon: ':heavy_check_mark:'
   attributes:
     links: []
   bundledCode: "Traceback (most recent call last):\n  File \"/opt/hostedtoolcache/Python/3.11.0/x64/lib/python3.11/site-packages/onlinejudge_verify/documentation/build.py\"\
@@ -53,9 +56,10 @@ data:
   isVerificationFile: false
   path: algorithm_library/python/graph/UnionFind.py
   requiredBy: []
-  timestamp: '2024-12-08 12:18:52+09:00'
-  verificationStatus: LIBRARY_NO_TESTS
-  verifiedWith: []
+  timestamp: '2024-12-08 12:22:34+09:00'
+  verificationStatus: LIBRARY_ALL_AC
+  verifiedWith:
+  - tests/graph/unionFind_yosupo.test.py
 documentation_of: algorithm_library/python/graph/UnionFind.py
 layout: document
 redirect_from:
