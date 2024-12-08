@@ -1,14 +1,11 @@
 ---
 data:
-  _extendedDependsOn:
-  - icon: ':heavy_check_mark:'
-    path: algo_library/python/graph/unionFind.py
-    title: algo_library/python/graph/unionFind.py
+  _extendedDependsOn: []
   _extendedRequiredBy: []
   _extendedVerifiedWith: []
-  _isVerificationFailed: false
+  _isVerificationFailed: true
   _pathExtension: py
-  _verificationStatusIcon: ':heavy_check_mark:'
+  _verificationStatusIcon: ':x:'
   attributes:
     PROBLEM: https://judge.yosupo.jp/problem/unionfind
     links:
@@ -20,18 +17,17 @@ data:
     \  File \"/opt/hostedtoolcache/Python/3.11.0/x64/lib/python3.11/site-packages/onlinejudge_verify/languages/python.py\"\
     , line 96, in bundle\n    raise NotImplementedError\nNotImplementedError\n"
   code: "# verification-helper: PROBLEM https://judge.yosupo.jp/problem/unionfind\n\
-    import sys\ninput = sys.stdin.buffer.readline\n\nfrom algo_library.python.graph.unionFind\
+    import sys\ninput = sys.stdin.buffer.readline\n\nfrom algorithm_library.python.graph.unionFind\
     \ import UnionFind\n\n\ndef main() -> None:\n    N, Q = map(int, input().split())\n\
     \    uft = UnionFind(N)\n    for _ in range(Q):\n        t, u, v = map(int, input().split())\n\
     \        if t == 0:\n            uft.union(u, v)\n        else:\n            print(int(uft.isSame(u,\
     \ v)))\n\n\nif __name__ == \"__main__\":\n    main()"
-  dependsOn:
-  - algo_library/python/graph/unionFind.py
+  dependsOn: []
   isVerificationFile: true
   path: tests/graph/unionFind_yosupo.test.py
   requiredBy: []
-  timestamp: '2024-11-26 23:23:24+09:00'
-  verificationStatus: TEST_ACCEPTED
+  timestamp: '2024-12-08 12:18:52+09:00'
+  verificationStatus: TEST_WRONG_ANSWER
   verifiedWith: []
 documentation_of: tests/graph/unionFind_yosupo.test.py
 layout: document

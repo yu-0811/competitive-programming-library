@@ -1,116 +1,119 @@
 ---
 data:
   libraryCategories:
-  - name: algo_library/cpp
+  - name: algorithm_library/cpp
     pages:
     - icon: ':warning:'
-      path: algo_library/cpp/Mos_algorithm.cpp
-      title: algo_library/cpp/Mos_algorithm.cpp
+      path: algorithm_library/cpp/Mos_algorithm.cpp
+      title: algorithm_library/cpp/Mos_algorithm.cpp
     - icon: ':warning:'
-      path: algo_library/cpp/RollingHash.cpp
-      title: algo_library/cpp/RollingHash.cpp
+      path: algorithm_library/cpp/RollingHash.cpp
+      title: algorithm_library/cpp/RollingHash.cpp
     - icon: ':warning:'
-      path: algo_library/cpp/doubing.cpp
-      title: algo_library/cpp/doubing.cpp
+      path: algorithm_library/cpp/doubing.cpp
+      title: algorithm_library/cpp/doubing.cpp
     - icon: ':warning:'
-      path: algo_library/cpp/matrixPower.cpp
-      title: algo_library/cpp/matrixPower.cpp
+      path: algorithm_library/cpp/matrixPower.cpp
+      title: algorithm_library/cpp/matrixPower.cpp
     - icon: ':warning:'
-      path: algo_library/cpp/maxflow.cpp
-      title: algo_library/cpp/maxflow.cpp
-  - name: algo_library/python
+      path: algorithm_library/cpp/maxflow.cpp
+      title: algorithm_library/cpp/maxflow.cpp
+  - name: algorithm_library/python/algorithm
     pages:
     - icon: ':warning:'
-      path: algo_library/python/crossAccumulate.py
-      title: algo_library/python/crossAccumulate.py
+      path: algorithm_library/python/algorithm/CrossAccumulate.py
+      title: algorithm_library/python/algorithm/CrossAccumulate.py
     - icon: ':warning:'
-      path: algo_library/python/doubling.py
-      title: algo_library/python/doubling.py
+      path: algorithm_library/python/algorithm/MegruBisect.py
+      title: algorithm_library/python/algorithm/MegruBisect.py
     - icon: ':warning:'
-      path: algo_library/python/megruBisect.py
-      title: algo_library/python/megruBisect.py
-  - name: algo_library/python/data-structure
+      path: algorithm_library/python/algorithm/doubling.py
+      title: algorithm_library/python/algorithm/doubling.py
+  - name: algorithm_library/python/data-structure
     pages:
     - icon: ':warning:'
-      path: algo_library/python/data-structure/MargeSortTree.py
-      title: algo_library/python/data-structure/MargeSortTree.py
+      path: algorithm_library/python/data-structure/LazySegtree.py
+      title: algorithm_library/python/data-structure/LazySegtree.py
     - icon: ':warning:'
-      path: algo_library/python/data-structure/Mos_algorithm.py
-      title: algo_library/python/data-structure/Mos_algorithm.py
+      path: algorithm_library/python/data-structure/MargeSortTree.py
+      title: algorithm_library/python/data-structure/MargeSortTree.py
     - icon: ':warning:'
-      path: algo_library/python/data-structure/SortedMultiset.py
-      title: algo_library/python/data-structure/SortedMultiset.py
+      path: algorithm_library/python/data-structure/Mos_algorithm.py
+      title: algorithm_library/python/data-structure/Mos_algorithm.py
     - icon: ':warning:'
-      path: algo_library/python/data-structure/lazySegtree.py
-      title: algo_library/python/data-structure/lazySegtree.py
+      path: algorithm_library/python/data-structure/Segtree.py
+      title: algorithm_library/python/data-structure/Segtree.py
     - icon: ':warning:'
-      path: algo_library/python/data-structure/segtree.py
-      title: algo_library/python/data-structure/segtree.py
-  - name: algo_library/python/graph
+      path: algorithm_library/python/data-structure/SortedMultiset.py
+      title: algorithm_library/python/data-structure/SortedMultiset.py
+  - name: algorithm_library/python/graph
     pages:
     - icon: ':warning:'
-      path: algo_library/python/graph/LCA.py
-      title: algo_library/python/graph/LCA.py
+      path: algorithm_library/python/graph/LCA.py
+      title: algorithm_library/python/graph/LCA.py
     - icon: ':heavy_check_mark:'
-      path: algo_library/python/graph/PotentialUnionFind.py
-      title: algo_library/python/graph/PotentialUnionFind.py
+      path: algorithm_library/python/graph/PotentialUnionFind.py
+      title: algorithm_library/python/graph/PotentialUnionFind.py
     - icon: ':warning:'
-      path: algo_library/python/graph/TopologicalSort.py
-      title: algo_library/python/graph/TopologicalSort.py
+      path: algorithm_library/python/graph/TopologicalSort.py
+      title: algorithm_library/python/graph/TopologicalSort.py
     - icon: ':warning:'
-      path: algo_library/python/graph/WarshallFloyd.py
-      title: algo_library/python/graph/WarshallFloyd.py
+      path: algorithm_library/python/graph/UnionFind.py
+      title: algorithm_library/python/graph/UnionFind.py
     - icon: ':warning:'
-      path: algo_library/python/graph/csr.py
-      title: algo_library/python/graph/csr.py
+      path: algorithm_library/python/graph/WarshallFloyd.py
+      title: algorithm_library/python/graph/WarshallFloyd.py
     - icon: ':warning:'
-      path: algo_library/python/graph/maxflow.py
-      title: algo_library/python/graph/maxflow.py
+      path: algorithm_library/python/graph/csr.py
+      title: algorithm_library/python/graph/csr.py
     - icon: ':warning:'
-      path: algo_library/python/graph/scc.py
-      title: algo_library/python/graph/scc.py
-    - icon: ':heavy_check_mark:'
-      path: algo_library/python/graph/unionFind.py
-      title: algo_library/python/graph/unionFind.py
-  - name: algo_library/python/hash
+      path: algorithm_library/python/graph/maxflow.py
+      title: algorithm_library/python/graph/maxflow.py
+    - icon: ':warning:'
+      path: algorithm_library/python/graph/scc.py
+      title: algorithm_library/python/graph/scc.py
+  - name: algorithm_library/python/hash
     pages:
     - icon: ':warning:'
-      path: algo_library/python/hash/MultisetHash.py
-      title: algo_library/python/hash/MultisetHash.py
+      path: algorithm_library/python/hash/MultisetHash.py
+      title: algorithm_library/python/hash/MultisetHash.py
     - icon: ':warning:'
-      path: algo_library/python/hash/ZobristHash.py
-      title: algo_library/python/hash/ZobristHash.py
+      path: algorithm_library/python/hash/ZobristHash.py
+      title: algorithm_library/python/hash/ZobristHash.py
     - icon: ':warning:'
-      path: algo_library/python/hash/tupleToHash.py
-      title: algo_library/python/hash/tupleToHash.py
-  - name: algo_library/python/math
+      path: algorithm_library/python/hash/tupleToHash.py
+      title: algorithm_library/python/hash/tupleToHash.py
+  - name: algorithm_library/python/math
     pages:
     - icon: ':warning:'
-      path: algo_library/python/math/ceilDiv.py
-      title: algo_library/python/math/ceilDiv.py
+      path: algorithm_library/python/math/MatrixPower.py
+      title: algorithm_library/python/math/MatrixPower.py
     - icon: ':warning:'
-      path: algo_library/python/math/eratosthenes.py
-      title: algo_library/python/math/eratosthenes.py
+      path: algorithm_library/python/math/ceilDiv.py
+      title: algorithm_library/python/math/ceilDiv.py
     - icon: ':warning:'
-      path: algo_library/python/math/matrixPower.py
-      title: algo_library/python/math/matrixPower.py
+      path: algorithm_library/python/math/eratosthenes.py
+      title: algorithm_library/python/math/eratosthenes.py
     - icon: ':warning:'
-      path: algo_library/python/math/modComb.py
-      title: algo_library/python/math/modComb.py
-  - name: algo_library/python/string
+      path: algorithm_library/python/math/factorization.py
+      title: algorithm_library/python/math/factorization.py
+    - icon: ':warning:'
+      path: algorithm_library/python/math/modComb.py
+      title: algorithm_library/python/math/modComb.py
+  - name: algorithm_library/python/string
     pages:
     - icon: ':warning:'
-      path: algo_library/python/string/RollingHash.py
-      title: algo_library/python/string/RollingHash.py
+      path: algorithm_library/python/string/RollingHash.py
+      title: algorithm_library/python/string/RollingHash.py
     - icon: ':warning:'
-      path: algo_library/python/string/SuffixArray.py
-      title: algo_library/python/string/SuffixArray.py
+      path: algorithm_library/python/string/SuffixArray.py
+      title: algorithm_library/python/string/SuffixArray.py
     - icon: ':warning:'
-      path: algo_library/python/string/Z-algo.py
-      title: algo_library/python/string/Z-algo.py
+      path: algorithm_library/python/string/Z-algo.py
+      title: algorithm_library/python/string/Z-algo.py
     - icon: ':warning:'
-      path: algo_library/python/string/changeable_RollingHash.py
-      title: algo_library/python/string/changeable_RollingHash.py
+      path: algorithm_library/python/string/changeable_RollingHash.py
+      title: algorithm_library/python/string/changeable_RollingHash.py
   - name: heuristic_library
     pages:
     - icon: ':warning:'
@@ -131,7 +134,7 @@ data:
     - icon: ':heavy_check_mark:'
       path: tests/graph/scc_yosupo.test.py
       title: tests/graph/scc_yosupo.test.py
-    - icon: ':heavy_check_mark:'
+    - icon: ':x:'
       path: tests/graph/unionFind_yosupo.test.py
       title: tests/graph/unionFind_yosupo.test.py
 layout: toppage
