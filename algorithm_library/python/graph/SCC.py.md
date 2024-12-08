@@ -14,7 +14,7 @@ data:
     \         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n\
     \  File \"/opt/hostedtoolcache/Python/3.11.0/x64/lib/python3.11/site-packages/onlinejudge_verify/languages/python.py\"\
     , line 96, in bundle\n    raise NotImplementedError\nNotImplementedError\n"
-  code: "from collections import deque\n\n\nclass SCC:\n  def __init__(self, N: int):\n\
+  code: "from collections import deque\n\nclass SCC:\n  def __init__(self, N: int):\n\
     \    self.N = N # \u9802\u70B9\u6570\n    self.graphEdges = list() # \u8FBA\n\
     \    self.inf = pow(10,9)\n    \n  def addEdge(self, frm: int, to: int):\n   \
     \ assert 0<=frm<=self.N\n    assert 0<=to<=self.N\n    self.graphEdges.append([frm,to])\n\
@@ -73,18 +73,18 @@ data:
     ID i \u306B\u5C5E\u3059\u308B\u9802\u70B9\u306E\u96C6\u5408\u3092 \u8FD4\u3059\
     \n  def doSCC(self):\n    groupNum, groupId = self._decomposeToSCC()\n    groups\
     \ = [[] for _ in range(groupNum)]\n    for v in range(self.N):\n      groups[groupId[v]].append(v)\n\
-    \    return groups"
+    \    return groups\n"
   dependsOn: []
   isVerificationFile: false
-  path: algorithm_library/python/graph/scc.py
+  path: algorithm_library/python/graph/SCC.py
   requiredBy: []
   timestamp: '1970-01-01 00:00:00+00:00'
   verificationStatus: LIBRARY_NO_TESTS
   verifiedWith: []
-documentation_of: algorithm_library/python/graph/scc.py
+documentation_of: algorithm_library/python/graph/SCC.py
 layout: document
 redirect_from:
-- /library/algorithm_library/python/graph/scc.py
-- /library/algorithm_library/python/graph/scc.py.html
-title: algorithm_library/python/graph/scc.py
+- /library/algorithm_library/python/graph/SCC.py
+- /library/algorithm_library/python/graph/SCC.py.html
+title: algorithm_library/python/graph/SCC.py
 ---

@@ -3,9 +3,9 @@ data:
   _extendedDependsOn: []
   _extendedRequiredBy: []
   _extendedVerifiedWith: []
-  _isVerificationFailed: true
+  _isVerificationFailed: false
   _pathExtension: py
-  _verificationStatusIcon: ':x:'
+  _verificationStatusIcon: ':heavy_check_mark:'
   attributes:
     PROBLEM: https://judge.yosupo.jp/problem/scc
     links:
@@ -25,8 +25,8 @@ data:
   isVerificationFile: true
   path: tests/graph/scc_yosupo.test.py
   requiredBy: []
-  timestamp: '2024-12-08 12:58:05+09:00'
-  verificationStatus: TEST_WRONG_ANSWER
+  timestamp: '1970-01-01 00:00:00+00:00'
+  verificationStatus: TEST_ACCEPTED
   verifiedWith: []
 documentation_of: tests/graph/scc_yosupo.test.py
 layout: document

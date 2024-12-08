@@ -20,7 +20,7 @@ data:
   isVerificationFile: false
   path: algorithm_library/python/math/ceilDiv.py
   requiredBy: []
-  timestamp: '2024-12-08 12:58:05+09:00'
+  timestamp: '2024-12-08 13:03:23+09:00'
   verificationStatus: LIBRARY_NO_TESTS
   verifiedWith: []
 documentation_of: algorithm_library/python/math/ceilDiv.py

@@ -49,11 +49,17 @@ data:
   - name: algorithm_library/python/graph
     pages:
     - icon: ':warning:'
+      path: algorithm_library/python/graph/CAR.py
+      title: algorithm_library/python/graph/CAR.py
+    - icon: ':warning:'
       path: algorithm_library/python/graph/LCA.py
       title: algorithm_library/python/graph/LCA.py
     - icon: ':heavy_check_mark:'
       path: algorithm_library/python/graph/PotentialUnionFind.py
       title: algorithm_library/python/graph/PotentialUnionFind.py
+    - icon: ':warning:'
+      path: algorithm_library/python/graph/SCC.py
+      title: algorithm_library/python/graph/SCC.py
     - icon: ':warning:'
       path: algorithm_library/python/graph/TopologicalSort.py
       title: algorithm_library/python/graph/TopologicalSort.py
@@ -64,14 +70,8 @@ data:
       path: algorithm_library/python/graph/WarshallFloyd.py
       title: algorithm_library/python/graph/WarshallFloyd.py
     - icon: ':warning:'
-      path: algorithm_library/python/graph/csr.py
-      title: algorithm_library/python/graph/csr.py
-    - icon: ':warning:'
       path: algorithm_library/python/graph/maxflow.py
       title: algorithm_library/python/graph/maxflow.py
-    - icon: ':warning:'
-      path: algorithm_library/python/graph/scc.py
-      title: algorithm_library/python/graph/scc.py
   - name: algorithm_library/python/hash
     pages:
     - icon: ':warning:'
@@ -131,7 +131,7 @@ data:
     - icon: ':heavy_check_mark:'
       path: tests/graph/PotentialUnionFind_yosupo.test.py
       title: tests/graph/PotentialUnionFind_yosupo.test.py
-    - icon: ':x:'
+    - icon: ':heavy_check_mark:'
       path: tests/graph/scc_yosupo.test.py
       title: tests/graph/scc_yosupo.test.py
     - icon: ':heavy_check_mark:'
