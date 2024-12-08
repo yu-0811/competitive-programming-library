@@ -2,8 +2,7 @@
 import sys
 input = sys.stdin.buffer.readline
 
-from algorithm_library.python.graph.unionFind import UnionFind
-
+from algorithm_library.python.graph.UnionFind import UnionFind
 
 def main() -> None:
     N, Q = map(int, input().split())
