@@ -1,5 +1,6 @@
 from collections import deque
 
+
 class SCC:
   def __init__(self, N: int):
     self.N = N # 頂点数
