@@ -32,7 +32,7 @@ data:
   isVerificationFile: true
   path: tests/graph/PotentialUnionFind_yosupo.test.py
   requiredBy: []
-  timestamp: '2024-12-08 12:22:34+09:00'
+  timestamp: '2024-12-08 12:53:01+09:00'
   verificationStatus: TEST_ACCEPTED
   verifiedWith: []
 documentation_of: tests/graph/PotentialUnionFind_yosupo.test.py
