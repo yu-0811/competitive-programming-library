@@ -49,8 +49,8 @@ data:
   - name: algorithm_library/python/graph
     pages:
     - icon: ':warning:'
-      path: algorithm_library/python/graph/CAR.py
-      title: algorithm_library/python/graph/CAR.py
+      path: algorithm_library/python/graph/CSR.py
+      title: algorithm_library/python/graph/CSR.py
     - icon: ':warning:'
       path: algorithm_library/python/graph/LCA.py
       title: algorithm_library/python/graph/LCA.py

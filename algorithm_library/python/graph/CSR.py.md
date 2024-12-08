@@ -44,15 +44,15 @@ data:
     \    return self.endList[self.start[u]:self.start[u+1]]"
   dependsOn: []
   isVerificationFile: false
-  path: algorithm_library/python/graph/CAR.py
+  path: algorithm_library/python/graph/CSR.py
   requiredBy: []
-  timestamp: '2024-12-08 13:03:23+09:00'
+  timestamp: '2024-12-08 13:07:00+09:00'
   verificationStatus: LIBRARY_NO_TESTS
   verifiedWith: []
-documentation_of: algorithm_library/python/graph/CAR.py
+documentation_of: algorithm_library/python/graph/CSR.py
 layout: document
 redirect_from:
-- /library/algorithm_library/python/graph/CAR.py
-- /library/algorithm_library/python/graph/CAR.py.html
-title: algorithm_library/python/graph/CAR.py
+- /library/algorithm_library/python/graph/CSR.py
+- /library/algorithm_library/python/graph/CSR.py.html
+title: algorithm_library/python/graph/CSR.py
 ---
