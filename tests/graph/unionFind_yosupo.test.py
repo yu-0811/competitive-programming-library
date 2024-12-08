@@ -2,7 +2,7 @@
 import sys
 input = sys.stdin.buffer.readline
 
-from algo_library.python.graph.unionFind import UnionFind
+from algorithm_library.python.graph.unionFind import UnionFind
 
 
 def main() -> None:

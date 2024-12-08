@@ -1,6 +1,6 @@
 # verification-helper: PROBLEM https://judge.yosupo.jp/problem/unionfind_with_potential
 
-from algo_library.python.graph.PotentialUnionFind import PotentialUnionFind
+from algorithm_library.python.graph.PotentialUnionFind import PotentialUnionFind
 
 import sys
 def input():return sys.stdin.readline().rstrip()

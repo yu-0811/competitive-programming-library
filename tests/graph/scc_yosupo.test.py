@@ -2,7 +2,7 @@
 import sys
 input = sys.stdin.buffer.readline
 
-from algo_library.python.graph.scc import SCC
+from algorithm_library.python.graph.scc import SCC
 
 N,M = map(int,input().split())
 scc = SCC(N)
