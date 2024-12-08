@@ -1,5 +1,4 @@
-# ほぼ acl のパクり
-
+from warnings import warn
 class segtree(): # すべて 0-index
   def __init__(self,V,OP,E):
       self.n=len(V)
@@ -21,7 +20,7 @@ class segtree(): # すべて 0-index
       for i in range(1,self.log+1):
           self._update(p>>i)
           
-  # 1 点加算(自分で書いた)
+  # 1 点加算
   def add(self,p,x): 
       assert 0<=p and p<self.n
       p+=self.size
@@ -29,7 +28,7 @@ class segtree(): # すべて 0-index
       for i in range(1,self.log+1):
           self._update(p>>i)
           
-  # data[p] を返す
+  # 元の配列の p 番目の要素を取得
   def get(self,p):
       assert 0<=p and p<self.n
       return self.data[p+self.size]
@@ -37,6 +36,9 @@ class segtree(): # すべて 0-index
   # [l,r) の演算結果を返す
   def prod(self,l,r):
       assert 0<=l and l<=r and r<=self.n
+      if l==r: 
+        warn("l=r in prod(l,r)")
+        return self.e
       sml=self.e; smr=self.e
       l+=self.size; r+=self.size
       while(l<r):
@@ -105,29 +107,3 @@ class segtree(): # すべて 0-index
       
   def __str__(self):
       return str([self.get(i) for i in range(self.n)])
-
-# 単位元
-e = -pow(10,18)
-
-# 区間に対して行いたい演算
-def operate(a,b):
-  return max(a,b)
-
-N,Q = map(int,input().split())
-A = list(map(int,input().split()))
-
-# (初期状態, operate, dataの単位元)
-seg = segtree(A,operate,e)
-
-
-# 使用例////////////////////////////
-for _ in range(Q):
-  t,x,v = map(int,input().split())
-  if t==1:
-    seg.set(x-1,v)
-  elif t==2:
-    print(seg.prod(x-1,v))
-  else:
-    def check(result):
-      return result<v
-    print(seg.max_right(x-1,check)+1)
