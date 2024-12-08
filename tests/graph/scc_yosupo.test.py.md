@@ -25,7 +25,7 @@ data:
   isVerificationFile: true
   path: tests/graph/scc_yosupo.test.py
   requiredBy: []
-  timestamp: '2024-12-08 12:53:01+09:00'
+  timestamp: '2024-12-08 12:58:05+09:00'
   verificationStatus: TEST_WRONG_ANSWER
   verifiedWith: []
 documentation_of: tests/graph/scc_yosupo.test.py

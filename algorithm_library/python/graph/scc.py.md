@@ -14,7 +14,7 @@ data:
     \         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n\
     \  File \"/opt/hostedtoolcache/Python/3.11.0/x64/lib/python3.11/site-packages/onlinejudge_verify/languages/python.py\"\
     , line 96, in bundle\n    raise NotImplementedError\nNotImplementedError\n"
-  code: "from collections import deque\n\nclass SCC:\n  def __init__(self, N: int):\n\
+  code: "from collections import deque\n\n\nclass SCC:\n  def __init__(self, N: int):\n\
     \    self.N = N # \u9802\u70B9\u6570\n    self.graphEdges = list() # \u8FBA\n\
     \    self.inf = pow(10,9)\n    \n  def addEdge(self, frm: int, to: int):\n   \
     \ assert 0<=frm<=self.N\n    assert 0<=to<=self.N\n    self.graphEdges.append([frm,to])\n\

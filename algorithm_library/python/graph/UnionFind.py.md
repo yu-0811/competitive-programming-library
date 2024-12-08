@@ -56,7 +56,7 @@ data:
   isVerificationFile: false
   path: algorithm_library/python/graph/UnionFind.py
   requiredBy: []
-  timestamp: '2024-12-08 12:53:01+09:00'
+  timestamp: '2024-12-08 12:58:05+09:00'
   verificationStatus: LIBRARY_ALL_AC
   verifiedWith:
   - tests/graph/unionFind_yosupo.test.py
