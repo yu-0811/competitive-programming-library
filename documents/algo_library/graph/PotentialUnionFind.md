@@ -1,6 +1,6 @@
 ---
 title: Potential Union find 
-documentation_of: ../algo_library/python/graph/PotentialUnionFind.py
+documentation_of: ../algorithm_library/python/graph/PotentialUnionFind.py
 ---
 
 unionfind にポテンシャルを乗せれるようにしたもの。
