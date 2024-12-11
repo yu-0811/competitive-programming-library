@@ -14,19 +14,21 @@ data:
     \         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n\
     \  File \"/opt/hostedtoolcache/Python/3.11.0/x64/lib/python3.11/site-packages/onlinejudge_verify/languages/python.py\"\
     , line 96, in bundle\n    raise NotImplementedError\nNotImplementedError\n"
-  code: "# \u5207\u308A\u4E0A\u3052\u9664\u7B97\ndef ceilDiv(p: int, q: int) -> int:\n\
-    \  return (p + q -1) / q"
+  code: "def run_length_compression(S : str):\n    res = []\n    tmp = S[0]\n    cnt\
+    \ = 1\n    for i in range(1,len(S)):\n        if S[i]==tmp: cnt += 1\n       \
+    \ else:\n            res.append((tmp,cnt))\n            tmp = S[i]; cnt = 1\n\
+    \    res.append((tmp,cnt))\n    return res"
   dependsOn: []
   isVerificationFile: false
-  path: algorithm_library/python/math/ceilDiv.py
+  path: algorithm_library/python/algorithm/RunLengthCompression.py
   requiredBy: []
   timestamp: '2024-12-11 23:06:31+09:00'
   verificationStatus: LIBRARY_NO_TESTS
   verifiedWith: []
-documentation_of: algorithm_library/python/math/ceilDiv.py
+documentation_of: algorithm_library/python/algorithm/RunLengthCompression.py
 layout: document
 redirect_from:
-- /library/algorithm_library/python/math/ceilDiv.py
-- /library/algorithm_library/python/math/ceilDiv.py.html
-title: algorithm_library/python/math/ceilDiv.py
+- /library/algorithm_library/python/algorithm/RunLengthCompression.py
+- /library/algorithm_library/python/algorithm/RunLengthCompression.py.html
+title: algorithm_library/python/algorithm/RunLengthCompression.py
 ---

@@ -27,6 +27,9 @@ data:
       path: algorithm_library/python/algorithm/MegruBisect.py
       title: algorithm_library/python/algorithm/MegruBisect.py
     - icon: ':warning:'
+      path: algorithm_library/python/algorithm/RunLengthCompression.py
+      title: algorithm_library/python/algorithm/RunLengthCompression.py
+    - icon: ':warning:'
       path: algorithm_library/python/algorithm/doubling.py
       title: algorithm_library/python/algorithm/doubling.py
   - name: algorithm_library/python/data-structure
