@@ -18,9 +18,9 @@ data:
     \    self.N = N # \u9802\u70B9\u6570\n    self.graphEdges = list() # \u8FBA\n\
     \    self.inf = pow(10,9)\n    \n  def addEdge(self, frm: int, to: int):\n   \
     \ assert 0<=frm<=self.N\n    assert 0<=to<=self.N\n    self.graphEdges.append([frm,to])\n\
-    \  \n  # \u8FBA\u3092 CSR \u5F62\u5F0F\u306B\u3059\u308B\n  # \u9AD8\u901F\u5316\
-    \u306E\u305F\u3081\u3001python \u3067\u306F\u3042\u3093\u307E\u610F\u5473\u306A\
-    \u3044\uFF1F\n  def _toCSR(self,N: int, graphEdges: list[list]):\n    start =\
+    \  \n  # \u8FBA\u3092 CSR \u5F62\u5F0F\u306B\u3059\u308B(\u5225\u306BCSR\u3058\
+    \u3083\u306A\u304F\u3066\u3082\u3067\u304D\u308B\u304C\u9AD8\u901F\u5316\u306E\
+    \u305F\u3081)\n  def _toCSR(self,N: int, graphEdges: list[list]):\n    start =\
     \ [0]*(N+1)\n    # endList := \u8FBA\u3092\u59CB\u70B9\u306E\u6607\u9806\u306B\
     \u30BD\u30FC\u30C8\u3057\u305F\u6642\u306E\u7D42\u70B9\u306E\u30EA\u30B9\u30C8\
     \n    endList = [0]*len(graphEdges)\n\n    # start[i+1] := \u9802\u70B9 i \u3092\
@@ -71,9 +71,18 @@ data:
     \u306B\u3059\u308B\n    for v in range(self.N):\n      groupId[v] = groupNum-1-groupId[v]\n\
     \      \n    return groupNum, groupId\n  \n  # groups[i] = \u30B0\u30EB\u30FC\u30D7\
     ID i \u306B\u5C5E\u3059\u308B\u9802\u70B9\u306E\u96C6\u5408\u3092 \u8FD4\u3059\
-    \n  def doSCC(self):\n    groupNum, groupId = self._decomposeToSCC()\n    groups\
-    \ = [[] for _ in range(groupNum)]\n    for v in range(self.N):\n      groups[groupId[v]].append(v)\n\
-    \    return groups\n"
+    \n  def build_scc(self) -> list[list[int]]:\n    groupNum, groupId = self._decomposeToSCC()\n\
+    \    groups = [[] for _ in range(groupNum)]\n    for v in range(self.N):\n   \
+    \   groups[groupId[v]].append(v)\n    return groups\n  \n  # \u5F37\u9023\u7D50\
+    \u6210\u5206\u5206\u89E3\u5F8C\u306E\u30B0\u30E9\u30D5\u3092\u69CB\u7BC9\u3059\
+    \u308B(\u540C\u4E00\u306E\u5F37\u9023\u7D50\u6210\u5206\u5185\u306E\u9802\u70B9\
+    \u306F\u7E2E\u7D04)\n  def build_dag(self) -> list[list[int]]:\n    # groupId[i]\
+    \ = \u9802\u70B9 i \u304C\u5C5E\u3059\u308B\u5F37\u9023\u7D50\u6210\u5206\u306E\
+    \ ID\n    groupNum, groupId = self._decomposeToSCC()\n    # dag[i] = \u5F37\u9023\
+    \u7D50\u6210\u5206 i \u304B\u3089\u51FA\u308B\u8FBA\u306E\u884C\u304D\u5148\u306E\
+    \u5F37\u9023\u7D50\u6210\u5206\u306E ID\n    dag = [[] for _ in range(groupNum)]\n\
+    \    for u,v in self.graphEdges:\n      if groupId[u] != groupId[v]:\n       \
+    \ dag[groupId[u]].append(groupId[v])\n    return dag"
   dependsOn: []
   isVerificationFile: false
   path: algorithm_library/python/graph/SCC.py

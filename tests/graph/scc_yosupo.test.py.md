@@ -19,7 +19,7 @@ data:
   code: "# verification-helper: PROBLEM https://judge.yosupo.jp/problem/scc\nimport\
     \ sys\ninput = sys.stdin.buffer.readline\n\nfrom algorithm_library.python.graph.SCC\
     \ import SCC\n\nN,M = map(int,input().split())\nscc = SCC(N)\nfor _ in range(M):\n\
-    \  a,b = map(int,input().split())\n  scc.addEdge(a,b)\n\ngroups = scc.doSCC()\n\
+    \  a,b = map(int,input().split())\n  scc.addEdge(a,b)\n\ngroups = scc.build_scc()\n\
     print(len(groups))\nfor ans in groups:\n  print(len(ans),*ans)"
   dependsOn: []
   isVerificationFile: true
