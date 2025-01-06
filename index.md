@@ -18,20 +18,6 @@ data:
     - icon: ':warning:'
       path: algorithm_library/cpp/maxflow.cpp
       title: algorithm_library/cpp/maxflow.cpp
-  - name: algorithm_library/python/algorithm
-    pages:
-    - icon: ':warning:'
-      path: algorithm_library/python/algorithm/CrossAccumulate.py
-      title: algorithm_library/python/algorithm/CrossAccumulate.py
-    - icon: ':warning:'
-      path: algorithm_library/python/algorithm/MegruBisect.py
-      title: algorithm_library/python/algorithm/MegruBisect.py
-    - icon: ':warning:'
-      path: algorithm_library/python/algorithm/RunLengthCompression.py
-      title: algorithm_library/python/algorithm/RunLengthCompression.py
-    - icon: ':warning:'
-      path: algorithm_library/python/algorithm/doubling.py
-      title: algorithm_library/python/algorithm/doubling.py
   - name: algorithm_library/python/data-structure
     pages:
     - icon: ':warning:'
@@ -72,6 +58,9 @@ data:
     - icon: ':warning:'
       path: algorithm_library/python/graph/WarshallFloyd.py
       title: algorithm_library/python/graph/WarshallFloyd.py
+    - icon: ':warning:'
+      path: algorithm_library/python/graph/cycle_detect.py
+      title: algorithm_library/python/graph/cycle_detect.py
     - icon: ':warning:'
       path: algorithm_library/python/graph/maxflow.py
       title: algorithm_library/python/graph/maxflow.py
@@ -117,6 +106,23 @@ data:
     - icon: ':warning:'
       path: algorithm_library/python/string/changeable_RollingHash.py
       title: algorithm_library/python/string/changeable_RollingHash.py
+  - name: algorithm_library/python/techniques
+    pages:
+    - icon: ':warning:'
+      path: algorithm_library/python/techniques/CrossAccumulate.py
+      title: algorithm_library/python/techniques/CrossAccumulate.py
+    - icon: ':warning:'
+      path: algorithm_library/python/techniques/Doubling.py
+      title: algorithm_library/python/techniques/Doubling.py
+    - icon: ':warning:'
+      path: algorithm_library/python/techniques/MegruBisect.py
+      title: algorithm_library/python/techniques/MegruBisect.py
+    - icon: ':warning:'
+      path: algorithm_library/python/techniques/RunLengthCompression.py
+      title: algorithm_library/python/techniques/RunLengthCompression.py
+    - icon: ':warning:'
+      path: algorithm_library/python/techniques/imos.py
+      title: algorithm_library/python/techniques/imos.py
   - name: heuristic_library
     pages:
     - icon: ':warning:'

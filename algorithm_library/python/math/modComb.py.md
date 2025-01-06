@@ -25,7 +25,7 @@ data:
   isVerificationFile: false
   path: algorithm_library/python/math/modComb.py
   requiredBy: []
-  timestamp: '2024-12-11 23:06:31+09:00'
+  timestamp: '2025-01-06 14:05:28+09:00'
   verificationStatus: LIBRARY_NO_TESTS
   verifiedWith: []
 documentation_of: algorithm_library/python/math/modComb.py

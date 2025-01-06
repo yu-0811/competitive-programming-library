@@ -33,7 +33,7 @@ data:
     \ = self.root(self.parents[x]) # \u7D4C\u8DEF\u5727\u7E2E\n      return self.parents[x]\n\
     \n  # O(\u03B1(N))\n  # \u30DE\u30FC\u30B8\u5F8C\u306E\u6839\u3092\u8FD4\u3059\
     \n  def union(self, x, y):\n    x = self.root(x); y = self.root(y)\n    if x ==\
-    \ y: return # x,y \u304C\u540C\u3058\u30B0\u30EB\u30FC\u30D7\u306A\u3089\u306A\
+    \ y: return x # x,y \u304C\u540C\u3058\u30B0\u30EB\u30FC\u30D7\u306A\u3089\u306A\
     \u306B\u3082\u3057\u306A\u3044\n    # x,y \u306F\u6839\u3067\u3042\u308A\u3001\
     parents \u306E\u5024*-1 \u304C\u305D\u306E\u6728\u306E\u30B5\u30A4\u30BA(\u8981\
     \u7D20\u6570)\n    # \u30B5\u30A4\u30BA\u304C\u5C0F\u3055\u3044\u65B9\u306B\u3064\
@@ -56,7 +56,7 @@ data:
   isVerificationFile: false
   path: algorithm_library/python/graph/UnionFind.py
   requiredBy: []
-  timestamp: '2024-12-11 23:06:31+09:00'
+  timestamp: '2025-01-06 14:05:28+09:00'
   verificationStatus: LIBRARY_ALL_AC
   verifiedWith:
   - tests/graph/unionFind_yosupo.test.py

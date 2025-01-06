@@ -38,7 +38,7 @@ data:
     \ static uint32_t randrange(unsigned x, unsigned y) { return randrange(y - x)\
     \ + x; }\n    // [0.0, 1.0)\n    inline static double random() { return (xorshift()\
     \ + 0.5) * (1.0 / UINT_MAX); }\n\n};\n\n// \u72B6\u614B\u9077\u79FB\nvoid transitionState(vector<int>\
-    \ &state){\n  \n  ll nex_score;\n  if (calcProbability_Maximum(SCORE,nex_score,temp)\
+    \ &state){\n  \n  ll nex_score;\n  if (calcProbability_Maximum(nex_score,SCORE,temp)\
     \ > Random::random()){\n    SCORE = nex_score;\n    // \u9077\u79FB\u3059\u308B\
     \n  }\n  else{\n    // \u72B6\u614B\u3092\u623B\u3059\n  }\n}\n\nTimer timer;\n\
     double NOW_TIME = 0.0;\nll SCORE = 0;\nvector<int> state; // \u72B6\u614B\n\n\
@@ -80,7 +80,7 @@ data:
     \ static uint32_t randrange(unsigned x, unsigned y) { return randrange(y - x)\
     \ + x; }\n    // [0.0, 1.0)\n    inline static double random() { return (xorshift()\
     \ + 0.5) * (1.0 / UINT_MAX); }\n\n};\n\n// \u72B6\u614B\u9077\u79FB\nvoid transitionState(vector<int>\
-    \ &state){\n  \n  ll nex_score;\n  if (calcProbability_Maximum(SCORE,nex_score,temp)\
+    \ &state){\n  \n  ll nex_score;\n  if (calcProbability_Maximum(nex_score,SCORE,temp)\
     \ > Random::random()){\n    SCORE = nex_score;\n    // \u9077\u79FB\u3059\u308B\
     \n  }\n  else{\n    // \u72B6\u614B\u3092\u623B\u3059\n  }\n}\n\nTimer timer;\n\
     double NOW_TIME = 0.0;\nll SCORE = 0;\nvector<int> state; // \u72B6\u614B\n\n\
@@ -97,7 +97,7 @@ data:
   isVerificationFile: false
   path: heuristic_library/SA.cpp
   requiredBy: []
-  timestamp: '2024-12-11 23:06:31+09:00'
+  timestamp: '2025-01-06 14:05:28+09:00'
   verificationStatus: LIBRARY_NO_TESTS
   verifiedWith: []
 documentation_of: heuristic_library/SA.cpp

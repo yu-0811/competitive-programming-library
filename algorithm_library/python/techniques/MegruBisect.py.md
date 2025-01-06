@@ -19,15 +19,15 @@ data:
     \u306A\u3089\n      ok = mid\n    else:\n      ng = mid\n\n  return ng,ok"
   dependsOn: []
   isVerificationFile: false
-  path: algorithm_library/python/algorithm/MegruBisect.py
+  path: algorithm_library/python/techniques/MegruBisect.py
   requiredBy: []
-  timestamp: '2024-12-11 23:06:31+09:00'
+  timestamp: '2025-01-06 14:05:28+09:00'
   verificationStatus: LIBRARY_NO_TESTS
   verifiedWith: []
-documentation_of: algorithm_library/python/algorithm/MegruBisect.py
+documentation_of: algorithm_library/python/techniques/MegruBisect.py
 layout: document
 redirect_from:
-- /library/algorithm_library/python/algorithm/MegruBisect.py
-- /library/algorithm_library/python/algorithm/MegruBisect.py.html
-title: algorithm_library/python/algorithm/MegruBisect.py
+- /library/algorithm_library/python/techniques/MegruBisect.py
+- /library/algorithm_library/python/techniques/MegruBisect.py.html
+title: algorithm_library/python/techniques/MegruBisect.py
 ---

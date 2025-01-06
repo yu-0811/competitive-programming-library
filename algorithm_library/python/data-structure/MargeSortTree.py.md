@@ -22,23 +22,26 @@ data:
     \u3066\u3059\u3079\u3066\u6301\u3064\u3088\u3046\u306B\u69CB\u7BC9\n        for\
     \ i in range(self.size - 1, 0, -1):\n           # \u30DE\u30FC\u30B8\u30BD\u30FC\
     \u30C8\u306E\u8981\u9818\u3067\u30DE\u30FC\u30B8\n            left_child = self.tree[2\
-    \ * i]\n            right_child = self.tree[2 * i + 1]\n            l,r = 0,0\n\
-    \            while l < len(left_child) and r < len(right_child):\n           \
-    \     if left_child[l] < right_child[r]:\n                    self.tree[i].append(left_child[l])\n\
-    \                    l += 1\n                else:\n                    self.tree[i].append(right_child[r])\n\
-    \                    r += 1\n            while l < len(left_child):\n        \
-    \        self.tree[i].append(left_child[l])\n                l += 1\n        \
-    \    while r < len(right_child):\n                self.tree[i].append(right_child[r])\n\
-    \                r += 1\n            \n    # \u533A\u9593 [l, r) \u3067\u5024\u304C\
-    \ x \u4EE5\u4E0B\u306E\u8981\u7D20\u6570\u3092\u6C42\u3081\u308B\n    def query_leq(self,\
-    \ l, r, x):\n        l += self.size \n        r += self.size \n        res = 0\n\
-    \        while l < r:\n            if (l&1):\n                res += bisect_right(self.tree[l],\
-    \ x)\n                l += 1\n            if (r&1):\n                res += bisect_right(self.tree[r-1],\
-    \ x)\n                r -= 1\n            l >>= 1\n            r >>= 1\n     \
-    \   return res\n    \n    # \u533A\u9593[l, r) \u3067\u5024\u304C a \u4EE5\u4E0A\
-    \ b \u672A\u6E80\u306E\u8981\u7D20\u6570\u3092\u6C42\u3081\u308B\n    def query_range(self,\
-    \ l, r, a, b):\n        l += self.size \n        r += self.size \n        res\
-    \ = 0\n        while l < r:\n            if (l&1):\n                res += bisect_left(self.tree[l],\
+    \ * i]\n            right_child = self.tree[2 * i + 1]\n            self.tree[i]\
+    \ = [-1] * (len(left_child) + len(right_child))\n            idx = 0\n       \
+    \     l,r = 0,0\n            while l < len(left_child) and r < len(right_child):\n\
+    \                if left_child[l] < right_child[r]:\n                    self.tree[i][idx]\
+    \ = left_child[l]\n                    l += 1\n                else:\n       \
+    \             self.tree[i][idx] = right_child[r]\n                    r += 1\n\
+    \                idx += 1\n            while l < len(left_child):\n          \
+    \      self.tree[i][idx] = left_child[l]\n                l += 1; idx += 1\n \
+    \           while r < len(right_child):\n                self.tree[i][idx] = right_child[r]\n\
+    \                r += 1; idx += 1\n            \n    # \u533A\u9593 [l, r) \u3067\
+    \u5024\u304C x \u4EE5\u4E0B\u306E\u8981\u7D20\u6570\u3092\u6C42\u3081\u308B\n\
+    \    def query_leq(self, l, r, x):\n        l += self.size \n        r += self.size\
+    \ \n        res = 0\n        while l < r:\n            if (l&1):\n           \
+    \     res += bisect_right(self.tree[l], x)\n                l += 1\n         \
+    \   if (r&1):\n                res += bisect_right(self.tree[r-1], x)\n      \
+    \          r -= 1\n            l >>= 1\n            r >>= 1\n        return res\n\
+    \    \n    # \u533A\u9593[l, r) \u3067\u5024\u304C a \u4EE5\u4E0A b \u672A\u6E80\
+    \u306E\u8981\u7D20\u6570\u3092\u6C42\u3081\u308B\n    def query_range(self, l,\
+    \ r, a, b):\n        l += self.size \n        r += self.size \n        res = 0\n\
+    \        while l < r:\n            if (l&1):\n                res += bisect_left(self.tree[l],\
     \ b) - bisect_left(self.tree[l], a)\n                l += 1\n            if (r&1):\n\
     \                res += bisect_left(self.tree[r-1], b) - bisect_left(self.tree[r-1],\
     \ a)\n                r -= 1\n            l >>= 1\n            r >>= 1\n     \
@@ -47,7 +50,7 @@ data:
   isVerificationFile: false
   path: algorithm_library/python/data-structure/MargeSortTree.py
   requiredBy: []
-  timestamp: '2024-12-11 23:06:31+09:00'
+  timestamp: '2025-01-06 14:05:28+09:00'
   verificationStatus: LIBRARY_NO_TESTS
   verifiedWith: []
 documentation_of: algorithm_library/python/data-structure/MargeSortTree.py
