@@ -11,8 +11,7 @@ class SCC:
     assert 0<=to<=self.N
     self.graphEdges.append([frm,to])
   
-  # 辺を CSR 形式にする
-  # 高速化のため、python ではあんま意味ない？
+  # 辺を CSR 形式にする(別にCSRじゃなくてもできるが高速化のため)
   def _toCSR(self,N: int, graphEdges: list[list]):
     start = [0]*(N+1)
     # endList := 辺を始点の昇順にソートした時の終点のリスト
@@ -97,9 +96,20 @@ class SCC:
     return groupNum, groupId
   
   # groups[i] = グループID i に属する頂点の集合を 返す
-  def doSCC(self):
+  def build_scc(self) -> list[list[int]]:
     groupNum, groupId = self._decomposeToSCC()
     groups = [[] for _ in range(groupNum)]
     for v in range(self.N):
       groups[groupId[v]].append(v)
     return groups
+  
+  # 強連結成分分解後のグラフを構築する(同一の強連結成分内の頂点は縮約)
+  def build_dag(self) -> list[list[int]]:
+    # groupId[i] = 頂点 i が属する強連結成分の ID
+    groupNum, groupId = self._decomposeToSCC()
+    # dag[i] = 強連結成分 i から出る辺の行き先の強連結成分の ID
+    dag = [[] for _ in range(groupNum)]
+    for u,v in self.graphEdges:
+      if groupId[u] != groupId[v]:
+        dag[groupId[u]].append(groupId[v])
+    return dag

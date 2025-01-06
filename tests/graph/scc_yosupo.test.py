@@ -10,7 +10,7 @@ for _ in range(M):
   a,b = map(int,input().split())
   scc.addEdge(a,b)
 
-groups = scc.doSCC()
+groups = scc.build_scc()
 print(len(groups))
 for ans in groups:
   print(len(ans),*ans)
