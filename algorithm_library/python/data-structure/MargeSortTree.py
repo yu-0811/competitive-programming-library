@@ -13,20 +13,23 @@ class MergeSortTree:
            # マージソートの要領でマージ
             left_child = self.tree[2 * i]
             right_child = self.tree[2 * i + 1]
+            self.tree[i] = [-1] * (len(left_child) + len(right_child))
+            idx = 0
             l,r = 0,0
             while l < len(left_child) and r < len(right_child):
                 if left_child[l] < right_child[r]:
-                    self.tree[i].append(left_child[l])
+                    self.tree[i][idx] = left_child[l]
                     l += 1
                 else:
-                    self.tree[i].append(right_child[r])
+                    self.tree[i][idx] = right_child[r]
                     r += 1
+                idx += 1
             while l < len(left_child):
-                self.tree[i].append(left_child[l])
-                l += 1
+                self.tree[i][idx] = left_child[l]
+                l += 1; idx += 1
             while r < len(right_child):
-                self.tree[i].append(right_child[r])
-                r += 1
+                self.tree[i][idx] = right_child[r]
+                r += 1; idx += 1
             
     # 区間 [l, r) で値が x 以下の要素数を求める
     def query_leq(self, l, r, x):

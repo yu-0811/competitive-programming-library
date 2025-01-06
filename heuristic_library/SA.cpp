@@ -66,7 +66,7 @@ public:
 void transitionState(vector<int> &state){
   
   ll nex_score;
-  if (calcProbability_Maximum(SCORE,nex_score,temp) > Random::random()){
+  if (calcProbability_Maximum(nex_score,SCORE,temp) > Random::random()){
     SCORE = nex_score;
     // 遷移する
   }

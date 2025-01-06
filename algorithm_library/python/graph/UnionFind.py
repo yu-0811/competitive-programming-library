@@ -22,7 +22,7 @@ class UnionFind():
   # マージ後の根を返す
   def union(self, x, y):
     x = self.root(x); y = self.root(y)
-    if x == y: return # x,y が同じグループならなにもしない
+    if x == y: return x # x,y が同じグループならなにもしない
     # x,y は根であり、parents の値*-1 がその木のサイズ(要素数)
     # サイズが小さい方につなげる (union by size)
     if self.parents[x] > self.parents[y]: x, y = y, x # x が小さい方になるようにする
