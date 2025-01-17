@@ -8,7 +8,7 @@ data:
   _verificationStatusIcon: ':warning:'
   attributes:
     links: []
-  bundledCode: "#line 1 \"heuristic_library/random.cpp\"\n#include <bits/stdc++.h>\n\
+  bundledCode: "#line 1 \"heuristic_library/cpp/random.cpp\"\n#include <bits/stdc++.h>\n\
     using namespace std;\n#define rep(i, n) for (int i = 0; i < (int)(n); i++)\n#define\
     \ ll long long\n\nclass Random {\n    static uint32_t xorshift() {\n        static\
     \ uint32_t x = 123456789, y = 362436039, z = 521288629, w = 88675123; \n     \
@@ -30,15 +30,15 @@ data:
     };"
   dependsOn: []
   isVerificationFile: false
-  path: heuristic_library/random.cpp
+  path: heuristic_library/cpp/random.cpp
   requiredBy: []
-  timestamp: '2025-01-06 22:05:22+09:00'
+  timestamp: '2025-01-17 21:54:12+09:00'
   verificationStatus: LIBRARY_NO_TESTS
   verifiedWith: []
-documentation_of: heuristic_library/random.cpp
+documentation_of: heuristic_library/cpp/random.cpp
 layout: document
 redirect_from:
-- /library/heuristic_library/random.cpp
-- /library/heuristic_library/random.cpp.html
-title: heuristic_library/random.cpp
+- /library/heuristic_library/cpp/random.cpp
+- /library/heuristic_library/cpp/random.cpp.html
+title: heuristic_library/cpp/random.cpp
 ---

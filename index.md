@@ -81,6 +81,9 @@ data:
       path: algorithm_library/python/math/MatrixPower.py
       title: algorithm_library/python/math/MatrixPower.py
     - icon: ':warning:'
+      path: algorithm_library/python/math/PIE.py
+      title: algorithm_library/python/math/PIE.py
+    - icon: ':warning:'
       path: algorithm_library/python/math/ceilDiv.py
       title: algorithm_library/python/math/ceilDiv.py
     - icon: ':warning:'
@@ -123,17 +126,22 @@ data:
     - icon: ':warning:'
       path: algorithm_library/python/techniques/imos.py
       title: algorithm_library/python/techniques/imos.py
-  - name: heuristic_library
+  - name: heuristic_library/cpp
     pages:
     - icon: ':warning:'
-      path: heuristic_library/SA.cpp
-      title: heuristic_library/SA.cpp
+      path: heuristic_library/cpp/SA.cpp
+      title: heuristic_library/cpp/SA.cpp
     - icon: ':warning:'
-      path: heuristic_library/beam_search.cpp
-      title: heuristic_library/beam_search.cpp
+      path: heuristic_library/cpp/beam_search.cpp
+      title: heuristic_library/cpp/beam_search.cpp
     - icon: ':warning:'
-      path: heuristic_library/random.cpp
-      title: heuristic_library/random.cpp
+      path: heuristic_library/cpp/random.cpp
+      title: heuristic_library/cpp/random.cpp
+  - name: heuristic_library/python
+    pages:
+    - icon: ':warning:'
+      path: heuristic_library/python/SA.py
+      title: heuristic_library/python/SA.py
   verificationCategories:
   - name: tests/graph
     pages:

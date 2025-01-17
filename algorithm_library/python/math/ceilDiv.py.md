@@ -15,12 +15,12 @@ data:
     \  File \"/opt/hostedtoolcache/Python/3.11.0/x64/lib/python3.11/site-packages/onlinejudge_verify/languages/python.py\"\
     , line 96, in bundle\n    raise NotImplementedError\nNotImplementedError\n"
   code: "# \u5207\u308A\u4E0A\u3052\u9664\u7B97\ndef ceilDiv(p: int, q: int) -> int:\n\
-    \  return (p + q -1) / q"
+    \  return (p + q - 1) // q"
   dependsOn: []
   isVerificationFile: false
   path: algorithm_library/python/math/ceilDiv.py
   requiredBy: []
-  timestamp: '2025-01-06 22:05:22+09:00'
+  timestamp: '2025-01-17 21:54:12+09:00'
   verificationStatus: LIBRARY_NO_TESTS
   verifiedWith: []
 documentation_of: algorithm_library/python/math/ceilDiv.py

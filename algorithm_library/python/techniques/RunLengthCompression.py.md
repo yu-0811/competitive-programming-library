@@ -22,7 +22,7 @@ data:
   isVerificationFile: false
   path: algorithm_library/python/techniques/RunLengthCompression.py
   requiredBy: []
-  timestamp: '2025-01-06 22:05:22+09:00'
+  timestamp: '2025-01-17 21:54:12+09:00'
   verificationStatus: LIBRARY_NO_TESTS
   verifiedWith: []
 documentation_of: algorithm_library/python/techniques/RunLengthCompression.py

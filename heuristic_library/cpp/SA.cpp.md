@@ -8,12 +8,12 @@ data:
   _verificationStatusIcon: ':warning:'
   attributes:
     links: []
-  bundledCode: "#line 1 \"heuristic_library/SA.cpp\"\n#include <bits/stdc++.h>\n#line\
-    \ 3 \"heuristic_library/SA.cpp\"\nusing namespace std;\n#define rep(i, n) for\
-    \ (int i = 0; i < (int)(n); i++)\n#define ll long long\n\n// \u6642\u9593\u8A08\
-    \u6E2C\nclass Timer {\n    chrono::time_point<chrono::steady_clock> start;\npublic:\n\
-    \    Timer() : start(chrono::steady_clock::now()) {}\n    long long get_ms() {\
-    \ // \u7D4C\u904E\u6642\u9593\u3092\u8FD4\u3059\n        auto now_time = chrono::steady_clock::now();\n\
+  bundledCode: "#line 1 \"heuristic_library/cpp/SA.cpp\"\n#include <bits/stdc++.h>\n\
+    #line 3 \"heuristic_library/cpp/SA.cpp\"\nusing namespace std;\n#define rep(i,\
+    \ n) for (int i = 0; i < (int)(n); i++)\n#define ll long long\n\n// \u6642\u9593\
+    \u8A08\u6E2C\nclass Timer {\n    chrono::time_point<chrono::steady_clock> start;\n\
+    public:\n    Timer() : start(chrono::steady_clock::now()) {}\n    long long get_ms()\
+    \ { // \u7D4C\u904E\u6642\u9593\u3092\u8FD4\u3059\n        auto now_time = chrono::steady_clock::now();\n\
     \        return chrono::duration_cast<chrono::milliseconds>(now_time - start).count();\n\
     \    }\n};\n\n// \u6E29\u5EA6\u95A2\u6570////////////////////////////////\n//\
     \ \u958B\u59CB\u6E29\u5EA6\nconstexpr double tempInit = 500;\n// \u7D42\u4E86\u6E29\
@@ -95,15 +95,15 @@ data:
     \  }\n}"
   dependsOn: []
   isVerificationFile: false
-  path: heuristic_library/SA.cpp
+  path: heuristic_library/cpp/SA.cpp
   requiredBy: []
-  timestamp: '2025-01-06 22:05:22+09:00'
+  timestamp: '2025-01-17 21:54:12+09:00'
   verificationStatus: LIBRARY_NO_TESTS
   verifiedWith: []
-documentation_of: heuristic_library/SA.cpp
+documentation_of: heuristic_library/cpp/SA.cpp
 layout: document
 redirect_from:
-- /library/heuristic_library/SA.cpp
-- /library/heuristic_library/SA.cpp.html
-title: heuristic_library/SA.cpp
+- /library/heuristic_library/cpp/SA.cpp
+- /library/heuristic_library/cpp/SA.cpp.html
+title: heuristic_library/cpp/SA.cpp
 ---
