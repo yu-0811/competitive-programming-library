@@ -31,13 +31,14 @@ data:
     \u30ED\u30FC\u30D0\u30EB\u5909\u6570 #########################\n\n##########################################\n\
     \ndef calc_score():\n\n  return\n\ndef initialize_score():\n\n  return\n\n# \u8FD1\
     \u508D\u751F\u6210 + \u30B9\u30B3\u30A2\u8A08\u7B97 + \u53D7\u5BB9\u5224\u5B9A\
-    \ndef generate_neighbor(now_score : int|float, temp : float):\n  # \u8FD1\u508D\
-    \u751F\u6210 ######################\n\n  ################################\n  #\
-    \ \u30B9\u30B3\u30A2\u8A08\u7B97 ###################\n  next_score = \n  if (calc_prob_maximize(now_score,\
-    \ next_score, temp) > random()): # \u53D7\u5BB9\u3059\u308B\n    # \u5FC5\u8981\
-    \u3067\u3042\u308C\u3070\u72B6\u614B\u3092\u66F4\u65B0 ######\n    \n    ###############################\n\
-    \    return next_score\n  else: # \u53D7\u5BB9\u3057\u306A\u3044\n    # \u72B6\
-    \u614B\u3092\u5143\u306B\u623B\u3059 #############\n\n    ##############################\n\
+    \ -> \u65B0\u3057\u3044\u30B9\u30B3\u30A2\u3092\u8FD4\u3059\ndef generate_neighbor(now_score\
+    \ : int|float, temp : float):\n  # \u8FD1\u508D\u751F\u6210 ######################\n\
+    \n  ################################\n  # \u30B9\u30B3\u30A2\u8A08\u7B97 ###################\n\
+    \  next_score = \n  if (calc_prob_maximize(now_score, next_score, temp) > random()):\
+    \ # \u53D7\u5BB9\u3059\u308B\n    # \u5FC5\u8981\u3067\u3042\u308C\u3070\u72B6\
+    \u614B\u3092\u66F4\u65B0 ######\n    \n    ###############################\n \
+    \   return next_score\n  else: # \u53D7\u5BB9\u3057\u306A\u3044\n    # \u72B6\u614B\
+    \u3092\u5143\u306B\u623B\u3059 #############\n\n    ##############################\n\
     \    return now_score\n  \ndef SA():\n  SA_start_time = time()\n  iter = -1\n\
     \  temp = start_temp\n  # \u30B9\u30B3\u30A2\u306E\u521D\u671F\u5316\n  now_score\
     \ = initialize_score()\n  while True:\n    if (iter%500 == 0):\n      now_time\
@@ -49,7 +50,7 @@ data:
   isVerificationFile: false
   path: heuristic_library/python/SA.py
   requiredBy: []
-  timestamp: '2025-01-17 21:54:12+09:00'
+  timestamp: '2025-01-17 23:21:45+09:00'
   verificationStatus: LIBRARY_NO_TESTS
   verifiedWith: []
 documentation_of: heuristic_library/python/SA.py
