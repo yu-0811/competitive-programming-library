@@ -40,7 +40,7 @@ def initialize_score():
 
   return
 
-# 近傍生成 + スコア計算 + 受容判定
+# 近傍生成 + スコア計算 + 受容判定 -> 新しいスコアを返す
 def generate_neighbor(now_score : int|float, temp : float):
   # 近傍生成 ######################
 

@@ -3,48 +3,10 @@
 using namespace std;
 #define rep(i, n) for (int i = 0; i < (int)(n); i++)
 #define ll long long
+#pragma GCC target("avx2")
+#pragma GCC optimize("O3")
+#pragma GCC optimize("unroll-loops")
 
-// 時間計測
-class Timer {
-    chrono::time_point<chrono::steady_clock> start;
-public:
-    Timer() : start(chrono::steady_clock::now()) {}
-    long long get_ms() { // 経過時間を返す
-        auto now_time = chrono::steady_clock::now();
-        return chrono::duration_cast<chrono::milliseconds>(now_time - start).count();
-    }
-};
-
-// 温度関数////////////////////////////////
-// 開始温度
-constexpr double tempInit = 500;
-// 終了温度
-constexpr double tempFinish = 10;
-double temp = tempInit;
-constexpr int timeLimit = 4950;
-
-// 線形の温度関数
-// (焼きなまし開始時間,現在時間)
-double linearTemp(double &startTime, double &nowTime){
-  return tempInit - (tempInit - tempFinish) * (nowTime - startTime) / timeLimit ;
-}
-
-// 遷移確率関数 /////////////////////////////
-// (新スコア,旧スコア,温度)
-
-// スコアの最大化問題のとき
-// newScore>=prevScore のとき確率は 1 以上
-double calcProbability_Maximum(ll &newScore, ll &prevScore, double &temp){
-  return exp((newScore - prevScore)/temp);
-}
-
-// スコアの最小化問題の問題
-double calcProbability_Minimum(ll &newScore, ll &prevScore, double &temp){
-  return exp((prevScore - newScore)/temp);
-}
-
-
-// 使用例/////////////////////////////
 class Random {
     static uint32_t xorshift() {
         static uint32_t x = 123456789, y = 362436039, z = 521288629, w = 88675123; 
@@ -62,38 +24,103 @@ public:
 
 };
 
-// 状態遷移
-void transitionState(vector<int> &state){
-  
-  ll nex_score;
-  if (calcProbability_Maximum(nex_score,SCORE,temp) > Random::random()){
-    SCORE = nex_score;
-    // 遷移する
+// 時間計測
+class Timer {
+    chrono::time_point<chrono::steady_clock> start;
+public:
+    Timer() : start(chrono::steady_clock::now()) {}
+    long long get_ms() { // 経過時間を返す
+        auto now_time = chrono::steady_clock::now();
+        return chrono::duration_cast<chrono::milliseconds>(now_time - start).count();
+    }
+};
+Timer timer;
+
+// パラメータ ///////////////////////////////////
+constexpr double start_temp = 500;
+constexpr double end_temp = 10;
+constexpr int time_limit = 4950; // 単位 ms
+////////////////////////////////////////////////
+
+// 線形温度管理
+double linear_temp(double &SA_start_time, double &now_time) {
+    return start_temp - (start_temp - end_temp) * (now_time - SA_start_time) / time_limit;
+}
+
+// 遷移確率関数
+// スコア最大化のとき
+double calc_prob_maximize(auto &now_score, auto &next_score, double &temp) {
+    if (next_score > now_score) return 1.0;
+    return exp((next_score - now_score) / temp);
+}
+
+// スコア最小化のとき
+double calc_prob_minimize(auto &now_score, auto &next_score, double &temp) {
+    if (next_score < now_score) return 1.0;
+    return exp((now_score - next_score) / temp);
+}
+
+// グローバル変数 ///////////////////////////////////
+
+////////////////////////////////////////////////////
+
+double calc_score(int &idx){
+  return;
+}
+
+auto initialize_score(){
+  return;
+}
+
+// 近傍生成 + スコア計算 + 受容判定 -> 新しいスコアを返す /////////////////
+auto generate_neighborhood(auto &now_score, auto &temp){
+  // 近傍生成 //////////////////////////////////////
+
+  //////////////////////////////////////////////////
+  // スコア計算 ////////////////////////////////////
+  auto next_score
+  if (calc_prob_maximize(now_score, next_score, temp) > Random::random()) {
+    // 必要であれば状態を更新 ////////////////////
+
+    //////////////////////////////////////////////
+    return next_score;
   }
-  else{
-    // 状態を戻す
+  else {
+    // 状態をもとに戻す //////////////////////////
+
+    //////////////////////////////////////////////
+    return now_score;
   }
 }
 
-Timer timer;
-double NOW_TIME = 0.0;
-ll SCORE = 0;
-vector<int> state; // 状態
+void SA() {
+  double SA_start_time = timer.get_ms();
+  int iter = 1;
+  double temp = start_temp;
+  double now_score = initialize_score();
+  while (true) {
+    if (iter % 1000 == 0) {
+      double now_time = timer.get_ms();
+      if (now_time > time_limit) break;
+      temp = linear_temp(SA_start_time, now_time);
+    }
+    now_score = generate_neighborhood(now_score, temp);
+    iter++;
+  }
+  cerr << "iter: " << iter << endl;
+}
 
 int main(){
   ios::sync_with_stdio(false); cin.tie(0);
   timer = Timer(); // タイマー初期化
-  
-  int ITER_CNT = 0; // 焼きなまし実行回数
-  double SA_START_TIME = timer.get_ms();
-  // 焼きなまし開始
-  while (true){
-    if (ITER_CNT%1000==0){// 高速化のために 1000 回に 1 回だけ時間計測する
-      NOW_TIME = timer.get_ms();
-      if (NOW_TIME>timeLimit) break; 
-      temp = linearTemp(SA_START_TIME, NOW_TIME); // 温度もついでに
-    }
 
-    transitionState(state);
-  }
+  // 入力 //////////////////////////////////////////
+
+  //////////////////////////////////////////////////
+
+  SA();
+
+  // 出力 //////////////////////////////////////////
+
+  //////////////////////////////////////////////////
 }
