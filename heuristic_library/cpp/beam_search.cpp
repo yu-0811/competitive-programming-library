@@ -5,18 +5,26 @@ using namespace std;
 
 const int beam_width = 70000;
 
+struct Move {
+    char d; int p;
+};
+
 struct State {
     int score;
-    bitset<100> move_history;
+    vector<Move> move_history;
+    vector<string> board;
     
     State() : score(0), move_history(0) {}
 };
 
 // 評価関数########################################
-// a1 > a2 のとき true を返すようにする
-// a1 より a2 の方を評価したいとき（選びたいとき）true を返す（a1 の方が前に来る）
-bool comp(const State &a1, const State &a2){
+// スコア最大化のとき
+bool comp_max(const State &a1, const State &a2){
     return a1.score > a2.score;
+}
+// スコア最小化のとき
+bool comp_min(const State &a1, const State &a2){
+    return a1.score < a2.score;
 }
 //#####################################################
 
@@ -41,19 +49,22 @@ auto beam_search(State &init_state, int beam_width, int depth){
                 int nex_score;
                 //#################################################
 
-                // ソート済みの中で最小の評価値よりも大きい場合のみ遷移
+                // スコア最大化のとき, ソート済みの中で最小の評価値よりも大きい場合のみ遷移
                 if (sorted && nex_score <= next[beam_width-1].score) continue;
+                // スコア最小化のとき, ソート済みの中で最大の評価値よりも小さい場合のみ遷移
+                // if (sorted && nex_score >= next[beam_width-1].score) continue;
+
                 auto nex = operate(s, op, i);
                 next.emplace_back(nex);
 
                 if (next.size() >= 2*beam_width){
-                    sort(next.begin(), next.end(), comp);
+                    sort(next.begin(), next.end(), comp_max);
                     next.resize(beam_width);
                     sorted = true;
                 }
             }
         }
-        sort(next.begin(), next.end(), comp);
+        sort(next.begin(), next.end(), comp_max);
         swap(now, next);
         next.clear();
     }

@@ -17,7 +17,7 @@ def init_factorization(N : int) -> list[int]:
       if D[j]==1: D[j] = i
   return D
 
-D = init_factorization( ) 
+D = init_factorization() 
 
 # 素因数分解
 def factorization(x : int) -> dict[int,int]: 

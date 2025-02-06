@@ -17,5 +17,4 @@ public:
     inline static uint32_t randrange(unsigned x, unsigned y) { return randrange(y - x) + x; }
     // [0.0, 1.0)
     inline static double random() { return (xorshift() + 0.5) * (1.0 / UINT_MAX); }
-
 };
