@@ -25,7 +25,7 @@ data:
     \u7D20\u56E0\u6570\u3092\u6C42\u3081\u308B\n  # D[i] = i \u306E\u6700\u5C0F\u306E\
     \u7D20\u56E0\u6570\n  D = [1]*(N+1)\n  for i in range(2,N+1):\n    if D[i]!=1:\
     \ continue\n    for j in range(i,N+1,i):\n      if D[j]==1: D[j] = i\n  return\
-    \ D\n\nD = init_factorization( ) \n\n# \u7D20\u56E0\u6570\u5206\u89E3\ndef factorization(x\
+    \ D\n\nD = init_factorization() \n\n# \u7D20\u56E0\u6570\u5206\u89E3\ndef factorization(x\
     \ : int) -> dict[int,int]: \n  res = defaultdict(int)\n  while x!=1:\n    res[D[x]]\
     \ += 1\n    x //= D[x]\n  return res"
   dependsOn: []

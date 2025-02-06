@@ -90,6 +90,9 @@ data:
       path: algorithm_library/python/math/eratosthenes.py
       title: algorithm_library/python/math/eratosthenes.py
     - icon: ':warning:'
+      path: algorithm_library/python/math/extGCD.py
+      title: algorithm_library/python/math/extGCD.py
+    - icon: ':warning:'
       path: algorithm_library/python/math/factorization.py
       title: algorithm_library/python/math/factorization.py
     - icon: ':warning:'

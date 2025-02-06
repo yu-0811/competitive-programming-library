@@ -17,7 +17,7 @@ data:
     \ static uint32_t randrange(unsigned x) { return xorshift() % x; }\n    // [x,\
     \ y)\n    inline static uint32_t randrange(unsigned x, unsigned y) { return randrange(y\
     \ - x) + x; }\n    // [0.0, 1.0)\n    inline static double random() { return (xorshift()\
-    \ + 0.5) * (1.0 / UINT_MAX); }\n\n};\n"
+    \ + 0.5) * (1.0 / UINT_MAX); }\n};\n"
   code: "#include <bits/stdc++.h>\nusing namespace std;\n#define rep(i, n) for (int\
     \ i = 0; i < (int)(n); i++)\n#define ll long long\n\nclass Random {\n    static\
     \ uint32_t xorshift() {\n        static uint32_t x = 123456789, y = 362436039,\
@@ -26,13 +26,12 @@ data:
     \    }\npublic:\n    // [0, x)\n    inline static uint32_t randrange(unsigned\
     \ x) { return xorshift() % x; }\n    // [x, y)\n    inline static uint32_t randrange(unsigned\
     \ x, unsigned y) { return randrange(y - x) + x; }\n    // [0.0, 1.0)\n    inline\
-    \ static double random() { return (xorshift() + 0.5) * (1.0 / UINT_MAX); }\n\n\
-    };"
+    \ static double random() { return (xorshift() + 0.5) * (1.0 / UINT_MAX); }\n};"
   dependsOn: []
   isVerificationFile: false
   path: heuristic_library/cpp/random.cpp
   requiredBy: []
-  timestamp: '2025-01-17 23:21:45+09:00'
+  timestamp: '2025-02-06 22:56:10+09:00'
   verificationStatus: LIBRARY_NO_TESTS
   verifiedWith: []
 documentation_of: heuristic_library/cpp/random.cpp
