@@ -66,7 +66,7 @@ data:
   isVerificationFile: false
   path: algorithm_library/python/string/SuffixArray.py
   requiredBy: []
-  timestamp: '2025-02-07 14:18:10+09:00'
+  timestamp: '2025-02-24 14:01:00+09:00'
   verificationStatus: LIBRARY_NO_TESTS
   verifiedWith: []
 documentation_of: algorithm_library/python/string/SuffixArray.py

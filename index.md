@@ -41,11 +41,17 @@ data:
       path: algorithm_library/python/graph/CSR.py
       title: algorithm_library/python/graph/CSR.py
     - icon: ':warning:'
+      path: algorithm_library/python/graph/EulerTour.py
+      title: algorithm_library/python/graph/EulerTour.py
+    - icon: ':warning:'
       path: algorithm_library/python/graph/LCA.py
       title: algorithm_library/python/graph/LCA.py
     - icon: ':heavy_check_mark:'
       path: algorithm_library/python/graph/PotentialUnionFind.py
       title: algorithm_library/python/graph/PotentialUnionFind.py
+    - icon: ':warning:'
+      path: algorithm_library/python/graph/Rerooting.py
+      title: algorithm_library/python/graph/Rerooting.py
     - icon: ':warning:'
       path: algorithm_library/python/graph/SCC.py
       title: algorithm_library/python/graph/SCC.py
@@ -77,6 +83,9 @@ data:
       title: algorithm_library/python/hash/tupleToHash.py
   - name: algorithm_library/python/math
     pages:
+    - icon: ':warning:'
+      path: algorithm_library/python/math/FFT.py
+      title: algorithm_library/python/math/FFT.py
     - icon: ':warning:'
       path: algorithm_library/python/math/MatrixPower.py
       title: algorithm_library/python/math/MatrixPower.py
