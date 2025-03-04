@@ -49,14 +49,14 @@ data:
     \u8981\u7D20\u3092\u30EA\u30B9\u30C8\u3067\u8FD4\u3059\n  # O(N)\n  def members(self,\
     \ x):\n      root = self.root(x)\n      return [i for i in range(self.n) if self.root(i)\
     \ == root]\n\n  # \u3059\u3079\u3066\u306E\u6839\u306E\u8981\u7D20\u3092\u30EA\
-    \u30B9\u30C8\u3067\u8FD4\u3059\n  # O(N)\n  def roots(self): return [i for i,\
-    \ x in enumerate(self.parents) if x < 0]\n\n  # \u30B0\u30EB\u30FC\u30D7\u306E\
+    \u30B9\u30C8\u3067\u8FD4\u3059\n  # O(N)\n  def get_roots(self): return [i for\
+    \ i, x in enumerate(self.parents) if x < 0]\n\n  # \u30B0\u30EB\u30FC\u30D7\u306E\
     \u6570\u3092\u8FD4\u3059\n  # O(N)\n  def group_count(self): return len(self.roots())"
   dependsOn: []
   isVerificationFile: false
   path: algorithm_library/python/graph/UnionFind.py
   requiredBy: []
-  timestamp: '2025-02-24 14:01:00+09:00'
+  timestamp: '2025-03-04 22:47:43+09:00'
   verificationStatus: LIBRARY_ALL_AC
   verifiedWith:
   - tests/graph/unionFind_yosupo.test.py
