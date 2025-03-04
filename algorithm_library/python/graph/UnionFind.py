@@ -46,7 +46,7 @@ class UnionFind():
 
   # すべての根の要素をリストで返す
   # O(N)
-  def roots(self): return [i for i, x in enumerate(self.parents) if x < 0]
+  def get_roots(self): return [i for i, x in enumerate(self.parents) if x < 0]
 
   # グループの数を返す
   # O(N)
