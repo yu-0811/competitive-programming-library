@@ -7,42 +7,38 @@ def mos_algorithm(data, queries):
     from math import sqrt, ceil
     n = len(data)
     q = len(queries)
-    B = ceil(sqrt(3)*n / (sqrt(2)*sqrt(q))) # bukectのサイズ
-    # [l,r)の半開区間で考える
+    B = ceil(sqrt(3)*n / (sqrt(2)*sqrt(q))) # bukectのサイズ(nyaanさんの記事より)
     L,R = 0,0
     # queryの順番を格納する用
-    order = []
+    order = [-1] * q
 
     ########################################
     # 状態を初期化する処理を書く
-    ans = 0
-    cnt = [0]*(2*pow(10,5)+1)
+
     ########################################
 
     def _add(i, ans):
         # i番目の要素を含めて考えるときへstatesを更新
         ########################################
-        ans += (cnt[data[i]] * (cnt[data[i]]-1)) // 2
-        cnt[data[i]] += 1
+
         return ans
         ########################################
 
     def _delete(i, ans):
         # i番目の要素を除いて考えるときへstatesを更新
         ########################################
-        cnt[data[i]] -= 1
-        ans -= (cnt[data[i]] * (cnt[data[i]]-1)) // 2
+
         return ans
         ########################################
 
     # クエリの解答順
     # (ceil(l/B), r*-1^{ceil(l/B)}) の昇順にするのが最速ぽい
     for idx, (l,r) in enumerate(queries):
-        order.append(((l//B)<<40)+((r if (l//B)&1 else -r)<<20)+idx)
+        order[idx] = ((l//B)<<40)+((r if (l//B)&1 else -r)<<20)+idx
     order.sort()
 
     mask = (1<<20)-1
-    ret = [-1] * Q
+    ret = [-1] * q
     for lri in order:  # クエリに答えていく
         i = lri & mask
         l,r = queries[i]
@@ -67,4 +63,5 @@ def mos_algorithm(data, queries):
         # ret[i] に i 番目のクエリの答えを格納する
         ret[i] = ans
         ########################################
+        
     return ret
