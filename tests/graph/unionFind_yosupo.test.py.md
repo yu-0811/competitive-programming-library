@@ -30,7 +30,7 @@ data:
   isVerificationFile: true
   path: tests/graph/unionFind_yosupo.test.py
   requiredBy: []
-  timestamp: '2025-03-18 19:06:00+09:00'
+  timestamp: '2025-03-18 19:17:10+09:00'
   verificationStatus: TEST_ACCEPTED
   verifiedWith: []
 documentation_of: tests/graph/unionFind_yosupo.test.py

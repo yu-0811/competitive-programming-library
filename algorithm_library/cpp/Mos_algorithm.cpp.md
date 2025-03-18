@@ -80,7 +80,7 @@ data:
   isVerificationFile: false
   path: algorithm_library/cpp/Mos_algorithm.cpp
   requiredBy: []
-  timestamp: '2025-03-18 19:06:00+09:00'
+  timestamp: '2025-03-18 19:17:10+09:00'
   verificationStatus: LIBRARY_NO_TESTS
   verifiedWith: []
 documentation_of: algorithm_library/cpp/Mos_algorithm.cpp
