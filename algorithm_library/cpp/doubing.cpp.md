@@ -30,7 +30,7 @@ data:
   isVerificationFile: false
   path: algorithm_library/cpp/doubing.cpp
   requiredBy: []
-  timestamp: '2025-03-04 22:47:43+09:00'
+  timestamp: '2025-03-18 19:06:00+09:00'
   verificationStatus: LIBRARY_NO_TESTS
   verifiedWith: []
 documentation_of: algorithm_library/cpp/doubing.cpp
