@@ -3,11 +3,8 @@ class rerooting:
   def __init__(self, n:int, edges:list[tuple[int,int]], identity:int, merge:callable, calc_node_value:callable, calc_ans:callable):
     self.n = n
     self.identity = identity
-    # merge(a, b) = 部分木の値 a, b をマージする関数
     self.merge = merge
-    # calc_node_value(a, v) = すべての子部分木の値をマージした値 a から頂点 v を根としたときの計算に使う値(DPの値)を計算する関数
     self.calc_node_value = calc_node_value
-    # calc_ans(a, v) = すべての子部分木の値をマージした値 a から頂点 v を根としたときの求めたいものを計算する関数
     self.calc_ans = calc_ans
     # adjacents[i] = i と隣接する頂点のリスト
     self.adjacents = [[] for _ in range(n+1)]
@@ -80,7 +77,14 @@ class rerooting:
     self._dfs1(root)
     self._dfs2()
     return self.ans
-  
+
+"""
+identity = 頂点に持たせる値(関数のaに渡される)の単位元
+merge(a, b) = 部分木の値 a, b をマージする関数
+calc_node_value(a, v) = すべての子部分木の値をマージした値 a から頂点 v を根としたときの計算に使う値(DPの値)を計算する関数
+calc_ans(a, v) = すべての子部分木の値をマージした値 a から頂点 v を根としたときの求めたいものを計算する関数
+"""
+
 # identity = 
 # def merge(a,b):
 #   return 
@@ -88,6 +92,6 @@ class rerooting:
 #   return 
 # def calc_ans(a,v):
 #     return 
-  
+
 
 # rr = rerooting(N, edges, identity, merge, calc_node_value, calc_ans)
