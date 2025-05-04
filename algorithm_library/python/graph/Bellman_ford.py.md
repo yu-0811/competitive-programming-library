@@ -14,24 +14,26 @@ data:
     \         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n\
     \  File \"/opt/hostedtoolcache/Python/3.11.0/x64/lib/python3.11/site-packages/onlinejudge_verify/languages/python.py\"\
     , line 96, in bundle\n    raise NotImplementedError\nNotImplementedError\n"
-  code: "# \u7D44\u5408\u305B\u7DCF\u6570\u30E9\u30A4\u30D6\u30E9\u30EA\nmod = 998244353\n\
-    \nMAX = pow(10,6) # n \u306E\u6700\u5927\u5024\nfact = [1, 1] \nfactinv = [1,\
-    \ 1]  \ninv = [0, 1] \nfor i in range(2, MAX+1):\n    fact.append((fact[i-1] *\
-    \ i) % mod)\n    inv.append((mod-inv[mod % i] * (mod // i)) % mod)\n    factinv.append((factinv[i-1]\
-    \ * inv[i]) % mod)\n    \ndef modComb(n,k): # nCk % mod\u3092\u8FD4\u3059\n  if\
-    \ (k < 0 or n<0) or (n < k):return 0\n  if k==1: return n\n  k = min(k,n-k)\n\
-    \  return fact[n]*factinv[k]%mod*factinv[n-k]%mod"
+  code: "inf = pow(10,18)\n\ndef bellman_ford(Edges : list[tuple[int,int,int]], N\
+    \ : int, s : int) -> tuple[list[int], bool]:\n  \"\"\"\n  Edges : \u6709\u5411\
+    \u8FBA(\u7121\u5411\u306E\u3068\u304D\u306F\u4E21\u65B9\u5165\u308C\u308B)\n \
+    \ N : \u9802\u70B9\u6570\n  s : \u59CB\u70B9 \n  \u8FD4\u308A\u5024 : (\u6700\u77ED\
+    \u8DDD\u96E2\u914D\u5217, \u8CA0\u9589\u8DEF\u306E\u6709\u7121)\n  \"\"\"\n  dist\
+    \ = [inf] * (N+1)\n  dist[s] = 0\n  cnt = 0\n  while (cnt < N):\n    end = True\n\
+    \    for fro, to, cost in Edges:\n      if dist[to] > dist[fro] + cost:\n    \
+    \    dist[to] = dist[fro] + cost\n        end = False\n    if end: break\n   \
+    \ cnt += 1\n  \n  return dist, cnt == N"
   dependsOn: []
   isVerificationFile: false
-  path: algorithm_library/python/math/modComb.py
+  path: algorithm_library/python/graph/Bellman_ford.py
   requiredBy: []
   timestamp: '2025-05-04 17:49:22+09:00'
   verificationStatus: LIBRARY_NO_TESTS
   verifiedWith: []
-documentation_of: algorithm_library/python/math/modComb.py
+documentation_of: algorithm_library/python/graph/Bellman_ford.py
 layout: document
 redirect_from:
-- /library/algorithm_library/python/math/modComb.py
-- /library/algorithm_library/python/math/modComb.py.html
-title: algorithm_library/python/math/modComb.py
+- /library/algorithm_library/python/graph/Bellman_ford.py
+- /library/algorithm_library/python/graph/Bellman_ford.py.html
+title: algorithm_library/python/graph/Bellman_ford.py
 ---

@@ -38,6 +38,9 @@ data:
   - name: algorithm_library/python/graph
     pages:
     - icon: ':warning:'
+      path: algorithm_library/python/graph/Bellman_ford.py
+      title: algorithm_library/python/graph/Bellman_ford.py
+    - icon: ':warning:'
       path: algorithm_library/python/graph/CSR.py
       title: algorithm_library/python/graph/CSR.py
     - icon: ':warning:'
