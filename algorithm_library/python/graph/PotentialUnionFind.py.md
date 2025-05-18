@@ -22,7 +22,9 @@ data:
     \u3089\u306E\u8DDD\u96E2\n    # \u76F8\u5BFE\u7684\u306A\u91CD\u3055\u3092\u8868\
     \u3059\n    # \u7D4C\u8DEF\u5727\u7E2E\u524D\u306F\u89AA\u30CE\u30FC\u30C9\u3068\
     \u306E\u5DEE\u5206\n    self.potential = [0]*(N+1)\n    self.inf = pow(10,18)\n\
-    \  \n  # \u9802\u70B9x\u306E\u6839\u3092\u8FD4\u3059\u95A2\u6570\n  # O(\u03B1\
+    \    self.inconsistent = [False]*(N+1) # \u9023\u7D50\u6210\u5206\u306B\u8CA0\u9589\
+    \u8DEF\u304C\u3042\u308B\u304B\uFF08\u77DB\u76FE\u304C\u3042\u308B\u304B\uFF09\
+    \n  \n  # \u9802\u70B9x\u306E\u6839\u3092\u8FD4\u3059\u95A2\u6570\n  # O(\u03B1\
     (N))\n  def root(self,x):\n    if self.parents[x]<0: return x\n    else:\n   \
     \   # \u7D4C\u8DEF\u5727\u7E2E\n      r = self.root(self.parents[x]) # \u5148\u306B\
     \u7D4C\u8DEF\u5727\u7E2E\u3057\u3066\u30DD\u30C6\u30F3\u30B7\u30E3\u30EB\u3092\
@@ -42,33 +44,35 @@ data:
     \n  # x -> y \u306E\u91CD\u307F distance \u306E\u6709\u5411\u8FBA\n  # \u8FD4\u308A\
     \u5024\u306F\u77DB\u76FE\u304C\u306A\u3051\u308C\u3070 true\n  # O(\u03B1(N))\n\
     \  def union(self,x,y,w):\n    rx = self.root(x); ry = self.root(y)\n    if rx==ry:\
-    \ # \u65E2\u306B\u9023\u7D50\u306A\u3089\n      return self.potential[y] - self.potential[x]\
-    \ == w\n    # \u3084\u3084\u3053\u3057\u3044\u304C\u3001x-y \u3092\u3064\u306A\
-    \u3050\u304C\u3001\u7D4C\u8DEF\u5727\u7E2E\u306E\u90FD\u5408\u3067\u5B9F\u88C5\
-    \u3067\u306F rx-ry \u3092\u3064\u306A\u3050\u3053\u3068\u306B\u306A\u308B\n  \
-    \  # union by size \u3067\u3064\u306A\u3052\u308B\n    if self.parents[ry] > self.parents[rx]:\n\
-    \      # rx \u306E\u4E0B\u306B ry \u3092\u3064\u306A\u3050\n      self.parents[rx]\
-    \ += self.parents[ry]\n      self.potential[ry] = self.potential[x] + w - self.potential[y]\n\
-    \      self.parents[ry] = rx\n    else:\n      # ry \u306E\u4E0B\u306B rx \u3092\
-    \u3064\u306A\u3050\n      self.parents[ry] += self.parents[rx]\n      self.potential[rx]\
-    \ = self.potential[y] - w - self.potential[x]\n      self.parents[rx] = ry\n \
-    \   return True\n\n  # \u8981\u7D20x\u304C\u5C5E\u3059\u308B\u30B0\u30EB\u30FC\
-    \u30D7\u306E\u8981\u7D20\u6570\u3092\u8FD4\u3059\n  # O(\u03B1(N))\n  def size(self,x):\
-    \ return -self.parents[self.root(x)]\n\n  # x,y\u304C\u540C\u3058\u30B0\u30EB\u30FC\
-    \u30D7\u304B(\u9023\u7D50\u304B)\u3092\u8FD4\u3059\u95A2\u6570\n  # O(\u03B1(N))\n\
-    \  def isSame(self,x,y): return self.root(x)==self.root(y)\n  \n  # x\u304C\u5C5E\
-    \u3059\u308B\u30B0\u30EB\u30FC\u30D7\u306E\u8981\u7D20\u3092\u30EA\u30B9\u30C8\
-    \u3067\u8FD4\u3059\n  # O(N)\n  def members(self, x):\n      root = self.root(x)\n\
-    \      return [i for i in range(1,self.N+1) if self.root(i) == root]\n\n  # \u3059\
-    \u3079\u3066\u306E\u6839\u306E\u8981\u7D20\u3092\u30EA\u30B9\u30C8\u3067\u8FD4\
-    \u3059\n  # O(N \xD7 \u03B1(N))\n  def roots(self): return [i for i, x in enumerate(self.parents)\
-    \ if x < 0]\n\n  # \u30B0\u30EB\u30FC\u30D7\u306E\u6570\u3092\u8FD4\u3059\n  #\
-    \ O(N \xD7 \u03B1(N))\n  def group_count(self): return len(self.roots())"
+    \ # \u65E2\u306B\u9023\u7D50\u306A\u3089\n      if self.potential[y] - self.potential[x]\
+    \ != w:\n        self.inconsistent[rx] = True\n      return self.potential[y]\
+    \ - self.potential[x] == w\n    # \u3084\u3084\u3053\u3057\u3044\u304C\u3001x-y\
+    \ \u3092\u3064\u306A\u3050\u304C\u3001\u7D4C\u8DEF\u5727\u7E2E\u306E\u90FD\u5408\
+    \u3067\u5B9F\u88C5\u3067\u306F rx-ry \u3092\u3064\u306A\u3050\u3053\u3068\u306B\
+    \u306A\u308B\n    # union by size \u3067\u3064\u306A\u3052\u308B\n    if self.parents[ry]\
+    \ > self.parents[rx]:\n      # rx \u306E\u4E0B\u306B ry \u3092\u3064\u306A\u3050\
+    \n      self.parents[rx] += self.parents[ry]\n      self.potential[ry] = self.potential[x]\
+    \ + w - self.potential[y]\n      self.parents[ry] = rx\n    else:\n      # ry\
+    \ \u306E\u4E0B\u306B rx \u3092\u3064\u306A\u3050\n      self.parents[ry] += self.parents[rx]\n\
+    \      self.potential[rx] = self.potential[y] - w - self.potential[x]\n      self.parents[rx]\
+    \ = ry\n    return True\n\n  # \u8981\u7D20x\u304C\u5C5E\u3059\u308B\u30B0\u30EB\
+    \u30FC\u30D7\u306E\u8981\u7D20\u6570\u3092\u8FD4\u3059\n  # O(\u03B1(N))\n  def\
+    \ size(self,x): return -self.parents[self.root(x)]\n\n  # x,y\u304C\u540C\u3058\
+    \u30B0\u30EB\u30FC\u30D7\u304B(\u9023\u7D50\u304B)\u3092\u8FD4\u3059\u95A2\u6570\
+    \n  # O(\u03B1(N))\n  def isSame(self,x,y): return self.root(x)==self.root(y)\n\
+    \  \n  # x\u304C\u5C5E\u3059\u308B\u30B0\u30EB\u30FC\u30D7\u306E\u8981\u7D20\u3092\
+    \u30EA\u30B9\u30C8\u3067\u8FD4\u3059\n  # O(N)\n  def members(self, x):\n    \
+    \  root = self.root(x)\n      return [i for i in range(1,self.N+1) if self.root(i)\
+    \ == root]\n\n  # \u3059\u3079\u3066\u306E\u6839\u306E\u8981\u7D20\u3092\u30EA\
+    \u30B9\u30C8\u3067\u8FD4\u3059\n  # O(N \xD7 \u03B1(N))\n  def roots(self): return\
+    \ [i for i, x in enumerate(self.parents) if x < 0]\n\n  # \u30B0\u30EB\u30FC\u30D7\
+    \u306E\u6570\u3092\u8FD4\u3059\n  # O(N \xD7 \u03B1(N))\n  def group_count(self):\
+    \ return len(self.roots())"
   dependsOn: []
   isVerificationFile: false
   path: algorithm_library/python/graph/PotentialUnionFind.py
   requiredBy: []
-  timestamp: '2025-05-04 17:49:22+09:00'
+  timestamp: '2025-05-18 10:45:09+09:00'
   verificationStatus: LIBRARY_ALL_AC
   verifiedWith:
   - tests/graph/PotentialUnionFind_yosupo.test.py
