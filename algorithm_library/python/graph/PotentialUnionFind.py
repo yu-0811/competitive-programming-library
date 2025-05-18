@@ -7,6 +7,7 @@ class PotentialUnionFind():
     # 経路圧縮前は親ノードとの差分
     self.potential = [0]*(N+1)
     self.inf = pow(10,18)
+    self.inconsistent = [False]*(N+1) # 連結成分に負閉路があるか（矛盾があるか）
   
   # 頂点xの根を返す関数
   # O(α(N))
@@ -39,6 +40,8 @@ class PotentialUnionFind():
   def union(self,x,y,w):
     rx = self.root(x); ry = self.root(y)
     if rx==ry: # 既に連結なら
+      if self.potential[y] - self.potential[x] != w:
+        self.inconsistent[rx] = True
       return self.potential[y] - self.potential[x] == w
     # ややこしいが、x-y をつなぐが、経路圧縮の都合で実装では rx-ry をつなぐことになる
     # union by size でつなげる
