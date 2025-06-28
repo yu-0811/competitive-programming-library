@@ -30,6 +30,9 @@ data:
       path: algorithm_library/python/data-structure/Mos_algorithm.py
       title: algorithm_library/python/data-structure/Mos_algorithm.py
     - icon: ':warning:'
+      path: algorithm_library/python/data-structure/RamgeSet.py
+      title: algorithm_library/python/data-structure/RamgeSet.py
+    - icon: ':warning:'
       path: algorithm_library/python/data-structure/Segtree.py
       title: algorithm_library/python/data-structure/Segtree.py
     - icon: ':warning:'
@@ -40,6 +43,9 @@ data:
     - icon: ':warning:'
       path: algorithm_library/python/graph/Bellman_ford.py
       title: algorithm_library/python/graph/Bellman_ford.py
+    - icon: ':warning:'
+      path: algorithm_library/python/graph/BipartiteGraph.py
+      title: algorithm_library/python/graph/BipartiteGraph.py
     - icon: ':warning:'
       path: algorithm_library/python/graph/CSR.py
       title: algorithm_library/python/graph/CSR.py

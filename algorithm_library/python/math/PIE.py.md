@@ -45,7 +45,7 @@ data:
   isVerificationFile: false
   path: algorithm_library/python/math/PIE.py
   requiredBy: []
-  timestamp: '2025-05-18 10:45:09+09:00'
+  timestamp: '2025-06-28 16:39:56+09:00'
   verificationStatus: LIBRARY_NO_TESTS
   verifiedWith: []
 documentation_of: algorithm_library/python/math/PIE.py
