@@ -7,6 +7,9 @@ data:
       path: algorithm_library/cpp/Mos_algorithm.cpp
       title: algorithm_library/cpp/Mos_algorithm.cpp
     - icon: ':warning:'
+      path: algorithm_library/cpp/RangeFactorize.cpp
+      title: algorithm_library/cpp/RangeFactorize.cpp
+    - icon: ':warning:'
       path: algorithm_library/cpp/RollingHash.cpp
       title: algorithm_library/cpp/RollingHash.cpp
     - icon: ':warning:'
@@ -67,7 +70,7 @@ data:
     - icon: ':warning:'
       path: algorithm_library/python/graph/TopologicalSort.py
       title: algorithm_library/python/graph/TopologicalSort.py
-    - icon: ':heavy_check_mark:'
+    - icon: ':warning:'
       path: algorithm_library/python/graph/UnionFind.py
       title: algorithm_library/python/graph/UnionFind.py
     - icon: ':warning:'
@@ -101,6 +104,9 @@ data:
     - icon: ':warning:'
       path: algorithm_library/python/math/PIE.py
       title: algorithm_library/python/math/PIE.py
+    - icon: ':warning:'
+      path: algorithm_library/python/math/RangeEratosthenes.py
+      title: algorithm_library/python/math/RangeEratosthenes.py
     - icon: ':warning:'
       path: algorithm_library/python/math/ceilDiv.py
       title: algorithm_library/python/math/ceilDiv.py

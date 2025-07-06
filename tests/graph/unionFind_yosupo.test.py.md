@@ -1,9 +1,6 @@
 ---
 data:
-  _extendedDependsOn:
-  - icon: ':heavy_check_mark:'
-    path: algorithm_library/python/graph/UnionFind.py
-    title: algorithm_library/python/graph/UnionFind.py
+  _extendedDependsOn: []
   _extendedRequiredBy: []
   _extendedVerifiedWith: []
   _isVerificationFailed: false
@@ -22,15 +19,15 @@ data:
   code: "# verification-helper: PROBLEM https://judge.yosupo.jp/problem/unionfind\n\
     import sys\ninput = sys.stdin.buffer.readline\n\nfrom algorithm_library.python.graph.UnionFind\
     \ import UnionFind\n\ndef main() -> None:\n    N, Q = map(int, input().split())\n\
-    \    uft = UnionFind(N)\n    for _ in range(Q):\n        t, u, v = map(int, input().split())\n\
-    \        if t == 0:\n            uft.union(u, v)\n        else:\n            print(int(uft.isSame(u,\
-    \ v)))\n\n\nif __name__ == \"__main__\":\n    main()"
-  dependsOn:
-  - algorithm_library/python/graph/UnionFind.py
+    \    uft = UnionFind(N + 1)\n    for _ in range(Q):\n        t, u, v = map(int,\
+    \ input().split())\n        if t == 0:\n            uft.union(u, v)\n        else:\n\
+    \            print(int(uft.isSame(u, v)))\n\n\nif __name__ == \"__main__\":\n\
+    \    main()"
+  dependsOn: []
   isVerificationFile: true
   path: tests/graph/unionFind_yosupo.test.py
   requiredBy: []
-  timestamp: '2025-06-28 16:39:56+09:00'
+  timestamp: '1970-01-01 00:00:00+00:00'
   verificationStatus: TEST_ACCEPTED
   verifiedWith: []
 documentation_of: tests/graph/unionFind_yosupo.test.py
