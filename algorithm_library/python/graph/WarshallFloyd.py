@@ -3,7 +3,7 @@
 
 def WarshallFloyd():
   dist = [[inf]*(N+1) for _ in range(N+1)]
-  for i in range(1,N+1): dist[i][i] = 0
+  for i in range(N+1): dist[i][i] = 0
   for i in range(1,N+1):
     for j,c in G[i]:
       if dist[i][j]>c: dist[i][j] = c

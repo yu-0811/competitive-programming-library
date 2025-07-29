@@ -1,4 +1,15 @@
-#include <bits/stdc++.h>
+#include <iostream>
+#include <vector>
+#include <algorithm>
+#include <unordered_set>
+#include <utility>
+#include <climits>
+#include <deque>
+#include <bitset>
+#include <cmath>
+#include <string>
+#include <cstdlib>
+#include <cassert>
 #include <chrono>
 using namespace std;
 #define rep(i, n) for (int i = 0; i < (int)(n); i++)
@@ -21,7 +32,6 @@ public:
     inline static uint32_t randrange(unsigned x, unsigned y) { return randrange(y - x) + x; }
     // [0.0, 1.0)
     inline static double random() { return (xorshift() + 0.5) * (1.0 / UINT_MAX); }
-
 };
 
 // 時間計測
@@ -37,9 +47,26 @@ public:
 Timer timer;
 
 // パラメータ ///////////////////////////////////
-constexpr double start_temp = 500;
-constexpr double end_temp = 10;
-constexpr int time_limit = 4950; // 単位 ms
+constexpr int time_limit = 1990; // 単位 ms
+// 提出用
+constexpr double start_temp = 200;
+constexpr double end_temp = 1;
+
+// optuna 用
+// constexpr double default_start_temp = 200;
+// constexpr double default_end_temp = 1;
+// double start_temp = defalut_start_temp;
+// double end_temp = defalut_end_temp;
+// void get_param() {
+//   const char* st = std::getenv("start_temp");
+//   if (st != nullptr) {
+//       start_temp = std::stoi(std::string(st));
+//   }
+//   const char* et = std::getenv("end_temp");
+//   if (et != nullptr) {
+//       end_temp = std::stod(std::string(et));
+//   }
+// }
 ////////////////////////////////////////////////
 
 // 線形温度管理
@@ -59,10 +86,6 @@ double calc_prob_minimize(auto &now_score, auto &next_score, double &temp) {
     if (next_score < now_score) return 1.0;
     return exp((now_score - next_score) / temp);
 }
-
-// グローバル変数 ///////////////////////////////////
-
-////////////////////////////////////////////////////
 
 double calc_score(int &idx){
   return;
@@ -93,26 +116,31 @@ auto generate_neighborhood(auto &now_score, auto &temp){
   }
 }
 
+unsigned int counter = 0;
 void SA() {
   double SA_start_time = timer.get_ms();
-  int iter = 1;
+  unsigned int iter = 1;
   double temp = start_temp;
   double now_score = initialize_score();
+  cerr << "start score: " << now_score << endl;
   while (true) {
-    if (iter % 1000 == 0) {
+    if (counter == 500) {
       double now_time = timer.get_ms();
       if (now_time > time_limit) break;
       temp = linear_temp(SA_start_time, now_time);
+      counter = 0;
     }
     now_score = generate_neighborhood(now_score, temp);
-    iter++;
+    iter++; counter++;
   }
+  cerr << "end score: " << now_score << endl;
   cerr << "iter: " << iter << endl;
 }
 
 int main(){
   ios::sync_with_stdio(false); cin.tie(0);
   timer = Timer(); // タイマー初期化
+  // get_param(); // optuna を使うときはコメントアウトを外す
 
   // 入力 //////////////////////////////////////////
 
