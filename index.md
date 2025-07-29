@@ -164,6 +164,11 @@ data:
     - icon: ':warning:'
       path: heuristic_library/cpp/random.cpp
       title: heuristic_library/cpp/random.cpp
+  - name: heuristic_library/pacher-optuna
+    pages:
+    - icon: ':warning:'
+      path: heuristic_library/pacher-optuna/optimize.py
+      title: heuristic_library/pacher-optuna/optimize.py
   - name: heuristic_library/python
     pages:
     - icon: ':warning:'
