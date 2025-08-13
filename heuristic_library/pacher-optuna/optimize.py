@@ -5,14 +5,15 @@ import subprocess
 from typing import Any
 
 import optuna
-
+import optunahub
+import optuna.visualization
 
 # TODO: Write parameter suggestions here
 def generate_params(trial: optuna.trial.Trial) -> dict[str, str]:
     # for more information, see https://optuna.readthedocs.io/en/stable/reference/generated/optuna.trial.Trial.html
     params = {
-        "start_temp": str(trial.suggest_float("start_temp", 150, 300)),
-        "end_temp": str(trial.suggest_float("end_temp", 0.1, 20)),
+        "start_temp": str(trial.suggest_float("start_temp", 50, 250)),
+        "end_temp": str(trial.suggest_float("end_temp", 0.01, 15)),
     }
 
     return params
@@ -41,7 +42,7 @@ def get_direction() -> str:
 # TODO: Set the timeout (seconds) or the number of trials
 def run_optimization(study: optuna.study.Study) -> None:
     # study.optimize(Objective(), timeout=600)
-    study.optimize(Objective(), n_trials=100)
+    study.optimize(Objective(), n_trials=50)
 
 
 class Objective:
@@ -116,10 +117,46 @@ study = optuna.create_study(
     direction=get_direction(),
     study_name="optuna-study",
     pruner=optuna.pruners.WilcoxonPruner(),
-    sampler=optuna.samplers.TPESampler(),
+    sampler=optunahub.load_module(
+        "samplers/auto_sampler"
+    ).AutoSampler()  # 内部でアルゴリズムを自動選択
 )
+
+# pacher のドキュメント通り
+# こっちの方が速い?
+# study = optuna.create_study(
+#     direction=get_direction(),
+#     study_name="optuna-study",
+#     pruner=optuna.pruners.WilcoxonPruner(),
+#     sampler=optuna.samplers.TPESampler(),
+# )
 
 run_optimization(study)
 
 print(f"best params = {study.best_params}")
 print(f"best score  = {study.best_value}")
+
+print("Generating visualization files...")
+
+# 保存用ディレクトリの定義
+output_dir = "visualization"
+# ディレクトリが存在しない場合に自動で作成
+os.makedirs(output_dir, exist_ok=True)
+
+# 1. 最適化履歴のプロット
+fig_history = optuna.visualization.plot_optimization_history(study)
+fig_history.write_image(os.path.join(output_dir, "optimization_history.png"))
+
+# 2. パラメータ重要度のプロット
+fig_importance = optuna.visualization.plot_param_importances(study)
+fig_importance.write_image(os.path.join(output_dir, "param_importances.png"))
+
+# 3. スライスプロット
+fig_slice = optuna.visualization.plot_slice(study)
+fig_slice.write_image(os.path.join(output_dir, "slice.png"))
+
+# 4. 中間値プロット (Pruningの様子を確認)
+fig_intermediate = optuna.visualization.plot_intermediate_values(study)
+fig_intermediate.write_image(os.path.join(output_dir, "intermediate_values.png"))
+
+print(f"Visualization files saved as PNG in '{output_dir}' directory.")

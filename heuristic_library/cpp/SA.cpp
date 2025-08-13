@@ -21,25 +21,20 @@ using namespace std;
 class Random {
     static uint32_t xorshift() {
         static uint32_t x = 123456789, y = 362436039, z = 521288629, w = 88675123; 
-        uint32_t t = x ^ (x << 11);
-        x = y; y = z; z = w;
+        uint32_t t = x ^ (x << 11); x = y; y = z; z = w;
         return w = (w ^ (w >> 19)) ^ (t ^ (t >> 8));
     }
 public:
-    // [0, x)
-    inline static uint32_t randrange(unsigned x) { return xorshift() % x; }
-    // [x, y)
-    inline static uint32_t randrange(unsigned x, unsigned y) { return randrange(y - x) + x; }
-    // [0.0, 1.0)
-    inline static double random() { return (xorshift() + 0.5) * (1.0 / UINT_MAX); }
+    inline static uint32_t randrange(unsigned x) { return xorshift() % x; } // [0, x)
+    inline static uint32_t randrange(unsigned x, unsigned y) { return randrange(y - x) + x; } // [x, y)
+    inline static float random() { return (xorshift() + 0.5) * (1.0 / UINT_MAX); } // [0.0, 1.0)
 };
 
-// 時間計測
 class Timer {
     chrono::time_point<chrono::steady_clock> start;
 public:
     Timer() : start(chrono::steady_clock::now()) {}
-    long long get_ms() { // 経過時間を返す
+    unsigned short get_ms() { // 経過時間を返す
         auto now_time = chrono::steady_clock::now();
         return chrono::duration_cast<chrono::milliseconds>(now_time - start).count();
     }
@@ -47,52 +42,54 @@ public:
 Timer timer;
 
 // パラメータ ///////////////////////////////////
-constexpr int time_limit = 1990; // 単位 ms
+unsigned int counter = 0;
+#ifndef ONLINE_JUDGE
+    constexpr int time_limit = 1985 + 2000; 
+#else
+    constexpr int time_limit = 1990; // ジャッジでは 1990 ms
+#endif
 // 提出用
-constexpr double start_temp = 200;
-constexpr double end_temp = 1;
+constexpr float start_temp = 200;
+constexpr float end_temp = 1;
 
 // optuna 用
-// constexpr double default_start_temp = 200;
-// constexpr double default_end_temp = 1;
-// double start_temp = defalut_start_temp;
-// double end_temp = defalut_end_temp;
-// void get_param() {
-//   const char* st = std::getenv("start_temp");
-//   if (st != nullptr) {
-//       start_temp = std::stoi(std::string(st));
-//   }
-//   const char* et = std::getenv("end_temp");
-//   if (et != nullptr) {
-//       end_temp = std::stod(std::string(et));
-//   }
-// }
+// constexpr float default_start_temp = 200;
+// constexpr float default_end_temp = 1;
+// float start_temp = default_start_temp;
+// float end_temp = default_end_temp;
+void get_param() {
+    const char* p;
+    // p = std::getenv("r_1"); assert(p); r1 = std::stof(p);
+    // p = std::getenv("r_2"); assert(p); r2 = std::stof(p);
+    // p = std::getenv("r_3"); assert(p); r3 = std::stof(p);
+    // p = std::getenv("r_4"); assert(p); r4 = std::stof(p);
+}
 ////////////////////////////////////////////////
 
 // 線形温度管理
-double linear_temp(double &SA_start_time, double &now_time) {
+float linear_temp(float &SA_start_time, float &now_time) {
     return start_temp - (start_temp - end_temp) * (now_time - SA_start_time) / time_limit;
 }
 
 // 遷移確率関数
 // スコア最大化のとき
-double calc_prob_maximize(auto &now_score, auto &next_score, double &temp) {
+float calc_prob_maximize(auto &now_score, auto &next_score, float &temp) {
     if (next_score > now_score) return 1.0;
     return exp((next_score - now_score) / temp);
 }
 
 // スコア最小化のとき
-double calc_prob_minimize(auto &now_score, auto &next_score, double &temp) {
+float calc_prob_minimize(auto &now_score, auto &next_score, float &temp) {
     if (next_score < now_score) return 1.0;
     return exp((now_score - next_score) / temp);
 }
 
-double calc_score(int &idx){
-  return;
+float calc_score(){
+  return 0.0;
 }
 
 auto initialize_score(){
-  return;
+  return 0.0;
 }
 
 // 近傍生成 + スコア計算 + 受容判定 -> 新しいスコアを返す /////////////////
@@ -101,7 +98,7 @@ auto generate_neighborhood(auto &now_score, auto &temp){
 
   //////////////////////////////////////////////////
   // スコア計算 ////////////////////////////////////
-  auto next_score
+  auto next_score = calc_score();
   if (calc_prob_maximize(now_score, next_score, temp) > Random::random()) {
     // 必要であれば状態を更新 ////////////////////
 
@@ -116,16 +113,15 @@ auto generate_neighborhood(auto &now_score, auto &temp){
   }
 }
 
-unsigned int counter = 0;
 void SA() {
-  double SA_start_time = timer.get_ms();
+  float SA_start_time = timer.get_ms();
   unsigned int iter = 1;
-  double temp = start_temp;
-  double now_score = initialize_score();
+  float temp = start_temp;
+  float now_score = initialize_score();
   cerr << "start score: " << now_score << endl;
   while (true) {
     if (counter == 500) {
-      double now_time = timer.get_ms();
+      float now_time = timer.get_ms();
       if (now_time > time_limit) break;
       temp = linear_temp(SA_start_time, now_time);
       counter = 0;
