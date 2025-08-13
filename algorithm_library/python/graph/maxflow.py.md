@@ -36,7 +36,7 @@ data:
   isVerificationFile: false
   path: algorithm_library/python/graph/maxflow.py
   requiredBy: []
-  timestamp: '2025-07-29 17:33:56+09:00'
+  timestamp: '2025-08-13 17:42:12+09:00'
   verificationStatus: LIBRARY_NO_TESTS
   verifiedWith: []
 documentation_of: algorithm_library/python/graph/maxflow.py

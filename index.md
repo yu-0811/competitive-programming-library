@@ -156,6 +156,9 @@ data:
   - name: heuristic_library/cpp
     pages:
     - icon: ':warning:'
+      path: heuristic_library/cpp/RandomSet.cpp
+      title: heuristic_library/cpp/RandomSet.cpp
+    - icon: ':warning:'
       path: heuristic_library/cpp/SA.cpp
       title: heuristic_library/cpp/SA.cpp
     - icon: ':warning:'
