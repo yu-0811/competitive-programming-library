@@ -42,7 +42,6 @@ public:
 Timer timer;
 
 // パラメータ ///////////////////////////////////
-unsigned int counter = 0;
 #ifndef ONLINE_JUDGE
     constexpr int time_limit = 1985 + 2000; 
 #else
@@ -67,7 +66,7 @@ void get_param() {
 ////////////////////////////////////////////////
 
 // 線形温度管理
-float linear_temp(float &SA_start_time, float &now_time) {
+float linear_temp(unsigned short &SA_start_time, unsigned short &now_time) {
     return start_temp - (start_temp - end_temp) * (now_time - SA_start_time) / time_limit;
 }
 
@@ -114,14 +113,14 @@ auto generate_neighborhood(auto &now_score, auto &temp){
 }
 
 void SA() {
-  float SA_start_time = timer.get_ms();
-  unsigned int iter = 1;
+  unsigned int counter = 0; unsigned int iter = 0;
+  auto SA_start_time = timer.get_ms();
   float temp = start_temp;
   float now_score = initialize_score();
   cerr << "start score: " << now_score << endl;
   while (true) {
     if (counter == 500) {
-      float now_time = timer.get_ms();
+      auto now_time = timer.get_ms();
       if (now_time > time_limit) break;
       temp = linear_temp(SA_start_time, now_time);
       counter = 0;
