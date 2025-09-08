@@ -156,6 +156,12 @@ data:
   - name: heuristic_library/cpp
     pages:
     - icon: ':warning:'
+      path: heuristic_library/cpp/1DHash.cpp
+      title: heuristic_library/cpp/1DHash.cpp
+    - icon: ':warning:'
+      path: heuristic_library/cpp/2Dhash.cpp
+      title: heuristic_library/cpp/2Dhash.cpp
+    - icon: ':warning:'
       path: heuristic_library/cpp/RandomSet.cpp
       title: heuristic_library/cpp/RandomSet.cpp
     - icon: ':warning:'
@@ -164,6 +170,9 @@ data:
     - icon: ':warning:'
       path: heuristic_library/cpp/beam_search.cpp
       title: heuristic_library/cpp/beam_search.cpp
+    - icon: ':warning:'
+      path: heuristic_library/cpp/beam_search_no_hash.cpp
+      title: heuristic_library/cpp/beam_search_no_hash.cpp
     - icon: ':warning:'
       path: heuristic_library/cpp/random.cpp
       title: heuristic_library/cpp/random.cpp

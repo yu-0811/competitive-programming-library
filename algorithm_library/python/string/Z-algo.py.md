@@ -32,7 +32,7 @@ data:
   isVerificationFile: false
   path: algorithm_library/python/string/Z-algo.py
   requiredBy: []
-  timestamp: '2025-08-13 17:42:12+09:00'
+  timestamp: '2025-09-08 21:21:05+09:00'
   verificationStatus: LIBRARY_NO_TESTS
   verifiedWith: []
 documentation_of: algorithm_library/python/string/Z-algo.py
