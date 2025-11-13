@@ -20,12 +20,13 @@ data:
     \ i) % mod)\n    inv.append((mod-inv[mod % i] * (mod // i)) % mod)\n    factinv.append((factinv[i-1]\
     \ * inv[i]) % mod)\n    \ndef modComb(n,k): # nCk % mod\u3092\u8FD4\u3059\n  if\
     \ (k < 0 or n<0) or (n < k):return 0\n  if k==1: return n\n  k = min(k,n-k)\n\
-    \  return fact[n]*factinv[k]%mod*factinv[n-k]%mod"
+    \  return fact[n]*factinv[k]%mod*factinv[n-k]%mod\n\n# \u91CD\u8907\u7D44\u5408\
+    \u305B nHr % mod\u3092\u8FD4\u3059\ndef modH(n,r):\n    return modComb(n+r-1,r)"
   dependsOn: []
   isVerificationFile: false
   path: algorithm_library/python/math/modComb.py
   requiredBy: []
-  timestamp: '2025-09-08 21:21:05+09:00'
+  timestamp: '2025-11-13 20:32:47+09:00'
   verificationStatus: LIBRARY_NO_TESTS
   verifiedWith: []
 documentation_of: algorithm_library/python/math/modComb.py
