@@ -15,3 +15,7 @@ def modComb(n,k): # nCk % modを返す
   if k==1: return n
   k = min(k,n-k)
   return fact[n]*factinv[k]%mod*factinv[n-k]%mod
+
+# 重複組合せ nHr % modを返す
+def modH(n,r):
+    return modComb(n+r-1,r)
