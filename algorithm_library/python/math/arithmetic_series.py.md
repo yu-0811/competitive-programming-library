@@ -14,21 +14,19 @@ data:
     \         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n\
     \  File \"/opt/hostedtoolcache/Python/3.11.0/x64/lib/python3.11/site-packages/onlinejudge_verify/languages/python.py\"\
     , line 96, in bundle\n    raise NotImplementedError\nNotImplementedError\n"
-  code: "def run_length_compression(S : str):\n    res = []\n    tmp = S[0]\n    cnt\
-    \ = 1\n    for i in range(1,len(S)):\n        if S[i]==tmp: cnt += 1\n       \
-    \ else:\n            res.append((tmp,cnt))\n            tmp = S[i]; cnt = 1\n\
-    \    res.append((tmp,cnt))\n    return res"
+  code: "# \u7B49\u5DEE\u6570\u5217\u306E\u548C\n# \u521D\u9805 a1, \u9805\u6570 n,\
+    \ \u516C\u5DEE d\ndef cal(a1,n,d): \n\tif n==0: return 0\n\treturn (n*(2*a1+(n-1)*d))//2"
   dependsOn: []
   isVerificationFile: false
-  path: algorithm_library/python/techniques/RunLengthCompression.py
+  path: algorithm_library/python/math/arithmetic_series.py
   requiredBy: []
   timestamp: '2025-11-24 14:08:58+09:00'
   verificationStatus: LIBRARY_NO_TESTS
   verifiedWith: []
-documentation_of: algorithm_library/python/techniques/RunLengthCompression.py
+documentation_of: algorithm_library/python/math/arithmetic_series.py
 layout: document
 redirect_from:
-- /library/algorithm_library/python/techniques/RunLengthCompression.py
-- /library/algorithm_library/python/techniques/RunLengthCompression.py.html
-title: algorithm_library/python/techniques/RunLengthCompression.py
+- /library/algorithm_library/python/math/arithmetic_series.py
+- /library/algorithm_library/python/math/arithmetic_series.py.html
+title: algorithm_library/python/math/arithmetic_series.py
 ---

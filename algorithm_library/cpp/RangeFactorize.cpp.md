@@ -61,7 +61,7 @@ data:
   isVerificationFile: false
   path: algorithm_library/cpp/RangeFactorize.cpp
   requiredBy: []
-  timestamp: '2025-11-13 20:32:47+09:00'
+  timestamp: '2025-11-24 14:08:58+09:00'
   verificationStatus: LIBRARY_NO_TESTS
   verifiedWith: []
 documentation_of: algorithm_library/cpp/RangeFactorize.cpp

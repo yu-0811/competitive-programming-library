@@ -24,6 +24,9 @@ data:
   - name: algorithm_library/python/data-structure
     pages:
     - icon: ':warning:'
+      path: algorithm_library/python/data-structure/BIT.py
+      title: algorithm_library/python/data-structure/BIT.py
+    - icon: ':warning:'
       path: algorithm_library/python/data-structure/LazySegtree.py
       title: algorithm_library/python/data-structure/LazySegtree.py
     - icon: ':warning:'
@@ -33,14 +36,14 @@ data:
       path: algorithm_library/python/data-structure/Mos_algorithm.py
       title: algorithm_library/python/data-structure/Mos_algorithm.py
     - icon: ':warning:'
-      path: algorithm_library/python/data-structure/RamgeSet.py
-      title: algorithm_library/python/data-structure/RamgeSet.py
-    - icon: ':warning:'
       path: algorithm_library/python/data-structure/Segtree.py
       title: algorithm_library/python/data-structure/Segtree.py
     - icon: ':warning:'
-      path: algorithm_library/python/data-structure/SortedMultiset.py
-      title: algorithm_library/python/data-structure/SortedMultiset.py
+      path: algorithm_library/python/data-structure/TopK.py
+      title: algorithm_library/python/data-structure/TopK.py
+    - icon: ':warning:'
+      path: algorithm_library/python/data-structure/TwoWayList.py
+      title: algorithm_library/python/data-structure/TwoWayList.py
   - name: algorithm_library/python/graph
     pages:
     - icon: ':warning:'
@@ -105,8 +108,14 @@ data:
       path: algorithm_library/python/math/PIE.py
       title: algorithm_library/python/math/PIE.py
     - icon: ':warning:'
+      path: algorithm_library/python/math/PascalsTriangle.py
+      title: algorithm_library/python/math/PascalsTriangle.py
+    - icon: ':warning:'
       path: algorithm_library/python/math/RangeEratosthenes.py
       title: algorithm_library/python/math/RangeEratosthenes.py
+    - icon: ':warning:'
+      path: algorithm_library/python/math/arithmetic_series.py
+      title: algorithm_library/python/math/arithmetic_series.py
     - icon: ':warning:'
       path: algorithm_library/python/math/ceilDiv.py
       title: algorithm_library/python/math/ceilDiv.py
@@ -138,6 +147,9 @@ data:
       title: algorithm_library/python/string/changeable_RollingHash.py
   - name: algorithm_library/python/techniques
     pages:
+    - icon: ':warning:'
+      path: algorithm_library/python/techniques/Compression.py
+      title: algorithm_library/python/techniques/Compression.py
     - icon: ':warning:'
       path: algorithm_library/python/techniques/CrossAccumulate.py
       title: algorithm_library/python/techniques/CrossAccumulate.py
