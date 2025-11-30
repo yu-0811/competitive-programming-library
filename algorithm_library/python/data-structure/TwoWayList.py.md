@@ -17,28 +17,29 @@ data:
     , line 96, in bundle\n    raise NotImplementedError\nNotImplementedError\n"
   code: "# \u53CC\u65B9\u5411\u9023\u7D50\u30EA\u30B9\u30C8 https://atcoder.jp/contests/abc344/editorial/9487\n\
     # \u633F\u5165\u30FB\u524A\u9664 O(1)\n# \u8981\u7D20\u306E\u91CD\u8907\u4E0D\u53EF\
-    \nfrom collections import defaultdict\n\nclass TwoWayList:\n  def  __init__(self,LIST):\n\
-    \    self.LIST = [pow(10,18)] + LIST + [-pow(10,18)]\n    self.front,self.back\
-    \ = defaultdict(int),defaultdict(int)\n    for i in range(len(self.LIST)-1):\n\
-    \      self.back[self.LIST[i]] = self.LIST[i+1] # x\u306E\u5F8C\u308D\n      self.front[self.LIST[i+1]]\
-    \ = self.LIST[i] # x\u306E\u524D\n      \n  def insert_front(self,x,y): # x\u306E\
-    \u524D\u306By\u3092\u633F\u5165\u3059\u308B\n    # \u73FE\u5728 a -> x\n    #\
-    \ a -> y -> x\n    a = self.front[x]\n    self.back[a] = y\n    self.front[x]\
-    \ = y\n    self.back[y] = x\n    self.front[y] = a\n      \n  def insert_back(self,x,y):\
-    \ # x\u306E\u76F4\u5F8C\u306By\u3092\u633F\u5165\u3059\u308B\n    # \u73FE\u5728\
-    \ x -> b\n    # x -> y -> b\n    b = self.back[x] \n    self.back[x] = y\n   \
-    \ self.front[y] = x\n    self.back[y] = b\n    self.front[b] = y\n    \n  def\
-    \ del_x(self,x): # x\u3092\u524A\u9664\u3059\u308B\n    a = self.front[x]\n  \
-    \  b = self.back[x]\n    self.back[a] = b\n    self.front[b] = a\n    del self.front[x]\n\
-    \    del self.back[x]\n    \n  def print_LIST(self): # \u30EA\u30B9\u30C8\u3092\
-    \u8FD4\u3059\n    ans = list()\n    crr = self.back[pow(10,18)] # HEAD\u304Cpow(10,18)\u3060\
-    \u304B\u3089\u305D\u3053\u304B\u3089\u59CB\u3081\u308B\n    while crr!=-pow(10,18):\n\
-    \      ans.append(crr)\n      crr = self.back[crr]\n    return ans "
+    \n\n\nclass TwoWayList:\n    def __init__(self, L):\n        self.head = -1\n\
+    \        self.tail = pow(10, 18)\n        self.L = [self.head] + L + [self.tail]\n\
+    \        self.front, self.back = dict(), dict()\n        for i in range(len(self.L)\
+    \ - 1):\n            self.back[self.L[i]] = self.L[i + 1]  # x\u306E\u5F8C\u308D\
+    \n            self.front[self.L[i + 1]] = self.L[i]  # x\u306E\u524D\n\n    def\
+    \ insert_front(self, x, y):  # x\u306E\u524D\u306By\u3092\u633F\u5165\u3059\u308B\
+    \n        # \u73FE\u5728 a -> x\n        # a -> y -> x\n        a = self.front[x]\n\
+    \        self.back[a] = y\n        self.front[x] = y\n        self.back[y] = x\n\
+    \        self.front[y] = a\n\n    def insert_back(self, x, y):  # x\u306E\u76F4\
+    \u5F8C\u306By\u3092\u633F\u5165\u3059\u308B\n        # \u73FE\u5728 x -> b\n \
+    \       # x -> y -> b\n        b = self.back[x]\n        self.back[x] = y\n  \
+    \      self.front[y] = x\n        self.back[y] = b\n        self.front[b] = y\n\
+    \n    def del_x(self, x):  # x\u3092\u524A\u9664\u3059\u308B\n        a = self.front[x]\n\
+    \        b = self.back[x]\n        self.back[a] = b\n        self.front[b] = a\n\
+    \        del self.front[x]\n        del self.back[x]\n\n    def res_LIST(self):\
+    \  # \u30EA\u30B9\u30C8\u3092\u8FD4\u3059\n        ans = list()\n        crr =\
+    \ self.back[self.head]\n        while crr != self.tail:\n            ans.append(crr)\n\
+    \            crr = self.back[crr]\n        return ans\n"
   dependsOn: []
   isVerificationFile: false
   path: algorithm_library/python/data-structure/TwoWayList.py
   requiredBy: []
-  timestamp: '1970-01-01 00:00:00+00:00'
+  timestamp: '2025-11-30 11:50:02+09:00'
   verificationStatus: LIBRARY_NO_TESTS
   verifiedWith: []
 documentation_of: algorithm_library/python/data-structure/TwoWayList.py

@@ -129,6 +129,9 @@ data:
       path: algorithm_library/python/math/factorization.py
       title: algorithm_library/python/math/factorization.py
     - icon: ':warning:'
+      path: algorithm_library/python/math/mobius.py
+      title: algorithm_library/python/math/mobius.py
+    - icon: ':warning:'
       path: algorithm_library/python/math/modComb.py
       title: algorithm_library/python/math/modComb.py
   - name: algorithm_library/python/string

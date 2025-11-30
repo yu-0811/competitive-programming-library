@@ -30,7 +30,7 @@ data:
   isVerificationFile: false
   path: algorithm_library/python/math/MatrixPower.py
   requiredBy: []
-  timestamp: '2025-11-24 14:08:58+09:00'
+  timestamp: '2025-11-30 11:50:02+09:00'
   verificationStatus: LIBRARY_NO_TESTS
   verifiedWith: []
 documentation_of: algorithm_library/python/math/MatrixPower.py
