@@ -189,7 +189,7 @@ data:
   isVerificationFile: false
   path: heuristic_library/cpp/beam_search.cpp
   requiredBy: []
-  timestamp: '2025-11-30 11:50:02+09:00'
+  timestamp: '2025-12-01 14:37:39+09:00'
   verificationStatus: LIBRARY_NO_TESTS
   verifiedWith: []
 documentation_of: heuristic_library/cpp/beam_search.cpp
