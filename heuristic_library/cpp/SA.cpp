@@ -11,6 +11,7 @@
 #include <cstdlib>
 #include <cassert>
 #include <chrono>
+#include <cstring>
 using namespace std;
 #define rep(i, n) for (int i = 0; i < (int)(n); i++)
 #define ll long long
@@ -43,12 +44,12 @@ Timer timer;
 
 // パラメータ ///////////////////////////////////
 #ifndef ONLINE_JUDGE
-    constexpr int time_limit = 1985 + 2000; 
+    constexpr int time_limit = 1990 + 1000;
 #else
-    constexpr int time_limit = 1990; // ジャッジでは 1990 ms
+    constexpr int time_limit = 1987; // ジャッジでは 1990 ms
 #endif
 // 提出用
-constexpr float start_temp = 200;
+constexpr float start_temp = 500;
 constexpr float end_temp = 1;
 
 // optuna 用
@@ -58,16 +59,20 @@ constexpr float end_temp = 1;
 // float end_temp = default_end_temp;
 void get_param() {
     const char* p;
-    // p = std::getenv("r_1"); assert(p); r1 = std::stof(p);
-    // p = std::getenv("r_2"); assert(p); r2 = std::stof(p);
-    // p = std::getenv("r_3"); assert(p); r3 = std::stof(p);
-    // p = std::getenv("r_4"); assert(p); r4 = std::stof(p);
+    // p = std::getenv("start_temp"); assert(p); start_temp = std::stof(p);
+    // p = std::getenv("end_temp"); assert(p); end_temp = std::stof(p);
 }
 ////////////////////////////////////////////////
-
+// 焼きなましに関する関数 /////////////////////////
 // 線形温度管理
 float linear_temp(unsigned short &SA_start_time, unsigned short &now_time) {
     return start_temp - (start_temp - end_temp) * (now_time - SA_start_time) / time_limit;
+}
+
+// 指数温度管理
+float expo_temp(unsigned short &SA_start_time, unsigned short &now_time) {
+    float p = (float)(now_time - SA_start_time) / time_limit;
+    return start_temp * pow(end_temp / start_temp, p);
 }
 
 // 遷移確率関数
@@ -82,68 +87,100 @@ float calc_prob_minimize(auto &now_score, auto &next_score, float &temp) {
     if (next_score < now_score) return 1.0;
     return exp((now_score - next_score) / temp);
 }
+///////////////////////////////////////////////////////
 
-float calc_score(){
-  return 0.0;
+// ここから下に解法を書く
+
+// 焼きなましで使う構造体
+struct WorkSpace {
+
+};
+// 解を構築するために必要な構造体
+// 焼きなましで使うけど解の構築にはいらない (ex. スコアの差分更新に使う配列など) があるのでこの構成にしている
+// WorkSpace が Answer を包含するイメージ
+struct Answer {
+
+};
+
+// 入力
+
+// 初期解生成
+WorkSpace make_initial_solution(){
+    WorkSpace res;
+
+    return res;
 }
 
-auto initialize_score(){
-  return 0.0;
+auto initialize_score(WorkSpace &sol) {
+    double score = 0.0;
+
+    return score;
 }
 
 // 近傍生成 + スコア計算 + 受容判定 -> 新しいスコアを返す /////////////////
-auto generate_neighborhood(auto &now_score, auto &temp){
-  // 近傍生成 //////////////////////////////////////
+auto generate_neighborhood(auto &now_score, auto &temp, WorkSpace &sol) {
+    // 近傍生成 //////////////////////////////////////
 
-  //////////////////////////////////////////////////
-  // スコア計算 ////////////////////////////////////
-  auto next_score = calc_score();
-  if (calc_prob_maximize(now_score, next_score, temp) > Random::random()) {
-    // 必要であれば状態を更新 ////////////////////
+    //////////////////////////////////////////////////
+    // スコア計算 ////////////////////////////////////
 
-    //////////////////////////////////////////////
-    return next_score;
-  }
-  else {
-    // 状態をもとに戻す //////////////////////////
+    //////////////////////////////////////////////////
+    if (calc_prob_minimize(now_score, next_score, temp) > Random::random()) { // TODO: 最小化 or 最大化
+        // 状態を更新
 
-    //////////////////////////////////////////////
-    return now_score;
-  }
+        return next_score;
+    }
+    else {
+        // 状態をもとに戻す
+
+        return now_score;
+    }
 }
 
-void SA() {
-  unsigned int counter = 0; unsigned int iter = 0;
-  auto SA_start_time = timer.get_ms();
-  float temp = start_temp;
-  float now_score = initialize_score();
-  cerr << "start score: " << now_score << endl;
-  while (true) {
-    if (counter == 500) {
-      auto now_time = timer.get_ms();
-      if (now_time > time_limit) break;
-      temp = linear_temp(SA_start_time, now_time);
-      counter = 0;
+Answer SA() {
+    unsigned int counter = 0; unsigned int iter = 0;
+    auto SA_start_time = timer.get_ms();
+    float temp = start_temp;
+
+    WorkSpace current_solution = make_initial_solution();
+    double now_score = initialize_score(current_solution);
+
+    double best_score = now_score;
+    Answer best_answer; // TODO: best_answer に current_solution をコピー
+    cerr << "start score: " << now_score << endl;
+    auto now_time = timer.get_ms();
+
+    while (true) {
+        if (counter == 30) {
+            now_time = timer.get_ms();
+            if (now_time > time_limit) break;
+            temp = linear_temp(SA_start_time, now_time);
+            counter = 0;
+        }
+        now_score = generate_neighborhood(now_score, temp, current_solution);
+        if (now_score < best_score) { // TODO: 最小化 or 最大化
+            best_score = now_score;
+            // TODO: best_answer に current_solution をコピー
+        }
+        iter++; counter++;
     }
-    now_score = generate_neighborhood(now_score, temp);
-    iter++; counter++;
-  }
-  cerr << "end score: " << now_score << endl;
-  cerr << "iter: " << iter << endl;
+    cerr << "end score: " << now_score << endl;
+    cerr << "iter: " << iter << endl;
+    return best_answer;
 }
 
 int main(){
-  ios::sync_with_stdio(false); cin.tie(0);
-  timer = Timer(); // タイマー初期化
-  // get_param(); // optuna を使うときはコメントアウトを外す
+    ios::sync_with_stdio(false); cin.tie(0);
+    timer = Timer(); // タイマー初期化
+    // get_param(); // optuna を使うときはコメントアウトを外す
 
-  // 入力 //////////////////////////////////////////
+    // 入力 //////////////////////////////////////////
+    
+    //////////////////////////////////////////////////
 
-  //////////////////////////////////////////////////
+    Answer best_answer = SA();
 
-  SA();
+    // 出力 //////////////////////////////////////////
 
-  // 出力 //////////////////////////////////////////
-
-  //////////////////////////////////////////////////
+    //////////////////////////////////////////////////
 }
