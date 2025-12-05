@@ -100,6 +100,10 @@ struct WorkSpace {
 // WorkSpace が Answer を包含するイメージ
 struct Answer {
 
+    // 「Answer = WorkSpace」という代入を可能にする (演算子オーバーロード)
+    Answer& operator=(const WorkSpace& sol) {
+        return *this;
+    }
 };
 
 // 入力
@@ -112,6 +116,12 @@ WorkSpace make_initial_solution(){
 }
 
 auto initialize_score(WorkSpace &sol) {
+    double score = 0.0;
+
+    return score;
+}
+
+auto calc_score(WorkSpace &sol) {
     double score = 0.0;
 
     return score;
@@ -143,10 +153,11 @@ Answer SA() {
     float temp = start_temp;
 
     WorkSpace current_solution = make_initial_solution();
-    double now_score = initialize_score(current_solution);
+    auto now_score = initialize_score(current_solution);
 
-    double best_score = now_score;
-    Answer best_answer; // TODO: best_answer に current_solution をコピー
+    auto best_score = now_score;
+    Answer best_answer;
+    best_answer = current_solution;
     cerr << "start score: " << now_score << endl;
     auto now_time = timer.get_ms();
 
@@ -160,7 +171,7 @@ Answer SA() {
         now_score = generate_neighborhood(now_score, temp, current_solution);
         if (now_score < best_score) { // TODO: 最小化 or 最大化
             best_score = now_score;
-            // TODO: best_answer に current_solution をコピー
+            best_answer = current_solution;
         }
         iter++; counter++;
     }

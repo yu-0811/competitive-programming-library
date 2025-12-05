@@ -147,6 +147,13 @@
     "typeindex": "cpp",
     "typeinfo": "cpp",
     "valarray": "cpp",
-    "variant": "cpp"
+    "variant": "cpp",
+    "cassert": "cpp"
+  },
+  "ruff.configuration": "./pyproject.toml",
+  "editor.defaultFormatter": "charliermarsh.ruff",
+  "editor.formatOnSave": true,
+  "[cpp]": {
+      "editor.tabSize": 4
   }
 }
