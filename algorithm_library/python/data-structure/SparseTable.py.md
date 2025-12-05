@@ -19,9 +19,9 @@ data:
     \u7B49\u5247\u3092\u6E80\u305F\u3059\u3053\u3068)\n        \u6642\u9593\u8A08\u7B97\
     \u91CF: O(n log n) \u69CB\u7BC9, O(1) \u30AF\u30A8\u30EA\n        \u7A7A\u9593\
     \u8A08\u7B97\u91CF: O(n log n)\n        \"\"\"\n        self.op = op\n       \
-    \ self.n = len(arr)\n        self.max_k = (self.n - 1).bit_length()\n        #\
-    \ table[k][i] = i \u304B\u3089\u9577\u3055 2^k \u306E\u533A\u9593\u306B\u5BFE\u3059\
-    \u308B\u6F14\u7B97\u7D50\u679C\n        self.table = [[0] * self.n for _ in range(self.max_k)]\n\
+    \ self.n = len(arr)\n        self.max_k = self.n.bit_length()\n        # table[k][i]\
+    \ = i \u304B\u3089\u9577\u3055 2^k \u306E\u533A\u9593\u306B\u5BFE\u3059\u308B\u6F14\
+    \u7B97\u7D50\u679C\n        self.table = [[0] * self.n for _ in range(self.max_k)]\n\
     \n        for i in range(self.n):\n            self.table[0][i] = arr[i]\n   \
     \     for k in range(1, self.max_k):\n            range_ = 1 << (k - 1)\n    \
     \        for i in range(self.n - (1 << k) + 1):\n                self.table[k][i]\
@@ -37,7 +37,7 @@ data:
   isVerificationFile: false
   path: algorithm_library/python/data-structure/SparseTable.py
   requiredBy: []
-  timestamp: '2025-12-05 15:36:33+09:00'
+  timestamp: '2025-12-05 18:59:27+09:00'
   verificationStatus: LIBRARY_NO_TESTS
   verifiedWith: []
 documentation_of: algorithm_library/python/data-structure/SparseTable.py

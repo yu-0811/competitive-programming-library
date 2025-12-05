@@ -31,7 +31,7 @@ data:
   isVerificationFile: false
   path: heuristic_library/cpp/random.cpp
   requiredBy: []
-  timestamp: '2025-12-05 15:36:33+09:00'
+  timestamp: '2025-12-05 18:59:27+09:00'
   verificationStatus: LIBRARY_NO_TESTS
   verifiedWith: []
 documentation_of: heuristic_library/cpp/random.cpp
