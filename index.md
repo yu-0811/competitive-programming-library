@@ -24,8 +24,14 @@ data:
   - name: algorithm_library/python/data-structure
     pages:
     - icon: ':warning:'
+      path: algorithm_library/python/data-structure/2DSparseTable.py
+      title: algorithm_library/python/data-structure/2DSparseTable.py
+    - icon: ':warning:'
       path: algorithm_library/python/data-structure/BIT.py
       title: algorithm_library/python/data-structure/BIT.py
+    - icon: ':warning:'
+      path: algorithm_library/python/data-structure/DisjointSparseTable.py
+      title: algorithm_library/python/data-structure/DisjointSparseTable.py
     - icon: ':warning:'
       path: algorithm_library/python/data-structure/LazySegtree.py
       title: algorithm_library/python/data-structure/LazySegtree.py
@@ -38,6 +44,9 @@ data:
     - icon: ':warning:'
       path: algorithm_library/python/data-structure/Segtree.py
       title: algorithm_library/python/data-structure/Segtree.py
+    - icon: ':warning:'
+      path: algorithm_library/python/data-structure/SparseTable.py
+      title: algorithm_library/python/data-structure/SparseTable.py
     - icon: ':warning:'
       path: algorithm_library/python/data-structure/TopK.py
       title: algorithm_library/python/data-structure/TopK.py

@@ -26,7 +26,7 @@ data:
   isVerificationFile: false
   path: algorithm_library/python/string/RollingHash.py
   requiredBy: []
-  timestamp: '2025-12-01 14:37:39+09:00'
+  timestamp: '2025-12-05 15:36:33+09:00'
   verificationStatus: LIBRARY_NO_TESTS
   verifiedWith: []
 documentation_of: algorithm_library/python/string/RollingHash.py
