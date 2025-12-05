@@ -8,7 +8,7 @@ class DisjointSparseTable:
         self.arr = arr[:]
         self.op = op
 
-        self.max_k = (self.n - 1).bit_length()
+        self.max_k = self.n.bit_length()
         self.table = [[0] * self.n for _ in range(self.max_k)]
 
         for k in range(self.max_k):

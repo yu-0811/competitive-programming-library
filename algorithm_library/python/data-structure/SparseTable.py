@@ -8,7 +8,7 @@ class SparseTable:
         """
         self.op = op
         self.n = len(arr)
-        self.max_k = (self.n - 1).bit_length()
+        self.max_k = self.n.bit_length()
         # table[k][i] = i から長さ 2^k の区間に対する演算結果
         self.table = [[0] * self.n for _ in range(self.max_k)]
 
