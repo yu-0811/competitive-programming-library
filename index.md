@@ -30,6 +30,9 @@ data:
       path: algorithm_library/python/data-structure/BIT.py
       title: algorithm_library/python/data-structure/BIT.py
     - icon: ':warning:'
+      path: algorithm_library/python/data-structure/CartesianTree.py
+      title: algorithm_library/python/data-structure/CartesianTree.py
+    - icon: ':warning:'
       path: algorithm_library/python/data-structure/DisjointSparseTable.py
       title: algorithm_library/python/data-structure/DisjointSparseTable.py
     - icon: ':warning:'
