@@ -15,9 +15,6 @@
 using namespace std;
 #define rep(i, n) for (int i = 0; i < (int)(n); i++)
 #define ll long long
-#pragma GCC target("avx2")
-#pragma GCC optimize("O3")
-#pragma GCC optimize("unroll-loops")
 
 class Random {
     static uint32_t xorshift() {
@@ -158,7 +155,7 @@ Answer SA() {
     auto best_score = now_score;
     Answer best_answer;
     best_answer = current_solution;
-    cerr << "start score: " << now_score << endl;
+    cerr << "start score: " << now_score << "\n";
     auto now_time = timer.get_ms();
 
     while (true) {
@@ -175,8 +172,8 @@ Answer SA() {
         }
         iter++; counter++;
     }
-    cerr << "end score: " << now_score << endl;
-    cerr << "iter: " << iter << endl;
+    cerr << "best score: " << best_score << "\n";
+    cerr << "iter: " << iter << "\n";
     return best_answer;
 }
 
