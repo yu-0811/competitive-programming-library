@@ -181,6 +181,9 @@ data:
       path: algorithm_library/python/techniques/RunLengthCompression.py
       title: algorithm_library/python/techniques/RunLengthCompression.py
     - icon: ':warning:'
+      path: algorithm_library/python/techniques/TernarySearch.py
+      title: algorithm_library/python/techniques/TernarySearch.py
+    - icon: ':warning:'
       path: algorithm_library/python/techniques/imos.py
       title: algorithm_library/python/techniques/imos.py
   - name: heuristic_library/cpp
