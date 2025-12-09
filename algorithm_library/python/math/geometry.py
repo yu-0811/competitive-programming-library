@@ -32,3 +32,35 @@ def get_line_abc(x0, y0, x1, y1):
     b = x0 - x1
     c = -(a * x0 + b * y0)
     return a, b, c
+
+
+def pos_after_t(sx, sy, gx, gy, t, v, dist=None):
+    """
+    始点(sx, sy) → 終点(gx, gy) を速さ v で動くとき、
+    t 秒後の位置を返す（到達したらゴールにとどまる）。
+    dist = 始点と終点の距離（前計算しといた方が速い）
+    """
+    # (dx,dy) = 方向ベクトル
+    dx = gx - sx
+    dy = gy - sy
+    if dist is None:
+        dist = math.sqrt(dx * dx + dy * dy)
+
+    # 始点と終点が同じ
+    if dist == 0 or v <= 0:
+        return sx, sy
+
+    # 進んだ距離
+    move = v * t
+
+    # すでに（またはちょうど）到達している
+    if move >= dist:
+        return gx, gy
+
+    # 全体の何割進んだか
+    u = move / dist
+
+    # 方向ベクトルに進んだ距離をかける
+    x = sx + dx * u
+    y = sy + dy * u
+    return x, y
