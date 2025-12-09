@@ -141,6 +141,9 @@ data:
       path: algorithm_library/python/math/factorization.py
       title: algorithm_library/python/math/factorization.py
     - icon: ':warning:'
+      path: algorithm_library/python/math/geometry.py
+      title: algorithm_library/python/math/geometry.py
+    - icon: ':warning:'
       path: algorithm_library/python/math/mobius.py
       title: algorithm_library/python/math/mobius.py
     - icon: ':warning:'

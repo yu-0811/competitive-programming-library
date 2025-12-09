@@ -13,15 +13,14 @@ data:
     #include <climits>\n#include <deque>\n#include <bitset>\n#include <cmath>\n#include\
     \ <string>\n#include <cstdlib>\n#include <cassert>\n#include <chrono>\n#include\
     \ <cstring>\nusing namespace std;\n#define rep(i, n) for (int i = 0; i < (int)(n);\
-    \ i++)\n#define ll long long\n#pragma GCC target(\"avx2\")\n#pragma GCC optimize(\"\
-    O3\")\n#pragma GCC optimize(\"unroll-loops\")\n\nclass Random {\n    static uint32_t\
-    \ xorshift() {\n        static uint32_t x = 123456789, y = 362436039, z = 521288629,\
-    \ w = 88675123; \n        uint32_t t = x ^ (x << 11); x = y; y = z; z = w;\n \
-    \       return w = (w ^ (w >> 19)) ^ (t ^ (t >> 8));\n    }\npublic:\n    inline\
-    \ static uint32_t randrange(unsigned x) { return xorshift() % x; } // [0, x)\n\
-    \    inline static uint32_t randrange(unsigned x, unsigned y) { return randrange(y\
-    \ - x) + x; } // [x, y)\n    inline static float random() { return (xorshift()\
-    \ + 0.5) * (1.0 / UINT_MAX); } // [0.0, 1.0)\n};\n\nclass Timer {\n    chrono::time_point<chrono::steady_clock>\
+    \ i++)\n#define ll long long\n\nclass Random {\n    static uint32_t xorshift()\
+    \ {\n        static uint32_t x = 123456789, y = 362436039, z = 521288629, w =\
+    \ 88675123; \n        uint32_t t = x ^ (x << 11); x = y; y = z; z = w;\n     \
+    \   return w = (w ^ (w >> 19)) ^ (t ^ (t >> 8));\n    }\npublic:\n    inline static\
+    \ uint32_t randrange(unsigned x) { return xorshift() % x; } // [0, x)\n    inline\
+    \ static uint32_t randrange(unsigned x, unsigned y) { return randrange(y - x)\
+    \ + x; } // [x, y)\n    inline static float random() { return (xorshift() + 0.5)\
+    \ * (1.0 / UINT_MAX); } // [0.0, 1.0)\n};\n\nclass Timer {\n    chrono::time_point<chrono::steady_clock>\
     \ start;\npublic:\n    Timer() : start(chrono::steady_clock::now()) {}\n    unsigned\
     \ short get_ms() { // \u7D4C\u904E\u6642\u9593\u3092\u8FD4\u3059\n        auto\
     \ now_time = chrono::steady_clock::now();\n        return chrono::duration_cast<chrono::milliseconds>(now_time\
@@ -78,16 +77,16 @@ data:
     \ auto SA_start_time = timer.get_ms();\n    float temp = start_temp;\n\n    WorkSpace\
     \ current_solution = make_initial_solution();\n    auto now_score = initialize_score(current_solution);\n\
     \n    auto best_score = now_score;\n    Answer best_answer;\n    best_answer =\
-    \ current_solution;\n    cerr << \"start score: \" << now_score << endl;\n   \
-    \ auto now_time = timer.get_ms();\n\n    while (true) {\n        if (counter ==\
-    \ 30) {\n            now_time = timer.get_ms();\n            if (now_time > time_limit)\
-    \ break;\n            temp = linear_temp(SA_start_time, now_time);\n         \
-    \   counter = 0;\n        }\n        now_score = generate_neighborhood(now_score,\
+    \ current_solution;\n    cerr << \"start score: \" << now_score << \"\\n\";\n\
+    \    auto now_time = timer.get_ms();\n\n    while (true) {\n        if (counter\
+    \ == 30) {\n            now_time = timer.get_ms();\n            if (now_time >\
+    \ time_limit) break;\n            temp = linear_temp(SA_start_time, now_time);\n\
+    \            counter = 0;\n        }\n        now_score = generate_neighborhood(now_score,\
     \ temp, current_solution);\n        if (now_score < best_score) { // TODO: \u6700\
     \u5C0F\u5316 or \u6700\u5927\u5316\n            best_score = now_score;\n    \
     \        best_answer = current_solution;\n        }\n        iter++; counter++;\n\
-    \    }\n    cerr << \"end score: \" << now_score << endl;\n    cerr << \"iter:\
-    \ \" << iter << endl;\n    return best_answer;\n}\n\nint main(){\n    ios::sync_with_stdio(false);\
+    \    }\n    cerr << \"best score: \" << best_score << \"\\n\";\n    cerr << \"\
+    iter: \" << iter << \"\\n\";\n    return best_answer;\n}\n\nint main(){\n    ios::sync_with_stdio(false);\
     \ cin.tie(0);\n    timer = Timer(); // \u30BF\u30A4\u30DE\u30FC\u521D\u671F\u5316\
     \n    // get_param(); // optuna \u3092\u4F7F\u3046\u3068\u304D\u306F\u30B3\u30E1\
     \u30F3\u30C8\u30A2\u30A6\u30C8\u3092\u5916\u3059\n\n    // \u5165\u529B //////////////////////////////////////////\n\
@@ -98,18 +97,17 @@ data:
     #include <utility>\n#include <climits>\n#include <deque>\n#include <bitset>\n\
     #include <cmath>\n#include <string>\n#include <cstdlib>\n#include <cassert>\n\
     #include <chrono>\n#include <cstring>\nusing namespace std;\n#define rep(i, n)\
-    \ for (int i = 0; i < (int)(n); i++)\n#define ll long long\n#pragma GCC target(\"\
-    avx2\")\n#pragma GCC optimize(\"O3\")\n#pragma GCC optimize(\"unroll-loops\")\n\
-    \nclass Random {\n    static uint32_t xorshift() {\n        static uint32_t x\
-    \ = 123456789, y = 362436039, z = 521288629, w = 88675123; \n        uint32_t\
-    \ t = x ^ (x << 11); x = y; y = z; z = w;\n        return w = (w ^ (w >> 19))\
-    \ ^ (t ^ (t >> 8));\n    }\npublic:\n    inline static uint32_t randrange(unsigned\
-    \ x) { return xorshift() % x; } // [0, x)\n    inline static uint32_t randrange(unsigned\
-    \ x, unsigned y) { return randrange(y - x) + x; } // [x, y)\n    inline static\
-    \ float random() { return (xorshift() + 0.5) * (1.0 / UINT_MAX); } // [0.0, 1.0)\n\
-    };\n\nclass Timer {\n    chrono::time_point<chrono::steady_clock> start;\npublic:\n\
-    \    Timer() : start(chrono::steady_clock::now()) {}\n    unsigned short get_ms()\
-    \ { // \u7D4C\u904E\u6642\u9593\u3092\u8FD4\u3059\n        auto now_time = chrono::steady_clock::now();\n\
+    \ for (int i = 0; i < (int)(n); i++)\n#define ll long long\n\nclass Random {\n\
+    \    static uint32_t xorshift() {\n        static uint32_t x = 123456789, y =\
+    \ 362436039, z = 521288629, w = 88675123; \n        uint32_t t = x ^ (x << 11);\
+    \ x = y; y = z; z = w;\n        return w = (w ^ (w >> 19)) ^ (t ^ (t >> 8));\n\
+    \    }\npublic:\n    inline static uint32_t randrange(unsigned x) { return xorshift()\
+    \ % x; } // [0, x)\n    inline static uint32_t randrange(unsigned x, unsigned\
+    \ y) { return randrange(y - x) + x; } // [x, y)\n    inline static float random()\
+    \ { return (xorshift() + 0.5) * (1.0 / UINT_MAX); } // [0.0, 1.0)\n};\n\nclass\
+    \ Timer {\n    chrono::time_point<chrono::steady_clock> start;\npublic:\n    Timer()\
+    \ : start(chrono::steady_clock::now()) {}\n    unsigned short get_ms() { // \u7D4C\
+    \u904E\u6642\u9593\u3092\u8FD4\u3059\n        auto now_time = chrono::steady_clock::now();\n\
     \        return chrono::duration_cast<chrono::milliseconds>(now_time - start).count();\n\
     \    }\n};\nTimer timer;\n\n// \u30D1\u30E9\u30E1\u30FC\u30BF ///////////////////////////////////\n\
     #ifndef ONLINE_JUDGE\n    constexpr int time_limit = 1990 + 1000;\n#else\n   \
@@ -163,16 +161,16 @@ data:
     \ auto SA_start_time = timer.get_ms();\n    float temp = start_temp;\n\n    WorkSpace\
     \ current_solution = make_initial_solution();\n    auto now_score = initialize_score(current_solution);\n\
     \n    auto best_score = now_score;\n    Answer best_answer;\n    best_answer =\
-    \ current_solution;\n    cerr << \"start score: \" << now_score << endl;\n   \
-    \ auto now_time = timer.get_ms();\n\n    while (true) {\n        if (counter ==\
-    \ 30) {\n            now_time = timer.get_ms();\n            if (now_time > time_limit)\
-    \ break;\n            temp = linear_temp(SA_start_time, now_time);\n         \
-    \   counter = 0;\n        }\n        now_score = generate_neighborhood(now_score,\
+    \ current_solution;\n    cerr << \"start score: \" << now_score << \"\\n\";\n\
+    \    auto now_time = timer.get_ms();\n\n    while (true) {\n        if (counter\
+    \ == 30) {\n            now_time = timer.get_ms();\n            if (now_time >\
+    \ time_limit) break;\n            temp = linear_temp(SA_start_time, now_time);\n\
+    \            counter = 0;\n        }\n        now_score = generate_neighborhood(now_score,\
     \ temp, current_solution);\n        if (now_score < best_score) { // TODO: \u6700\
     \u5C0F\u5316 or \u6700\u5927\u5316\n            best_score = now_score;\n    \
     \        best_answer = current_solution;\n        }\n        iter++; counter++;\n\
-    \    }\n    cerr << \"end score: \" << now_score << endl;\n    cerr << \"iter:\
-    \ \" << iter << endl;\n    return best_answer;\n}\n\nint main(){\n    ios::sync_with_stdio(false);\
+    \    }\n    cerr << \"best score: \" << best_score << \"\\n\";\n    cerr << \"\
+    iter: \" << iter << \"\\n\";\n    return best_answer;\n}\n\nint main(){\n    ios::sync_with_stdio(false);\
     \ cin.tie(0);\n    timer = Timer(); // \u30BF\u30A4\u30DE\u30FC\u521D\u671F\u5316\
     \n    // get_param(); // optuna \u3092\u4F7F\u3046\u3068\u304D\u306F\u30B3\u30E1\
     \u30F3\u30C8\u30A2\u30A6\u30C8\u3092\u5916\u3059\n\n    // \u5165\u529B //////////////////////////////////////////\n\
@@ -183,7 +181,7 @@ data:
   isVerificationFile: false
   path: heuristic_library/cpp/SA.cpp
   requiredBy: []
-  timestamp: '2025-12-08 11:04:53+09:00'
+  timestamp: '2025-12-09 12:08:02+09:00'
   verificationStatus: LIBRARY_NO_TESTS
   verifiedWith: []
 documentation_of: heuristic_library/cpp/SA.cpp
