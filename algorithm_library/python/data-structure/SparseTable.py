@@ -15,10 +15,10 @@ class SparseTable:
         for i in range(self.n):
             self.table[0][i] = arr[i]
         for k in range(1, self.max_k):
-            range_ = 1 << (k - 1)
+            half_len = 1 << (k - 1)
             for i in range(self.n - (1 << k) + 1):
                 self.table[k][i] = op(
-                    self.table[k - 1][i], self.table[k - 1][i + range_]
+                    self.table[k - 1][i], self.table[k - 1][i + half_len]
                 )
 
     def query(self, l, r):

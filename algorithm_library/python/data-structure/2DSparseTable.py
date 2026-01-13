@@ -7,6 +7,7 @@ class SparseTable2D:
         """
         grid: 2次元配列
         op: 演算 (結合則、冪等性が必要)
+        O(H * W * logH * logW)
         """
         self.op = op
         self.H = len(grid)
@@ -57,16 +58,16 @@ class SparseTable2D:
 
         height = r2 - r1 + 1
         width = c2 - c1 + 1
-        k = height.bit_length() - 1
-        l = width.bit_length() - 1
+        k = height.bit_length() - 1  # 2^k <= height を満たす最大の k
+        l = width.bit_length() - 1  # 2^l <= width を満たす最大の l
 
-        # 4つの長方形でカバーする
-        bottom_row = r2 - (1 << k) + 1
-        right_col = c2 - (1 << l) + 1
+        r2_start = r2 - (1 << k) + 1
+        c2_start = c2 - (1 << l) + 1
 
-        rl = self.table[k][l][r1][c1]
-        tr = self.table[k][l][r1][right_col]
-        bl = self.table[k][l][bottom_row][c1]
-        br = self.table[k][l][bottom_row][right_col]
+        # 4つの長方形で (r1,c1)~(r2,c2) をカバーする
+        tl = self.table[k][l][r1][c1]
+        tr = self.table[k][l][r1][c2_start]
+        bl = self.table[k][l][r2_start][c1]
+        br = self.table[k][l][r2_start][c2_start]
 
-        return self.op(self.op(rl, tr), self.op(bl, br))
+        return self.op(self.op(tl, tr), self.op(bl, br))
