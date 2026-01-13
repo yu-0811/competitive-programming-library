@@ -4,6 +4,9 @@ data:
   - name: algorithm_library/cpp
     pages:
     - icon: ':warning:'
+      path: algorithm_library/cpp/DisjointSparseTable.cpp
+      title: algorithm_library/cpp/DisjointSparseTable.cpp
+    - icon: ':warning:'
       path: algorithm_library/cpp/Mos_algorithm.cpp
       title: algorithm_library/cpp/Mos_algorithm.cpp
     - icon: ':warning:'
@@ -12,6 +15,9 @@ data:
     - icon: ':warning:'
       path: algorithm_library/cpp/RollingHash.cpp
       title: algorithm_library/cpp/RollingHash.cpp
+    - icon: ':warning:'
+      path: algorithm_library/cpp/SparseTable.cpp
+      title: algorithm_library/cpp/SparseTable.cpp
     - icon: ':warning:'
       path: algorithm_library/cpp/doubing.cpp
       title: algorithm_library/cpp/doubing.cpp
@@ -129,8 +135,8 @@ data:
       path: algorithm_library/python/math/arithmetic_series.py
       title: algorithm_library/python/math/arithmetic_series.py
     - icon: ':warning:'
-      path: algorithm_library/python/math/ceilDiv.py
-      title: algorithm_library/python/math/ceilDiv.py
+      path: algorithm_library/python/math/calc.py
+      title: algorithm_library/python/math/calc.py
     - icon: ':warning:'
       path: algorithm_library/python/math/eratosthenes.py
       title: algorithm_library/python/math/eratosthenes.py

@@ -23,9 +23,9 @@ data:
     \ = i \u304B\u3089\u9577\u3055 2^k \u306E\u533A\u9593\u306B\u5BFE\u3059\u308B\u6F14\
     \u7B97\u7D50\u679C\n        self.table = [[0] * self.n for _ in range(self.max_k)]\n\
     \n        for i in range(self.n):\n            self.table[0][i] = arr[i]\n   \
-    \     for k in range(1, self.max_k):\n            range_ = 1 << (k - 1)\n    \
-    \        for i in range(self.n - (1 << k) + 1):\n                self.table[k][i]\
-    \ = op(\n                    self.table[k - 1][i], self.table[k - 1][i + range_]\n\
+    \     for k in range(1, self.max_k):\n            half_len = 1 << (k - 1)\n  \
+    \          for i in range(self.n - (1 << k) + 1):\n                self.table[k][i]\
+    \ = op(\n                    self.table[k - 1][i], self.table[k - 1][i + half_len]\n\
     \                )\n\n    def query(self, l, r):\n        \"\"\"\n        [l,\
     \ r) \u306E\u533A\u9593\u306B\u5BFE\u3059\u308B\u6F14\u7B97\u7D50\u679C\u3092\u8FD4\
     \u3059 O(1)\n        \"\"\"\n        assert 0 <= l < r <= self.n\n        # 2^k\
@@ -37,7 +37,7 @@ data:
   isVerificationFile: false
   path: algorithm_library/python/data-structure/SparseTable.py
   requiredBy: []
-  timestamp: '2025-12-09 13:42:16+09:00'
+  timestamp: '2026-01-13 11:58:18+09:00'
   verificationStatus: LIBRARY_NO_TESTS
   verifiedWith: []
 documentation_of: algorithm_library/python/data-structure/SparseTable.py

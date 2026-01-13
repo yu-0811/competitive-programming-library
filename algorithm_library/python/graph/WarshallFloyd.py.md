@@ -27,7 +27,7 @@ data:
   isVerificationFile: false
   path: algorithm_library/python/graph/WarshallFloyd.py
   requiredBy: []
-  timestamp: '2025-12-09 13:42:16+09:00'
+  timestamp: '2026-01-13 11:58:18+09:00'
   verificationStatus: LIBRARY_NO_TESTS
   verifiedWith: []
 documentation_of: algorithm_library/python/graph/WarshallFloyd.py

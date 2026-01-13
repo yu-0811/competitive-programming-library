@@ -14,15 +14,17 @@ data:
     \         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n\
     \  File \"/opt/hostedtoolcache/Python/3.11.0/x64/lib/python3.11/site-packages/onlinejudge_verify/languages/python.py\"\
     , line 96, in bundle\n    raise NotImplementedError\nNotImplementedError\n"
-  code: "def doubling(dp,LEN,POW):\n  for i in range(1,POW):\n    for j in range(LEN):\n\
-    \      dp[i][j] = dp[i-1][dp[i-1][j]]\n  return dp\n\ndef query(dp,j,k):\n  tmp\
-    \ = j\n  i = 0\n  while k:\n    if k&1: tmp = dp[i][tmp]\n    k >>= 1\n    i +=\
-    \ 1\n  return tmp"
+  code: "def doubling(dp, LEN, POW):\n    for i in range(1, POW):\n        for j in\
+    \ range(LEN):\n            dp[i][j] = dp[i - 1][dp[i - 1][j]]\n    return dp\n\
+    \n\ndef query(dp, j, k):\n    \"\"\"\n    j \u304B\u3089\u59CB\u3081\u3066 k \u56DE\
+    \u79FB\u52D5\u3059\u308B\n    \"\"\"\n    tmp = j\n    i = 0\n    while k:\n \
+    \       if k & 1:\n            tmp = dp[i][tmp]\n        k >>= 1\n        i +=\
+    \ 1\n    return tmp\n"
   dependsOn: []
   isVerificationFile: false
   path: algorithm_library/python/techniques/Doubling.py
   requiredBy: []
-  timestamp: '2025-12-09 13:42:16+09:00'
+  timestamp: '2026-01-13 11:58:18+09:00'
   verificationStatus: LIBRARY_NO_TESTS
   verifiedWith: []
 documentation_of: algorithm_library/python/techniques/Doubling.py
