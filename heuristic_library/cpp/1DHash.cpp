@@ -1,21 +1,25 @@
 // 一次元 Zobrist Hash
 // 盤面の長さ、盤面の値の種類数をテンプレート引数として受け取る
 // もうちょっといい感じにできそう、特に getValueIndex の部分
-using HashType = uint32_t; // TODO
-template<short LEN, short NumValue>
-struct ZobristHash2D {
+// LEN: 盤面のサイズ
+// NumValue: 値のバリエーションの数（配列の確保サイズ）
+// MIN_VAL: 値の最小値（これを使ってオフセットする）
+template<int LEN, int NumValue, int MIN_VAL = 0> 
+struct ZobristHash1D {
 private:
-    // ハッシュ値を格納するテーブル
     array<array<HashType, NumValue>, LEN> table;
-    
-    // 盤面の種類を表す値から、テーブルのインデックスに変換する
-    static constexpr short getValueIndex(short value) {
-        return value + 100;
+
+    // 値をインデックスに変換
+    static constexpr int getValueIndex(int value) {
+        int index = value - MIN_VAL;
+        assert(index >= 0 && index < NumValue); 
+        
+        return index;
     }
 
 public:
     // コンストラクタ：オブジェクト生成時にハッシュテーブルを乱数で初期化する
-    ZobristHash2D() {
+    ZobristHash1D() {
         for (int i = 0; i < LEN; ++i) {
             for (int k = 0; k < NumValue; ++k) {
                 table[i][k] = Random::xorshift64(); // 32ビットでいいときは xorshift32() でも良い
@@ -37,16 +41,19 @@ public:
 
     // 1マスの変化からハッシュ値を高速に更新（差分更新）する
     // current_hash: 更新前のハッシュ値
-    HashType update_hash(HashType& current_hash, const short (&X)[100], Action& action) const {
-        HashType new_hash = current_hash;
-        auto pi = input.P[action.turn];
-        new_hash = new_hash ^ table[pi][getValueIndex(X[pi])] ^ table[pi][getValueIndex(X[pi] + action.dx)];
-        auto qi = input.Q[action.turn];
-        new_hash = new_hash ^ table[qi][getValueIndex(X[qi])] ^ table[qi][getValueIndex(X[qi] + action.dx)];
-        auto ri = input.R[action.turn];
-        new_hash = new_hash ^ table[ri][getValueIndex(X[ri])] ^ table[ri][getValueIndex(X[ri] + action.dx)];
-        return new_hash;
+    // pos: 変化したマスの位置
+    // old_value: 変化前の値
+    // new_value: 変化後の値
+    // クラス内部に追加・修正
+    HashType update_hash(HashType current_hash, int pos, int old_value, int new_value) const {
+        current_hash ^= table[pos][getValueIndex(old_value)];
+        current_hash ^= table[pos][getValueIndex(new_value)];
+        return current_hash;
     }
 };
-const short LEN = 100, NumValue = 200; // TODO
-ZobristHash2D<LEN, NumValue> zobrist_hash;
+// TODO
+using HashType = uint32_t; 
+const int LEN = 50; // 盤面の長さ
+const int MIN_VAL = 0; // 盤面の値の最小値
+const int NumValue = 100000; // 盤面の値のバリエーション数
+ZobristHash1D<LEN, NumValue, MIN_VAL> zobrist_hash;
