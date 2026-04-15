@@ -99,14 +99,13 @@ using Score = int;
 // ここから下に解法を書く
 
 // 焼きなましで使う構造体
+// スコアの差分更新に使う配列などを持つ
 struct WorkSpace {
 
 };
 
 // 最良解を保持するための構造体
-// スコアと解の出力に必要な情報だけを持つ
-// 焼きなましで使うけど解の構築にはいらない (ex. スコアの差分更新に使う配列など) があるのでこの構成にしている
-// WorkSpace が Answer を包含するイメージ
+// WorkSpace のうち、スコアと解の出力に必要な情報だけを持つ
 struct Answer {
     Score score;
     // 「Answer = WorkSpace」という代入を可能にする (演算子オーバーロード)
@@ -132,14 +131,13 @@ Score initialize_score(WorkSpace &sol) {
 
 // 近傍生成 + スコア計算 + 受容判定 + 状態更新 -> 新しいスコア を返す /////////////////
 Score generate_neighborhood(Score &now_score, auto &temp, WorkSpace &sol) {
-    // 近傍生成 //////////////////////////////////////
+    // 近傍生成
 
-    //////////////////////////////////////////////////
-    // スコア計算 ////////////////////////////////////
 
-    //////////////////////////////////////////////////
-    if (calc_prob(now_score, next_score, temp) > Random::random()) { // TODO: 最小化 or 最大化
-        // 状態を更新
+    // スコア計算 
+
+
+    if (calc_prob(now_score, next_score, temp) > Random::random()) {
 
         return next_score;
     }
@@ -159,8 +157,8 @@ Answer SA() {
     Score now_score = initialize_score(current_solution);
 
     auto best_score = now_score;
-    Answer best_solution;
-    best_solution = current_solution;
+    Answer best_ans;
+    best_ans = current_solution;
     cerr << "start score: " << now_score << "\n";
     auto now_time = timer.get_ms();
 
@@ -174,13 +172,13 @@ Answer SA() {
         now_score = generate_neighborhood(now_score, temp, current_solution);
         if (is_better(now_score, best_score)) {
             best_score = now_score;
-            best_solution = current_solution;
+            best_ans = current_solution;
         }
         iter++; counter++;
     }
     cerr << "best score: " << best_score << "\n";
     cerr << "iter: " << iter << "\n";
-    return best_solution;
+    return best_ans;
 }
 
 int main(){
@@ -192,7 +190,7 @@ int main(){
     
     //////////////////////////////////////////////////
 
-    Answer best_solution = SA();
+    Answer best_ans = SA();
 
     // 出力 //////////////////////////////////////////
 
