@@ -60,6 +60,7 @@ void get_param() {
     // p = std::getenv("end_temp"); assert(p); end_temp = std::stof(p);
 }
 ////////////////////////////////////////////////
+
 // 焼きなましに関する関数 /////////////////////////
 // 線形温度管理
 float linear_temp(unsigned short &SA_start_time, unsigned short &now_time) {
@@ -73,17 +74,26 @@ float expo_temp(unsigned short &SA_start_time, unsigned short &now_time) {
 }
 
 // 遷移確率関数
-// スコア最大化のとき
-float calc_prob_maximize(auto &now_score, auto &next_score, float &temp) {
-    if (next_score > now_score) return 1.0;
-    return exp((next_score - now_score) / temp);
+constexpr bool maximize = false; // false: 最小化, true: 最大化
+
+template<class Score>
+bool is_better(const Score& a, const Score& b) {
+    if constexpr (maximize) return a > b;
+    else return a < b;
 }
 
-// スコア最小化のとき
-float calc_prob_minimize(auto &now_score, auto &next_score, float &temp) {
-    if (next_score < now_score) return 1.0;
-    return exp((now_score - next_score) / temp);
+template<class Score>
+double calc_prob(const Score& now_score, const Score& next_score, double temp) {
+    if (is_better(next_score, now_score)) return 1.0;
+    if constexpr (maximize) {
+        return exp((next_score - now_score) / temp);
+    } else {
+        return exp((now_score - next_score) / temp);
+    }
 }
+
+// スコアの型
+using Score = int;
 ///////////////////////////////////////////////////////
 
 // ここから下に解法を書く
@@ -92,11 +102,13 @@ float calc_prob_minimize(auto &now_score, auto &next_score, float &temp) {
 struct WorkSpace {
 
 };
-// 解を構築するために必要な構造体
+
+// 最良解を保持するための構造体
+// スコアと解の出力に必要な情報だけを持つ
 // 焼きなましで使うけど解の構築にはいらない (ex. スコアの差分更新に使う配列など) があるのでこの構成にしている
 // WorkSpace が Answer を包含するイメージ
 struct Answer {
-
+    Score score;
     // 「Answer = WorkSpace」という代入を可能にする (演算子オーバーロード)
     Answer& operator=(const WorkSpace& sol) {
         return *this;
@@ -112,27 +124,21 @@ WorkSpace make_initial_solution(){
     return res;
 }
 
-auto initialize_score(WorkSpace &sol) {
-    double score = 0.0;
+Score initialize_score(WorkSpace &sol) {
+    Score score = 0;
 
     return score;
 }
 
-auto calc_score(WorkSpace &sol) {
-    double score = 0.0;
-
-    return score;
-}
-
-// 近傍生成 + スコア計算 + 受容判定 -> 新しいスコアを返す /////////////////
-auto generate_neighborhood(auto &now_score, auto &temp, WorkSpace &sol) {
+// 近傍生成 + スコア計算 + 受容判定 + 状態更新 -> 新しいスコア を返す /////////////////
+Score generate_neighborhood(Score &now_score, auto &temp, WorkSpace &sol) {
     // 近傍生成 //////////////////////////////////////
 
     //////////////////////////////////////////////////
     // スコア計算 ////////////////////////////////////
 
     //////////////////////////////////////////////////
-    if (calc_prob_minimize(now_score, next_score, temp) > Random::random()) { // TODO: 最小化 or 最大化
+    if (calc_prob(now_score, next_score, temp) > Random::random()) { // TODO: 最小化 or 最大化
         // 状態を更新
 
         return next_score;
@@ -150,11 +156,11 @@ Answer SA() {
     float temp = start_temp;
 
     WorkSpace current_solution = make_initial_solution();
-    auto now_score = initialize_score(current_solution);
+    Score now_score = initialize_score(current_solution);
 
     auto best_score = now_score;
-    Answer best_answer;
-    best_answer = current_solution;
+    Answer best_solution;
+    best_solution = current_solution;
     cerr << "start score: " << now_score << "\n";
     auto now_time = timer.get_ms();
 
@@ -166,27 +172,27 @@ Answer SA() {
             counter = 0;
         }
         now_score = generate_neighborhood(now_score, temp, current_solution);
-        if (now_score < best_score) { // TODO: 最小化 or 最大化
+        if (is_better(now_score, best_score)) {
             best_score = now_score;
-            best_answer = current_solution;
+            best_solution = current_solution;
         }
         iter++; counter++;
     }
     cerr << "best score: " << best_score << "\n";
     cerr << "iter: " << iter << "\n";
-    return best_answer;
+    return best_solution;
 }
 
 int main(){
     ios::sync_with_stdio(false); cin.tie(0);
-    timer = Timer(); // タイマー初期化
+    timer = Timer();
     // get_param(); // optuna を使うときはコメントアウトを外す
 
     // 入力 //////////////////////////////////////////
     
     //////////////////////////////////////////////////
 
-    Answer best_answer = SA();
+    Answer best_solution = SA();
 
     // 出力 //////////////////////////////////////////
 
