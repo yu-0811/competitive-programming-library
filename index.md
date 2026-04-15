@@ -22,6 +22,9 @@ data:
       path: algorithm_library/cpp/doubing.cpp
       title: algorithm_library/cpp/doubing.cpp
     - icon: ':warning:'
+      path: algorithm_library/cpp/hash.cpp
+      title: algorithm_library/cpp/hash.cpp
+    - icon: ':warning:'
       path: algorithm_library/cpp/matrixPower.cpp
       title: algorithm_library/cpp/matrixPower.cpp
     - icon: ':warning:'
@@ -117,6 +120,9 @@ data:
   - name: algorithm_library/python/math
     pages:
     - icon: ':warning:'
+      path: algorithm_library/python/math/AngularSort.py
+      title: algorithm_library/python/math/AngularSort.py
+    - icon: ':warning:'
       path: algorithm_library/python/math/FFT.py
       title: algorithm_library/python/math/FFT.py
     - icon: ':warning:'
@@ -209,6 +215,9 @@ data:
     - icon: ':warning:'
       path: heuristic_library/cpp/beam_search.cpp
       title: heuristic_library/cpp/beam_search.cpp
+    - icon: ':warning:'
+      path: heuristic_library/cpp/beam_search_naive.cpp
+      title: heuristic_library/cpp/beam_search_naive.cpp
     - icon: ':warning:'
       path: heuristic_library/cpp/beam_search_no_hash.cpp
       title: heuristic_library/cpp/beam_search_no_hash.cpp
