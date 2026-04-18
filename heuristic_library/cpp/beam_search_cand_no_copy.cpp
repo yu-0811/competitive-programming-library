@@ -10,8 +10,8 @@ using namespace std;
 using u64 = unsigned long long;
 const int INF = 10000000;
 
-struct State;
-u64 calc_hash(const State& s);
+using HashType = u64;
+using ScoreType = int;
 
 class Timer {
     chrono::time_point<chrono::steady_clock> start;
@@ -123,42 +123,43 @@ struct ZobristHash2D {
 /// 状態 
 // State と Candidate は軽い方がいい
 struct Action { // State に対する遷移操作
-    char d;
-    int p;
+    // TODO
 };
 
 struct State { // ビームに入れる状態
-    // 問題特有の状態を入れる
-    int score = 0;
-    u64 hash = 0; // 差分更新しないならいらない
+    ScoreType score = 0;
+    HashType hash = 0; // 差分更新しないならいらない
+    // TODO: // 問題特有の状態を入れる
 
-    // 終了条件満たすなら true 返す
+    // 状態に action を適用する
+    // 終了状態になるなら true
+    // 候補が採用されてから実行する
     bool do_(const Action& action) {
         (void)action;
-        return false;
     } 
-    void undo_(const Action& action) {
-        (void)action;
-    }
-    void calc_eval(const Action& action) {
-        (void)action;
-    }
-    void calc_hash(const Action& action) {
-        (void)action;
-    }
 };
 
+// TODO: スコアの差分更新（小さい方がいい）
+ScoreType calc_eval(const State& s, const Action& action) {
+    (void)action;
+}
+
+// TODO: ハッシュの差分更新
+HashType calc_hash(const State& s, const Action& action) {
+    (void)action;
+}
+
+// ↓ここからは書き換えなくていい
 struct Candidate { // 採用前の走査候補
     int parent_idx = -1; // nodes のインデックス
     Action action{};
     int score = INF;
-    bool is_finished = false;
     u64 hash = 0;
 
     Candidate() = default;
 
-    Candidate(int parent_idx_, Action action_, int score_, bool is_finished_, u64 hash_)
-        : parent_idx(parent_idx_), action(action_), score(score_), is_finished(is_finished_), hash(hash_) {}
+    Candidate(int parent_idx_, Action action_, int score_, u64 hash_)
+        : parent_idx(parent_idx_), action(action_), score(score_), hash(hash_) {}
 };
 
 struct FinishCandidate { // 最良解候補
@@ -167,7 +168,6 @@ struct FinishCandidate { // 最良解候補
     int score = INF;
 };
 
-// ↓ここからは書き換えなくていい
 struct WorkSpace {
     State s;
     vector<Action> actions;
@@ -185,17 +185,11 @@ struct BeamSearchResult {
 };
 // ↑ここまで
 
-// 評価関数 小さい方が良い
-int calc_eval(const State& s) {
-    int eval = 0;
-    (void)s;
-    return eval;
-}
-
 // 遷移操作候補生成
 // actions に s に対して可能な操作を入れる
 void generate_possible_actions(const State& s, vector<Action>& actions) {
-    
+    (void)s;
+    (void)actions;
 }
 
 // 操作履歴復元関数
@@ -236,14 +230,12 @@ BeamSearchResult run_beam_search(State& init_state, int beam_width) {
         for (int beam_idx = 0; beam_idx < (int)now.size(); beam_idx++) {
             const int parent_idx = now[beam_idx];
             const State& parent_state = nodes[parent_idx].state;
-            ws.s = parent_state;
             ws.actions.clear();
             generate_possible_actions(parent_state, ws.actions);
             for (const auto& action : ws.actions) {
-                const bool is_finished = ws.s.do_(action);
-                Candidate cand(parent_idx, action, ws.s.score, is_finished, ws.s.hash);
+                ws.s = parent_state;
+                Candidate cand(parent_idx, action, calc_eval(ws.s, action), calc_hash(ws.s, action));
                 candidates.emplace_back(cand);
-                ws.s.undo_(action);
             }
         }
 
@@ -253,17 +245,18 @@ BeamSearchResult run_beam_search(State& init_state, int beam_width) {
         });
 
         for (const auto& cand : candidates) {
-            if (cand.is_finished) {
+            ws.s = nodes[cand.parent_idx].state;
+            ws.s.score = cand.score;
+            ws.s.hash = cand.hash;
+            bool is_finished = ws.s.do_(cand.action);
+            if (is_finished) {
                 if (cand.score < best_cand.score) {
                     best_cand = FinishCandidate{cand.parent_idx, cand.action, cand.score};
                 }
                 continue;
             }
+            // 重複除去
             if (visited.contains_or_insert(cand.hash)) continue;
-
-            ws.s = nodes[cand.parent_idx].state;
-            [[maybe_unused]] const bool is_finished = ws.s.do_(cand.action);
-            assert(is_finished == cand.is_finished);
             const int node_idx = static_cast<int>(nodes.size());
             nodes.emplace_back(BeamNode{ws.s, cand.parent_idx, cand.action});
             next.emplace_back(node_idx);
@@ -277,8 +270,7 @@ BeamSearchResult run_beam_search(State& init_state, int beam_width) {
     assert(best_cand.parent_idx != -1);
 
     result.final_state = nodes[best_cand.parent_idx].state;
-    [[maybe_unused]] const bool ok = result.final_state.do_(best_cand.action);
-    assert(ok);
+    result.final_state.do_(best_cand.action);
     result.move_history = restore_move_history(nodes, best_cand.parent_idx);
     result.move_history.emplace_back(best_cand.action);
     return result;
