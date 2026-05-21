@@ -25,6 +25,9 @@ data:
       path: algorithm_library/cpp/hash.cpp
       title: algorithm_library/cpp/hash.cpp
     - icon: ':warning:'
+      path: algorithm_library/cpp/itertools.cpp
+      title: algorithm_library/cpp/itertools.cpp
+    - icon: ':warning:'
       path: algorithm_library/cpp/matrixPower.cpp
       title: algorithm_library/cpp/matrixPower.cpp
     - icon: ':warning:'
@@ -213,14 +216,17 @@ data:
       path: heuristic_library/cpp/SA.cpp
       title: heuristic_library/cpp/SA.cpp
     - icon: ':warning:'
-      path: heuristic_library/cpp/beam_search.cpp
-      title: heuristic_library/cpp/beam_search.cpp
+      path: heuristic_library/cpp/beam_search_cand_no_copy.cpp
+      title: heuristic_library/cpp/beam_search_cand_no_copy.cpp
     - icon: ':warning:'
       path: heuristic_library/cpp/beam_search_naive.cpp
       title: heuristic_library/cpp/beam_search_naive.cpp
     - icon: ':warning:'
       path: heuristic_library/cpp/beam_search_no_hash.cpp
       title: heuristic_library/cpp/beam_search_no_hash.cpp
+    - icon: ':warning:'
+      path: heuristic_library/cpp/beam_search_sabunkousin.cpp
+      title: heuristic_library/cpp/beam_search_sabunkousin.cpp
     - icon: ':warning:'
       path: heuristic_library/cpp/random.cpp
       title: heuristic_library/cpp/random.cpp
