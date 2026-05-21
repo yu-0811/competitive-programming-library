@@ -1,5 +1,5 @@
-/// 候補段階では状態をコピーしない実装
-/// 状態遷移が State のコピーより高速なときに使う
+/// 差分更新ビームサーチ（木の上のビームサーチ）
+/// 参考：https://eijirou-kyopro.hatenablog.com/entry/2024/02/01/115639
 #include <bits/stdc++.h>
 using namespace std;
 
@@ -174,9 +174,15 @@ struct WorkSpace {
 };
 
 struct BeamNode {
-    State state;
     int parent = -1;
     Action last_action{};
+    int first_child = -1;
+    int last_child = -1;
+    int prev_sibling = -1;
+    int next_sibling = -1;
+    int score = INF;
+    u64 hash = 0;
+    int depth = 0;
 };
 
 struct BeamSearchResult {
@@ -209,42 +215,137 @@ vector<Action> restore_move_history(const vector<BeamNode>& nodes, int node_idx)
     return history;
 }
 
-BeamSearchResult run_beam_search(State& init_state, int beam_width) {
-    vector<BeamNode> nodes; // ビームの全ノードを入れる
-    vector<int> now; // nodes のインデックス
-    vector<int> next;
+int move_to_leftmost_leaf(const vector<BeamNode>& nodes, State& state) {
+    int node_idx = 0;
+    while (nodes[node_idx].first_child != -1) {
+        node_idx = nodes[node_idx].first_child;
+        [[maybe_unused]] const bool finished = state.do_(nodes[node_idx].last_action);
+    }
+    return node_idx;
+}
 
-    nodes.emplace_back(BeamNode{init_state, -1, Action{}});
-    now.emplace_back(0);
+int move_to_next_leaf(const vector<BeamNode>& nodes, int node_idx, State& state) {
+    if (node_idx == 0) return -1;
+
+    int cur = node_idx;
+    while (true) {
+        if (nodes[cur].next_sibling != -1) {
+            state.undo_(nodes[cur].last_action);
+            cur = nodes[cur].next_sibling;
+            [[maybe_unused]] const bool finished = state.do_(nodes[cur].last_action);
+            while (nodes[cur].first_child != -1) {
+                cur = nodes[cur].first_child;
+                [[maybe_unused]] const bool finished2 = state.do_(nodes[cur].last_action);
+            }
+            return cur;
+        }
+        state.undo_(nodes[cur].last_action);
+        cur = nodes[cur].parent;
+        if (cur == 0) return -1;
+    }
+}
+
+int add_child(vector<BeamNode>& nodes, int parent_idx, const Candidate& cand) {
+    const int node_idx = static_cast<int>(nodes.size());
+    nodes.emplace_back(BeamNode{
+        parent_idx,
+        cand.action,
+        -1,
+        -1,
+        nodes[parent_idx].last_child,
+        -1,
+        cand.score,
+        cand.hash,
+        nodes[parent_idx].depth + 1
+    });
+
+    if (nodes[parent_idx].first_child == -1) {
+        nodes[parent_idx].first_child = node_idx;
+    } else {
+        nodes[nodes[parent_idx].last_child].next_sibling = node_idx;
+    }
+    nodes[parent_idx].last_child = node_idx;
+    return node_idx;
+}
+
+void prune_if_unnecessary(vector<BeamNode>& nodes, int node_idx) {
+    int cur = node_idx;
+    while (cur != 0 && nodes[cur].first_child == -1) {
+        const int parent_idx = nodes[cur].parent;
+        const int prev_idx = nodes[cur].prev_sibling;
+        const int next_idx = nodes[cur].next_sibling;
+
+        if (prev_idx != -1) {
+            nodes[prev_idx].next_sibling = next_idx;
+        } else {
+            nodes[parent_idx].first_child = next_idx;
+        }
+        if (next_idx != -1) {
+            nodes[next_idx].prev_sibling = prev_idx;
+        } else {
+            nodes[parent_idx].last_child = prev_idx;
+        }
+
+        nodes[cur].parent = -1;
+        nodes[cur].prev_sibling = -1;
+        nodes[cur].next_sibling = -1;
+        cur = parent_idx;
+    }
+}
+
+BeamSearchResult run_beam_search(State& init_state, int beam_width) {
+    vector<BeamNode> nodes; // 探索木
+    nodes.emplace_back(BeamNode{
+        -1,
+        Action{},
+        -1,
+        -1,
+        -1,
+        -1,
+        init_state.score,
+        init_state.hash,
+        0
+    });
 
     vector<Candidate> candidates; // 遷移先候補（親ノード + 操作 + 評価値）
+    vector<int> expanded_leaf_indices;
     WorkSpace ws;
-    FinishCandidate best_cand;
+    BeamSearchResult best_result;
+    int best_score = INF;
 
-    now.reserve(beam_width);
-    next.reserve(beam_width);
     // 確保領域は問題ごとに調整する
     nodes.reserve(2 * beam_width * 100);
     candidates.reserve(4 * beam_width);
+    expanded_leaf_indices.reserve(beam_width);
+    ws.s = init_state;
 
-    while (!now.empty() && timer.get_ms() < time_limit) {
-        next.clear();
+    while (timer.get_ms() < time_limit) {
         candidates.clear();
+        expanded_leaf_indices.clear();
         visited.clear();
 
-        // 遷移先を列挙する
-        for (int beam_idx = 0; beam_idx < (int)now.size(); beam_idx++) {
-            const int parent_idx = now[beam_idx];
-            const State& parent_state = nodes[parent_idx].state;
-            ws.s = parent_state;
+        // 葉を Euler Tour 順に走査する。
+        // move_to_next_leaf は undo_/do_ だけで隣の葉へ移動する。
+        int leaf_idx = move_to_leftmost_leaf(nodes, ws.s);
+        while (leaf_idx != -1) {
+            expanded_leaf_indices.emplace_back(leaf_idx);
             ws.actions.clear();
-            generate_possible_actions(parent_state, ws.actions);
+            generate_possible_actions(ws.s, ws.actions);
             for (const auto& action : ws.actions) {
                 const bool is_finished = ws.s.do_(action);
-                Candidate cand(parent_idx, action, ws.s.score, is_finished, ws.s.hash);
-                candidates.emplace_back(cand);
+                if (is_finished) {
+                    if (ws.s.score < best_score) {
+                        best_score = ws.s.score;
+                        best_result.final_state = ws.s;
+                        best_result.move_history = restore_move_history(nodes, leaf_idx);
+                        best_result.move_history.emplace_back(action);
+                    }
+                } else {
+                    candidates.emplace_back(leaf_idx, action, ws.s.score, false, ws.s.hash);
+                }
                 ws.s.undo_(action);
             }
+            leaf_idx = move_to_next_leaf(nodes, leaf_idx, ws.s);
         }
 
         // 上位 beam_width 件だけ取る
@@ -252,36 +353,25 @@ BeamSearchResult run_beam_search(State& init_state, int beam_width) {
             return a.score < b.score;
         });
 
+        int selected_count = 0;
         for (const auto& cand : candidates) {
-            if (cand.is_finished) {
-                if (cand.score < best_cand.score) {
-                    best_cand = FinishCandidate{cand.parent_idx, cand.action, cand.score};
-                }
-                continue;
-            }
             if (visited.contains_or_insert(cand.hash)) continue;
-
-            ws.s = nodes[cand.parent_idx].state;
-            [[maybe_unused]] const bool is_finished = ws.s.do_(cand.action);
-            assert(is_finished == cand.is_finished);
-            const int node_idx = static_cast<int>(nodes.size());
-            nodes.emplace_back(BeamNode{ws.s, cand.parent_idx, cand.action});
-            next.emplace_back(node_idx);
-            if ((int)next.size() >= beam_width) break;
+            add_child(nodes, cand.parent_idx, cand);
+            ++selected_count;
+            if (selected_count >= beam_width) break;
         }
-        if (next.empty()) break;
-        swap(now, next);
+
+        for (int node_idx : expanded_leaf_indices) {
+            if (nodes[node_idx].parent != -1 && nodes[node_idx].first_child == -1) {
+                prune_if_unnecessary(nodes, node_idx);
+            }
+        }
+
+        if (selected_count == 0) break;
     }
 
-    BeamSearchResult result;
-    assert(best_cand.parent_idx != -1);
-
-    result.final_state = nodes[best_cand.parent_idx].state;
-    [[maybe_unused]] const bool ok = result.final_state.do_(best_cand.action);
-    assert(ok);
-    result.move_history = restore_move_history(nodes, best_cand.parent_idx);
-    result.move_history.emplace_back(best_cand.action);
-    return result;
+    assert(best_score != INF);
+    return best_result;
 }
 
 int main() {
