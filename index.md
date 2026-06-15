@@ -235,11 +235,6 @@ data:
     - icon: ':warning:'
       path: heuristic_library/pacher-optuna/optimize.py
       title: heuristic_library/pacher-optuna/optimize.py
-  - name: heuristic_library/python
-    pages:
-    - icon: ':warning:'
-      path: heuristic_library/python/SA.py
-      title: heuristic_library/python/SA.py
   verificationCategories:
   - name: tests/graph
     pages:

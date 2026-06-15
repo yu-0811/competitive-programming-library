@@ -29,7 +29,7 @@ data:
   isVerificationFile: false
   path: algorithm_library/python/math/PascalsTriangle.py
   requiredBy: []
-  timestamp: '2026-05-21 22:08:52+09:00'
+  timestamp: '2026-06-15 14:58:16+09:00'
   verificationStatus: LIBRARY_NO_TESTS
   verifiedWith: []
 documentation_of: algorithm_library/python/math/PascalsTriangle.py
