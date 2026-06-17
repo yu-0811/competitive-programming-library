@@ -243,7 +243,7 @@ data:
   isVerificationFile: false
   path: heuristic_library/cpp/beam_search_cand_no_copy.cpp
   requiredBy: []
-  timestamp: '2026-06-17 12:46:21+09:00'
+  timestamp: '2026-06-17 12:49:18+09:00'
   verificationStatus: LIBRARY_NO_TESTS
   verifiedWith: []
 documentation_of: heuristic_library/cpp/beam_search_cand_no_copy.cpp
