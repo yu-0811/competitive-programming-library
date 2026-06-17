@@ -13,6 +13,9 @@ data:
       path: algorithm_library/cpp/RangeFactorize.cpp
       title: algorithm_library/cpp/RangeFactorize.cpp
     - icon: ':warning:'
+      path: algorithm_library/cpp/RangeSet.cpp
+      title: algorithm_library/cpp/RangeSet.cpp
+    - icon: ':warning:'
       path: algorithm_library/cpp/RollingHash.cpp
       title: algorithm_library/cpp/RollingHash.cpp
     - icon: ':warning:'

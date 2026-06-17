@@ -50,7 +50,7 @@ data:
   isVerificationFile: false
   path: algorithm_library/python/data-structure/MargeSortTree.py
   requiredBy: []
-  timestamp: '2026-06-17 12:49:18+09:00'
+  timestamp: '2026-06-17 13:03:47+09:00'
   verificationStatus: LIBRARY_NO_TESTS
   verifiedWith: []
 documentation_of: algorithm_library/python/data-structure/MargeSortTree.py
