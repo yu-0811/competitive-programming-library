@@ -235,6 +235,89 @@ data:
     - icon: ':warning:'
       path: heuristic_library/pacher-optuna/optimize.py
       title: heuristic_library/pacher-optuna/optimize.py
+  - name: tatyam_set
+    pages:
+    - icon: ':warning:'
+      path: tatyam_set/BucketList.py
+      title: tatyam_set/BucketList.py
+    - icon: ':warning:'
+      path: tatyam_set/SortedMultiset.py
+      title: tatyam_set/SortedMultiset.py
+    - icon: ':warning:'
+      path: tatyam_set/SortedSet.py
+      title: tatyam_set/SortedSet.py
+  - name: tatyam_set/codon
+    pages:
+    - icon: ':warning:'
+      path: tatyam_set/codon/BucketList.py
+      title: tatyam_set/codon/BucketList.py
+    - icon: ':warning:'
+      path: tatyam_set/codon/SortedMultiset.py
+      title: tatyam_set/codon/SortedMultiset.py
+    - icon: ':warning:'
+      path: tatyam_set/codon/SortedSet.py
+      title: tatyam_set/codon/SortedSet.py
+  - name: tatyam_set/example
+    pages:
+    - icon: ':warning:'
+      path: tatyam_set/example/ABC119-D.py
+      title: tatyam_set/example/ABC119-D.py
+    - icon: ':warning:'
+      path: tatyam_set/example/ABC140-E.py
+      title: tatyam_set/example/ABC140-E.py
+    - icon: ':warning:'
+      path: tatyam_set/example/ABC217-D.py
+      title: tatyam_set/example/ABC217-D.py
+    - icon: ':warning:'
+      path: tatyam_set/example/ABC228-D.py
+      title: tatyam_set/example/ABC228-D.py
+    - icon: ':warning:'
+      path: tatyam_set/example/ABC234-D.py
+      title: tatyam_set/example/ABC234-D.py
+    - icon: ':warning:'
+      path: tatyam_set/example/ABC241-D.py
+      title: tatyam_set/example/ABC241-D.py
+    - icon: ':warning:'
+      path: tatyam_set/example/ABC245-E.py
+      title: tatyam_set/example/ABC245-E.py
+    - icon: ':warning:'
+      path: tatyam_set/example/ABC253-C.py
+      title: tatyam_set/example/ABC253-C.py
+    - icon: ':warning:'
+      path: tatyam_set/example/ABC281-E.py
+      title: tatyam_set/example/ABC281-E.py
+    - icon: ':warning:'
+      path: tatyam_set/example/ABC308-G.py
+      title: tatyam_set/example/ABC308-G.py
+    - icon: ':warning:'
+      path: tatyam_set/example/ABC370-D.py
+      title: tatyam_set/example/ABC370-D.py
+    - icon: ':warning:'
+      path: tatyam_set/example/ABC392-F.py
+      title: tatyam_set/example/ABC392-F.py
+    - icon: ':warning:'
+      path: tatyam_set/example/ARC033-C.py
+      title: tatyam_set/example/ARC033-C.py
+    - icon: ':warning:'
+      path: tatyam_set/example/ARC155-B.py
+      title: tatyam_set/example/ARC155-B.py
+    - icon: ':warning:'
+      path: tatyam_set/example/PAST10-M.py
+      title: tatyam_set/example/PAST10-M.py
+    - icon: ':warning:'
+      path: tatyam_set/example/PAST9-M.py
+      title: tatyam_set/example/PAST9-M.py
+  - name: tatyam_set/test
+    pages:
+    - icon: ':warning:'
+      path: tatyam_set/test/test_BucketList.py
+      title: tatyam_set/test/test_BucketList.py
+    - icon: ':warning:'
+      path: tatyam_set/test/test_SortedMultiset.py
+      title: tatyam_set/test/test_SortedMultiset.py
+    - icon: ':warning:'
+      path: tatyam_set/test/test_SortedSet.py
+      title: tatyam_set/test/test_SortedSet.py
   verificationCategories:
   - name: tests/graph
     pages:
