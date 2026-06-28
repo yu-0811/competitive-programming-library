@@ -36,6 +36,150 @@ data:
     - icon: ':warning:'
       path: algorithm_library/cpp/maxflow.cpp
       title: algorithm_library/cpp/maxflow.cpp
+  - name: algorithm_library/cpp-from-py/data-structure
+    pages:
+    - icon: ':warning:'
+      path: algorithm_library/cpp-from-py/data-structure/2DSparseTable.cpp
+      title: algorithm_library/cpp-from-py/data-structure/2DSparseTable.cpp
+    - icon: ':warning:'
+      path: algorithm_library/cpp-from-py/data-structure/BIT.cpp
+      title: algorithm_library/cpp-from-py/data-structure/BIT.cpp
+    - icon: ':warning:'
+      path: algorithm_library/cpp-from-py/data-structure/CartesianTree.cpp
+      title: algorithm_library/cpp-from-py/data-structure/CartesianTree.cpp
+    - icon: ':warning:'
+      path: algorithm_library/cpp-from-py/data-structure/MargeSortTree.cpp
+      title: algorithm_library/cpp-from-py/data-structure/MargeSortTree.cpp
+    - icon: ':warning:'
+      path: algorithm_library/cpp-from-py/data-structure/Mos_algorithm.cpp
+      title: algorithm_library/cpp-from-py/data-structure/Mos_algorithm.cpp
+    - icon: ':warning:'
+      path: algorithm_library/cpp-from-py/data-structure/TopK.cpp
+      title: algorithm_library/cpp-from-py/data-structure/TopK.cpp
+    - icon: ':warning:'
+      path: algorithm_library/cpp-from-py/data-structure/TwoWayList.cpp
+      title: algorithm_library/cpp-from-py/data-structure/TwoWayList.cpp
+  - name: algorithm_library/cpp-from-py/graph
+    pages:
+    - icon: ':warning:'
+      path: algorithm_library/cpp-from-py/graph/Bellman_ford.cpp
+      title: algorithm_library/cpp-from-py/graph/Bellman_ford.cpp
+    - icon: ':warning:'
+      path: algorithm_library/cpp-from-py/graph/BipartiteGraph.cpp
+      title: algorithm_library/cpp-from-py/graph/BipartiteGraph.cpp
+    - icon: ':warning:'
+      path: algorithm_library/cpp-from-py/graph/CSR.cpp
+      title: algorithm_library/cpp-from-py/graph/CSR.cpp
+    - icon: ':warning:'
+      path: algorithm_library/cpp-from-py/graph/EulerTour.cpp
+      title: algorithm_library/cpp-from-py/graph/EulerTour.cpp
+    - icon: ':warning:'
+      path: algorithm_library/cpp-from-py/graph/LCA.cpp
+      title: algorithm_library/cpp-from-py/graph/LCA.cpp
+    - icon: ':warning:'
+      path: algorithm_library/cpp-from-py/graph/PotentialUnionFind.cpp
+      title: algorithm_library/cpp-from-py/graph/PotentialUnionFind.cpp
+    - icon: ':warning:'
+      path: algorithm_library/cpp-from-py/graph/Rerooting.cpp
+      title: algorithm_library/cpp-from-py/graph/Rerooting.cpp
+    - icon: ':warning:'
+      path: algorithm_library/cpp-from-py/graph/SCC.cpp
+      title: algorithm_library/cpp-from-py/graph/SCC.cpp
+    - icon: ':warning:'
+      path: algorithm_library/cpp-from-py/graph/TopologicalSort.cpp
+      title: algorithm_library/cpp-from-py/graph/TopologicalSort.cpp
+    - icon: ':warning:'
+      path: algorithm_library/cpp-from-py/graph/UnionFind.cpp
+      title: algorithm_library/cpp-from-py/graph/UnionFind.cpp
+    - icon: ':warning:'
+      path: algorithm_library/cpp-from-py/graph/WarshallFloyd.cpp
+      title: algorithm_library/cpp-from-py/graph/WarshallFloyd.cpp
+    - icon: ':warning:'
+      path: algorithm_library/cpp-from-py/graph/cycle_detect.cpp
+      title: algorithm_library/cpp-from-py/graph/cycle_detect.cpp
+    - icon: ':warning:'
+      path: algorithm_library/cpp-from-py/graph/maxflow.cpp
+      title: algorithm_library/cpp-from-py/graph/maxflow.cpp
+  - name: algorithm_library/cpp-from-py/hash
+    pages:
+    - icon: ':warning:'
+      path: algorithm_library/cpp-from-py/hash/MultisetHash.cpp
+      title: algorithm_library/cpp-from-py/hash/MultisetHash.cpp
+    - icon: ':warning:'
+      path: algorithm_library/cpp-from-py/hash/ZobristHash.cpp
+      title: algorithm_library/cpp-from-py/hash/ZobristHash.cpp
+  - name: algorithm_library/cpp-from-py/math
+    pages:
+    - icon: ':warning:'
+      path: algorithm_library/cpp-from-py/math/AngularSort.cpp
+      title: algorithm_library/cpp-from-py/math/AngularSort.cpp
+    - icon: ':warning:'
+      path: algorithm_library/cpp-from-py/math/FFT.cpp
+      title: algorithm_library/cpp-from-py/math/FFT.cpp
+    - icon: ':warning:'
+      path: algorithm_library/cpp-from-py/math/PIE.cpp
+      title: algorithm_library/cpp-from-py/math/PIE.cpp
+    - icon: ':warning:'
+      path: algorithm_library/cpp-from-py/math/PascalsTriangle.cpp
+      title: algorithm_library/cpp-from-py/math/PascalsTriangle.cpp
+    - icon: ':warning:'
+      path: algorithm_library/cpp-from-py/math/RangeEratosthenes.cpp
+      title: algorithm_library/cpp-from-py/math/RangeEratosthenes.cpp
+    - icon: ':warning:'
+      path: algorithm_library/cpp-from-py/math/arithmetic_series.cpp
+      title: algorithm_library/cpp-from-py/math/arithmetic_series.cpp
+    - icon: ':warning:'
+      path: algorithm_library/cpp-from-py/math/calc.cpp
+      title: algorithm_library/cpp-from-py/math/calc.cpp
+    - icon: ':warning:'
+      path: algorithm_library/cpp-from-py/math/eratosthenes.cpp
+      title: algorithm_library/cpp-from-py/math/eratosthenes.cpp
+    - icon: ':warning:'
+      path: algorithm_library/cpp-from-py/math/extGCD.cpp
+      title: algorithm_library/cpp-from-py/math/extGCD.cpp
+    - icon: ':warning:'
+      path: algorithm_library/cpp-from-py/math/factorization.cpp
+      title: algorithm_library/cpp-from-py/math/factorization.cpp
+    - icon: ':warning:'
+      path: algorithm_library/cpp-from-py/math/geometry.cpp
+      title: algorithm_library/cpp-from-py/math/geometry.cpp
+    - icon: ':warning:'
+      path: algorithm_library/cpp-from-py/math/mobius.cpp
+      title: algorithm_library/cpp-from-py/math/mobius.cpp
+    - icon: ':warning:'
+      path: algorithm_library/cpp-from-py/math/modComb.cpp
+      title: algorithm_library/cpp-from-py/math/modComb.cpp
+  - name: algorithm_library/cpp-from-py/string
+    pages:
+    - icon: ':warning:'
+      path: algorithm_library/cpp-from-py/string/SuffixArray.cpp
+      title: algorithm_library/cpp-from-py/string/SuffixArray.cpp
+    - icon: ':warning:'
+      path: algorithm_library/cpp-from-py/string/Z-algo.cpp
+      title: algorithm_library/cpp-from-py/string/Z-algo.cpp
+    - icon: ':warning:'
+      path: algorithm_library/cpp-from-py/string/changeable_RollingHash.cpp
+      title: algorithm_library/cpp-from-py/string/changeable_RollingHash.cpp
+  - name: algorithm_library/cpp-from-py/techniques
+    pages:
+    - icon: ':warning:'
+      path: algorithm_library/cpp-from-py/techniques/3buntansaku.cpp
+      title: algorithm_library/cpp-from-py/techniques/3buntansaku.cpp
+    - icon: ':warning:'
+      path: algorithm_library/cpp-from-py/techniques/Compression.cpp
+      title: algorithm_library/cpp-from-py/techniques/Compression.cpp
+    - icon: ':warning:'
+      path: algorithm_library/cpp-from-py/techniques/CrossAccumulate.cpp
+      title: algorithm_library/cpp-from-py/techniques/CrossAccumulate.cpp
+    - icon: ':warning:'
+      path: algorithm_library/cpp-from-py/techniques/MegruBisect.cpp
+      title: algorithm_library/cpp-from-py/techniques/MegruBisect.cpp
+    - icon: ':warning:'
+      path: algorithm_library/cpp-from-py/techniques/RunLengthCompression.cpp
+      title: algorithm_library/cpp-from-py/techniques/RunLengthCompression.cpp
+    - icon: ':warning:'
+      path: algorithm_library/cpp-from-py/techniques/imos.cpp
+      title: algorithm_library/cpp-from-py/techniques/imos.cpp
   - name: algorithm_library/python/data-structure
     pages:
     - icon: ':warning:'
@@ -167,6 +311,9 @@ data:
     - icon: ':warning:'
       path: algorithm_library/python/math/modComb.py
       title: algorithm_library/python/math/modComb.py
+    - icon: ':warning:'
+      path: algorithm_library/python/math/modDIv.py
+      title: algorithm_library/python/math/modDIv.py
   - name: algorithm_library/python/string
     pages:
     - icon: ':warning:'
@@ -184,6 +331,9 @@ data:
   - name: algorithm_library/python/techniques
     pages:
     - icon: ':warning:'
+      path: algorithm_library/python/techniques/3buntansaku.py
+      title: algorithm_library/python/techniques/3buntansaku.py
+    - icon: ':warning:'
       path: algorithm_library/python/techniques/Compression.py
       title: algorithm_library/python/techniques/Compression.py
     - icon: ':warning:'
@@ -198,9 +348,6 @@ data:
     - icon: ':warning:'
       path: algorithm_library/python/techniques/RunLengthCompression.py
       title: algorithm_library/python/techniques/RunLengthCompression.py
-    - icon: ':warning:'
-      path: algorithm_library/python/techniques/TernarySearch.py
-      title: algorithm_library/python/techniques/TernarySearch.py
     - icon: ':warning:'
       path: algorithm_library/python/techniques/imos.py
       title: algorithm_library/python/techniques/imos.py

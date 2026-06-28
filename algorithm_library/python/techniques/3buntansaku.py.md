@@ -46,15 +46,15 @@ data:
     \ best_x = x\n\n    return best_x, best_val\n"
   dependsOn: []
   isVerificationFile: false
-  path: algorithm_library/python/techniques/TernarySearch.py
+  path: algorithm_library/python/techniques/3buntansaku.py
   requiredBy: []
-  timestamp: '2026-06-17 22:16:09+09:00'
+  timestamp: '2026-06-28 23:41:02+09:00'
   verificationStatus: LIBRARY_NO_TESTS
   verifiedWith: []
-documentation_of: algorithm_library/python/techniques/TernarySearch.py
+documentation_of: algorithm_library/python/techniques/3buntansaku.py
 layout: document
 redirect_from:
-- /library/algorithm_library/python/techniques/TernarySearch.py
-- /library/algorithm_library/python/techniques/TernarySearch.py.html
-title: algorithm_library/python/techniques/TernarySearch.py
+- /library/algorithm_library/python/techniques/3buntansaku.py
+- /library/algorithm_library/python/techniques/3buntansaku.py.html
+title: algorithm_library/python/techniques/3buntansaku.py
 ---
