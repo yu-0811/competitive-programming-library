@@ -51,7 +51,7 @@ data:
   isVerificationFile: false
   path: algorithm_library/python/data-structure/Mos_algorithm.py
   requiredBy: []
-  timestamp: '2026-06-28 23:41:02+09:00'
+  timestamp: '2026-06-30 23:53:06+09:00'
   verificationStatus: LIBRARY_NO_TESTS
   verifiedWith: []
 documentation_of: algorithm_library/python/data-structure/Mos_algorithm.py

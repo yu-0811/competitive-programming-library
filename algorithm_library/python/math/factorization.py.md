@@ -21,13 +21,25 @@ data:
     \u3066\n\u69CB\u7BC9 O(N log log N)\n\u7D20\u56E0\u6570\u5206\u89E3 O(log N)\n\
     init_factorization \u306E\u5F15\u6570\u306B\u6700\u5927\u306E\u6570 N \u3092\u5165\
     \u308C\u3066\u521D\u671F\u5316\n\"\"\"\ndef init_factorization(N : int) -> list[int]:\n\
-    \  # N \u4EE5\u4E0B\u306E\u6574\u6570\u306B\u5BFE\u3057\u3066\u6700\u5C0F\u306E\
-    \u7D20\u56E0\u6570\u3092\u6C42\u3081\u308B\n  # D[i] = i \u306E\u6700\u5C0F\u306E\
-    \u7D20\u56E0\u6570\n  D = [1]*(N+1)\n  for i in range(2,N+1):\n    if D[i]!=1:\
-    \ continue\n    for j in range(i,N+1,i):\n      if D[j]==1: D[j] = i\n  return\
-    \ D\n\nD = init_factorization() \n\n# \u7D20\u56E0\u6570\u5206\u89E3\ndef factorization(x\
-    \ : int) -> dict[int,int]: \n  res = defaultdict(int)\n  while x!=1:\n    res[D[x]]\
-    \ += 1\n    x //= D[x]\n  return res"
+    \    # N \u4EE5\u4E0B\u306E\u6574\u6570\u306B\u5BFE\u3057\u3066\u6700\u5C0F\u306E\
+    \u7D20\u56E0\u6570\u3092\u6C42\u3081\u308B\n    # D[i] = i \u306E\u6700\u5C0F\u306E\
+    \u7D20\u56E0\u6570\n    D = [1]*(N+1)\n    for i in range(2,N+1):\n        if\
+    \ D[i]!=1: continue\n        for j in range(i,N+1,i):\n            if D[j]==1:\
+    \ D[j] = i\n    return D\n\nD = init_factorization() \n\n# \u7D20\u56E0\u6570\u5206\
+    \u89E3\ndef factorization(x : int) -> dict[int,int]: \n    res = defaultdict(int)\n\
+    \    while x!=1:\n        res[D[x]] += 1\n        x //= D[x]\n    return res\n\
+    \n# \u30A8\u30E9\u30C8\u30B9\u30C6\u30CD\u30B9\u306E\u7BE9\n# O (N log log N)\n\
+    def eratosthenes(N: int): \n  prime_number = list() # \u7D20\u6570\n  isprime\
+    \ = [True] * (N+1) # isprime[i]==True \u306A\u3089 i \u306F\u7D20\u6570\n  isprime[0],\
+    \ isprime[1] = False, False\n  for p in range(2, N+1):\n      if not isprime[p]:\
+    \ continue\n      q = p * 2\n      while q <= N:\n          isprime[q] = False\n\
+    \          q += p\n  for p in range(2,N+1):\n      if isprime[p]: prime_number.append(p)\n\
+    \  return prime_number, isprime\n\n# M \u4EE5\u4E0B\u306E\u7D20\u6570\u30EA\u30B9\
+    \u30C8\u3092\u8FD4\u3059\n# O(M log log M)\ndef res_primeList(M):\n    isprime\
+    \ = [True] * (M+1)\n    isprime[0], isprime[1] = False, False\n    for i in range(2,\
+    \ M+1):\n        if i*i > M: break\n        if isprime[i]:\n            for j\
+    \ in range(i*i, M+1, i):\n                isprime[j] = False\n    return [i for\
+    \ i in range(2, M+1) if isprime[i]]"
   dependsOn: []
   isVerificationFile: false
   path: algorithm_library/python/math/factorization.py

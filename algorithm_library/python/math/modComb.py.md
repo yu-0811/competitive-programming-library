@@ -35,12 +35,23 @@ data:
     \ % mod\n\n    def nCk(self, n, k):\n        if k < 0 or k > n:\n            return\
     \ 0\n        if k > self.k:\n            raise ValueError(\"precomputed k is too\
     \ small\")\n        ans = 1\n        for i in range(k):\n            ans *= n\
-    \ - i\n            ans %= self.mod\n        return ans * self.fact_inv[k] % self.mod"
+    \ - i\n            ans %= self.mod\n        return ans * self.fact_inv[k] % self.mod\n\
+    \    \nclass PascalsTriangle:\n    \"\"\"\n    \u30D1\u30B9\u30AB\u30EB\u306E\u4E09\
+    \u89D2\u5F62\u3067 nCk \u3092\u6C42\u3081\u308B\n    \u8A08\u7B97\u91CF: O(N^2)\n\
+    \    mod \u304C\u7D20\u6570\u3067\u306A\u304F\u3066\u3082\u4F7F\u7528\u53EF\u80FD\
+    \n    \"\"\"\n    def __init__(self, N, mod):\n        self.mod = mod\n      \
+    \  self.binom = [[0] * (N + 1) for _ in range(N + 1)]\n        for i in range(N\
+    \ + 1):\n            self.binom[i][0] = 1\n            for j in range(1, i + 1):\n\
+    \                self.binom[i][j] = (self.binom[i - 1][j - 1] + self.binom[i -\
+    \ 1][j]) % mod\n\n    def C(self, n, k):\n        assert 0 <= k <= n\n       \
+    \ return self.binom[n][k]\n\n    def H(self, n, k):\n        \"\"\" \u91CD\u8907\
+    \u7D44\u5408\u305B nHk \"\"\"\n        assert n >= 0 and k >= 0\n        return\
+    \ self.C(n + k - 1, k)"
   dependsOn: []
   isVerificationFile: false
   path: algorithm_library/python/math/modComb.py
   requiredBy: []
-  timestamp: '2026-06-28 23:41:02+09:00'
+  timestamp: '2026-06-30 23:53:06+09:00'
   verificationStatus: LIBRARY_NO_TESTS
   verifiedWith: []
 documentation_of: algorithm_library/python/math/modComb.py

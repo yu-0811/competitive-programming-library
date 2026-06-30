@@ -198,6 +198,9 @@ data:
       path: algorithm_library/python/data-structure/LazySegtree.py
       title: algorithm_library/python/data-structure/LazySegtree.py
     - icon: ':warning:'
+      path: algorithm_library/python/data-structure/LinearImos.py
+      title: algorithm_library/python/data-structure/LinearImos.py
+    - icon: ':warning:'
       path: algorithm_library/python/data-structure/MargeSortTree.py
       title: algorithm_library/python/data-structure/MargeSortTree.py
     - icon: ':warning:'
@@ -282,20 +285,11 @@ data:
       path: algorithm_library/python/math/PIE.py
       title: algorithm_library/python/math/PIE.py
     - icon: ':warning:'
-      path: algorithm_library/python/math/PascalsTriangle.py
-      title: algorithm_library/python/math/PascalsTriangle.py
-    - icon: ':warning:'
-      path: algorithm_library/python/math/RangeEratosthenes.py
-      title: algorithm_library/python/math/RangeEratosthenes.py
-    - icon: ':warning:'
-      path: algorithm_library/python/math/arithmetic_series.py
-      title: algorithm_library/python/math/arithmetic_series.py
+      path: algorithm_library/python/math/Triangle.py
+      title: algorithm_library/python/math/Triangle.py
     - icon: ':warning:'
       path: algorithm_library/python/math/calc.py
       title: algorithm_library/python/math/calc.py
-    - icon: ':warning:'
-      path: algorithm_library/python/math/eratosthenes.py
-      title: algorithm_library/python/math/eratosthenes.py
     - icon: ':warning:'
       path: algorithm_library/python/math/extGCD.py
       title: algorithm_library/python/math/extGCD.py
@@ -312,8 +306,8 @@ data:
       path: algorithm_library/python/math/modComb.py
       title: algorithm_library/python/math/modComb.py
     - icon: ':warning:'
-      path: algorithm_library/python/math/modDIv.py
-      title: algorithm_library/python/math/modDIv.py
+      path: algorithm_library/python/math/modDiv.py
+      title: algorithm_library/python/math/modDiv.py
   - name: algorithm_library/python/string
     pages:
     - icon: ':warning:'
