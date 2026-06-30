@@ -14,7 +14,7 @@ def extGCD(a,b) -> tuple[int,int,int]:
     y = s - a//b * t
     return g, x, y
 
-# ax ≡ 1 (mod m) を満たす x (a^-1) を求める
+# ax ≡ 1 (mod m) を満たす x (a の逆元) を求める
 def modinv(a,m) -> int:
     g,x,y = extGCD(a,m)
     assert g == 1, "a と m が互いに素でない"

@@ -1,4 +1,5 @@
 # 区間 [l,r] に i \in [l,r] に一次関数 a*i + b を加算できるライブラリ
+# クエリ l, r, a, b：各 i ∈ [l, r] に a*i + b を加算する
 class LinearImos:
     def __init__(self, n, mod=None):
         self.n = n
