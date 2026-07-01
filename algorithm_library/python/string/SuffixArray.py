@@ -1,3 +1,6 @@
+# SA の構築：O(|S|)
+# SA[i]: int で S の SA[i] から始まる suffix がソートされてる
+
 def sa_is(s,upper):
         n=len(s)
         if n==0:
@@ -111,7 +114,8 @@ def suffix_array(s) -> list[int]:
                 now+=1
             s2[idx[i]]=now
         return sa_is(s2,now)
-      
+
+# lcp[i] = S の SA[i] 文字目から始まる suffix と S の SA[i+1] 文字目から始まる suffix の共通接頭辞の長さ
 def lcp_array(s : str, sa : list[int]) -> list[int]:
     n=len(s)
     assert n>=1
@@ -132,3 +136,19 @@ def lcp_array(s : str, sa : list[int]) -> list[int]:
             h+=1
         lcp[rnk[i]-1]=h
     return lcp
+
+# suffix をソートして T <= x なる suffix x のインデックスを返す
+# T <= S[SA[i] : SA[i] + len(T)] を満たす最小の i
+def suffix_array_bisect(S,SA,T):
+    ng,ok = -1, len(S)
+    while abs(ok-ng)>1:
+        mid = (ok+ng) // 2
+        idx = SA[mid]
+        if T <= S[idx : idx+len(T)]:
+            ok = mid
+        else:
+            ng = mid
+    return ok
+
+
+# SA = suffix_array(S)
