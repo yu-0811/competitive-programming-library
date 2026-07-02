@@ -14,7 +14,9 @@ data:
     \         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n\
     \  File \"/opt/hostedtoolcache/Python/3.11.0/x64/lib/python3.11/site-packages/onlinejudge_verify/languages/python.py\"\
     , line 96, in bundle\n    raise NotImplementedError\nNotImplementedError\n"
-  code: "def sa_is(s,upper):\n        n=len(s)\n        if n==0:\n            return\
+  code: "# SA \u306E\u69CB\u7BC9\uFF1AO(|S|)\n# SA[i]: int \u3067 S \u306E SA[i] \u304B\
+    \u3089\u59CB\u307E\u308B suffix \u304C\u30BD\u30FC\u30C8\u3055\u308C\u3066\u308B\
+    \n\ndef sa_is(s,upper):\n        n=len(s)\n        if n==0:\n            return\
     \ []\n        if n==1:\n            return [0]\n        if n==2:\n           \
     \ if (s[0]<s[1]):\n                return [0,1]\n            else:\n         \
     \       return [1,0]\n        sa=[0]*n\n        ls=[0]*n\n        for i in range(n-2,-1,-1):\n\
@@ -56,17 +58,26 @@ data:
     \    idx=list(range(n))\n        idx.sort(key=lambda x:s[x])\n        s2=[0]*n\n\
     \        now=0\n        for i in range(n):\n            if (i and s[idx[i-1]]!=s[idx[i]]):\n\
     \                now+=1\n            s2[idx[i]]=now\n        return sa_is(s2,now)\n\
-    \      \ndef lcp_array(s : str, sa : list[int]) -> list[int]:\n    n=len(s)\n\
-    \    assert n>=1\n    rnk=[0]*n\n    for i in range(n):\n        rnk[sa[i]]=i\n\
-    \    lcp=[0]*(n-1)\n    h=0\n    for i in range(n):\n        if h>0:\n       \
-    \     h-=1\n        if rnk[i]==0:\n            continue\n        j=sa[rnk[i]-1]\n\
-    \        while(j+h<n and i+h<n):\n            if s[j+h]!=s[i+h]:\n           \
-    \     break\n            h+=1\n        lcp[rnk[i]-1]=h\n    return lcp"
+    \n# lcp[i] = S \u306E SA[i] \u6587\u5B57\u76EE\u304B\u3089\u59CB\u307E\u308B suffix\
+    \ \u3068 S \u306E SA[i+1] \u6587\u5B57\u76EE\u304B\u3089\u59CB\u307E\u308B suffix\
+    \ \u306E\u5171\u901A\u63A5\u982D\u8F9E\u306E\u9577\u3055\ndef lcp_array(s : str,\
+    \ sa : list[int]) -> list[int]:\n    n=len(s)\n    assert n>=1\n    rnk=[0]*n\n\
+    \    for i in range(n):\n        rnk[sa[i]]=i\n    lcp=[0]*(n-1)\n    h=0\n  \
+    \  for i in range(n):\n        if h>0:\n            h-=1\n        if rnk[i]==0:\n\
+    \            continue\n        j=sa[rnk[i]-1]\n        while(j+h<n and i+h<n):\n\
+    \            if s[j+h]!=s[i+h]:\n                break\n            h+=1\n   \
+    \     lcp[rnk[i]-1]=h\n    return lcp\n\n# suffix \u3092\u30BD\u30FC\u30C8\u3057\
+    \u3066 T <= x \u306A\u308B suffix x \u306E\u30A4\u30F3\u30C7\u30C3\u30AF\u30B9\
+    \u3092\u8FD4\u3059\n# T <= S[SA[i] : SA[i] + len(T)] \u3092\u6E80\u305F\u3059\u6700\
+    \u5C0F\u306E i\ndef suffix_array_bisect(S,SA,T):\n    ng,ok = -1, len(S)\n   \
+    \ while abs(ok-ng)>1:\n        mid = (ok+ng) // 2\n        idx = SA[mid]\n   \
+    \     if T <= S[idx : idx+len(T)]:\n            ok = mid\n        else:\n    \
+    \        ng = mid\n    return ok\n\n\n# SA = suffix_array(S)"
   dependsOn: []
   isVerificationFile: false
   path: algorithm_library/python/string/SuffixArray.py
   requiredBy: []
-  timestamp: '2026-06-30 23:53:06+09:00'
+  timestamp: '2026-07-02 14:15:44+09:00'
   verificationStatus: LIBRARY_NO_TESTS
   verifiedWith: []
 documentation_of: algorithm_library/python/string/SuffixArray.py

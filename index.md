@@ -22,6 +22,12 @@ data:
       path: algorithm_library/cpp/SparseTable.cpp
       title: algorithm_library/cpp/SparseTable.cpp
     - icon: ':warning:'
+      path: algorithm_library/cpp/circle.cpp
+      title: algorithm_library/cpp/circle.cpp
+    - icon: ':warning:'
+      path: algorithm_library/cpp/circle_int.cpp
+      title: algorithm_library/cpp/circle_int.cpp
+    - icon: ':warning:'
       path: algorithm_library/cpp/doubing.cpp
       title: algorithm_library/cpp/doubing.cpp
     - icon: ':warning:'
@@ -30,6 +36,12 @@ data:
     - icon: ':warning:'
       path: algorithm_library/cpp/itertools.cpp
       title: algorithm_library/cpp/itertools.cpp
+    - icon: ':warning:'
+      path: algorithm_library/cpp/line.cpp
+      title: algorithm_library/cpp/line.cpp
+    - icon: ':warning:'
+      path: algorithm_library/cpp/line_int.cpp
+      title: algorithm_library/cpp/line_int.cpp
     - icon: ':warning:'
       path: algorithm_library/cpp/matrixPower.cpp
       title: algorithm_library/cpp/matrixPower.cpp
@@ -291,6 +303,12 @@ data:
       path: algorithm_library/python/math/calc.py
       title: algorithm_library/python/math/calc.py
     - icon: ':warning:'
+      path: algorithm_library/python/math/circle.py
+      title: algorithm_library/python/math/circle.py
+    - icon: ':warning:'
+      path: algorithm_library/python/math/circle_int.py
+      title: algorithm_library/python/math/circle_int.py
+    - icon: ':warning:'
       path: algorithm_library/python/math/extGCD.py
       title: algorithm_library/python/math/extGCD.py
     - icon: ':warning:'
@@ -299,6 +317,12 @@ data:
     - icon: ':warning:'
       path: algorithm_library/python/math/geometry.py
       title: algorithm_library/python/math/geometry.py
+    - icon: ':warning:'
+      path: algorithm_library/python/math/line.py
+      title: algorithm_library/python/math/line.py
+    - icon: ':warning:'
+      path: algorithm_library/python/math/line_int.py
+      title: algorithm_library/python/math/line_int.py
     - icon: ':warning:'
       path: algorithm_library/python/math/mobius.py
       title: algorithm_library/python/math/mobius.py
@@ -340,8 +364,14 @@ data:
       path: algorithm_library/python/techniques/MegruBisect.py
       title: algorithm_library/python/techniques/MegruBisect.py
     - icon: ':warning:'
+      path: algorithm_library/python/techniques/Rotate.py
+      title: algorithm_library/python/techniques/Rotate.py
+    - icon: ':warning:'
       path: algorithm_library/python/techniques/RunLengthCompression.py
       title: algorithm_library/python/techniques/RunLengthCompression.py
+    - icon: ':warning:'
+      path: algorithm_library/python/techniques/c_is_buween_a_to_b.py
+      title: algorithm_library/python/techniques/c_is_buween_a_to_b.py
     - icon: ':warning:'
       path: algorithm_library/python/techniques/imos.py
       title: algorithm_library/python/techniques/imos.py
