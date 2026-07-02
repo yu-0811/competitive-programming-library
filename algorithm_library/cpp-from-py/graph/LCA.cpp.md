@@ -55,7 +55,7 @@ data:
   isVerificationFile: false
   path: algorithm_library/cpp-from-py/graph/LCA.cpp
   requiredBy: []
-  timestamp: '2026-07-02 14:15:44+09:00'
+  timestamp: '2026-07-02 14:44:59+09:00'
   verificationStatus: LIBRARY_NO_TESTS
   verifiedWith: []
 documentation_of: algorithm_library/cpp-from-py/graph/LCA.cpp

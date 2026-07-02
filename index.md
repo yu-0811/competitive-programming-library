@@ -10,6 +10,12 @@ data:
       path: algorithm_library/cpp/Mos_algorithm.cpp
       title: algorithm_library/cpp/Mos_algorithm.cpp
     - icon: ':warning:'
+      path: algorithm_library/cpp/Polygon.cpp
+      title: algorithm_library/cpp/Polygon.cpp
+    - icon: ':warning:'
+      path: algorithm_library/cpp/Polygon_int.cpp
+      title: algorithm_library/cpp/Polygon_int.cpp
+    - icon: ':warning:'
       path: algorithm_library/cpp/RangeFactorize.cpp
       title: algorithm_library/cpp/RangeFactorize.cpp
     - icon: ':warning:'
@@ -30,6 +36,9 @@ data:
     - icon: ':warning:'
       path: algorithm_library/cpp/doubing.cpp
       title: algorithm_library/cpp/doubing.cpp
+    - icon: ':warning:'
+      path: algorithm_library/cpp/geometry3d.cpp
+      title: algorithm_library/cpp/geometry3d.cpp
     - icon: ':warning:'
       path: algorithm_library/cpp/hash.cpp
       title: algorithm_library/cpp/hash.cpp
@@ -297,6 +306,12 @@ data:
       path: algorithm_library/python/math/PIE.py
       title: algorithm_library/python/math/PIE.py
     - icon: ':warning:'
+      path: algorithm_library/python/math/Polygon.py
+      title: algorithm_library/python/math/Polygon.py
+    - icon: ':warning:'
+      path: algorithm_library/python/math/Polygon_int.py
+      title: algorithm_library/python/math/Polygon_int.py
+    - icon: ':warning:'
       path: algorithm_library/python/math/Triangle.py
       title: algorithm_library/python/math/Triangle.py
     - icon: ':warning:'
@@ -317,6 +332,9 @@ data:
     - icon: ':warning:'
       path: algorithm_library/python/math/geometry.py
       title: algorithm_library/python/math/geometry.py
+    - icon: ':warning:'
+      path: algorithm_library/python/math/geometry3d.py
+      title: algorithm_library/python/math/geometry3d.py
     - icon: ':warning:'
       path: algorithm_library/python/math/line.py
       title: algorithm_library/python/math/line.py
