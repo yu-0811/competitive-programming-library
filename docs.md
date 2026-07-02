@@ -32,7 +32,7 @@
 ### 整数
 - extGCD.py
     - ax + by = gcd(a,b) を満たす (x,y) を求める
-    - ax ≡ 1 (mod m) を満たす x (a の逆元) を求める
+    - ax ≡ 1 (mod m) を満たす x (a の逆元) を求める 
     - ax ≡ b (mod m) を満たす x を求める
     - x ≡ B[i] (mod M[i]) を満たす x ≡ r (mod lcm(M)) を求める
 
