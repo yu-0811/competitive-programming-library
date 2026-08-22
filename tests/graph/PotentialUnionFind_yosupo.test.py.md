@@ -21,18 +21,20 @@ data:
     , line 96, in bundle\n    raise NotImplementedError\nNotImplementedError\n"
   code: "# verification-helper: PROBLEM https://judge.yosupo.jp/problem/unionfind_with_potential\n\
     \nfrom algorithm_library.python.graph.PotentialUnionFind import PotentialUnionFind\n\
-    \nimport sys\ndef input():return sys.stdin.readline().rstrip()\nmod = 998244353\n\
-    \nN,Q = map(int,input().split())\nuf = PotentialUnionFind(N)\nfor _ in range(Q):\n\
-    \  t,*P = map(int,input().split())\n  if t==0:\n    u,v,x = P\n    res = uf.dist(v,u)\n\
-    \    if res!=uf.inf and res%mod!=x:\n      print(0)\n    else:\n      print(1)\n\
-    \      uf.union(v,u,x)\n  else:\n    u,v = P\n    res = uf.dist(v,u)\n    if res!=uf.inf:\
-    \ print(res%mod)\n    else: print(-1)"
+    \nimport sys\n\n\ndef input():\n    return sys.stdin.readline().rstrip()\n\n\n\
+    mod = 998244353\n\nN, Q = map(int, input().split())\nuf = PotentialUnionFind(N)\n\
+    for _ in range(Q):\n    t, *P = map(int, input().split())\n    if t == 0:\n  \
+    \      u, v, x = P\n        res = uf.dist(v, u)\n        if res != uf.inf and\
+    \ res % mod != x:\n            print(0)\n        else:\n            print(1)\n\
+    \            uf.union(v, u, x)\n    else:\n        u, v = P\n        res = uf.dist(v,\
+    \ u)\n        if res != uf.inf:\n            print(res % mod)\n        else:\n\
+    \            print(-1)\n"
   dependsOn:
   - algorithm_library/python/graph/PotentialUnionFind.py
   isVerificationFile: true
   path: tests/graph/PotentialUnionFind_yosupo.test.py
   requiredBy: []
-  timestamp: '2026-07-02 14:44:59+09:00'
+  timestamp: '2026-08-23 01:04:14+09:00'
   verificationStatus: TEST_ACCEPTED
   verifiedWith: []
 documentation_of: tests/graph/PotentialUnionFind_yosupo.test.py

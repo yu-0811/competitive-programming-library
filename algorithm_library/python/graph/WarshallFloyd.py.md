@@ -17,17 +17,19 @@ data:
   code: "# \u30BF\u30A4\u30D7\u6570\u524A\u6E1B\u3001\u4F59\u8A08\u306A\u3053\u3068\
     \u3092\u8003\u3048\u306A\u304F\u3066\u3044\u3044\u3088\u3046\u306B\u3001inf,N,G\
     \ \u306F\u30B0\u30ED\u30FC\u30D0\u30EB\u5909\u6570\n# \u30B0\u30E9\u30D5\u306F\
-    \ 1-index\n\ndef WarshallFloyd():\n  dist = [[inf]*(N+1) for _ in range(N+1)]\n\
-    \  for i in range(N+1): dist[i][i] = 0\n  for i in range(1,N+1):\n    for j,c\
-    \ in G[i]:\n      if dist[i][j]>c: dist[i][j] = c\n      if dist[j][i]>c: dist[i][j]\
-    \ = c\n  \n  for k in range(1,N+1):\n    for i in range(1,N+1):\n      for j in\
-    \ range(1,N+1):\n        if i==j: continue\n        if dist[i][j]>dist[i][k]+dist[k][j]:\n\
-    \          dist[i][j] = dist[i][k]+dist[k][j]\n  \n  return dist"
+    \ 1-index\n\n\ndef WarshallFloyd():\n    dist = [[inf] * (N + 1) for _ in range(N\
+    \ + 1)]\n    for i in range(N + 1):\n        dist[i][i] = 0\n    for i in range(1,\
+    \ N + 1):\n        for j, c in G[i]:\n            if dist[i][j] > c:\n       \
+    \         dist[i][j] = c\n            if dist[j][i] > c:\n                dist[i][j]\
+    \ = c\n\n    for k in range(1, N + 1):\n        for i in range(1, N + 1):\n  \
+    \          for j in range(1, N + 1):\n                if i == j:\n           \
+    \         continue\n                if dist[i][j] > dist[i][k] + dist[k][j]:\n\
+    \                    dist[i][j] = dist[i][k] + dist[k][j]\n\n    return dist\n"
   dependsOn: []
   isVerificationFile: false
   path: algorithm_library/python/graph/WarshallFloyd.py
   requiredBy: []
-  timestamp: '2026-07-02 14:44:59+09:00'
+  timestamp: '2026-08-23 01:04:14+09:00'
   verificationStatus: LIBRARY_NO_TESTS
   verifiedWith: []
 documentation_of: algorithm_library/python/graph/WarshallFloyd.py

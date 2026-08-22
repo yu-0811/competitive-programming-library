@@ -17,12 +17,12 @@ data:
     \  File \"/opt/hostedtoolcache/Python/3.11.0/x64/lib/python3.11/site-packages/onlinejudge_verify/languages/python.py\"\
     , line 96, in bundle\n    raise NotImplementedError\nNotImplementedError\n"
   code: "# verification-helper: PROBLEM https://judge.yosupo.jp/problem/unionfind\n\
-    import sys\ninput = sys.stdin.buffer.readline\n\nfrom algorithm_library.python.graph.UnionFind\
-    \ import UnionFind\n\ndef main() -> None:\n    N, Q = map(int, input().split())\n\
+    import sys\n\ninput = sys.stdin.buffer.readline\n\nfrom algorithm_library.python.graph.UnionFind\
+    \ import UnionFind\n\n\ndef main() -> None:\n    N, Q = map(int, input().split())\n\
     \    uft = UnionFind(N + 1)\n    for _ in range(Q):\n        t, u, v = map(int,\
     \ input().split())\n        if t == 0:\n            uft.union(u, v)\n        else:\n\
     \            print(int(uft.isSame(u, v)))\n\n\nif __name__ == \"__main__\":\n\
-    \    main()"
+    \    main()\n"
   dependsOn: []
   isVerificationFile: true
   path: tests/graph/unionFind_yosupo.test.py

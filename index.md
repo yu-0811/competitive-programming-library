@@ -239,6 +239,11 @@ data:
     - icon: ':warning:'
       path: algorithm_library/python/data-structure/TwoWayList.py
       title: algorithm_library/python/data-structure/TwoWayList.py
+  - name: algorithm_library/python/gen
+    pages:
+    - icon: ':warning:'
+      path: algorithm_library/python/gen/graph.py
+      title: algorithm_library/python/gen/graph.py
   - name: algorithm_library/python/graph
     pages:
     - icon: ':warning:'

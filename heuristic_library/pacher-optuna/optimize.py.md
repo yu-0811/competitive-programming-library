@@ -17,7 +17,7 @@ data:
     \  File \"/opt/hostedtoolcache/Python/3.11.0/x64/lib/python3.11/site-packages/onlinejudge_verify/languages/python.py\"\
     , line 96, in bundle\n    raise NotImplementedError\nNotImplementedError\n"
   code: "import json\nimport math\nimport os\nimport subprocess\nfrom typing import\
-    \ Any\n\nimport optuna\nimport optunahub\nimport optuna.visualization\n\n# TODO:\
+    \ Any\n\nimport optuna\nimport optunahub\nimport optuna.visualization\n\n\n# TODO:\
     \ Write parameter suggestions here\ndef generate_params(trial: optuna.trial.Trial)\
     \ -> dict[str, str]:\n    # for more information, see https://optuna.readthedocs.io/en/stable/reference/generated/optuna.trial.Trial.html\n\
     \    params = {\n        \"start_temp\": str(trial.suggest_float(\"start_temp\"\
@@ -65,10 +65,10 @@ data:
     \    return sum(scores) / len(scores)\n\n        return sum(scores) / len(scores)\n\
     \n\nstudy = optuna.create_study(\n    direction=get_direction(),\n    study_name=\"\
     optuna-study\",\n    pruner=optuna.pruners.WilcoxonPruner(),\n    sampler=optunahub.load_module(\n\
-    \        \"samplers/auto_sampler\"\n    ).AutoSampler()  # \u5185\u90E8\u3067\u30A2\
-    \u30EB\u30B4\u30EA\u30BA\u30E0\u3092\u81EA\u52D5\u9078\u629E\n)\n\n# pacher \u306E\
-    \u30C9\u30AD\u30E5\u30E1\u30F3\u30C8\u901A\u308A\n# \u3053\u3063\u3061\u306E\u65B9\
-    \u304C\u901F\u3044?\n# study = optuna.create_study(\n#     direction=get_direction(),\n\
+    \        \"samplers/auto_sampler\"\n    ).AutoSampler(),  # \u5185\u90E8\u3067\
+    \u30A2\u30EB\u30B4\u30EA\u30BA\u30E0\u3092\u81EA\u52D5\u9078\u629E\n)\n\n# pacher\
+    \ \u306E\u30C9\u30AD\u30E5\u30E1\u30F3\u30C8\u901A\u308A\n# \u3053\u3063\u3061\
+    \u306E\u65B9\u304C\u901F\u3044?\n# study = optuna.create_study(\n#     direction=get_direction(),\n\
     #     study_name=\"optuna-study\",\n#     pruner=optuna.pruners.WilcoxonPruner(),\n\
     #     sampler=optuna.samplers.TPESampler(),\n# )\n\nrun_optimization(study)\n\n\
     print(f\"best params = {study.best_params}\")\nprint(f\"best score  = {study.best_value}\"\
@@ -86,7 +86,7 @@ data:
     \u5024\u30D7\u30ED\u30C3\u30C8 (Pruning\u306E\u69D8\u5B50\u3092\u78BA\u8A8D)\n\
     fig_intermediate = optuna.visualization.plot_intermediate_values(study)\nfig_intermediate.write_image(os.path.join(output_dir,\
     \ \"intermediate_values.png\"))\n\nprint(f\"Visualization files saved as PNG in\
-    \ '{output_dir}' directory.\")"
+    \ '{output_dir}' directory.\")\n"
   dependsOn: []
   isVerificationFile: false
   path: heuristic_library/pacher-optuna/optimize.py

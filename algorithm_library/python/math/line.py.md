@@ -15,7 +15,7 @@ data:
     \  File \"/opt/hostedtoolcache/Python/3.11.0/x64/lib/python3.11/site-packages/onlinejudge_verify/languages/python.py\"\
     , line 96, in bundle\n    raise NotImplementedError\nNotImplementedError\n"
   code: "import math\n\neps = 1e-10\nINF = 10**18\n\nPoint = tuple[float, float]\n\
-    Line = tuple[Point, Point]\n\n# \u88DC\u52A9\u95A2\u6570\n# \u8AA4\u5DEE\u4ED8\
+    Line = tuple[Point, Point]\n\n\n# \u88DC\u52A9\u95A2\u6570\n# \u8AA4\u5DEE\u4ED8\
     \u304D\u3067\u7B26\u53F7\u3092\u8FD4\u3059\u3002\u6B63: 1, \u8CA0: -1, \u307B\u307C\
     \ 0: 0\ndef sgn(x: float) -> int:\n    if x > eps:\n        return 1\n    if x\
     \ < -eps:\n        return -1\n    return 0\n\n\n# 2\u70B9\u30FB2\u30D9\u30AF\u30C8\
@@ -51,10 +51,10 @@ data:
     \ sub(b, a)\n    ac = sub(c, a)\n    cr = cross(ab, ac)\n    if cr > eps:\n  \
     \      return 1\n    if cr < -eps:\n        return -1\n    if dot(ab, ac) < -eps:\n\
     \        return 2\n    if norm(ab) < norm(ac) - eps:\n        return -2\n    return\
-    \ 0\n\n#/////////////////////////////////////////////\n\n# \u70B9 p \u304C\u76F4\
-    \u7DDA l \u4E0A\u306B\u3042\u308B\u304B\ndef point_on_line(p: Point, l: Line)\
-    \ -> bool:\n    return abs(cross(sub(p, l[0]), vec(l))) < eps\n\n\n# \u70B9 p\
-    \ \u304C\u7DDA\u5206 l \u4E0A\u306B\u3042\u308B\u304B\ndef point_on_segment(p:\
+    \ 0\n\n\n# /////////////////////////////////////////////\n\n\n# \u70B9 p \u304C\
+    \u76F4\u7DDA l \u4E0A\u306B\u3042\u308B\u304B\ndef point_on_line(p: Point, l:\
+    \ Line) -> bool:\n    return abs(cross(sub(p, l[0]), vec(l))) < eps\n\n\n# \u70B9\
+    \ p \u304C\u7DDA\u5206 l \u4E0A\u306B\u3042\u308B\u304B\ndef point_on_segment(p:\
     \ Point, l: Line) -> bool:\n    return point_on_line(p, l) and dot(sub(p, l[0]),\
     \ sub(p, l[1])) < eps\n\n\n# \u70B9 p \u304B\u3089\u76F4\u7DDA l \u3078\u4E0B\u308D\
     \u3057\u305F\u5782\u7DDA\u306E\u8DB3\ndef projection(p: Point, l: Line) -> Point:\n\
@@ -88,7 +88,7 @@ data:
   isVerificationFile: false
   path: algorithm_library/python/math/line.py
   requiredBy: []
-  timestamp: '2026-07-02 14:44:59+09:00'
+  timestamp: '2026-08-23 01:04:14+09:00'
   verificationStatus: LIBRARY_NO_TESTS
   verifiedWith: []
 documentation_of: algorithm_library/python/math/line.py

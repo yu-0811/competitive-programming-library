@@ -17,10 +17,10 @@ data:
     \  File \"/opt/hostedtoolcache/Python/3.11.0/x64/lib/python3.11/site-packages/onlinejudge_verify/languages/python.py\"\
     , line 96, in bundle\n    raise NotImplementedError\nNotImplementedError\n"
   code: "# verification-helper: PROBLEM https://judge.yosupo.jp/problem/scc\nimport\
-    \ sys\ninput = sys.stdin.buffer.readline\n\nfrom algorithm_library.python.graph.SCC\
-    \ import SCC\n\nN,M = map(int,input().split())\nscc = SCC(N)\nfor _ in range(M):\n\
-    \  a,b = map(int,input().split())\n  scc.addEdge(a,b)\n\ngroups = scc.build_scc()\n\
-    print(len(groups))\nfor ans in groups:\n  print(len(ans),*ans)"
+    \ sys\n\ninput = sys.stdin.buffer.readline\n\nfrom algorithm_library.python.graph.SCC\
+    \ import SCC\n\nN, M = map(int, input().split())\nscc = SCC(N)\nfor _ in range(M):\n\
+    \    a, b = map(int, input().split())\n    scc.addEdge(a, b)\n\ngroups = scc.build_scc()\n\
+    print(len(groups))\nfor ans in groups:\n    print(len(ans), *ans)\n"
   dependsOn: []
   isVerificationFile: true
   path: tests/graph/scc_yosupo.test.py

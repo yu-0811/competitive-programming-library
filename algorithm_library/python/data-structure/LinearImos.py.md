@@ -40,12 +40,12 @@ data:
     \            s += self.cons[i]\n                res[i] = c * i + s\n        else:\n\
     \            mod = self.mod\n            for i in range(self.n):\n           \
     \     c = (c + self.coef[i]) % mod\n                s = (s + self.cons[i]) % mod\n\
-    \                res[i] = (c * i + s) % mod\n\n        return res"
+    \                res[i] = (c * i + s) % mod\n\n        return res\n"
   dependsOn: []
   isVerificationFile: false
   path: algorithm_library/python/data-structure/LinearImos.py
   requiredBy: []
-  timestamp: '2026-07-02 14:44:59+09:00'
+  timestamp: '2026-08-23 01:04:14+09:00'
   verificationStatus: LIBRARY_NO_TESTS
   verifiedWith: []
 documentation_of: algorithm_library/python/data-structure/LinearImos.py

@@ -51,7 +51,7 @@ data:
     \ Point, c: Point) -> int:\n    ab = sub(b, a)\n    ac = sub(c, a)\n    cr = cross(ab,\
     \ ac)\n    if cr > eps:\n        return 1\n    if cr < -eps:\n        return -1\n\
     \    if dot(ab, ac) < -eps:\n        return 2\n    if norm(ab) < norm(ac) - eps:\n\
-    \        return -2\n    return 0\n\n# \u70B9 p \u304C\u76F4\u7DDA l \u4E0A\u306B\
+    \        return -2\n    return 0\n\n\n# \u70B9 p \u304C\u76F4\u7DDA l \u4E0A\u306B\
     \u3042\u308B\u304B\ndef point_on_line(p: Point, l: Line) -> bool:\n    return\
     \ abs(cross(sub(p, l[0]), vec(l))) < eps\n\n\n# \u70B9 p \u304C\u7DDA\u5206 l\
     \ \u4E0A\u306B\u3042\u308B\u304B\ndef point_on_segment(p: Point, l: Line) -> bool:\n\
@@ -83,9 +83,9 @@ data:
     \ float:\n    if segment_intersect(l1, l2):\n        return 0\n    return min(\n\
     \        point_segment_distance(l1[0], l2),\n        point_segment_distance(l1[1],\
     \ l2),\n        point_segment_distance(l2[0], l1),\n        point_segment_distance(l2[1],\
-    \ l1),\n    )\n\n# /////////////////////////////////////////////\n\n# \u76F4\u7DDA\
-    \ l \u3068\u5186 c \u306E\u4EA4\u70B9\u3002\u4EA4\u70B9\u304C\u306A\u3044\u5834\
-    \u5408\u306F assert \u3067\u843D\u3068\u3059\ndef line_circle_intersection(l:\
+    \ l1),\n    )\n\n\n# /////////////////////////////////////////////\n\n\n# \u76F4\
+    \u7DDA l \u3068\u5186 c \u306E\u4EA4\u70B9\u3002\u4EA4\u70B9\u304C\u306A\u3044\
+    \u5834\u5408\u306F assert \u3067\u843D\u3068\u3059\ndef line_circle_intersection(l:\
     \ Line, c: Circle) -> tuple[Point, Point]:\n    center, radius = c\n    assert\
     \ length(vec(l)) > eps\n    p = projection(center, l)\n    d = point_line_distance(center,\
     \ l)\n    assert d <= radius + eps\n    h = math.sqrt(max(0.0, radius * radius\
@@ -136,7 +136,7 @@ data:
   isVerificationFile: false
   path: algorithm_library/python/math/circle.py
   requiredBy: []
-  timestamp: '2026-07-02 14:44:59+09:00'
+  timestamp: '2026-08-23 01:04:14+09:00'
   verificationStatus: LIBRARY_NO_TESTS
   verifiedWith: []
 documentation_of: algorithm_library/python/math/circle.py
