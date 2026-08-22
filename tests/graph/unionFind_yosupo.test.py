@@ -1,8 +1,10 @@
 # verification-helper: PROBLEM https://judge.yosupo.jp/problem/unionfind
 import sys
+
 input = sys.stdin.buffer.readline
 
 from algorithm_library.python.graph.UnionFind import UnionFind
+
 
 def main() -> None:
     N, Q = map(int, input().split())

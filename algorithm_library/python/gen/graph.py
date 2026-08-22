@@ -1,8 +1,9 @@
 # 単純連結無効グラフの生成
-from random import randint,shuffle
+from random import randint, shuffle
 from collections import defaultdict
 
-class UnionFind():
+
+class UnionFind:
     def __init__(self, n):
         self.n = n
         # 各頂点の親(1個上の要素)を記入
@@ -16,27 +17,33 @@ class UnionFind():
     # 経路圧縮によってこの関数が返す値は変わらない(根を返すから)
     # O(α(N))
     def root(self, x):
-        if self.parents[x] < 0: return x # xが根ならxを返す
+        if self.parents[x] < 0:
+            return x  # xが根ならxを返す
         else:
-            self.parents[x] = self.root(self.parents[x]) # 経路圧縮
+            self.parents[x] = self.root(self.parents[x])  # 経路圧縮
             return self.parents[x]
 
     # マージ後の根を返す O(α(N))
     def union(self, x, y):
-        x = self.root(x); y = self.root(y)
-        if x == y: return x # x,y が同じグループならなにもしない
+        x = self.root(x)
+        y = self.root(y)
+        if x == y:
+            return x  # x,y が同じグループならなにもしない
         # x,y は根であり、parents の値*-1 がその木のサイズ(要素数)
         # サイズが小さい方につなげる (union by size)
-        if self.parents[x] > self.parents[y]: x, y = y, x # x が小さい方になるようにする
-        self.parents[x] += self.parents[y] # サイズを更新
+        if self.parents[x] > self.parents[y]:
+            x, y = y, x  # x が小さい方になるようにする
+        self.parents[x] += self.parents[y]  # サイズを更新
         self.parents[y] = x
         return x
 
     # 要素xが属するグループの要素数を返す O(α(N))
-    def size(self, x): return -self.parents[self.root(x)]
+    def size(self, x):
+        return -self.parents[self.root(x)]
 
     # x,yが同じグループか(連結か)を返す関数 O(α(N))
-    def isSame(self, x, y): return self.root(x) == self.root(y)
+    def isSame(self, x, y):
+        return self.root(x) == self.root(y)
 
     # xが属するグループの要素をリストで返す O(N)
     def members(self, x):
@@ -44,10 +51,13 @@ class UnionFind():
         return [i for i in range(self.n) if self.root(i) == root]
 
     # すべての根の要素をリストで返す O(N)
-    def roots(self): return [i for i, x in enumerate(self.parents) if x < 0]
+    def roots(self):
+        return [i for i, x in enumerate(self.parents) if x < 0]
 
     # グループの数を返す O(N)
-    def group_count(self): return len(self.roots())
+    def group_count(self):
+        return len(self.roots())
+
     # すべてのグループをリストで返す O(N)
     def all_group_members(self):
         group_members = defaultdict(list)
@@ -56,28 +66,30 @@ class UnionFind():
             group_members[root].append(i)
         return list(group_members.values())
 
-N = randint(3,10)
+
+N = randint(3, 10)
 M = []
-uf = UnionFind(N+1)
+uf = UnionFind(N + 1)
 
 # すべての辺を列挙
 E = []
-for i in range(1,N):
-    for j in range(i+1,N+1):
-        E.append((i,j))
+for i in range(1, N):
+    for j in range(i + 1, N + 1):
+        E.append((i, j))
 shuffle(E)
 
 # 全域木を構成
-for a,b in E:
-    if uf.isSame(a,b): continue
-    uf.union(a,b)
-    M.append((a,b))
+for a, b in E:
+    if uf.isSame(a, b):
+        continue
+    uf.union(a, b)
+    M.append((a, b))
 
 # ランダムに辺を追加する
-for a,b in E:
-    if (a,b) not in M and randint(0,1):
-        M.append((a,b))
+for a, b in E:
+    if (a, b) not in M and randint(0, 1):
+        M.append((a, b))
 
-print(N,len(M))
-for a,b in M:
-    print(a,b)
+print(N, len(M))
+for a, b in M:
+    print(a, b)

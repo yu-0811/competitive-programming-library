@@ -1,6 +1,7 @@
-def modDiv(P,Q,mod): # P/Q mod m
-    denominator = pow(Q,-1,mod) # Q が同じなら前計算したほうが速い
-    return P*denominator%mod
+def modDiv(P, Q, mod):  # P/Q mod m
+    denominator = pow(Q, -1, mod)  # Q が同じなら前計算したほうが速い
+    return P * denominator % mod
+
 
 def max_leq_congruent(R: int, r: int, m: int) -> int:
     """R 以下で r ≡ x (mod m) を満たす最大の整数 x を求める"""

@@ -1,5 +1,6 @@
 # 約数系包除に使うやつ系
 
+
 class eratosthenes:
     def __init__(self, MAX: int):
         """
@@ -7,8 +8,8 @@ class eratosthenes:
         """
         self.MAX = MAX
         self.isprime = [True] * (MAX + 1)
-        self.mebius = [1] * (MAX + 1) # メビウス関数
-        self.min_factor = [-1] * (MAX + 1) # 最小の素因数
+        self.mebius = [1] * (MAX + 1)  # メビウス関数
+        self.min_factor = [-1] * (MAX + 1)  # 最小の素因数
 
         self.isprime[0] = self.isprime[1] = False
         self.min_factor[0], self.min_factor[1] = 0, 1

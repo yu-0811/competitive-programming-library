@@ -8,6 +8,7 @@ import optuna
 import optunahub
 import optuna.visualization
 
+
 # TODO: Write parameter suggestions here
 def generate_params(trial: optuna.trial.Trial) -> dict[str, str]:
     # for more information, see https://optuna.readthedocs.io/en/stable/reference/generated/optuna.trial.Trial.html
@@ -119,7 +120,7 @@ study = optuna.create_study(
     pruner=optuna.pruners.WilcoxonPruner(),
     sampler=optunahub.load_module(
         "samplers/auto_sampler"
-    ).AutoSampler()  # 内部でアルゴリズムを自動選択
+    ).AutoSampler(),  # 内部でアルゴリズムを自動選択
 )
 
 # pacher のドキュメント通り

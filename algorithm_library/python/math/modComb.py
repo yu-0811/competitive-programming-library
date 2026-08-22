@@ -3,27 +3,34 @@
 # 前計算 O(n)
 # O(1) で nCk, nHk を返す
 class Comb:
-  def __init__(self,n,mod):
-    self.mod = mod
-    self.n = n
-    self.fact = [1, 1] 
-    self.factinv = [1, 1]  
-    self.inv = [0, 1] 
-    for i in range(2,self.n+1):
-        self.fact.append((self.fact[i-1] * i) % self.mod)
-        self.inv.append((self.mod-self.inv[self.mod % i] * (self.mod // i)) % self.mod)
-        self.factinv.append((self.factinv[i-1] * self.inv[i]) % self.mod)
-        
-  def C(self,n,k): # nCk % modを返す
-    assert n <= self.n
-    if (k < 0 or n < 0) or (n < k):return 0
-    if k==1: return n
-    k = min(k,n-k)
-    return self.fact[n]*self.factinv[k]%self.mod*self.factinv[n-k]%self.mod
+    def __init__(self, n, mod):
+        self.mod = mod
+        self.n = n
+        self.fact = [1, 1]
+        self.factinv = [1, 1]
+        self.inv = [0, 1]
+        for i in range(2, self.n + 1):
+            self.fact.append((self.fact[i - 1] * i) % self.mod)
+            self.inv.append(
+                (self.mod - self.inv[self.mod % i] * (self.mod // i)) % self.mod
+            )
+            self.factinv.append((self.factinv[i - 1] * self.inv[i]) % self.mod)
 
-  # 重複組合せ nHr % modを返す
-  def H(self,n,r):
-      return self.C(n+r-1,r)
+    def C(self, n, k):  # nCk % modを返す
+        assert n <= self.n
+        if (k < 0 or n < 0) or (n < k):
+            return 0
+        if k == 1:
+            return n
+        k = min(k, n - k)
+        return (
+            self.fact[n] * self.factinv[k] % self.mod * self.factinv[n - k] % self.mod
+        )
+
+    # 重複組合せ nHr % modを返す
+    def H(self, n, r):
+        return self.C(n + r - 1, r)
+
 
 # O(k) 前計算
 # O(k) で nCk を計算（n が大きいときでも使える）
@@ -52,26 +59,30 @@ class Comb:
             ans *= n - i
             ans %= self.mod
         return ans * self.fact_inv[k] % self.mod
-    
+
+
 class PascalsTriangle:
     """
     パスカルの三角形で nCk を求める
     計算量: O(N^2)
     mod が素数でなくても使用可能
     """
+
     def __init__(self, N, mod):
         self.mod = mod
         self.binom = [[0] * (N + 1) for _ in range(N + 1)]
         for i in range(N + 1):
             self.binom[i][0] = 1
             for j in range(1, i + 1):
-                self.binom[i][j] = (self.binom[i - 1][j - 1] + self.binom[i - 1][j]) % mod
+                self.binom[i][j] = (
+                    self.binom[i - 1][j - 1] + self.binom[i - 1][j]
+                ) % mod
 
     def C(self, n, k):
         assert 0 <= k <= n
         return self.binom[n][k]
 
     def H(self, n, k):
-        """ 重複組合せ nHk """
+        """重複組合せ nHk"""
         assert n >= 0 and k >= 0
         return self.C(n + k - 1, k)

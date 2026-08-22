@@ -3,5 +3,7 @@ repos:
     rev: v0.1.11
     hooks:
       - id: ruff-format
+        exclude: ^tatyam_set/
       - id: ruff 
+        exclude: ^tatyam_set/
         args: [ --fix ]

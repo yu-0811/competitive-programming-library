@@ -108,6 +108,7 @@ def ccw(a: Point, b: Point, c: Point) -> int:
         return -2
     return 0
 
+
 # 点 p が直線 l 上にあるか
 def point_on_line(p: Point, l: Line) -> bool:
     return abs(cross(sub(p, l[0]), vec(l))) < eps
@@ -181,7 +182,9 @@ def segment_distance(l1: Line, l2: Line) -> float:
         point_segment_distance(l2[1], l1),
     )
 
+
 # /////////////////////////////////////////////
+
 
 # 直線 l と円 c の交点。交点がない場合は assert で落とす
 def line_circle_intersection(l: Line, c: Circle) -> tuple[Point, Point]:

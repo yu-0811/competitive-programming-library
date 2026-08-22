@@ -6,6 +6,7 @@ INF = 10**18
 Point = tuple[float, float]
 Line = tuple[Point, Point]
 
+
 # 補助関数
 # 誤差付きで符号を返す。正: 1, 負: -1, ほぼ 0: 0
 def sgn(x: float) -> int:
@@ -106,7 +107,9 @@ def ccw(a: Point, b: Point, c: Point) -> int:
         return -2
     return 0
 
-#/////////////////////////////////////////////
+
+# /////////////////////////////////////////////
+
 
 # 点 p が直線 l 上にあるか
 def point_on_line(p: Point, l: Line) -> bool:
