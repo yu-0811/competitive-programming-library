@@ -1,12 +1,4 @@
-#include <bits/stdc++.h>
-#include <cassert>
-using namespace std;
-#define rep(i, n) for (int i = 0; i < (int)(n); i++)
-#define ll long long
-using u64 = unsigned long long;
-#pragma GCC target("avx2")
-#pragma GCC optimize("O3")
-#pragma GCC optimize("unroll-loops")
+#include "template.cpp"
 
 constexpr int T = 100;
 short P[T], Q[T], R[T];

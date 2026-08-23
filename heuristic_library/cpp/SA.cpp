@@ -1,43 +1,4 @@
-#include <iostream>
-#include <vector>
-#include <algorithm>
-#include <unordered_set>
-#include <utility>
-#include <climits>
-#include <deque>
-#include <bitset>
-#include <cmath>
-#include <string>
-#include <cstdlib>
-#include <cassert>
-#include <chrono>
-#include <cstring>
-using namespace std;
-#define rep(i, n) for (int i = 0; i < (int)(n); i++)
-#define ll long long
-
-class Random {
-    static uint32_t xorshift() {
-        static uint32_t x = 123456789, y = 362436039, z = 521288629, w = 88675123; 
-        uint32_t t = x ^ (x << 11); x = y; y = z; z = w;
-        return w = (w ^ (w >> 19)) ^ (t ^ (t >> 8));
-    }
-public:
-    inline static uint32_t randrange(unsigned x) { return xorshift() % x; } // [0, x)
-    inline static uint32_t randrange(unsigned x, unsigned y) { return randrange(y - x) + x; } // [x, y)
-    inline static float random() { return (xorshift() + 0.5) * (1.0 / UINT_MAX); } // [0.0, 1.0)
-};
-
-class Timer {
-    chrono::time_point<chrono::steady_clock> start;
-public:
-    Timer() : start(chrono::steady_clock::now()) {}
-    unsigned short get_ms() { // 経過時間を返す
-        auto now_time = chrono::steady_clock::now();
-        return chrono::duration_cast<chrono::milliseconds>(now_time - start).count();
-    }
-};
-Timer timer;
+#include "template.cpp"
 
 // パラメータ ///////////////////////////////////
 #ifndef ONLINE_JUDGE

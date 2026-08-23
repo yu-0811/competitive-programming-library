@@ -1,3 +1,5 @@
+#include "template.cpp"
+
 // 一次元 Zobrist Hash
 // 盤面の長さ、盤面の値の種類数をテンプレート引数として受け取る
 // もうちょっといい感じにできそう、特に getValueIndex の部分

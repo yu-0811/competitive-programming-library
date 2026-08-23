@@ -1,3 +1,5 @@
+#include "template.cpp"
+
 // 二次元 Zobrist Hash
 // 盤面の高さと幅、駒の種類数をテンプレート引数として受け取る
 // もうちょっといい感じにできそう、特に getValueIndex の部分

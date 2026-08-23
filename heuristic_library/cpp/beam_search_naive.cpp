@@ -1,27 +1,10 @@
 /// apply_move で状態をコピーする実装
 /// apply_move の処理が State のコピーと同程度に重いときに使う
-#include <bits/stdc++.h>
-using namespace std;
+#include "template.cpp"
 
-#pragma GCC target("avx2")
-#pragma GCC optimize("O3")
-#pragma GCC optimize("unroll-loops")
-
-using u64 = unsigned long long;
 const int INF = 10000000;
 
 u64 calc_hash(const State& s);
-
-class Timer {
-    chrono::time_point<chrono::steady_clock> start;
-public:
-    Timer() : start(chrono::steady_clock::now()) {}
-    unsigned short get_ms() { // 経過時間を返す
-        auto now_time = chrono::steady_clock::now();
-        return chrono::duration_cast<chrono::milliseconds>(now_time - start).count();
-    }
-};
-Timer timer;
 
 #ifndef ONLINE_JUDGE
     constexpr int time_limit = 1990 + 1000;
@@ -70,19 +53,6 @@ struct FixedHashSet {
 };
 
 FixedHashSet visited;
-
-// Zobrist Hash
-class Random {
-    inline static u64 state = 88172645463325252ULL;
-
-public:
-    inline static uint64_t xorshift64() {
-        u64 x = state;
-        x ^= x << 7;
-        x ^= x >> 9;
-        return state = x;
-    }
-};
 
 struct ZobristHash2D {
     int H = 0;
