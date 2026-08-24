@@ -425,8 +425,8 @@ data:
       path: heuristic_library/cpp/beam_search_sabunkousin.cpp
       title: heuristic_library/cpp/beam_search_sabunkousin.cpp
     - icon: ':warning:'
-      path: heuristic_library/cpp/random.cpp
-      title: heuristic_library/cpp/random.cpp
+      path: heuristic_library/cpp/template.cpp
+      title: heuristic_library/cpp/template.cpp
   - name: heuristic_library/pacher-optuna
     pages:
     - icon: ':warning:'

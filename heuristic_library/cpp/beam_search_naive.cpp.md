@@ -1,6 +1,9 @@
 ---
 data:
-  _extendedDependsOn: []
+  _extendedDependsOn:
+  - icon: ':warning:'
+    path: heuristic_library/cpp/template.cpp
+    title: heuristic_library/cpp/template.cpp
   _extendedRequiredBy: []
   _extendedVerifiedWith: []
   _isVerificationFailed: false
@@ -11,35 +14,44 @@ data:
   bundledCode: "#line 1 \"heuristic_library/cpp/beam_search_naive.cpp\"\n/// apply_move\
     \ \u3067\u72B6\u614B\u3092\u30B3\u30D4\u30FC\u3059\u308B\u5B9F\u88C5\n/// apply_move\
     \ \u306E\u51E6\u7406\u304C State \u306E\u30B3\u30D4\u30FC\u3068\u540C\u7A0B\u5EA6\
-    \u306B\u91CD\u3044\u3068\u304D\u306B\u4F7F\u3046\n#include <bits/stdc++.h>\nusing\
-    \ namespace std;\n\n#pragma GCC target(\"avx2\")\n#pragma GCC optimize(\"O3\"\
-    )\n#pragma GCC optimize(\"unroll-loops\")\n\nusing u64 = unsigned long long;\n\
-    const int INF = 10000000;\n\nu64 calc_hash(const State& s);\n\nclass Timer {\n\
-    \    chrono::time_point<chrono::steady_clock> start;\npublic:\n    Timer() : start(chrono::steady_clock::now())\
-    \ {}\n    unsigned short get_ms() { // \u7D4C\u904E\u6642\u9593\u3092\u8FD4\u3059\
-    \n        auto now_time = chrono::steady_clock::now();\n        return chrono::duration_cast<chrono::milliseconds>(now_time\
-    \ - start).count();\n    }\n};\nTimer timer;\n\n#ifndef ONLINE_JUDGE\n    constexpr\
-    \ int time_limit = 1990 + 1000;\n#else\n    constexpr int time_limit = 1987;\n\
-    #endif\n\n// \u30D1\u30E9\u30E1\u30FC\u30BF\nconst int beam_width = 380;\n\n//\
-    \ \u30CF\u30C3\u30B7\u30E5\u7528\u306E\u30C6\u30FC\u30D6\u30EB\nstruct FixedHashSet\
-    \ {\n    static constexpr int LOG_CAP = 20;\n    static constexpr int CAP = 1\
-    \ << LOG_CAP;\n    static constexpr int MASK = CAP - 1;\n\n    array<u64, CAP>\
-    \ keys{};\n    array<uint16_t, CAP> stamps{};\n    uint16_t cur_stamp = 1;\n\n\
-    \    static u64 mix(u64 x) {\n        x += 0x9e3779b97f4a7c15ULL;\n        x =\
-    \ (x ^ (x >> 30)) * 0xbf58476d1ce4e5b9ULL;\n        x = (x ^ (x >> 27)) * 0x94d049bb133111ebULL;\n\
+    \u306B\u91CD\u3044\u3068\u304D\u306B\u4F7F\u3046\n#line 1 \"heuristic_library/cpp/template.cpp\"\
+    \n#include <bits/stdc++.h>\nusing namespace std;\n#define rep(i, n) for (int i\
+    \ = 0; i < (int)(n); i++)\nusing ll = long long;\nusing u64 = unsigned long long;\n\
+    #pragma GCC target(\"avx2\")\n#pragma GCC optimize(\"O3\")\n#pragma GCC optimize(\"\
+    unroll-loops\")\n\nclass Random {\n    static uint32_t xorshift32() {\n      \
+    \  static uint32_t x = 123456789, y = 362436039, z = 521288629, w = 88675123;\
+    \ \n        uint32_t t = x ^ (x << 11);\n        x = y; y = z; z = w;\n      \
+    \  return w = (w ^ (w >> 19)) ^ (t ^ (t >> 8));\n    }\npublic:\n    inline static\
+    \ u64 xorshift64() {\n        static u64 state = 88172645463325252ULL;\n     \
+    \   u64 x = state;\n        x ^= x << 7;\n        x ^= x >> 9;\n        return\
+    \ state = x;\n    }\n    // [0, x)\n    inline static uint32_t randrange(unsigned\
+    \ x) { return xorshift32() % x; }\n    // [x, y)\n    inline static uint32_t randrange(unsigned\
+    \ x, unsigned y) { return randrange(y - x) + x; }\n    // [0.0, 1.0)\n    inline\
+    \ static double random() { return (xorshift32() + 0.5) * (1.0 / UINT_MAX); }\n\
+    };\n\nclass Timer {\n    chrono::time_point<chrono::steady_clock> start;\npublic:\n\
+    \    Timer() : start(chrono::steady_clock::now()) {}\n    unsigned short get_ms()\
+    \ { // \u7D4C\u904E\u6642\u9593\u3092\u8FD4\u3059\n        auto now_time = chrono::steady_clock::now();\n\
+    \        return chrono::duration_cast<chrono::milliseconds>(now_time - start).count();\n\
+    \    }\n};\ninline Timer timer;\n#line 4 \"heuristic_library/cpp/beam_search_naive.cpp\"\
+    \n\nconst int INF = 10000000;\n\nu64 calc_hash(const State& s);\n\n#ifndef ONLINE_JUDGE\n\
+    \    constexpr int time_limit = 1990 + 1000;\n#else\n    constexpr int time_limit\
+    \ = 1987;\n#endif\n\n// \u30D1\u30E9\u30E1\u30FC\u30BF\nconst int beam_width =\
+    \ 380;\n\n// \u30CF\u30C3\u30B7\u30E5\u7528\u306E\u30C6\u30FC\u30D6\u30EB\nstruct\
+    \ FixedHashSet {\n    static constexpr int LOG_CAP = 20;\n    static constexpr\
+    \ int CAP = 1 << LOG_CAP;\n    static constexpr int MASK = CAP - 1;\n\n    array<u64,\
+    \ CAP> keys{};\n    array<uint16_t, CAP> stamps{};\n    uint16_t cur_stamp = 1;\n\
+    \n    static u64 mix(u64 x) {\n        x += 0x9e3779b97f4a7c15ULL;\n        x\
+    \ = (x ^ (x >> 30)) * 0xbf58476d1ce4e5b9ULL;\n        x = (x ^ (x >> 27)) * 0x94d049bb133111ebULL;\n\
     \        return x ^ (x >> 31);\n    }\n\n    void clear() {\n        ++cur_stamp;\n\
     \        if (cur_stamp == 0) {\n            stamps.fill(0);\n            cur_stamp\
     \ = 1;\n        }\n    }\n\n    bool contains_or_insert(u64 key) {\n        int\
     \ slot = static_cast<int>(mix(key) & MASK);\n        while (stamps[slot] == cur_stamp)\
     \ {\n            if (keys[slot] == key) return true;\n            slot = (slot\
     \ + 1) & MASK;\n        }\n        stamps[slot] = cur_stamp;\n        keys[slot]\
-    \ = key;\n        return false;\n    }\n};\n\nFixedHashSet visited;\n\n// Zobrist\
-    \ Hash\nclass Random {\n    inline static u64 state = 88172645463325252ULL;\n\n\
-    public:\n    inline static uint64_t xorshift64() {\n        u64 x = state;\n \
-    \       x ^= x << 7;\n        x ^= x >> 9;\n        return state = x;\n    }\n\
-    };\n\nstruct ZobristHash2D {\n    int H = 0;\n    int W = 0;\n    int kinds =\
-    \ 0;\n    vector<u64> table;\n\n    void init(int h, int w, int kind_count) {\n\
-    \        H = h;\n        W = w;\n        kinds = kind_count;\n        table.resize(static_cast<size_t>(H)\
+    \ = key;\n        return false;\n    }\n};\n\nFixedHashSet visited;\n\nstruct\
+    \ ZobristHash2D {\n    int H = 0;\n    int W = 0;\n    int kinds = 0;\n    vector<u64>\
+    \ table;\n\n    void init(int h, int w, int kind_count) {\n        H = h;\n  \
+    \      W = w;\n        kinds = kind_count;\n        table.resize(static_cast<size_t>(H)\
     \ * W * kinds);\n        for (u64& x : table) x = Random::xorshift64();\n    }\n\
     \n    inline u64 value(int r, int c, int kind) const {\n        return table[(r\
     \ * W + c) * kinds + kind];\n    }\n\n    inline void apply_change(u64& hash,\
@@ -133,35 +145,25 @@ data:
   code: "/// apply_move \u3067\u72B6\u614B\u3092\u30B3\u30D4\u30FC\u3059\u308B\u5B9F\
     \u88C5\n/// apply_move \u306E\u51E6\u7406\u304C State \u306E\u30B3\u30D4\u30FC\
     \u3068\u540C\u7A0B\u5EA6\u306B\u91CD\u3044\u3068\u304D\u306B\u4F7F\u3046\n#include\
-    \ <bits/stdc++.h>\nusing namespace std;\n\n#pragma GCC target(\"avx2\")\n#pragma\
-    \ GCC optimize(\"O3\")\n#pragma GCC optimize(\"unroll-loops\")\n\nusing u64 =\
-    \ unsigned long long;\nconst int INF = 10000000;\n\nu64 calc_hash(const State&\
-    \ s);\n\nclass Timer {\n    chrono::time_point<chrono::steady_clock> start;\n\
-    public:\n    Timer() : start(chrono::steady_clock::now()) {}\n    unsigned short\
-    \ get_ms() { // \u7D4C\u904E\u6642\u9593\u3092\u8FD4\u3059\n        auto now_time\
-    \ = chrono::steady_clock::now();\n        return chrono::duration_cast<chrono::milliseconds>(now_time\
-    \ - start).count();\n    }\n};\nTimer timer;\n\n#ifndef ONLINE_JUDGE\n    constexpr\
-    \ int time_limit = 1990 + 1000;\n#else\n    constexpr int time_limit = 1987;\n\
-    #endif\n\n// \u30D1\u30E9\u30E1\u30FC\u30BF\nconst int beam_width = 380;\n\n//\
-    \ \u30CF\u30C3\u30B7\u30E5\u7528\u306E\u30C6\u30FC\u30D6\u30EB\nstruct FixedHashSet\
-    \ {\n    static constexpr int LOG_CAP = 20;\n    static constexpr int CAP = 1\
-    \ << LOG_CAP;\n    static constexpr int MASK = CAP - 1;\n\n    array<u64, CAP>\
-    \ keys{};\n    array<uint16_t, CAP> stamps{};\n    uint16_t cur_stamp = 1;\n\n\
-    \    static u64 mix(u64 x) {\n        x += 0x9e3779b97f4a7c15ULL;\n        x =\
-    \ (x ^ (x >> 30)) * 0xbf58476d1ce4e5b9ULL;\n        x = (x ^ (x >> 27)) * 0x94d049bb133111ebULL;\n\
-    \        return x ^ (x >> 31);\n    }\n\n    void clear() {\n        ++cur_stamp;\n\
-    \        if (cur_stamp == 0) {\n            stamps.fill(0);\n            cur_stamp\
-    \ = 1;\n        }\n    }\n\n    bool contains_or_insert(u64 key) {\n        int\
-    \ slot = static_cast<int>(mix(key) & MASK);\n        while (stamps[slot] == cur_stamp)\
-    \ {\n            if (keys[slot] == key) return true;\n            slot = (slot\
-    \ + 1) & MASK;\n        }\n        stamps[slot] = cur_stamp;\n        keys[slot]\
-    \ = key;\n        return false;\n    }\n};\n\nFixedHashSet visited;\n\n// Zobrist\
-    \ Hash\nclass Random {\n    inline static u64 state = 88172645463325252ULL;\n\n\
-    public:\n    inline static uint64_t xorshift64() {\n        u64 x = state;\n \
-    \       x ^= x << 7;\n        x ^= x >> 9;\n        return state = x;\n    }\n\
-    };\n\nstruct ZobristHash2D {\n    int H = 0;\n    int W = 0;\n    int kinds =\
-    \ 0;\n    vector<u64> table;\n\n    void init(int h, int w, int kind_count) {\n\
-    \        H = h;\n        W = w;\n        kinds = kind_count;\n        table.resize(static_cast<size_t>(H)\
+    \ \"template.cpp\"\n\nconst int INF = 10000000;\n\nu64 calc_hash(const State&\
+    \ s);\n\n#ifndef ONLINE_JUDGE\n    constexpr int time_limit = 1990 + 1000;\n#else\n\
+    \    constexpr int time_limit = 1987;\n#endif\n\n// \u30D1\u30E9\u30E1\u30FC\u30BF\
+    \nconst int beam_width = 380;\n\n// \u30CF\u30C3\u30B7\u30E5\u7528\u306E\u30C6\
+    \u30FC\u30D6\u30EB\nstruct FixedHashSet {\n    static constexpr int LOG_CAP =\
+    \ 20;\n    static constexpr int CAP = 1 << LOG_CAP;\n    static constexpr int\
+    \ MASK = CAP - 1;\n\n    array<u64, CAP> keys{};\n    array<uint16_t, CAP> stamps{};\n\
+    \    uint16_t cur_stamp = 1;\n\n    static u64 mix(u64 x) {\n        x += 0x9e3779b97f4a7c15ULL;\n\
+    \        x = (x ^ (x >> 30)) * 0xbf58476d1ce4e5b9ULL;\n        x = (x ^ (x >>\
+    \ 27)) * 0x94d049bb133111ebULL;\n        return x ^ (x >> 31);\n    }\n\n    void\
+    \ clear() {\n        ++cur_stamp;\n        if (cur_stamp == 0) {\n           \
+    \ stamps.fill(0);\n            cur_stamp = 1;\n        }\n    }\n\n    bool contains_or_insert(u64\
+    \ key) {\n        int slot = static_cast<int>(mix(key) & MASK);\n        while\
+    \ (stamps[slot] == cur_stamp) {\n            if (keys[slot] == key) return true;\n\
+    \            slot = (slot + 1) & MASK;\n        }\n        stamps[slot] = cur_stamp;\n\
+    \        keys[slot] = key;\n        return false;\n    }\n};\n\nFixedHashSet visited;\n\
+    \nstruct ZobristHash2D {\n    int H = 0;\n    int W = 0;\n    int kinds = 0;\n\
+    \    vector<u64> table;\n\n    void init(int h, int w, int kind_count) {\n   \
+    \     H = h;\n        W = w;\n        kinds = kind_count;\n        table.resize(static_cast<size_t>(H)\
     \ * W * kinds);\n        for (u64& x : table) x = Random::xorshift64();\n    }\n\
     \n    inline u64 value(int r, int c, int kind) const {\n        return table[(r\
     \ * W + c) * kinds + kind];\n    }\n\n    inline void apply_change(u64& hash,\
@@ -252,11 +254,12 @@ data:
     \    return result;\n}\n\nint main() {\n    ios::sync_with_stdio(false);cin.tie(nullptr);\n\
     \    timer = Timer();\n\n    State init_state;\n    BeamSearchResult result =\
     \ run_beam_search(init_state, beam_width);\n\n    return 0;\n}\n"
-  dependsOn: []
+  dependsOn:
+  - heuristic_library/cpp/template.cpp
   isVerificationFile: false
   path: heuristic_library/cpp/beam_search_naive.cpp
   requiredBy: []
-  timestamp: '2026-08-23 01:04:14+09:00'
+  timestamp: '2026-08-24 15:06:54+09:00'
   verificationStatus: LIBRARY_NO_TESTS
   verifiedWith: []
 documentation_of: heuristic_library/cpp/beam_search_naive.cpp
