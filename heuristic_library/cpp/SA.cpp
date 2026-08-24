@@ -71,6 +71,7 @@ struct Answer {
     Score score;
     // 「Answer = WorkSpace」という代入を可能にする (演算子オーバーロード)
     Answer& operator=(const WorkSpace& sol) {
+        // score = sol.score;
         return *this;
     }
 };
