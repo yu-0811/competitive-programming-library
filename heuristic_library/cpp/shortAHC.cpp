@@ -1,4 +1,20 @@
-#include <bits/stdc++.h>
+// library: https://github.com/yu-0811/competitive-programming-library/tree/main/heuristic_library
+#include <iostream>
+#include <vector>
+#include <algorithm>
+#include <unordered_set>
+#include <utility>
+#include <climits>
+#include <deque>
+#include <set>
+#include <queue>
+#include <bitset>
+#include <cmath>
+#include <string>
+#include <cstdlib>
+#include <cassert>
+#include <chrono>
+#include <cstring>
 using namespace std;
 #define rep(i, n) for (int i = 0; i < (int)(n); i++)
 using ll = long long;
@@ -49,3 +65,13 @@ inline Timer timer;
 #else
     constexpr int time_limit = 1987;
 #endif
+
+/*
+ここに問題文を貼る
+*/
+
+int main(){
+    ios::sync_with_stdio(false); cin.tie(0);
+    timer = Timer(); // タイマー初期化
+
+}
