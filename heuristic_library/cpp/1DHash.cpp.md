@@ -23,23 +23,25 @@ data:
     \ ^= x << 7;\n        x ^= x >> 9;\n        return state = x;\n    }\n    // [0,\
     \ x)\n    inline static uint32_t randrange(unsigned x) { return xorshift32() %\
     \ x; }\n    // [x, y)\n    inline static uint32_t randrange(unsigned x, unsigned\
-    \ y) { return randrange(y - x) + x; }\n    // [0.0, 1.0)\n    inline static double\
-    \ random() { return (xorshift32() + 0.5) * (1.0 / UINT_MAX); }\n};\n\nclass Timer\
-    \ {\n    chrono::time_point<chrono::steady_clock> start;\npublic:\n    Timer()\
-    \ : start(chrono::steady_clock::now()) {}\n    unsigned short get_ms() { // \u7D4C\
-    \u904E\u6642\u9593\u3092\u8FD4\u3059\n        auto now_time = chrono::steady_clock::now();\n\
-    \        return chrono::duration_cast<chrono::milliseconds>(now_time - start).count();\n\
-    \    }\n};\ninline Timer timer;\n#line 2 \"heuristic_library/cpp/1DHash.cpp\"\n\
-    \n// \u4E00\u6B21\u5143 Zobrist Hash\n// \u76E4\u9762\u306E\u9577\u3055\u3001\u76E4\
-    \u9762\u306E\u5024\u306E\u7A2E\u985E\u6570\u3092\u30C6\u30F3\u30D7\u30EC\u30FC\
-    \u30C8\u5F15\u6570\u3068\u3057\u3066\u53D7\u3051\u53D6\u308B\n// \u3082\u3046\u3061\
-    \u3087\u3063\u3068\u3044\u3044\u611F\u3058\u306B\u3067\u304D\u305D\u3046\u3001\
-    \u7279\u306B getValueIndex \u306E\u90E8\u5206\n// LEN: \u76E4\u9762\u306E\u30B5\
-    \u30A4\u30BA\n// NumValue: \u5024\u306E\u30D0\u30EA\u30A8\u30FC\u30B7\u30E7\u30F3\
-    \u306E\u6570\uFF08\u914D\u5217\u306E\u78BA\u4FDD\u30B5\u30A4\u30BA\uFF09\n// MIN_VAL:\
-    \ \u5024\u306E\u6700\u5C0F\u5024\uFF08\u3053\u308C\u3092\u4F7F\u3063\u3066\u30AA\
-    \u30D5\u30BB\u30C3\u30C8\u3059\u308B\uFF09\ntemplate<int LEN, int NumValue, int\
-    \ MIN_VAL = 0> \nstruct ZobristHash1D {\nprivate:\n    array<array<HashType, NumValue>,\
+    \ y) { \n        assert(x < y);\n        return randrange(y - x) + x;\n    }\n\
+    \    // [0.0, 1.0)\n    inline static double random() { return (xorshift32() +\
+    \ 0.5) * (1.0 / UINT_MAX); }\n};\n\nclass Timer {\n    chrono::time_point<chrono::steady_clock>\
+    \ start;\npublic:\n    Timer() : start(chrono::steady_clock::now()) {}\n    unsigned\
+    \ short get_ms() { // \u7D4C\u904E\u6642\u9593\u3092\u8FD4\u3059\n        auto\
+    \ now_time = chrono::steady_clock::now();\n        return chrono::duration_cast<chrono::milliseconds>(now_time\
+    \ - start).count();\n    }\n};\ninline Timer timer;\n\n#ifndef ONLINE_JUDGE\n\
+    \    constexpr int time_limit = 1990 + 1000;\n#else\n    constexpr int time_limit\
+    \ = 1987;\n#endif\n#line 2 \"heuristic_library/cpp/1DHash.cpp\"\n\n// \u4E00\u6B21\
+    \u5143 Zobrist Hash\n// \u76E4\u9762\u306E\u9577\u3055\u3001\u76E4\u9762\u306E\
+    \u5024\u306E\u7A2E\u985E\u6570\u3092\u30C6\u30F3\u30D7\u30EC\u30FC\u30C8\u5F15\
+    \u6570\u3068\u3057\u3066\u53D7\u3051\u53D6\u308B\n// \u3082\u3046\u3061\u3087\u3063\
+    \u3068\u3044\u3044\u611F\u3058\u306B\u3067\u304D\u305D\u3046\u3001\u7279\u306B\
+    \ getValueIndex \u306E\u90E8\u5206\n// LEN: \u76E4\u9762\u306E\u30B5\u30A4\u30BA\
+    \n// NumValue: \u5024\u306E\u30D0\u30EA\u30A8\u30FC\u30B7\u30E7\u30F3\u306E\u6570\
+    \uFF08\u914D\u5217\u306E\u78BA\u4FDD\u30B5\u30A4\u30BA\uFF09\n// MIN_VAL: \u5024\
+    \u306E\u6700\u5C0F\u5024\uFF08\u3053\u308C\u3092\u4F7F\u3063\u3066\u30AA\u30D5\
+    \u30BB\u30C3\u30C8\u3059\u308B\uFF09\ntemplate<int LEN, int NumValue, int MIN_VAL\
+    \ = 0> \nstruct ZobristHash1D {\nprivate:\n    array<array<HashType, NumValue>,\
     \ LEN> table;\n\n    // \u5024\u3092\u30A4\u30F3\u30C7\u30C3\u30AF\u30B9\u306B\
     \u5909\u63DB\n    static constexpr int getValueIndex(int value) {\n        int\
     \ index = value - MIN_VAL;\n        assert(index >= 0 && index < NumValue); \n\
@@ -117,7 +119,7 @@ data:
   isVerificationFile: false
   path: heuristic_library/cpp/1DHash.cpp
   requiredBy: []
-  timestamp: '2026-08-24 15:06:54+09:00'
+  timestamp: '2026-08-28 16:05:28+09:00'
   verificationStatus: LIBRARY_NO_TESTS
   verifiedWith: []
 documentation_of: heuristic_library/cpp/1DHash.cpp

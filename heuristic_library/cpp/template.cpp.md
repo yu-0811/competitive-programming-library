@@ -44,13 +44,15 @@ data:
     \ ^= x << 7;\n        x ^= x >> 9;\n        return state = x;\n    }\n    // [0,\
     \ x)\n    inline static uint32_t randrange(unsigned x) { return xorshift32() %\
     \ x; }\n    // [x, y)\n    inline static uint32_t randrange(unsigned x, unsigned\
-    \ y) { return randrange(y - x) + x; }\n    // [0.0, 1.0)\n    inline static double\
-    \ random() { return (xorshift32() + 0.5) * (1.0 / UINT_MAX); }\n};\n\nclass Timer\
-    \ {\n    chrono::time_point<chrono::steady_clock> start;\npublic:\n    Timer()\
-    \ : start(chrono::steady_clock::now()) {}\n    unsigned short get_ms() { // \u7D4C\
-    \u904E\u6642\u9593\u3092\u8FD4\u3059\n        auto now_time = chrono::steady_clock::now();\n\
-    \        return chrono::duration_cast<chrono::milliseconds>(now_time - start).count();\n\
-    \    }\n};\ninline Timer timer;\n"
+    \ y) { \n        assert(x < y);\n        return randrange(y - x) + x;\n    }\n\
+    \    // [0.0, 1.0)\n    inline static double random() { return (xorshift32() +\
+    \ 0.5) * (1.0 / UINT_MAX); }\n};\n\nclass Timer {\n    chrono::time_point<chrono::steady_clock>\
+    \ start;\npublic:\n    Timer() : start(chrono::steady_clock::now()) {}\n    unsigned\
+    \ short get_ms() { // \u7D4C\u904E\u6642\u9593\u3092\u8FD4\u3059\n        auto\
+    \ now_time = chrono::steady_clock::now();\n        return chrono::duration_cast<chrono::milliseconds>(now_time\
+    \ - start).count();\n    }\n};\ninline Timer timer;\n\n#ifndef ONLINE_JUDGE\n\
+    \    constexpr int time_limit = 1990 + 1000;\n#else\n    constexpr int time_limit\
+    \ = 1987;\n#endif\n"
   code: "#include <bits/stdc++.h>\nusing namespace std;\n#define rep(i, n) for (int\
     \ i = 0; i < (int)(n); i++)\nusing ll = long long;\nusing u64 = unsigned long\
     \ long;\n#pragma GCC target(\"avx2\")\n#pragma GCC optimize(\"O3\")\n#pragma GCC\
@@ -62,13 +64,15 @@ data:
     \        u64 x = state;\n        x ^= x << 7;\n        x ^= x >> 9;\n        return\
     \ state = x;\n    }\n    // [0, x)\n    inline static uint32_t randrange(unsigned\
     \ x) { return xorshift32() % x; }\n    // [x, y)\n    inline static uint32_t randrange(unsigned\
-    \ x, unsigned y) { return randrange(y - x) + x; }\n    // [0.0, 1.0)\n    inline\
-    \ static double random() { return (xorshift32() + 0.5) * (1.0 / UINT_MAX); }\n\
-    };\n\nclass Timer {\n    chrono::time_point<chrono::steady_clock> start;\npublic:\n\
-    \    Timer() : start(chrono::steady_clock::now()) {}\n    unsigned short get_ms()\
-    \ { // \u7D4C\u904E\u6642\u9593\u3092\u8FD4\u3059\n        auto now_time = chrono::steady_clock::now();\n\
-    \        return chrono::duration_cast<chrono::milliseconds>(now_time - start).count();\n\
-    \    }\n};\ninline Timer timer;\n"
+    \ x, unsigned y) { \n        assert(x < y);\n        return randrange(y - x) +\
+    \ x;\n    }\n    // [0.0, 1.0)\n    inline static double random() { return (xorshift32()\
+    \ + 0.5) * (1.0 / UINT_MAX); }\n};\n\nclass Timer {\n    chrono::time_point<chrono::steady_clock>\
+    \ start;\npublic:\n    Timer() : start(chrono::steady_clock::now()) {}\n    unsigned\
+    \ short get_ms() { // \u7D4C\u904E\u6642\u9593\u3092\u8FD4\u3059\n        auto\
+    \ now_time = chrono::steady_clock::now();\n        return chrono::duration_cast<chrono::milliseconds>(now_time\
+    \ - start).count();\n    }\n};\ninline Timer timer;\n\n#ifndef ONLINE_JUDGE\n\
+    \    constexpr int time_limit = 1990 + 1000;\n#else\n    constexpr int time_limit\
+    \ = 1987;\n#endif"
   dependsOn: []
   isVerificationFile: false
   path: heuristic_library/cpp/template.cpp
@@ -81,7 +85,7 @@ data:
   - heuristic_library/cpp/1DHash.cpp
   - heuristic_library/cpp/beam_search_naive.cpp
   - heuristic_library/cpp/beam_search_no_hash.cpp
-  timestamp: '2026-08-24 15:06:54+09:00'
+  timestamp: '2026-08-28 16:05:28+09:00'
   verificationStatus: LIBRARY_NO_TESTS
   verifiedWith: []
 documentation_of: heuristic_library/cpp/template.cpp

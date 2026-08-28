@@ -23,17 +23,19 @@ data:
     \ ^= x << 7;\n        x ^= x >> 9;\n        return state = x;\n    }\n    // [0,\
     \ x)\n    inline static uint32_t randrange(unsigned x) { return xorshift32() %\
     \ x; }\n    // [x, y)\n    inline static uint32_t randrange(unsigned x, unsigned\
-    \ y) { return randrange(y - x) + x; }\n    // [0.0, 1.0)\n    inline static double\
-    \ random() { return (xorshift32() + 0.5) * (1.0 / UINT_MAX); }\n};\n\nclass Timer\
-    \ {\n    chrono::time_point<chrono::steady_clock> start;\npublic:\n    Timer()\
-    \ : start(chrono::steady_clock::now()) {}\n    unsigned short get_ms() { // \u7D4C\
-    \u904E\u6642\u9593\u3092\u8FD4\u3059\n        auto now_time = chrono::steady_clock::now();\n\
-    \        return chrono::duration_cast<chrono::milliseconds>(now_time - start).count();\n\
-    \    }\n};\ninline Timer timer;\n#line 2 \"heuristic_library/cpp/RandomSet.cpp\"\
-    \n\n// \u8981\u7D20\u306E\u8FFD\u52A0\u3001\u524A\u9664\u3001\u30E9\u30F3\u30C0\
-    \u30E0\u53D6\u5F97\u3092 O(1) \u884C\u3046\u56FA\u5B9A\u30B5\u30A4\u30BA\u306E\
-    \u30BB\u30C3\u30C8 \n\n// ---------------------------\n// \u5024\u306E\u578B\uFF08\
-    \u4F8B: int, short, uint16_t, int16_t \u306A\u3069\uFF09\nusing ValueType = short;\n\
+    \ y) { \n        assert(x < y);\n        return randrange(y - x) + x;\n    }\n\
+    \    // [0.0, 1.0)\n    inline static double random() { return (xorshift32() +\
+    \ 0.5) * (1.0 / UINT_MAX); }\n};\n\nclass Timer {\n    chrono::time_point<chrono::steady_clock>\
+    \ start;\npublic:\n    Timer() : start(chrono::steady_clock::now()) {}\n    unsigned\
+    \ short get_ms() { // \u7D4C\u904E\u6642\u9593\u3092\u8FD4\u3059\n        auto\
+    \ now_time = chrono::steady_clock::now();\n        return chrono::duration_cast<chrono::milliseconds>(now_time\
+    \ - start).count();\n    }\n};\ninline Timer timer;\n\n#ifndef ONLINE_JUDGE\n\
+    \    constexpr int time_limit = 1990 + 1000;\n#else\n    constexpr int time_limit\
+    \ = 1987;\n#endif\n#line 2 \"heuristic_library/cpp/RandomSet.cpp\"\n\n// \u8981\
+    \u7D20\u306E\u8FFD\u52A0\u3001\u524A\u9664\u3001\u30E9\u30F3\u30C0\u30E0\u53D6\
+    \u5F97\u3092 O(1) \u884C\u3046\u56FA\u5B9A\u30B5\u30A4\u30BA\u306E\u30BB\u30C3\
+    \u30C8 \n\n// ---------------------------\n// \u5024\u306E\u578B\uFF08\u4F8B:\
+    \ int, short, uint16_t, int16_t \u306A\u3069\uFF09\nusing ValueType = short;\n\
     // (\u5024\u304C\u53D6\u308A\u5F97\u308B) \u6700\u5927\u306E\u5024\u3002\u5024\
     \u306E\u6709\u52B9\u7BC4\u56F2\u306F 0 .. MAX_VALUE\nconstexpr int MAX_VALUE =\
     \ 1020;\n// position_map \u306B\u4F7F\u3046\u30A4\u30F3\u30C7\u30C3\u30AF\u30B9\
@@ -143,7 +145,7 @@ data:
   isVerificationFile: false
   path: heuristic_library/cpp/RandomSet.cpp
   requiredBy: []
-  timestamp: '2026-08-24 15:06:54+09:00'
+  timestamp: '2026-08-28 16:05:28+09:00'
   verificationStatus: LIBRARY_NO_TESTS
   verifiedWith: []
 documentation_of: heuristic_library/cpp/RandomSet.cpp

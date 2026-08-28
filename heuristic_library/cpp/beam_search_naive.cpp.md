@@ -26,14 +26,16 @@ data:
     \   u64 x = state;\n        x ^= x << 7;\n        x ^= x >> 9;\n        return\
     \ state = x;\n    }\n    // [0, x)\n    inline static uint32_t randrange(unsigned\
     \ x) { return xorshift32() % x; }\n    // [x, y)\n    inline static uint32_t randrange(unsigned\
-    \ x, unsigned y) { return randrange(y - x) + x; }\n    // [0.0, 1.0)\n    inline\
-    \ static double random() { return (xorshift32() + 0.5) * (1.0 / UINT_MAX); }\n\
-    };\n\nclass Timer {\n    chrono::time_point<chrono::steady_clock> start;\npublic:\n\
-    \    Timer() : start(chrono::steady_clock::now()) {}\n    unsigned short get_ms()\
-    \ { // \u7D4C\u904E\u6642\u9593\u3092\u8FD4\u3059\n        auto now_time = chrono::steady_clock::now();\n\
-    \        return chrono::duration_cast<chrono::milliseconds>(now_time - start).count();\n\
-    \    }\n};\ninline Timer timer;\n#line 4 \"heuristic_library/cpp/beam_search_naive.cpp\"\
-    \n\nconst int INF = 10000000;\n\nu64 calc_hash(const State& s);\n\n#ifndef ONLINE_JUDGE\n\
+    \ x, unsigned y) { \n        assert(x < y);\n        return randrange(y - x) +\
+    \ x;\n    }\n    // [0.0, 1.0)\n    inline static double random() { return (xorshift32()\
+    \ + 0.5) * (1.0 / UINT_MAX); }\n};\n\nclass Timer {\n    chrono::time_point<chrono::steady_clock>\
+    \ start;\npublic:\n    Timer() : start(chrono::steady_clock::now()) {}\n    unsigned\
+    \ short get_ms() { // \u7D4C\u904E\u6642\u9593\u3092\u8FD4\u3059\n        auto\
+    \ now_time = chrono::steady_clock::now();\n        return chrono::duration_cast<chrono::milliseconds>(now_time\
+    \ - start).count();\n    }\n};\ninline Timer timer;\n\n#ifndef ONLINE_JUDGE\n\
+    \    constexpr int time_limit = 1990 + 1000;\n#else\n    constexpr int time_limit\
+    \ = 1987;\n#endif\n#line 4 \"heuristic_library/cpp/beam_search_naive.cpp\"\n\n\
+    const int INF = 10000000;\n\nu64 calc_hash(const State& s);\n\n#ifndef ONLINE_JUDGE\n\
     \    constexpr int time_limit = 1990 + 1000;\n#else\n    constexpr int time_limit\
     \ = 1987;\n#endif\n\n// \u30D1\u30E9\u30E1\u30FC\u30BF\nconst int beam_width =\
     \ 380;\n\n// \u30CF\u30C3\u30B7\u30E5\u7528\u306E\u30C6\u30FC\u30D6\u30EB\nstruct\
@@ -259,7 +261,7 @@ data:
   isVerificationFile: false
   path: heuristic_library/cpp/beam_search_naive.cpp
   requiredBy: []
-  timestamp: '2026-08-24 15:06:54+09:00'
+  timestamp: '2026-08-28 16:05:28+09:00'
   verificationStatus: LIBRARY_NO_TESTS
   verifiedWith: []
 documentation_of: heuristic_library/cpp/beam_search_naive.cpp

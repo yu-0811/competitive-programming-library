@@ -21,7 +21,7 @@ data:
   isVerificationFile: false
   path: algorithm_library/python/techniques/c_is_buween_a_to_b.py
   requiredBy: []
-  timestamp: '2026-08-24 15:06:54+09:00'
+  timestamp: '2026-08-28 16:05:28+09:00'
   verificationStatus: LIBRARY_NO_TESTS
   verifiedWith: []
 documentation_of: algorithm_library/python/techniques/c_is_buween_a_to_b.py
