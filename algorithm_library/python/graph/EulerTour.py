@@ -1,4 +1,4 @@
-class segtree:
+class segtree:  # すべて 0-index
     def __init__(self, V, OP, E):
         self.n = len(V)
         self.op = OP
@@ -11,6 +11,7 @@ class segtree:
         for i in range(self.size - 1, 0, -1):
             self._update(i)
 
+    # 1 点更新
     def set(self, p, x):
         assert 0 <= p and p < self.n
         p += self.size
@@ -18,6 +19,7 @@ class segtree:
         for i in range(1, self.log + 1):
             self._update(p >> i)
 
+    # 1 点加算(自分で書いた)
     def add(self, p, x):
         assert 0 <= p and p < self.n
         p += self.size
@@ -25,10 +27,12 @@ class segtree:
         for i in range(1, self.log + 1):
             self._update(p >> i)
 
+    # data[p] を返す
     def get(self, p):
         assert 0 <= p and p < self.n
         return self.data[p + self.size]
 
+    # [l,r) の演算結果を返す
     def prod(self, l, r):
         assert 0 <= l and l <= r and r <= self.n
         sml = self.e
@@ -54,7 +58,10 @@ class segtree:
 
 
 class fenwick_tree:
-    def __init__(self, N, data):
+    n = 1
+    data = [0 for i in range(n)]
+
+    def __init__(self, N):
         self.n = N
         self.data = [0 for i in range(N)]
 
@@ -92,6 +99,11 @@ class EulerTour:
         self.edge_order = []
         self.depth = [-1]
 
+        self.shift = N.bit_length()
+        self.base = 1 << self.shift
+        self.mask = self.base - 1
+
+    # 無向辺 u-v を重さ w で追加する
     def add_edge(self, u: int, v: int, w: int):
         self.edge_cnt += 1
         self.G[u].append((v, w, self.edge_cnt))
@@ -140,17 +152,12 @@ class EulerTour:
 
     def _build_lca(self):
         # lca 用のセグ木の構築
-        inf = pow(10, 18)
-        e = [inf, inf]
-
-        def operate(a, b):
-            if a[0] < b[0]:
-                return a
-            else:
-                return b
-
-        s = [[d, abs(v)] for d, v in zip(self.depth, self.vartex_order)]
-        self.lca_seg = segtree(s, operate, e)
+        e = (self.N + 1) * self.base
+        s = [
+            self.depth[i] * self.base + abs(self.vartex_order[i])
+            for i in range(len(self.vartex_order))
+        ]
+        self.lca_seg = segtree(s, min, e)
 
     def build(self, root: int):
         self.root = root
@@ -158,10 +165,6 @@ class EulerTour:
         self.depth.pop(0)
         self._build_fentree()
         self._build_lca()
-
-    # u を根とする部分木の辺のコストの和
-    def subtree_sum(self, u: int):
-        return self.fen.sum0(self._in[u] + 1)
 
     # 根から u へのパスのコストの和
     def path_sum(self, u: int):
@@ -172,7 +175,7 @@ class EulerTour:
         in_u, in_v = self._in[u], self._in[v]
         if in_u > in_v:
             in_u, in_v = in_v, in_u
-        lca_idx = self.lca_seg.prod(in_u, in_v + 1)[1]
+        lca_idx = self.lca_seg.prod(in_u, in_v + 1) & self.mask
         return lca_idx
 
     # パス u - v のコストの和
