@@ -77,15 +77,15 @@ data:
   isVerificationFile: false
   path: heuristic_library/cpp/template.cpp
   requiredBy:
-  - heuristic_library/cpp/RandomSet.cpp
-  - heuristic_library/cpp/SA.cpp
+  - heuristic_library/cpp/beam_search_sabunkousin.cpp
+  - heuristic_library/cpp/beam_search_no_hash.cpp
+  - heuristic_library/cpp/1DHash.cpp
   - heuristic_library/cpp/2Dhash.cpp
   - heuristic_library/cpp/beam_search_cand_no_copy.cpp
-  - heuristic_library/cpp/beam_search_sabunkousin.cpp
-  - heuristic_library/cpp/1DHash.cpp
+  - heuristic_library/cpp/SA.cpp
   - heuristic_library/cpp/beam_search_naive.cpp
-  - heuristic_library/cpp/beam_search_no_hash.cpp
-  timestamp: '2026-08-28 16:05:28+09:00'
+  - heuristic_library/cpp/RandomSet.cpp
+  timestamp: '2026-09-23 18:21:54+09:00'
   verificationStatus: LIBRARY_NO_TESTS
   verifiedWith: []
 documentation_of: heuristic_library/cpp/template.cpp

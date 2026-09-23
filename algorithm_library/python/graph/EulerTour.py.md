@@ -14,42 +14,48 @@ data:
     \         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n\
     \  File \"/opt/hostedtoolcache/Python/3.11.0/x64/lib/python3.11/site-packages/onlinejudge_verify/languages/python.py\"\
     , line 96, in bundle\n    raise NotImplementedError\nNotImplementedError\n"
-  code: "class segtree:\n    def __init__(self, V, OP, E):\n        self.n = len(V)\n\
-    \        self.op = OP\n        self.e = E\n        self.log = (self.n - 1).bit_length()\n\
-    \        self.size = 1 << self.log\n        self.data = [E for i in range(2 *\
-    \ self.size)]\n        for i in range(self.n):\n            self.data[self.size\
-    \ + i] = V[i]\n        for i in range(self.size - 1, 0, -1):\n            self._update(i)\n\
-    \n    def set(self, p, x):\n        assert 0 <= p and p < self.n\n        p +=\
-    \ self.size\n        self.data[p] = x\n        for i in range(1, self.log + 1):\n\
-    \            self._update(p >> i)\n\n    def add(self, p, x):\n        assert\
-    \ 0 <= p and p < self.n\n        p += self.size\n        self.data[p] += x\n \
-    \       for i in range(1, self.log + 1):\n            self._update(p >> i)\n\n\
-    \    def get(self, p):\n        assert 0 <= p and p < self.n\n        return self.data[p\
-    \ + self.size]\n\n    def prod(self, l, r):\n        assert 0 <= l and l <= r\
-    \ and r <= self.n\n        sml = self.e\n        smr = self.e\n        l += self.size\n\
+  code: "class segtree:  # \u3059\u3079\u3066 0-index\n    def __init__(self, V, OP,\
+    \ E):\n        self.n = len(V)\n        self.op = OP\n        self.e = E\n   \
+    \     self.log = (self.n - 1).bit_length()\n        self.size = 1 << self.log\n\
+    \        self.data = [E for i in range(2 * self.size)]\n        for i in range(self.n):\n\
+    \            self.data[self.size + i] = V[i]\n        for i in range(self.size\
+    \ - 1, 0, -1):\n            self._update(i)\n\n    # 1 \u70B9\u66F4\u65B0\n  \
+    \  def set(self, p, x):\n        assert 0 <= p and p < self.n\n        p += self.size\n\
+    \        self.data[p] = x\n        for i in range(1, self.log + 1):\n        \
+    \    self._update(p >> i)\n\n    # 1 \u70B9\u52A0\u7B97(\u81EA\u5206\u3067\u66F8\
+    \u3044\u305F)\n    def add(self, p, x):\n        assert 0 <= p and p < self.n\n\
+    \        p += self.size\n        self.data[p] += x\n        for i in range(1,\
+    \ self.log + 1):\n            self._update(p >> i)\n\n    # data[p] \u3092\u8FD4\
+    \u3059\n    def get(self, p):\n        assert 0 <= p and p < self.n\n        return\
+    \ self.data[p + self.size]\n\n    # [l,r) \u306E\u6F14\u7B97\u7D50\u679C\u3092\
+    \u8FD4\u3059\n    def prod(self, l, r):\n        assert 0 <= l and l <= r and\
+    \ r <= self.n\n        sml = self.e\n        smr = self.e\n        l += self.size\n\
     \        r += self.size\n        while l < r:\n            if l & 1:\n       \
     \         sml = self.op(sml, self.data[l])\n                l += 1\n         \
     \   if r & 1:\n                smr = self.op(self.data[r - 1], smr)\n        \
     \        r -= 1\n            l >>= 1\n            r >>= 1\n        return self.op(sml,\
     \ smr)\n\n    def _update(self, k):\n        self.data[k] = self.op(self.data[2\
     \ * k], self.data[2 * k + 1])\n\n    def __str__(self):\n        return str([self.get(i)\
-    \ for i in range(self.n)])\n\n\nclass fenwick_tree:\n    def __init__(self, N,\
-    \ data):\n        self.n = N\n        self.data = [0 for i in range(N)]\n\n  \
-    \  def add(self, p, x):\n        assert 0 <= p < self.n, \"0<=p<n,p={0},n={1}\"\
-    .format(p, self.n)\n        p += 1\n        while p <= self.n:\n            self.data[p\
-    \ - 1] += x\n            p += p & -p\n\n    def sum(self, l, r):\n        assert\
-    \ 0 <= l and l <= r and r <= self.n, \"0<=l<=r<=n,l={0},r={1},n={2}\".format(\n\
-    \            l, r, self.n\n        )\n        return self.sum0(r) - self.sum0(l)\n\
-    \n    def sum0(self, r):\n        s = 0\n        while r > 0:\n            s +=\
-    \ self.data[r - 1]\n            r -= r & -r\n        return s\n\n\nclass EulerTour:\n\
-    \    def __init__(self, N: int):\n        self.N = N\n        self.G = [[] for\
-    \ _ in range(N + 1)]\n        self._in = [-1] * (N + 1)  # \u5404\u9802\u70B9\u306E\
-    \u8A2A\u554F\u958B\u59CB\u6642\u523B\n        self._out = [-1] * (N + 1)  # \u5404\
-    \u9802\u70B9\u306E\u8A2A\u554F\u7D42\u4E86\u6642\u523B\n        self.edge_cnt\
-    \ = 0\n        self.edge_cost = []\n        # \u30AA\u30A4\u30E9\u30FC\u30C4\u30A2\
-    \u30FC\u3067\u306E\u8A2A\u554F\u9806\n        self.vartex_order = []\n       \
-    \ self.edge_order = []\n        self.depth = [-1]\n\n    def add_edge(self, u:\
-    \ int, v: int, w: int):\n        self.edge_cnt += 1\n        self.G[u].append((v,\
+    \ for i in range(self.n)])\n\n\nclass fenwick_tree:\n    n = 1\n    data = [0\
+    \ for i in range(n)]\n\n    def __init__(self, N):\n        self.n = N\n     \
+    \   self.data = [0 for i in range(N)]\n\n    def add(self, p, x):\n        assert\
+    \ 0 <= p < self.n, \"0<=p<n,p={0},n={1}\".format(p, self.n)\n        p += 1\n\
+    \        while p <= self.n:\n            self.data[p - 1] += x\n            p\
+    \ += p & -p\n\n    def sum(self, l, r):\n        assert 0 <= l and l <= r and\
+    \ r <= self.n, \"0<=l<=r<=n,l={0},r={1},n={2}\".format(\n            l, r, self.n\n\
+    \        )\n        return self.sum0(r) - self.sum0(l)\n\n    def sum0(self, r):\n\
+    \        s = 0\n        while r > 0:\n            s += self.data[r - 1]\n    \
+    \        r -= r & -r\n        return s\n\n\nclass EulerTour:\n    def __init__(self,\
+    \ N: int):\n        self.N = N\n        self.G = [[] for _ in range(N + 1)]\n\
+    \        self._in = [-1] * (N + 1)  # \u5404\u9802\u70B9\u306E\u8A2A\u554F\u958B\
+    \u59CB\u6642\u523B\n        self._out = [-1] * (N + 1)  # \u5404\u9802\u70B9\u306E\
+    \u8A2A\u554F\u7D42\u4E86\u6642\u523B\n        self.edge_cnt = 0\n        self.edge_cost\
+    \ = []\n        # \u30AA\u30A4\u30E9\u30FC\u30C4\u30A2\u30FC\u3067\u306E\u8A2A\
+    \u554F\u9806\n        self.vartex_order = []\n        self.edge_order = []\n \
+    \       self.depth = [-1]\n\n        self.shift = N.bit_length()\n        self.base\
+    \ = 1 << self.shift\n        self.mask = self.base - 1\n\n    # \u7121\u5411\u8FBA\
+    \ u-v \u3092\u91CD\u3055 w \u3067\u8FFD\u52A0\u3059\u308B\n    def add_edge(self,\
+    \ u: int, v: int, w: int):\n        self.edge_cnt += 1\n        self.G[u].append((v,\
     \ w, self.edge_cnt))\n        self.G[v].append((u, w, self.edge_cnt))\n\n    def\
     \ _dfs(self, v: int):\n        stack = []\n        stack.append((\"f\", v, 0,\
     \ 0))\n        while stack:\n            state, v, w, idx = stack.pop()\n    \
@@ -73,28 +79,25 @@ data:
     \    def _build_fentree(self):\n        self.fen = fenwick_tree(len(self.edge_cost))\n\
     \        for i in range(1, len(self.edge_cost)):\n            self.fen.add(i,\
     \ self.edge_cost[i])\n\n    def _build_lca(self):\n        # lca \u7528\u306E\u30BB\
-    \u30B0\u6728\u306E\u69CB\u7BC9\n        inf = pow(10, 18)\n        e = [inf, inf]\n\
-    \n        def operate(a, b):\n            if a[0] < b[0]:\n                return\
-    \ a\n            else:\n                return b\n\n        s = [[d, abs(v)] for\
-    \ d, v in zip(self.depth, self.vartex_order)]\n        self.lca_seg = segtree(s,\
-    \ operate, e)\n\n    def build(self, root: int):\n        self.root = root\n \
-    \       self._euler_tour(root)\n        self.depth.pop(0)\n        self._build_fentree()\n\
-    \        self._build_lca()\n\n    # u \u3092\u6839\u3068\u3059\u308B\u90E8\u5206\
-    \u6728\u306E\u8FBA\u306E\u30B3\u30B9\u30C8\u306E\u548C\n    def subtree_sum(self,\
-    \ u: int):\n        return self.fen.sum0(self._in[u] + 1)\n\n    # \u6839\u304B\
-    \u3089 u \u3078\u306E\u30D1\u30B9\u306E\u30B3\u30B9\u30C8\u306E\u548C\n    def\
-    \ path_sum(self, u: int):\n        return self.fen.sum0(self._in[u] + 1)\n\n \
-    \   # lca(u, v)\n    def lca(self, u: int, v: int):\n        in_u, in_v = self._in[u],\
-    \ self._in[v]\n        if in_u > in_v:\n            in_u, in_v = in_v, in_u\n\
-    \        lca_idx = self.lca_seg.prod(in_u, in_v + 1)[1]\n        return lca_idx\n\
-    \n    # \u30D1\u30B9 u - v \u306E\u30B3\u30B9\u30C8\u306E\u548C\n    def get_distance(self,\
-    \ u: int, v: int):\n        lca_idx = self.lca(u, v)\n        return self.subtree_sum(u)\
-    \ + self.subtree_sum(v) - 2 * self.subtree_sum(lca_idx)\n"
+    \u30B0\u6728\u306E\u69CB\u7BC9\n        e = (self.N + 1) * self.base\n       \
+    \ s = [\n            self.depth[i] * self.base + abs(self.vartex_order[i])\n \
+    \           for i in range(len(self.vartex_order))\n        ]\n        self.lca_seg\
+    \ = segtree(s, min, e)\n\n    def build(self, root: int):\n        self.root =\
+    \ root\n        self._euler_tour(root)\n        self.depth.pop(0)\n        self._build_fentree()\n\
+    \        self._build_lca()\n\n    # \u6839\u304B\u3089 u \u3078\u306E\u30D1\u30B9\
+    \u306E\u30B3\u30B9\u30C8\u306E\u548C\n    def path_sum(self, u: int):\n      \
+    \  return self.fen.sum0(self._in[u] + 1)\n\n    # lca(u, v)\n    def lca(self,\
+    \ u: int, v: int):\n        in_u, in_v = self._in[u], self._in[v]\n        if\
+    \ in_u > in_v:\n            in_u, in_v = in_v, in_u\n        lca_idx = self.lca_seg.prod(in_u,\
+    \ in_v + 1) & self.mask\n        return lca_idx\n\n    # \u30D1\u30B9 u - v \u306E\
+    \u30B3\u30B9\u30C8\u306E\u548C\n    def get_distance(self, u: int, v: int):\n\
+    \        lca_idx = self.lca(u, v)\n        return self.subtree_sum(u) + self.subtree_sum(v)\
+    \ - 2 * self.subtree_sum(lca_idx)\n"
   dependsOn: []
   isVerificationFile: false
   path: algorithm_library/python/graph/EulerTour.py
   requiredBy: []
-  timestamp: '2026-08-28 16:05:28+09:00'
+  timestamp: '2026-09-23 18:21:54+09:00'
   verificationStatus: LIBRARY_NO_TESTS
   verifiedWith: []
 documentation_of: algorithm_library/python/graph/EulerTour.py
