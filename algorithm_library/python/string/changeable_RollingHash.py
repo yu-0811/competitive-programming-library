@@ -114,6 +114,7 @@ class segtree:  # すべて 0-index
 class changeable_RollingHash:
     def __init__(self, S, base=1237, mod=(1 << 61) - 1):
         N = len(S)
+        self.N = N
         self.ord_base = ord("a")
         self.base = base
         self.mod = mod
