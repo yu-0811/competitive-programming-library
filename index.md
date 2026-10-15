@@ -398,6 +398,11 @@ data:
     - icon: ':warning:'
       path: algorithm_library/python/techniques/imos.py
       title: algorithm_library/python/techniques/imos.py
+  - name: algorithm_library/python
+    pages:
+    - icon: ':warning:'
+      path: algorithm_library/python/template.py
+      title: algorithm_library/python/template.py
   - name: heuristic_library/cpp
     pages:
     - icon: ':warning:'

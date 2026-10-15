@@ -34,7 +34,7 @@ data:
   isVerificationFile: true
   path: tests/graph/PotentialUnionFind_yosupo.test.py
   requiredBy: []
-  timestamp: '2026-09-23 18:21:54+09:00'
+  timestamp: '2026-10-15 18:18:06+09:00'
   verificationStatus: TEST_ACCEPTED
   verifiedWith: []
 documentation_of: tests/graph/PotentialUnionFind_yosupo.test.py
