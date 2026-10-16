@@ -369,6 +369,9 @@ data:
     - icon: ':warning:'
       path: algorithm_library/python/string/changeable_RollingHash.py
       title: algorithm_library/python/string/changeable_RollingHash.py
+    - icon: ':warning:'
+      path: algorithm_library/python/string/sort_by_concat.py
+      title: algorithm_library/python/string/sort_by_concat.py
   - name: algorithm_library/python/techniques
     pages:
     - icon: ':warning:'

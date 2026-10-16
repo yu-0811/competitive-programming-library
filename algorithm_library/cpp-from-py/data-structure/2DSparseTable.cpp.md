@@ -65,7 +65,7 @@ data:
   isVerificationFile: false
   path: algorithm_library/cpp-from-py/data-structure/2DSparseTable.cpp
   requiredBy: []
-  timestamp: '2026-10-15 18:18:06+09:00'
+  timestamp: '2026-10-16 13:28:30+09:00'
   verificationStatus: LIBRARY_NO_TESTS
   verifiedWith: []
 documentation_of: algorithm_library/cpp-from-py/data-structure/2DSparseTable.cpp
