@@ -5,44 +5,48 @@ class LCA:
     def __init__(self, N, G, root):
         # 根からの距離と親を求める
         self.N = N
-        self.bit = N.bit_length() + 2
-        self.parent = [[-1] * (N + 1) for _ in range(self.bit)]
-        self.parent[0][root] = -1
-        self.depth = [-1] * (N + 1)  # 根からの距離
-        self.depth[root] = 0
-        que = deque()
-        que.append(root)
+        self.bit = N.bit_length()
+        parent = self.parent = [[-1] * (N + 1) for _ in range(self.bit)]
+        depth = self.depth = [-1] * (N + 1)  # 根からの距離
+        depth[root] = 0
+        first = parent[0]
+        que = deque([root])
         while que:
             v = que.popleft()
+            d = depth[v] + 1
             for v2 in G[v]:
-                if self.depth[v2] == -1:
-                    self.depth[v2] = self.depth[v] + 1
-                    self.parent[0][v2] = v
+                if depth[v2] == -1:
+                    depth[v2] = d
+                    first[v2] = v
                     que.append(v2)
 
         # ダブリングする
         for i in range(1, self.bit):
+            prev, cur = parent[i - 1], parent[i]
             for j in range(N + 1):
-                if self.parent[i - 1][j] != -1:
-                    self.parent[i][j] = self.parent[i - 1][self.parent[i - 1][j]]
+                if prev[j] != -1:
+                    cur[j] = prev[prev[j]]
 
     # u と v の LCA を返す
     # O(log N)
     def lca(self, u, v):
+        parent, depth = self.parent, self.depth
         # 深さを同じにする
-        if self.depth[u] < self.depth[v]:
+        if depth[u] < depth[v]:
             u, v = v, u
-        for k in range(self.bit):
-            if ((self.depth[u] - self.depth[v]) >> k) & 1:
-                u = self.parent[k][u]
+        diff = depth[u] - depth[v]
+        while diff:
+            k = diff.bit_length() - 1
+            u = parent[k][u]
+            diff ^= 1 << k
         # 二分探索する
         if u == v:
             return u
-        for k in reversed(range(self.bit)):
-            if self.parent[k][u] != self.parent[k][v]:
-                u = self.parent[k][u]
-                v = self.parent[k][v]
-        return self.parent[0][u]
+        for row in reversed(parent):
+            pu, pv = row[u], row[v]
+            if pu != pv:
+                u, v = pu, pv
+        return parent[0][u]
 
     # u と v の距離を返す
     def get_distance(self, u, v):

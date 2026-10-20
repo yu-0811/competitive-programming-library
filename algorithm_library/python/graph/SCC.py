@@ -1,6 +1,3 @@
-from collections import deque
-
-
 class SCC:
     def __init__(self, N: int):
         self.N = N  # 頂点数
@@ -36,71 +33,53 @@ class SCC:
 
     # 強連結成分分解をする
     def _decomposeToSCC(self):
-        start, endList = self._toCSR(self.N, self.graphEdges)
+        N = self.N
+        start, endList = self._toCSR(N, self.graphEdges)
+        cursor = start[:-1]  # 各頂点で次に調べる辺の位置
         nowOrder = 0  # 訪れた頂点数
         groupNum = 0  # 見つかった強連結成分の数
-        pendingStack = deque()  # 探索済みかつ sccId が未確定の頂点を管理する stack
-        lowlink = [0] * self.N
-        order = [-1] * self.N  # 頂点の行きがけ順
-        groupId = [0] * self.N
+        pendingStack = []  # 探索済みかつ sccId が未確定の頂点
+        lowlink = [0] * N
+        order = [-1] * N  # 頂点の行きがけ順
+        parent = [-1] * N
+        groupId = [0] * N
 
-        def dfs(v):
-            nonlocal nowOrder, groupNum, pendingStack, lowlink, order, groupId
-            dfsStack = deque()
-            dfsStack.append(-(v + 1))
-            dfsStack.append(v)
+        for root in range(N):
+            if order[root] != -1:
+                continue
+            dfsStack = [root]
+            lowlink[root] = order[root] = nowOrder
+            nowOrder += 1
+            pendingStack.append(root)
             while dfsStack:
-                v = dfsStack.pop()
-                if v < 0:  # 帰りがけ
-                    # lowlink を更新する必要があるなら
-                    v *= -1
-                    v -= 1
-                    if v >= self.inf:
-                        frm = v // self.inf - 1
-                        to = v % self.inf
-                        # lowlink[frm] = min(lowlink[frm], lowlink[to])
-                        if lowlink[frm] > lowlink[to]:
-                            lowlink[frm] = lowlink[to]
-                        v %= self.inf
-
-                    # scc_roote なら
+                v = dfsStack[-1]
+                i = cursor[v]
+                if i < start[v + 1]:
+                    cursor[v] = i + 1
+                    to = endList[i]
+                    if order[to] == -1:
+                        parent[to] = v
+                        lowlink[to] = order[to] = nowOrder
+                        nowOrder += 1
+                        pendingStack.append(to)
+                        dfsStack.append(to)
+                    elif lowlink[v] > order[to]:
+                        lowlink[v] = order[to]
+                else:  # 帰りがけ
+                    dfsStack.pop()
                     if lowlink[v] == order[v]:
                         while True:
                             u = pendingStack.pop()
-                            order[
-                                u
-                            ] = (
-                                self.inf
-                            )  # lowlink の計算に使われないように order を更新
-                            groupId[u] = groupNum  # groupId を確定
+                            order[u] = N  # 確定した成分を lowlink の計算から除く
+                            groupId[u] = groupNum
                             if u == v:
                                 break
                         groupNum += 1
-
-                else:  # 行きがけ
-                    if order[v] != -1:
-                        continue
-                    lowlink[v] = order[v] = nowOrder
-                    nowOrder += 1
-                    pendingStack.append(v)
-                    for i in range(start[v], start[v + 1]):
-                        to = endList[i]  # v -> to の辺
-                        if order[to] == -1:  # 未探索なら
-                            dfsStack.append(
-                                -((to + 1) + (v + 1) * self.inf)
-                            )  # 0-index で壊れないように v+1 に
-                            dfsStack.append(to)
-                        # 探索済みなら back edge か cross edge
-                        else:
-                            # lowlink[v] = min(lowlink[v], order[to])
-                            if lowlink[v] > order[to]:
-                                lowlink[v] = order[to]
-
-        for v in range(self.N):
-            if order[v] == -1:
-                dfs(v)
+                    pv = parent[v]
+                    if pv != -1 and lowlink[pv] > lowlink[v]:
+                        lowlink[pv] = lowlink[v]
         # 縮約後のグラフで groupId をトポロジカルソート順にする
-        for v in range(self.N):
+        for v in range(N):
             groupId[v] = groupNum - 1 - groupId[v]
 
         return groupNum, groupId

@@ -146,9 +146,16 @@ class EulerTour:
         self._dfs(root)
 
     def _build_fentree(self):
-        self.fen = fenwick_tree(len(self.edge_cost))
-        for i in range(1, len(self.edge_cost)):
-            self.fen.add(i, self.edge_cost[i])
+        n = len(self.edge_cost)
+        self.fen = fenwick_tree(n)
+        data = self.fen.data = self.edge_cost[:]
+        if data:
+            data[0] = 0
+        # 各区間の和を親の区間に一度ずつ加え、O(n) で構築する
+        for i in range(1, n + 1):
+            j = i + (i & -i)
+            if j <= n:
+                data[j - 1] += data[i - 1]
 
     def _build_lca(self):
         # lca 用のセグ木の構築
