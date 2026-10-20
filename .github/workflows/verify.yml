@@ -12,33 +12,57 @@ on:
 jobs:
   verify:
     runs-on: ubuntu-latest
+    timeout-minutes: 130
 
     steps:
-    - uses: actions/checkout@v3
+    - uses: actions/checkout@v4
+      with:
+        fetch-depth: 0
 
     - name: Set up Python
-      uses: actions/setup-python@v4
+      uses: actions/setup-python@v5
       with:
-        python-version: 3.11.0
+        python-version: '3.11'
 
     - name: Check Library Checker submission code
       run: python3 library-checker-submitcode/generate.py --check
 
-    - name: Test Library Checker submission code
-      run: python3 -m unittest discover -s tests/library_checker -p 'test_*.py'
-
     - name: Install dependencies
-      run: pip3 install -U online-judge-verify-helper
+      run: pip3 install -r library-checker-submitcode/requirements-verify.txt
 
-    - name: Fetch gh-pages branch and merge
-      run: |
-        git fetch origin gh-pages
-        git checkout gh-pages || git checkout -b gh-pages
-        git pull origin gh-pages  # リモートの最新状態を取得
+    - name: Get Library Checker revision
+      id: library-checker-version
+      run: git ls-remote https://github.com/yosupo06/library-checker-problems.git HEAD | awk '{print "commit=" $1}' >> "$GITHUB_OUTPUT"
 
-    - name: Run tests
+    - name: Restore Library Checker cases and generators
+      id: library-checker-cache
+      uses: actions/cache/restore@v4
+      with:
+        path: |
+          .verify-helper/cache
+          ~/.cache/online-judge-tools/library-checker-problems
+        key: ${{ runner.os }}-library-checker-v1-${{ steps.library-checker-version.outputs.commit }}-${{ hashFiles('library-checker-submitcode/src/**/*.py', 'library-checker-submitcode/generate.py') }}
+        restore-keys: |
+          ${{ runner.os }}-library-checker-v1-${{ steps.library-checker-version.outputs.commit }}-
+
+    - name: Verify with official cases
       env:
         GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         YUKICODER_TOKEN: ${{ secrets.YUKICODER_TOKEN }}
+      run: oj-verify run --timeout inf
+
+    # oj-verify docs switches to gh-pages and removes the working files.
+    - name: Save Library Checker cases and generators
+      if: always() && steps.library-checker-cache.outcome == 'success' && steps.library-checker-cache.outputs.cache-hit != 'true'
+      uses: actions/cache/save@v4
+      with:
+        path: |
+          .verify-helper/cache
+          ~/.cache/online-judge-tools/library-checker-problems
+        key: ${{ steps.library-checker-cache.outputs.cache-primary-key }}
+
+    - name: Publish verification documents
+      env:
+        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         GH_PAT: ${{ secrets.GH_PAT }}
-      run: oj-verify all
+      run: oj-verify docs

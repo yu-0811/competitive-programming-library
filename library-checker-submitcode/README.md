@@ -7,7 +7,9 @@
 python3 library-checker-submitcode/generate.py
 ```
 
-たとえば `src/graph/unionfind.py` から `graph/unionfind.py` を生成します。
+たとえば `src/graph/unionfind.py` から `graph/unionfind.py` と
+`../tests/library_checker/official/graph/unionfind.test.py` を生成します。
+検証用ファイルは提出コードの先頭に `verification-helper: PROBLEM` を付けたものです。
 生成されたファイルを Library Checker に提出してください。
 提出コードを直す場合は `src/`、ライブラリを直す場合は
 `algorithm_library/python/` を編集します。
@@ -86,15 +88,24 @@ if __name__ == "__main__":
 
 ## ローカルでの確認
 
-生成コードを独立したプロセスで実行し、小さなランダムケースなどを素朴な解法と
-比較するテストを用意しています。SCC・マッチング・最長共通部分文字列は、
-答えが一意でないため、出力された解の条件と最適性を確認します。
-このテストは CI でも実行します。
+Python 3.11 と C++ コンパイラ、Git を用意し、リポジトリ直下で実行します。
+`oj-verify` が Library Checker の公式ケースを生成して検証します。
+答えが一意でない問題も、公式 checker で判定します。
+依存パッケージは、Python の依存解析の修正を含む公式リポジトリの版を
+コミット単位で固定しています。
 
 ```bash
+python3 -m pip install -r library-checker-submitcode/requirements-verify.txt
 python3 library-checker-submitcode/generate.py
-python3 -m unittest discover -s tests/library_checker -p 'test_*.py'
+oj-verify run tests/library_checker/official/graph/unionfind.test.py
 ```
 
-これはローカルでの正しさの確認です。Library Checker 上での提出・AC を記録する
-ものではなく、最大制約での実行時間やメモリ使用量までは保証しません。
+全件を検証する場合は `oj-verify run` を実行します。検証済みのコードは、
+変更がなければスキップされます。再実行したい場合はローカルの
+`.verify-helper/timestamps.local.json` を削除してください。
+
+CI も PR または main の対象コードを検証し、公式ケースと生成ツールをキャッシュします。
+初回はケースの生成と全件の検証に時間がかかります。
+ケースごとの制限時間は `oj-verify` の既定値の60秒です。
+Library Checker 上への提出や AC の記録は行わず、公式サイトと同じ時間・メモリ制限での
+通過を保証するものではありません。

@@ -3,7 +3,6 @@ import sys,math;sys.setrecursionlimit(10**9)
 # import pypyjit
 # pypyjit.set_param('max_unroll_recursion=-1')
 from collections import defaultdict,deque
-from itertools import combinations,permutations,accumulate,product
 from bisect import bisect_left,bisect_right
 from heapq import heappop,heappush,heapify
 #from more_itertools import distinct_permutations,distinct_combinations

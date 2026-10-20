@@ -1,15 +1,18 @@
 """Build standalone submissions from the template, libraries, and problem code."""
 
 import argparse
-from pathlib import Path
 import re
 import sys
-
+from pathlib import Path
 
 BASE = Path(__file__).resolve().parent
 ROOT = BASE.parent
 SOURCES = BASE / "src"
+VERIFY = ROOT / "tests/library_checker/official"
 INCLUDE = re.compile(r"^# include: (.+)$", re.MULTILINE)
+PROBLEM = re.compile(
+    r"^# problem: (https://judge\.yosupo\.jp/problem/\w+)$", re.MULTILINE
+)
 
 
 def render(source):
@@ -42,18 +45,40 @@ def main():
     )
     args = parser.parse_args()
     outdated = False
+    verification_paths = set()
     for source in sorted(SOURCES.rglob("*.py")):
-        output = BASE / source.relative_to(SOURCES)
+        relative = source.relative_to(SOURCES)
         result = render(source)
-        if output.exists() and output.read_text(encoding="utf-8") == result:
-            continue
+        problems = PROBLEM.findall(source.read_text(encoding="utf-8"))
+        if len(problems) != 1:
+            print(
+                f"Expected one # problem: URL in {source.relative_to(ROOT)}",
+                file=sys.stderr,
+            )
+            return 1
+        verification = VERIFY / relative.with_suffix(".test.py")
+        verification_paths.add(verification)
+        outputs = {
+            BASE / relative: result,
+            verification: f"# verification-helper: PROBLEM {problems[0]}\n{result}",
+        }
+        for output, content in outputs.items():
+            if output.exists() and output.read_text(encoding="utf-8") == content:
+                continue
+            if args.check:
+                print(f"outdated: {output.relative_to(ROOT)}", file=sys.stderr)
+                outdated = True
+            else:
+                output.parent.mkdir(parents=True, exist_ok=True)
+                output.write_text(content, encoding="utf-8")
+                print(f"generated: {output.relative_to(ROOT)}")
+    for obsolete in sorted(set(VERIFY.rglob("*.test.py")) - verification_paths):
         if args.check:
-            print(f"outdated: {output.relative_to(ROOT)}", file=sys.stderr)
+            print(f"obsolete: {obsolete.relative_to(ROOT)}", file=sys.stderr)
             outdated = True
         else:
-            output.parent.mkdir(parents=True, exist_ok=True)
-            output.write_text(result, encoding="utf-8")
-            print(f"generated: {output.relative_to(ROOT)}")
+            obsolete.unlink()
+            print(f"removed: {obsolete.relative_to(ROOT)}")
     if outdated:
         print("Run: python3 library-checker-submitcode/generate.py", file=sys.stderr)
         return 1

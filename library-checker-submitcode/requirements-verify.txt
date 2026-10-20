@@ -1,0 +1,4 @@
+# PyPI 5.6.0 predates the fix that limits Python dependency analysis to local files.
+online-judge-verify-helper @ https://github.com/online-judge-tools/verification-helper/archive/adbff121b1f96de5f34e9f1483eb47d661c54075.tar.gz
+# The verifier's documentation generator still imports pkg_resources.
+setuptools<81
