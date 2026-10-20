@@ -1,12 +1,13 @@
 # O(|S|)
 # Z[i] := S[0:|S|) と S[i:|S|) の最長共通接頭辞の長さ
 def z_algo(S):
-    Z = [0] * len(S)
-    Z[0] = len(S)
+    n = len(S)
+    Z = [0] * n
+    Z[0] = n
     i, j = 1, 0
-    while i < len(S):
+    while i < n:
         # 一致する限り延長する
-        while i + j < len(S) and S[j] == S[i + j]:
+        while i + j < n and S[j] == S[i + j]:
             j += 1
         Z[i] = j
 

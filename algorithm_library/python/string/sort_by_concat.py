@@ -1,12 +1,13 @@
 # O(|S|)
 # Z[i] := S[0:|S|) と S[i:|S|) の最長共通接頭辞の長さ
 def z_algo(S):
-    Z = [0] * len(S)
-    Z[0] = len(S)
+    n = len(S)
+    Z = [0] * n
+    Z[0] = n
     i, j = 1, 0
-    while i < len(S):
+    while i < n:
         # 一致する限り延長する
-        while i + j < len(S) and S[j] == S[i + j]:
+        while i + j < n and S[j] == S[i + j]:
             j += 1
         Z[i] = j
 
@@ -37,20 +38,22 @@ def sort_by_concat(T: list[str]) -> list[str]:
     T の辞書順ソートではない
     """
 
+    # Z-array は比較で必要になったときに一度だけ構築する
+    Z = [None] * len(T)
+
     # a, b の辞書順を返す
     def lexcmp(a: str, b: str) -> int:
         return (a > b) - (a < b)
 
-    def cmp(x: tuple[str, list[int]], y: tuple[str, list[int]]) -> int:
+    def cmp(x: int, y: int) -> int:
         """
         a+b < b+a なら -1, a+b == b+a なら 0, a+b > b+a なら 1
         """
-        a, za = x
-        b, zb = y
+        a, b = T[x], T[y]
         isrev = len(a) > len(b)
         if isrev:
             a, b = b, a
-            za, zb = zb, za
+            x, y = y, x
         n, m = len(a), len(b)
 
         # 1. a と b[:n]
@@ -58,6 +61,9 @@ def sort_by_concat(T: list[str]) -> list[str]:
 
         # 2, b[:m-n] と b[n:m]
         if f == 0 and n < m:
+            zb = Z[y]
+            if zb is None:
+                Z[y] = zb = z_algo(b)
             k = m - n
             lcp = min(zb[n], k)
             # b[:m-n] != b[n:m] なら lcp の直後の文字で辞書順決まる
@@ -70,8 +76,8 @@ def sort_by_concat(T: list[str]) -> list[str]:
 
         return -f if isrev else f
 
-    def merge_sort(arr: list[tuple[str, list[int]]]):
-        # arr の要素は (文字列, Z-array)
+    def merge_sort(arr: list[int]):
+        # arr の要素は T のインデックス
         if len(arr) <= 1:
             return arr
 
@@ -94,6 +100,4 @@ def sort_by_concat(T: list[str]) -> list[str]:
         res.extend(right[j:])
         return res
 
-    Z = [z_algo(t) for t in T]
-    TZ = list(zip(T, Z))
-    return [s for s, z in merge_sort(TZ)]
+    return [T[i] for i in merge_sort(list(range(len(T))))]
