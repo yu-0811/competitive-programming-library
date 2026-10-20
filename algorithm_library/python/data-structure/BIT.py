@@ -10,10 +10,18 @@ class BIT:
             idx += idx & -idx
 
     def add(self, l, r, x):  # [l,r)にxを加算
-        self._add_sub(0, l, -x * (l - 1))
-        self._add_sub(0, r, x * (r - 1))
-        self._add_sub(1, l, x)
-        self._add_sub(1, r, -x)
+        bit0, bit1 = self.bit
+        n = self.n
+        c = -x * (l - 1)
+        while l < n:
+            bit0[l] += c
+            bit1[l] += x
+            l += l & -l
+        c = x * (r - 1)
+        while r < n:
+            bit0[r] += c
+            bit1[r] -= x
+            r += r & -r
 
     def _sum_sub(self, p, i):
         s = 0
@@ -24,27 +32,36 @@ class BIT:
         return s
 
     def SUM(self, i):
-        return self._sum_sub(0, i) + self._sum_sub(1, i) * i
+        bit0, bit1 = self.bit
+        s0 = s1 = 0
+        idx = i
+        while idx > 0:
+            s0 += bit0[idx]
+            s1 += bit1[idx]
+            idx -= idx & -idx
+        return s0 + s1 * i
 
     # 任意の区間[l,r)の区間をを取得
     def range_sum(self, l, r):
         return self.SUM(r - 1) - self.SUM(l - 1)
 
-    # 二分探索
-    ## a_1 + a_2 + ... + a_x >= w となる最小の x を求める
+    # a_1 + a_2 + ... + a_x >= w となる最小の x を O(log n) で求める
+    # 各要素は非負であること。w <= 0 なら 0、見つからなければ要素数 + 1
     def lower_bound(self, w):
         if w <= 0:
             return 0
-        else:
-            x, LEN = 0, 1
-            # 最大の区間長を LEN に入れる
-            while LEN < self.size:
-                LEN <<= 1
-            while LEN > 0:
-                # 区間[x+1,x+LEN]が w 以下のとき = 採用する時
-                if x + LEN < self.size and self.tree[x + LEN] < w:
-                    w -= self.tree[x + LEN]
-                    x += LEN
-                LEN >>= 1
 
+        bit0, bit1 = self.bit
+        n = self.n
+        x = s0 = s1 = 0
+        step = 1 << (n.bit_length() - 1)
+        while step:
+            nxt = x + step
+            if nxt < n:
+                t0 = s0 + bit0[nxt]
+                t1 = s1 + bit1[nxt]
+                # SUM(nxt) を2本のBITの累積値から復元する
+                if t0 + t1 * nxt < w:
+                    x, s0, s1 = nxt, t0, t1
+            step >>= 1
         return x + 1

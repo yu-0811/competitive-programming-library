@@ -7,19 +7,17 @@ class SparseTable:
         空間計算量: O(n log n)
         """
         self.op = op
-        self.n = len(arr)
-        self.max_k = self.n.bit_length()
+        self.n = n = len(arr)
+        mk = n.bit_length()
         # table[k][i] = i から長さ 2^k の区間に対する演算結果
-        self.table = [[0] * self.n for _ in range(self.max_k)]
+        self.table = table = [arr[:]] if n else []
 
-        for i in range(self.n):
-            self.table[0][i] = arr[i]
-        for k in range(1, self.max_k):
+        for k in range(1, mk):
             half_len = 1 << (k - 1)
-            for i in range(self.n - (1 << k) + 1):
-                self.table[k][i] = op(
-                    self.table[k - 1][i], self.table[k - 1][i + half_len]
-                )
+            prev = table[-1]
+            table.append(
+                [op(prev[i], prev[i + half_len]) for i in range(n - (1 << k) + 1)]
+            )
 
     def query(self, l, r):
         """
