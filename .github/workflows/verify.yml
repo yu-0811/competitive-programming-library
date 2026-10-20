@@ -24,6 +24,9 @@ jobs:
     - name: Check Library Checker submission code
       run: python3 library-checker-submitcode/generate.py --check
 
+    - name: Test Library Checker submission code
+      run: python3 -m unittest discover -s tests/library_checker -p 'test_*.py'
+
     - name: Install dependencies
       run: pip3 install -U online-judge-verify-helper
 

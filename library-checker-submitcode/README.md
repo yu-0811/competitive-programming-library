@@ -51,3 +51,50 @@ def main():
 if __name__ == "__main__":
     main()
 ```
+
+## 追加済みの提出コード
+
+20 個のライブラリを、21 問・24 本の提出コードで確認できます。
+同じ問題に複数の実装を用意しているものもあります。
+
+| ライブラリ | 提出コード | Library Checker 問題 |
+| --- | --- | --- |
+| `graph/UnionFind.py` | [graph/unionfind.py](graph/unionfind.py) | [Unionfind](https://judge.yosupo.jp/problem/unionfind) |
+| `graph/PotentialUnionFind.py` | [graph/unionfind_with_potential.py](graph/unionfind_with_potential.py) | [Unionfind with Potential](https://judge.yosupo.jp/problem/unionfind_with_potential) |
+| `graph/SCC.py` | [graph/scc.py](graph/scc.py) | [Strongly Connected Components](https://judge.yosupo.jp/problem/scc) |
+| `graph/LCA.py` | [graph/lca.py](graph/lca.py) | [Lowest Common Ancestor](https://judge.yosupo.jp/problem/lca) |
+| `graph/EulerTour.py` | [graph/lca_euler_tour.py](graph/lca_euler_tour.py) | [Lowest Common Ancestor](https://judge.yosupo.jp/problem/lca) |
+| `graph/LCA.py` + `techniques/Doubling.py` | [graph/jump_on_tree.py](graph/jump_on_tree.py) | [Jump on Tree](https://judge.yosupo.jp/problem/jump_on_tree) |
+| `graph/maxflow.py` | [graph/bipartitematching.py](graph/bipartitematching.py) | [Bipartite Matching](https://judge.yosupo.jp/problem/bipartitematching) |
+| `data-structure/BIT.py` | [data_structure/point_add_range_sum_bit.py](data_structure/point_add_range_sum_bit.py) | [Point Add Range Sum](https://judge.yosupo.jp/problem/point_add_range_sum) |
+| `data-structure/Segtree.py` | [data_structure/point_add_range_sum_segtree.py](data_structure/point_add_range_sum_segtree.py) | [Point Add Range Sum](https://judge.yosupo.jp/problem/point_add_range_sum) |
+| `data-structure/Segtree.py` | [data_structure/point_set_range_composite.py](data_structure/point_set_range_composite.py) | [Point Set Range Composite](https://judge.yosupo.jp/problem/point_set_range_composite) |
+| `data-structure/SparseTable.py` | [data_structure/staticrmq.py](data_structure/staticrmq.py) | [Static RMQ](https://judge.yosupo.jp/problem/staticrmq) |
+| `data-structure/DisjointSparseTable.py` | [data_structure/static_range_sum.py](data_structure/static_range_sum.py) | [Static Range Sum](https://judge.yosupo.jp/problem/static_range_sum) |
+| `data-structure/MargeSortTree.py` | [data_structure/static_range_frequency.py](data_structure/static_range_frequency.py) | [Static Range Frequency](https://judge.yosupo.jp/problem/static_range_frequency) |
+| `data-structure/CartesianTree.py` | [data_structure/cartesian_tree.py](data_structure/cartesian_tree.py) | [Cartesian Tree](https://judge.yosupo.jp/problem/cartesian_tree) |
+| `data-structure/LazySegtree.py` | [data_structure/range_affine_range_sum.py](data_structure/range_affine_range_sum.py) | [Range Affine Range Sum](https://judge.yosupo.jp/problem/range_affine_range_sum) |
+| `data-structure/TupleLazySegtree.py` | [data_structure/range_affine_range_sum_tuple.py](data_structure/range_affine_range_sum_tuple.py) | [Range Affine Range Sum](https://judge.yosupo.jp/problem/range_affine_range_sum) |
+| `string/SuffixArray.py` | [string/suffixarray.py](string/suffixarray.py) | [Suffix Array](https://judge.yosupo.jp/problem/suffixarray) |
+| `string/SuffixArray.py` | [string/number_of_substrings.py](string/number_of_substrings.py) | [Number of Substrings](https://judge.yosupo.jp/problem/number_of_substrings) |
+| `string/SuffixArray.py` | [string/longest_common_substring.py](string/longest_common_substring.py) | [Longest Common Substring](https://judge.yosupo.jp/problem/longest_common_substring) |
+| `string/Z-algo.py` | [string/zalgorithm.py](string/zalgorithm.py) | [Z Algorithm](https://judge.yosupo.jp/problem/zalgorithm) |
+| `math/FFT.py` | [math/convolution_mod.py](math/convolution_mod.py) | [Convolution](https://judge.yosupo.jp/problem/convolution_mod) |
+| `math/MatrixPower.py` | [math/matrix_product.py](math/matrix_product.py) | [Matrix Product](https://judge.yosupo.jp/problem/matrix_product) |
+| `math/MatrixPower.py` | [math/pow_of_matrix.py](math/pow_of_matrix.py) | [Power of Matrix](https://judge.yosupo.jp/problem/pow_of_matrix) |
+| `math/AngularSort.py` | [math/sort_points_by_argument.py](math/sort_points_by_argument.py) | [Sort Points by Argument](https://judge.yosupo.jp/problem/sort_points_by_argument) |
+
+## ローカルでの確認
+
+生成コードを独立したプロセスで実行し、小さなランダムケースなどを素朴な解法と
+比較するテストを用意しています。SCC・マッチング・最長共通部分文字列は、
+答えが一意でないため、出力された解の条件と最適性を確認します。
+このテストは CI でも実行します。
+
+```bash
+python3 library-checker-submitcode/generate.py
+python3 -m unittest discover -s tests/library_checker -p 'test_*.py'
+```
+
+これはローカルでの正しさの確認です。Library Checker 上での提出・AC を記録する
+ものではなく、最大制約での実行時間やメモリ使用量までは保証しません。
