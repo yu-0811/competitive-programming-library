@@ -4,30 +4,32 @@
 class eratosthenes:
     def __init__(self, MAX: int):
         """
-        初期化 : O(MAX loglog MAX)
+        初期化 : O(MAX)
         """
         self.MAX = MAX
-        self.isprime = [True] * (MAX + 1)
-        self.mebius = [1] * (MAX + 1)  # メビウス関数
-        self.min_factor = [-1] * (MAX + 1)  # 最小の素因数
-
-        self.isprime[0] = self.isprime[1] = False
-        self.min_factor[0], self.min_factor[1] = 0, 1
+        isprime = self.isprime = [False] * (MAX + 1)
+        mebius = self.mebius = [1] * (MAX + 1)  # メビウス関数
+        min_factor = self.min_factor = [0] * (MAX + 1)  # 最小の素因数
+        min_factor[1] = 1
+        primes = []
 
         for i in range(2, MAX + 1):
-            if not self.isprime[i]:
-                continue
-            self.mebius[i] = -1
-            self.min_factor[i] = i
+            if min_factor[i] == 0:
+                min_factor[i] = i
+                isprime[i] = True
+                mebius[i] = -1
+                primes.append(i)
 
-            for j in range(2 * i, MAX + 1, i):
-                self.isprime[j] = False
-                if (j // i) % i == 0:
-                    self.mebius[j] = 0
-                else:
-                    self.mebius[j] *= -1
-                if self.min_factor[j] == -1:
-                    self.min_factor[j] = i
+            smallest, mu = min_factor[i], mebius[i]
+            for prime in primes:
+                j = i * prime
+                if j > MAX:
+                    break
+                min_factor[j] = prime
+                if prime == smallest:
+                    mebius[j] = 0
+                    break
+                mebius[j] = -mu
 
     def prime_factors(self, n: int) -> list[tuple[int, int]]:
         """

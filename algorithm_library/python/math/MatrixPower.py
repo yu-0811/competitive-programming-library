@@ -2,12 +2,20 @@
 # mod がいらない時は消して
 def mat_mul(A: list[list[int]], B: list[list[int]], mod):
     assert len(A[0]) == len(B)
-    res = [[0] * len(B[0]) for _ in range(len(A))]
-    for i in range(len(A)):
-        for j in range(len(B[0])):
-            for k in range(len(B)):
-                res[i][j] += A[i][k] * B[k][j]
-                res[i][j] %= mod
+    K = len(B)
+    BT = list(zip(*B))
+    res = []
+    for row in A:
+        out = []
+        for col in BT:
+            total = 0
+            # 多倍長整数の成長を抑えるため、8項ごとに剰余を取る
+            for start in range(0, K, 8):
+                for k in range(start, min(start + 8, K)):
+                    total += row[k] * col[k]
+                total %= mod
+            out.append(total)
+        res.append(out)
     return res
 
 

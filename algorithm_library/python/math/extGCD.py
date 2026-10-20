@@ -27,11 +27,8 @@ def modlin(a, b, m) -> int:
     g, x, y = extGCD(a, m)
     if b % g != 0:
         return None  # 解なし
-    a //= g
-    b //= g
-    m //= g
-    inv_a = modinv(a, m)
-    return (inv_a * b) % m
+    # a*x + m*y = g より、x は a/g の mod m/g における逆元
+    return x * (b // g) % (m // g)
 
 
 # 中国剰余定理

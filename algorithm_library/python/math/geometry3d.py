@@ -116,8 +116,9 @@ def unit(p: Point3D) -> Point3D:
 
 # 2ベクトルのなす角 [0, pi]
 def angle(p: Point3D, q: Point3D) -> float:
-    assert length(p) > eps and length(q) > eps
-    return math.acos(clamp_unit(dot(p, q) / length(p) / length(q)))
+    lp, lq = length(p), length(q)
+    assert lp > eps and lq > eps
+    return math.acos(clamp_unit(dot(p, q) / lp / lq))
 
 
 # 原点を通る axis を軸として p を theta ラジアン回転

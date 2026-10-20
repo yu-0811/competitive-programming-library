@@ -1,20 +1,22 @@
 # 二項係数ライブラリ
 
-# 前計算 O(n)
+# 前計算 O(n + log mod)
 # O(1) で nCk, nHk を返す
 class Comb:
     def __init__(self, n, mod):
         self.mod = mod
         self.n = n
-        self.fact = [1, 1]
-        self.factinv = [1, 1]
-        self.inv = [0, 1]
-        for i in range(2, self.n + 1):
-            self.fact.append((self.fact[i - 1] * i) % self.mod)
-            self.inv.append(
-                (self.mod - self.inv[self.mod % i] * (self.mod // i)) % self.mod
-            )
-            self.factinv.append((self.factinv[i - 1] * self.inv[i]) % self.mod)
+        size = max(2, n + 1)
+        fact = self.fact = [1] * size
+        factinv = self.factinv = [1] * size
+        inv = self.inv = [0, 1] + [0] * (size - 2)
+        for i in range(2, n + 1):
+            fact[i] = fact[i - 1] * i % mod
+        factinv[n] = pow(fact[n], -1, mod)
+        for i in range(n, 0, -1):
+            factinv[i - 1] = factinv[i] * i % mod
+        for i in range(2, n + 1):
+            inv[i] = factinv[i] * fact[i - 1] % mod
 
     def C(self, n, k):  # nCk % modを返す
         assert n <= self.n
@@ -33,7 +35,7 @@ class Comb:
 
 
 # O(k) 前計算
-# O(k) で nCk を計算（n が大きいときでも使える）
+# O(min(k, n-k)) で nCk を計算（n が大きいときでも使える）
 class Comb:
     def __init__(self, k, mod):
         self.k = k
@@ -52,13 +54,14 @@ class Comb:
     def nCk(self, n, k):
         if k < 0 or k > n:
             return 0
+        k = min(k, n - k)
         if k > self.k:
             raise ValueError("precomputed k is too small")
+        mod = self.mod
         ans = 1
         for i in range(k):
-            ans *= n - i
-            ans %= self.mod
-        return ans * self.fact_inv[k] % self.mod
+            ans = ans * (n - i) % mod
+        return ans * self.fact_inv[k] % mod
 
 
 class PascalsTriangle:

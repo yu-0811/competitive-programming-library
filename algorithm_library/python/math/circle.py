@@ -189,12 +189,15 @@ def segment_distance(l1: Line, l2: Line) -> float:
 # 直線 l と円 c の交点。交点がない場合は assert で落とす
 def line_circle_intersection(l: Line, c: Circle) -> tuple[Point, Point]:
     center, radius = c
-    assert length(vec(l)) > eps
-    p = projection(center, l)
-    d = point_line_distance(center, l)
+    v = vec(l)
+    v_len = length(v)
+    assert v_len > eps
+    rel = sub(center, l[0])
+    p = add(l[0], mul(v, dot(rel, v) / norm(v)))
+    d = abs(cross(rel, v)) / v_len
     assert d <= radius + eps
     h = math.sqrt(max(0.0, radius * radius - d * d))
-    u = div(vec(l), length(vec(l)))
+    u = div(v, v_len)
     return add(p, mul(u, h)), sub(p, mul(u, h))
 
 
