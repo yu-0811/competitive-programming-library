@@ -181,4 +181,4 @@ class EulerTour:
     # パス u - v のコストの和
     def get_distance(self, u: int, v: int):
         lca_idx = self.lca(u, v)
-        return self.subtree_sum(u) + self.subtree_sum(v) - 2 * self.subtree_sum(lca_idx)
+        return self.path_sum(u) + self.path_sum(v) - 2 * self.path_sum(lca_idx)

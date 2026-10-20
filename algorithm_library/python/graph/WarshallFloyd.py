@@ -1,5 +1,5 @@
 # タイプ数削減、余計なことを考えなくていいように、inf,N,G はグローバル変数
-# グラフは 1-index
+# 無向グラフ、1-index
 
 
 def WarshallFloyd():
@@ -11,7 +11,7 @@ def WarshallFloyd():
             if dist[i][j] > c:
                 dist[i][j] = c
             if dist[j][i] > c:
-                dist[i][j] = c
+                dist[j][i] = c
 
     for k in range(1, N + 1):
         for i in range(1, N + 1):

@@ -8,7 +8,7 @@ def bellman_ford(
     Edges : 有向辺(無向のときは両方入れる)
     N : 頂点数
     s : 始点
-    返り値 : (最短距離配列, 負閉路の有無)
+    返り値 : (最短距離配列, 始点から到達できる負閉路の有無)
     """
     dist = [inf] * (N + 1)
     dist[s] = 0
@@ -16,6 +16,8 @@ def bellman_ford(
     while cnt < N:
         end = True
         for fro, to, cost in Edges:
+            if dist[fro] == inf:
+                continue
             if dist[to] > dist[fro] + cost:
                 dist[to] = dist[fro] + cost
                 end = False

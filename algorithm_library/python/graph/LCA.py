@@ -50,6 +50,6 @@ class LCA:
 
     # u-v のパス上に a が存在するか
     def is_on_path(self, u, v, a):
-        return self.get_distance(u, a) + self.get_distance(v, u) == self.get_distance(
+        return self.get_distance(u, a) + self.get_distance(a, v) == self.get_distance(
             u, v
         )
