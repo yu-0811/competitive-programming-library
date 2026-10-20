@@ -3,7 +3,15 @@ repos:
     rev: v0.1.11
     hooks:
       - id: ruff-format
-        exclude: ^tatyam_set/
+        exclude: ^(tatyam_set/|library-checker-submitcode/(?!generate\.py$|src/))
       - id: ruff 
-        exclude: ^tatyam_set/
+        exclude: ^(tatyam_set/|library-checker-submitcode/(?!generate\.py$|src/))
         args: [ --fix ]
+  - repo: local
+    hooks:
+      - id: generate-library-checker-submitcode
+        name: Generate Library Checker submission code
+        entry: python3 library-checker-submitcode/generate.py
+        language: system
+        pass_filenames: false
+        files: ^(algorithm_library/python/|library-checker-submitcode/)

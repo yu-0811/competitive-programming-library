@@ -21,6 +21,9 @@ jobs:
       with:
         python-version: 3.11.0
 
+    - name: Check Library Checker submission code
+      run: python3 library-checker-submitcode/generate.py --check
+
     - name: Install dependencies
       run: pip3 install -U online-judge-verify-helper
 
