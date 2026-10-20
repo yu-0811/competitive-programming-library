@@ -28,9 +28,13 @@ class imos:
     # 二次元累積和を取る
     def cross_accumulate(self):
         self.flag = True
-        for i in range(len(self.grid)):
-            self.grid[i] = list(accumulate(self.grid[i]))
-        for j in range(len(self.grid[0])):
-            for i in range(1, len(self.grid)):
-                self.grid[i][j] += self.grid[i - 1][j]
-        return self.grid
+        grid = self.grid
+        H, W = len(grid), len(grid[0])
+        grid[0] = list(accumulate(grid[0]))
+        for i in range(1, H):
+            prev, cur = grid[i - 1], grid[i]
+            total = 0
+            for j in range(W):
+                total += cur[j]
+                cur[j] = prev[j] + total
+        return grid

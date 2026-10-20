@@ -4,11 +4,13 @@ class CrossAccumulate:
         self.W = len(grid[0])
         self.s = [[0] * (self.W + 1) for _ in range(self.H + 1)]
 
+        s = self.s
         for i in range(self.H):
+            prev, cur, row = s[i], s[i + 1], grid[i]
+            total = 0
             for j in range(self.W):
-                self.s[i + 1][j + 1] = (
-                    self.s[i][j + 1] + self.s[i + 1][j] - self.s[i][j] + grid[i][j]
-                )
+                total += row[j]
+                cur[j + 1] = prev[j + 1] + total
 
     def query(self, r1: int, c1: int, r2: int, c2: int) -> int:
         """
