@@ -6,7 +6,6 @@ import unittest
 from functools import reduce
 from pathlib import Path
 
-
 LIBRARY = (
     Path(__file__).resolve().parents[2] / "algorithm_library/python/data-structure"
 )
@@ -59,6 +58,50 @@ class MergeSortTreeTests(unittest.TestCase):
                     tree.query_range(left, right, a, b),
                     sum(a <= x < b for x in values[left:right]),
                 )
+
+    def test_sparse_values_across_large_boundaries(self):
+        rng = random.Random(1031)
+        for n in [127, 128, 129, 511, 512, 513]:
+            values = [rng.randrange(-(10**12), 10**12) for _ in range(n)]
+            tree = MergeSortTree(values)
+            for _ in range(500):
+                left, right = sorted([rng.randrange(n + 1), rng.randrange(n + 1)])
+                a, b = sorted(rng.choices(values, k=2))
+                self.assertEqual(
+                    tree.query_range(left, right, a, b),
+                    sum(a <= x < b for x in values[left:right]),
+                )
+                self.assertEqual(
+                    tree.query_range(left, right, a, a + 1),
+                    sum(x == a for x in values[left:right]),
+                )
+                self.assertEqual(
+                    tree.query_leq(left, right, a),
+                    sum(x <= a for x in values[left:right]),
+                )
+
+    def test_values_with_only_less_than_comparison(self):
+        class Value:
+            def __init__(self, key):
+                self.key = key
+
+            def __lt__(self, other):
+                return self.key < other.key
+
+        keys = [2, 0, 2, 1, 0, 3, 2, 4, 1]
+        tree = MergeSortTree([Value(key) for key in keys])
+        for left in range(len(keys) + 1):
+            for right in range(left, len(keys) + 1):
+                for a in range(-1, 6):
+                    self.assertEqual(
+                        tree.query_leq(left, right, Value(a)),
+                        sum(x <= a for x in keys[left:right]),
+                    )
+                    for b in range(a, 6):
+                        self.assertEqual(
+                            tree.query_range(left, right, Value(a), Value(b)),
+                            sum(a <= x < b for x in keys[left:right]),
+                        )
 
     def test_ordered_equal_and_large_values(self):
         for values in [list(range(64)), list(range(64))[::-1], [10**30] * 64]:
