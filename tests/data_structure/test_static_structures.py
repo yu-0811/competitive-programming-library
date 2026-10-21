@@ -4,6 +4,7 @@ import random
 import runpy
 import unittest
 from functools import reduce
+from itertools import product
 from pathlib import Path
 
 LIBRARY = (
@@ -40,6 +41,23 @@ class SparseTableTests(unittest.TestCase):
 
 
 class MergeSortTreeTests(unittest.TestCase):
+    def test_small_nodes_with_duplicates(self):
+        for n in [2, 4]:
+            for values in product(range(3), repeat=n):
+                tree = MergeSortTree(values)
+                for left in range(n + 1):
+                    for right in range(left, n + 1):
+                        for a in range(4):
+                            self.assertEqual(
+                                tree.query_leq(left, right, a),
+                                sum(x <= a for x in values[left:right]),
+                            )
+                            for b in range(a, 4):
+                                self.assertEqual(
+                                    tree.query_range(left, right, a, b),
+                                    sum(a <= x < b for x in values[left:right]),
+                                )
+
     def test_counts_against_direct_scan(self):
         rng = random.Random(819)
         for n in [0, 1, 2, 3, 7, 8, 9, 15, 16, 17, 31, 32, 33, 63, 64, 65]:
