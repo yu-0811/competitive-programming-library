@@ -21,13 +21,15 @@ MODULE = runpy.run_path(
     str(ROOT / "algorithm_library/python/data-structure/TupleHeap.py")
 )
 TupleHeap = MODULE["TupleHeap"]
-PackedTupleHeap = MODULE["PackedTupleHeap"]
+PackedTupleHeap = runpy.run_path(
+    str(ROOT / "algorithm_library/python/data-structure/PackedTupleHeap.py")
+)["PackedTupleHeap"]
 METHODS = ["heapq", "columns", "packed"]
 CASES = ["random", "ties", "ascending", "descending", "wide"]
 WORKLOADS = ["batch", "mixed", "dijkstra"]
 
 
-def methods(name, bits):
+def methods(name, bits, arity):
     if name == "heapq":
 
         def build(values):
@@ -37,9 +39,13 @@ def methods(name, bits):
 
         return build, heapq.heappush, heapq.heappop
     if name == "columns":
-        return TupleHeap, TupleHeap.push, TupleHeap.pop
+        return (
+            lambda values: TupleHeap(arity=arity, values=values),
+            TupleHeap.push,
+            TupleHeap.pop,
+        )
     return (
-        lambda values: PackedTupleHeap(values, bits=bits),
+        lambda values: PackedTupleHeap(arity=arity, bits=bits, values=values),
         PackedTupleHeap.push,
         PackedTupleHeap.pop,
     )
@@ -51,8 +57,7 @@ def batch(values, build, push, pop):
         push(heap, item)
     checksum = 0
     for _ in values:
-        x, y = pop(heap)
-        checksum += x ^ y
+        checksum += sum(pop(heap))
     return checksum
 
 
@@ -61,12 +66,10 @@ def mixed(values, build, push, pop):
     heap = build(values[:initial])
     checksum = 0
     for i in range(initial, len(values)):
-        x, y = pop(heap)
-        checksum += x ^ y
+        checksum += sum(pop(heap))
         push(heap, values[i])
     for _ in range(initial):
-        x, y = pop(heap)
-        checksum += x ^ y
+        checksum += sum(pop(heap))
     return checksum
 
 
@@ -90,7 +93,7 @@ def dijkstra(graph, build, push, pop):
 RUNNERS = {"batch": batch, "mixed": mixed, "dijkstra": dijkstra}
 
 
-def make_data(workload, case, n, seed):
+def make_data(workload, case, n, seed, arity):
     rng = random.Random(seed + n)
     limit = {"ties": 8, "wide": 1 << 90}.get(case, 10**9)
     if workload == "dijkstra":
@@ -104,7 +107,10 @@ def make_data(workload, case, n, seed):
             )
             graph.append(edges)
         return graph
-    values = [(rng.randrange(limit), rng.randrange(n)) for _ in range(n)]
+    values = [
+        (rng.randrange(limit),) + tuple(rng.randrange(n) for _ in range(arity - 1))
+        for _ in range(n)
+    ]
     if case == "ascending":
         values.sort()
     elif case == "descending":
@@ -112,10 +118,10 @@ def make_data(workload, case, n, seed):
     return values
 
 
-def verify_sequence(data, runner, name, bits):
+def verify_sequence(data, runner, name, bits, arity):
     """計測後にもう一度実行し、全 pop の値・順序を heapq と照合する。"""
     reference = []
-    build, push, pop = methods(name, bits)
+    build, push, pop = methods(name, bits, arity)
 
     def checked_build(values):
         reference[:] = values
@@ -140,7 +146,7 @@ def worker(args):
     with Path(data_path).open("rb") as stream:
         data, expected = pickle.load(stream)
     runner = RUNNERS[workload]
-    operations = methods(name, args.bits)
+    operations = methods(name, args.bits, args.arity)
     for _ in range(args.warmup):
         assert runner(data, *operations) == expected
     samples = []
@@ -151,12 +157,12 @@ def worker(args):
         elapsed = time.perf_counter() - start
         assert actual == expected
         samples.append(elapsed)
-    verify_sequence(data, runner, name, args.bits)
+    verify_sequence(data, runner, name, args.bits, args.arity)
     print(json.dumps(samples))
 
 
 def measure(data, workload, args, index):
-    expected = RUNNERS[workload](data, *methods("heapq", args.bits))
+    expected = RUNNERS[workload](data, *methods("heapq", args.bits, args.arity))
     samples = {name: [] for name in args.methods}
     with tempfile.TemporaryDirectory(prefix="benchmark-tuple-heap-") as directory:
         path = Path(directory) / "data.pickle"
@@ -176,6 +182,8 @@ def measure(data, workload, args, index):
                     str(path),
                     "--bits",
                     str(args.bits),
+                    "--arity",
+                    str(args.arity),
                     "--repeat",
                     str(1 if args.fresh_process else args.repeat),
                     "--warmup",
@@ -194,9 +202,10 @@ def main():
     parser.add_argument(
         "--cases", nargs="+", choices=CASES, default=["random", "ties", "wide"]
     )
-    parser.add_argument("--workloads", nargs="+", choices=WORKLOADS, default=WORKLOADS)
+    parser.add_argument("--workloads", nargs="+", choices=WORKLOADS)
     parser.add_argument("--methods", nargs="+", choices=METHODS, default=METHODS)
     parser.add_argument("--bits", type=int, default=20)
+    parser.add_argument("--arity", type=int, default=2)
     parser.add_argument("--repeat", type=int, default=5)
     parser.add_argument("--warmup", type=int, default=2)
     parser.add_argument("--seed", type=int, default=20261025)
@@ -204,12 +213,24 @@ def main():
     parser.add_argument("--output", type=Path, help="全計測値を JSON で保存")
     parser.add_argument("--worker", nargs=3, help=argparse.SUPPRESS)
     args = parser.parse_args()
-    if args.repeat < 1 or args.warmup < 0 or args.bits < 0 or min(args.sizes) < 1:
-        parser.error("sizes/repeat must be positive; warmup/bits must be nonnegative")
+    if (
+        args.repeat < 1
+        or args.warmup < 0
+        or args.bits < 0
+        or args.arity < 1
+        or min(args.sizes) < 1
+    ):
+        parser.error(
+            "sizes/repeat/arity must be positive; warmup/bits must be nonnegative"
+        )
+    if args.workloads is None:
+        args.workloads = WORKLOADS if args.arity == 2 else ["batch", "mixed"]
+    if "dijkstra" in args.workloads and args.arity != 2:
+        parser.error("dijkstra requires arity=2")
     if args.worker:
         worker(args)
         return
-    if "packed" in args.methods and max(args.sizes) > 1 << args.bits:
+    if "packed" in args.methods and args.arity > 1 and max(args.sizes) > 1 << args.bits:
         parser.error("sizes must not exceed 2**bits for the packed heap")
     if "dijkstra" in args.workloads and any(
         case in ["ascending", "descending"] for case in args.cases
@@ -225,6 +246,8 @@ def main():
         "warmup": 0 if args.fresh_process else args.warmup,
         "repeat": args.repeat,
         "bits": args.bits,
+        "arity": args.arity,
+        "heap_implementation": "compact",
         "seed": args.seed,
     }
     print("# " + json.dumps(metadata), flush=True)
@@ -233,7 +256,7 @@ def main():
     for n in args.sizes:
         for workload in args.workloads:
             for case in args.cases:
-                data = make_data(workload, case, n, args.seed)
+                data = make_data(workload, case, n, args.seed, args.arity)
                 samples = measure(data, workload, args, len(results))
                 medians = {
                     name: statistics.median(times) for name, times in samples.items()

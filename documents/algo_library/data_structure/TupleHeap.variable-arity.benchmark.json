@@ -1,0 +1,147 @@
+{
+  "cpu": "AMD Ryzen AI 7 350 w/ Radeon 860M",
+  "cpu_affinity": [
+    2
+  ],
+  "heap_implementation": "compact",
+  "runs": [
+    {
+      "metadata": {
+        "implementation": "PyPy",
+        "version": "3.11.13 (7.3.20+dfsg-4, Oct 29 2025, 17:24:08)\n[PyPy 7.3.20 with GCC 15.2.0]",
+        "platform": "Linux-6.6.114.1-microsoft-standard-WSL2-x86_64-with-glibc2.43",
+        "processor": "",
+        "date": "2026-10-25",
+        "mode": "warm",
+        "warmup": 2,
+        "repeat": 5,
+        "bits": 20,
+        "arity": 3,
+        "heap_implementation": "compact",
+        "seed": 20261025
+      },
+      "results": [
+        {
+          "n": 100000,
+          "workload": "batch",
+          "case": "random",
+          "samples_seconds": {
+            "heapq": [
+              0.3608371369773522,
+              0.3943590270355344,
+              0.24622807098785415,
+              0.25287207699147984,
+              0.3198372330516577
+            ],
+            "columns": [
+              0.18915285100229084,
+              0.1698648930178024,
+              0.16208692803047597,
+              0.1767853139899671,
+              0.17843257100321352
+            ],
+            "packed": [
+              0.14872428798116744,
+              0.18384701595641673,
+              0.16936099395388737,
+              0.13260176801122725,
+              0.15106752997962758
+            ]
+          }
+        }
+      ]
+    },
+    {
+      "metadata": {
+        "implementation": "PyPy",
+        "version": "3.11.13 (7.3.20+dfsg-4, Oct 29 2025, 17:24:08)\n[PyPy 7.3.20 with GCC 15.2.0]",
+        "platform": "Linux-6.6.114.1-microsoft-standard-WSL2-x86_64-with-glibc2.43",
+        "processor": "",
+        "date": "2026-10-25",
+        "mode": "warm",
+        "warmup": 2,
+        "repeat": 5,
+        "bits": 20,
+        "arity": 8,
+        "heap_implementation": "compact",
+        "seed": 20261025
+      },
+      "results": [
+        {
+          "n": 100000,
+          "workload": "batch",
+          "case": "random",
+          "samples_seconds": {
+            "heapq": [
+              0.29750606504967436,
+              0.3206959219533019,
+              0.3798188570071943,
+              0.2796036879881285,
+              0.4698896679910831
+            ],
+            "columns": [
+              0.2063363179913722,
+              0.2381080620107241,
+              0.21769385901279747,
+              0.2355093520018272,
+              0.23055759898852557
+            ],
+            "packed": [
+              0.23940126301022246,
+              0.20270121499197558,
+              0.25363392202416435,
+              0.19923115603160113,
+              0.1824547029682435
+            ]
+          }
+        }
+      ]
+    },
+    {
+      "metadata": {
+        "implementation": "CPython",
+        "version": "3.14.4 (main, Aug 20 2026, 10:41:58) [GCC 15.2.0]",
+        "platform": "Linux-6.6.114.1-microsoft-standard-WSL2-x86_64-with-glibc2.43",
+        "processor": "",
+        "date": "2026-10-25",
+        "mode": "warm",
+        "warmup": 2,
+        "repeat": 5,
+        "bits": 20,
+        "arity": 3,
+        "heap_implementation": "compact",
+        "seed": 20261025
+      },
+      "results": [
+        {
+          "n": 100000,
+          "workload": "batch",
+          "case": "random",
+          "samples_seconds": {
+            "heapq": [
+              0.2368992559495382,
+              0.26893637800822034,
+              0.2835694059613161,
+              0.19150702696060762,
+              0.19794879603432491
+            ],
+            "columns": [
+              0.7934330850257538,
+              0.7497372869984247,
+              0.7563542900024913,
+              0.8462654870236292,
+              0.9029244559933431
+            ],
+            "packed": [
+              0.17114796000532806,
+              0.22031951398821548,
+              0.1674461589427665,
+              0.17952882195822895,
+              0.1904100069659762
+            ]
+          }
+        }
+      ]
+    }
+  ]
+}
