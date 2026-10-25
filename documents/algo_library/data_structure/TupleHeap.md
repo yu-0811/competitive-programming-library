@@ -6,7 +6,7 @@
 | ファイル | 本体の長さ（冒頭の使い方コメントを除く） | 方式 |
 | --- | ---: | --- |
 | `algorithm_library/python/data-structure/TupleHeap.py` | 54 行・1,229 字 | 成分を別々のリストに保存する自作二分ヒープ |
-| `algorithm_library/python/data-structure/PackedTupleHeap.py` | 34 行・785 字 | 整数タプルを 1 整数に符号化して `heapq` を使う |
+| `algorithm_library/python/data-structure/PackedTupleHeap.py` | 39 行・916 字 | 整数タプルを 1 整数に符号化して `heapq` を使う |
 
 ## 使い方
 
@@ -35,7 +35,7 @@ assert h.pop() == (-5, 255, 4095)
 
 API は初期化・`push`・`pop`・`top`・`len`。空の `pop`・`top` は `IndexError`。
 引数は `TupleHeap(arity=2, values=())`、
-`PackedTupleHeap(arity=2, bits=20, values=())` の順。
+`PackedTupleHeap(arity=2, bits=20, values=None)` の順。
 初期値にはリストやイテレータを渡せる。入力リストは変更しない。
 
 ## 入力条件と計算量
