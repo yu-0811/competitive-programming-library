@@ -2,15 +2,15 @@ from warnings import warn
 
 
 class segtree:  # すべて 0-index
-    def __init__(s, V, OP, E):
-        s.n = len(V)
-        s.op = OP
-        s.e = E
+    def __init__(s, v, op, e):
+        s.n = len(v)
+        s.op = op
+        s.e = e
         s.z = 1 << (s.n - 1).bit_length()
-        d = s.d = [E] * (2 * s.z)
-        d[s.z : s.z + s.n] = V
+        d = s.d = [e] * (2 * s.z)
+        d[s.z : s.z + s.n] = v
         for i in range(s.z - 1, 0, -1):
-            d[i] = OP(d[2 * i], d[2 * i + 1])
+            d[i] = op(d[2 * i], d[2 * i + 1])
 
     # 1 点更新
     def set(s, p, x):

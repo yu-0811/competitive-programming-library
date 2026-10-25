@@ -18,11 +18,22 @@ mod = 998244353
 
 # problem: https://judge.yosupo.jp/problem/pow_of_matrix
 # BEGIN LIBRARY: algorithm_library/python/math/MatrixPower.py
+def vec_mul(v: list[int], M: list[list[int]], mod: int):
+    n = len(v)
+    assert n == len(M)
+    res = [0] * n
+    for i in range(n):
+        x, row = v[i], M[i]
+        for j in range(n):
+            res[j] = (res[j] + x * row[j]) % mod
+    return res
+
+
 # 行列 A と 行列 B の積を返す
-# mod がいらない時は消して
 def mat_mul(A: list[list[int]], B: list[list[int]], mod):
     assert len(A[0]) == len(B)
     K = len(B)
+    end = K & -8
     BT = list(zip(*B))
     res = []
     for row in A:
@@ -30,29 +41,43 @@ def mat_mul(A: list[list[int]], B: list[list[int]], mod):
         for col in BT:
             total = 0
             # 多倍長整数の成長を抑えるため、8項ごとに剰余を取る
-            for start in range(0, K, 8):
-                for k in range(start, min(start + 8, K)):
-                    total += row[k] * col[k]
-                total %= mod
-            out.append(total)
+            for k in range(0, end, 8):
+                total = (
+                    total
+                    + row[k] * col[k]
+                    + row[k + 1] * col[k + 1]
+                    + row[k + 2] * col[k + 2]
+                    + row[k + 3] * col[k + 3]
+                    + row[k + 4] * col[k + 4]
+                    + row[k + 5] * col[k + 5]
+                    + row[k + 6] * col[k + 6]
+                    + row[k + 7] * col[k + 7]
+                ) % mod
+            for k in range(end, K):
+                total += row[k] * col[k]
+            out.append(total % mod)
         res.append(out)
     return res
 
 
-# 行列累乗
-# 行列 M^K
-# ダブリングみたいにする(繰り返し二乗法)
+# 行列累乗 M^K
 def mat_pow(M: list[list[int]], K: int, mod: int):
-    res = [[0] * len(M) for _ in range(len(M))]
-    # 単位行列で初期化する
-    for i in range(len(M)):
-        res[i][i] = 1
-
+    res = []
     while K > 0:
-        if K & 1 == 1:
-            res = mat_mul(M, res, mod)
-        M = mat_mul(M, M, mod)
+        if K & 1:
+            if not res:
+                # 最初の単位行列との積は、剰余を取ったコピーで置き換える
+                res = [[x % mod for x in row] for row in M]
+            else:
+                res = mat_mul(M, res, mod)
         K >>= 1
+        if K:
+            M = mat_mul(M, M, mod)
+
+    if not res:
+        res = [[0] * len(M) for _ in range(len(M))]
+        for i in range(len(M)):
+            res[i][i] = 1
     return res
 # END LIBRARY
 

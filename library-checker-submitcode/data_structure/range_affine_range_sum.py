@@ -34,18 +34,18 @@ class lazy_segtree:  # すべて 0-index
             lz[c + 1] = comp(f, lz[c + 1])
         lz[k] = s.ide
 
-    def __init__(s, V, op, E, mp, comp, ID):
-        s.n = len(V)
+    def __init__(s, v, op, e, mp, comp, ide):
+        s.n = len(v)
         s.log = (s.n - 1).bit_length()
         z = s.z = 1 << s.log
-        d = s.d = [E] * (2 * z)
-        s.lz = [ID] * z
-        s.e = E
+        d = s.d = [e] * (2 * z)
+        s.lz = [ide] * z
+        s.e = e
         s.op = op
         s.mp = mp
         s.comp = comp
-        s.ide = ID
-        d[z : z + s.n] = V
+        s.ide = ide
+        d[z : z + s.n] = v
         for i in range(z - 1, 0, -1):
             d[i] = op(d[2 * i], d[2 * i + 1])
 
