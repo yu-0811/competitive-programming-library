@@ -171,7 +171,7 @@ data:
   isVerificationFile: false
   path: heuristic_library/cpp/beam_search_no_hash.cpp
   requiredBy: []
-  timestamp: '2026-10-16 13:28:30+09:00'
+  timestamp: '2026-08-28 16:05:28+09:00'
   verificationStatus: LIBRARY_NO_TESTS
   verifiedWith: []
 documentation_of: heuristic_library/cpp/beam_search_no_hash.cpp

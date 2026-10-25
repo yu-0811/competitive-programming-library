@@ -441,7 +441,7 @@ data:
   isVerificationFile: false
   path: algorithm_library/cpp/geometry3d.cpp
   requiredBy: []
-  timestamp: '2026-10-16 13:28:30+09:00'
+  timestamp: '2026-07-02 14:44:49+09:00'
   verificationStatus: LIBRARY_NO_TESTS
   verifiedWith: []
 documentation_of: algorithm_library/cpp/geometry3d.cpp

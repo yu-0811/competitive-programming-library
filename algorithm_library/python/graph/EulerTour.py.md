@@ -1,18 +1,23 @@
 ---
 data:
   _extendedDependsOn: []
-  _extendedRequiredBy: []
+  _extendedRequiredBy:
+  - icon: ':warning:'
+    path: tests/graph/test_graph_optimizations.py
+    title: tests/graph/test_graph_optimizations.py
+  - icon: ':warning:'
+    path: tests/graph/test_graph_regressions.py
+    title: tests/graph/test_graph_regressions.py
   _extendedVerifiedWith: []
   _isVerificationFailed: false
   _pathExtension: py
   _verificationStatusIcon: ':warning:'
   attributes:
     links: []
-  bundledCode: "Traceback (most recent call last):\n  File \"/opt/hostedtoolcache/Python/3.11.0/x64/lib/python3.11/site-packages/onlinejudge_verify/documentation/build.py\"\
+  bundledCode: "Traceback (most recent call last):\n  File \"/opt/hostedtoolcache/PyPy/3.11.16/x64/lib/pypy3.11/site-packages/onlinejudge_verify/documentation/build.py\"\
     , line 71, in _render_source_code_stat\n    bundled_code = language.bundle(stat.path,\
     \ basedir=basedir, options={'include_paths': [basedir]}).decode()\n          \
-    \         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n\
-    \  File \"/opt/hostedtoolcache/Python/3.11.0/x64/lib/python3.11/site-packages/onlinejudge_verify/languages/python.py\"\
+    \                  ^^^^^^\n  File \"/opt/hostedtoolcache/PyPy/3.11.16/x64/lib/pypy3.11/site-packages/onlinejudge_verify/languages/python.py\"\
     , line 96, in bundle\n    raise NotImplementedError\nNotImplementedError\n"
   code: "class segtree:  # \u3059\u3079\u3066 0-index\n    def __init__(self, V, OP,\
     \ E):\n        self.n = len(V)\n        self.op = OP\n        self.e = E\n   \
@@ -76,9 +81,13 @@ data:
     -\u3067\u305D\u308C\u305E\u308C)\n        self.edge_idx_plus = [-1] * (self.edge_cnt\
     \ + 1)\n        self.edge_idx_minus = [-1] * (self.edge_cnt + 1)\n        self.vis\
     \ = [False] * (self.N + 1)\n        self.step = 0\n        self._dfs(root)\n\n\
-    \    def _build_fentree(self):\n        self.fen = fenwick_tree(len(self.edge_cost))\n\
-    \        for i in range(1, len(self.edge_cost)):\n            self.fen.add(i,\
-    \ self.edge_cost[i])\n\n    def _build_lca(self):\n        # lca \u7528\u306E\u30BB\
+    \    def _build_fentree(self):\n        n = len(self.edge_cost)\n        self.fen\
+    \ = fenwick_tree(n)\n        data = self.fen.data = self.edge_cost[:]\n      \
+    \  if data:\n            data[0] = 0\n        # \u5404\u533A\u9593\u306E\u548C\
+    \u3092\u89AA\u306E\u533A\u9593\u306B\u4E00\u5EA6\u305A\u3064\u52A0\u3048\u3001\
+    O(n) \u3067\u69CB\u7BC9\u3059\u308B\n        for i in range(1, n + 1):\n     \
+    \       j = i + (i & -i)\n            if j <= n:\n                data[j - 1]\
+    \ += data[i - 1]\n\n    def _build_lca(self):\n        # lca \u7528\u306E\u30BB\
     \u30B0\u6728\u306E\u69CB\u7BC9\n        e = (self.N + 1) * self.base\n       \
     \ s = [\n            self.depth[i] * self.base + abs(self.vartex_order[i])\n \
     \           for i in range(len(self.vartex_order))\n        ]\n        self.lca_seg\
@@ -91,13 +100,15 @@ data:
     \ in_u > in_v:\n            in_u, in_v = in_v, in_u\n        lca_idx = self.lca_seg.prod(in_u,\
     \ in_v + 1) & self.mask\n        return lca_idx\n\n    # \u30D1\u30B9 u - v \u306E\
     \u30B3\u30B9\u30C8\u306E\u548C\n    def get_distance(self, u: int, v: int):\n\
-    \        lca_idx = self.lca(u, v)\n        return self.subtree_sum(u) + self.subtree_sum(v)\
-    \ - 2 * self.subtree_sum(lca_idx)\n"
+    \        lca_idx = self.lca(u, v)\n        return self.path_sum(u) + self.path_sum(v)\
+    \ - 2 * self.path_sum(lca_idx)\n"
   dependsOn: []
   isVerificationFile: false
   path: algorithm_library/python/graph/EulerTour.py
-  requiredBy: []
-  timestamp: '2026-10-16 13:28:30+09:00'
+  requiredBy:
+  - tests/graph/test_graph_optimizations.py
+  - tests/graph/test_graph_regressions.py
+  timestamp: '2026-10-20 12:07:51+09:00'
   verificationStatus: LIBRARY_NO_TESTS
   verifiedWith: []
 documentation_of: algorithm_library/python/graph/EulerTour.py

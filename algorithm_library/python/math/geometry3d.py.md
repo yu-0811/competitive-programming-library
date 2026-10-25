@@ -8,11 +8,10 @@ data:
   _verificationStatusIcon: ':warning:'
   attributes:
     links: []
-  bundledCode: "Traceback (most recent call last):\n  File \"/opt/hostedtoolcache/Python/3.11.0/x64/lib/python3.11/site-packages/onlinejudge_verify/documentation/build.py\"\
+  bundledCode: "Traceback (most recent call last):\n  File \"/opt/hostedtoolcache/PyPy/3.11.16/x64/lib/pypy3.11/site-packages/onlinejudge_verify/documentation/build.py\"\
     , line 71, in _render_source_code_stat\n    bundled_code = language.bundle(stat.path,\
     \ basedir=basedir, options={'include_paths': [basedir]}).decode()\n          \
-    \         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n\
-    \  File \"/opt/hostedtoolcache/Python/3.11.0/x64/lib/python3.11/site-packages/onlinejudge_verify/languages/python.py\"\
+    \                  ^^^^^^\n  File \"/opt/hostedtoolcache/PyPy/3.11.16/x64/lib/pypy3.11/site-packages/onlinejudge_verify/languages/python.py\"\
     , line 96, in bundle\n    raise NotImplementedError\nNotImplementedError\n"
   code: "import math\n\neps = 1e-10\nINF = 10**18\n\nPoint3D = tuple[float, float,\
     \ float]\nLine3D = tuple[Point3D, Point3D]\nPlane3D = tuple[Point3D, Point3D]\
@@ -61,66 +60,67 @@ data:
     \u306E\u5834\u5408\u306F assert \u3067\u843D\u3068\u3059\ndef unit(p: Point3D)\
     \ -> Point3D:\n    l = length(p)\n    assert l > eps\n    return div(p, l)\n\n\
     \n# 2\u30D9\u30AF\u30C8\u30EB\u306E\u306A\u3059\u89D2 [0, pi]\ndef angle(p: Point3D,\
-    \ q: Point3D) -> float:\n    assert length(p) > eps and length(q) > eps\n    return\
-    \ math.acos(clamp_unit(dot(p, q) / length(p) / length(q)))\n\n\n# \u539F\u70B9\
-    \u3092\u901A\u308B axis \u3092\u8EF8\u3068\u3057\u3066 p \u3092 theta \u30E9\u30B8\
-    \u30A2\u30F3\u56DE\u8EE2\ndef rotate_around_axis(p: Point3D, axis: Point3D, theta:\
-    \ float) -> Point3D:\n    u = unit(axis)\n    c = math.cos(theta)\n    s = math.sin(theta)\n\
-    \    return add(add(mul(p, c), mul(cross(u, p), s)), mul(u, dot(u, p) * (1 - c)))\n\
-    \n\n# \u76F4\u7DDA axis \u3092\u8EF8\u3068\u3057\u3066 p \u3092 theta \u30E9\u30B8\
-    \u30A2\u30F3\u56DE\u8EE2\ndef rotate(p: Point3D, axis: Line3D, theta: float) ->\
-    \ Point3D:\n    return add(axis[0], rotate_around_axis(sub(p, axis[0]), vec(axis),\
-    \ theta))\n\n\n# 3\u70B9 a, b, c \u3092\u9802\u70B9\u3068\u3059\u308B\u4E09\u89D2\
-    \u5F62\u306E\u9762\u7A4D\ndef triangle_area(a: Point3D, b: Point3D, c: Point3D)\
-    \ -> float:\n    return length(cross(sub(b, a), sub(c, a))) / 2\n\n\n# 4\u70B9\
-    \ a, b, c, d \u3092\u9802\u70B9\u3068\u3059\u308B\u56DB\u9762\u4F53\u306E\u4F53\
-    \u7A4D\ndef tetrahedron_volume(a: Point3D, b: Point3D, c: Point3D, d: Point3D)\
-    \ -> float:\n    return abs(triple(sub(b, a), sub(c, a), sub(d, a))) / 6\n\n\n\
-    # \u70B9 p \u304C\u76F4\u7DDA l \u4E0A\u306B\u3042\u308B\u304B\ndef point_on_line(p:\
-    \ Point3D, l: Line3D) -> bool:\n    v = vec(l)\n    assert length(v) > eps\n \
-    \   return length(cross(sub(p, l[0]), v)) <= eps * length(v)\n\n\n# \u70B9 p \u304C\
-    \u7DDA\u5206 s \u4E0A\u306B\u3042\u308B\u304B\ndef point_on_segment(p: Point3D,\
-    \ s: Line3D) -> bool:\n    return point_on_line(p, s) and dot(sub(p, s[0]), sub(p,\
-    \ s[1])) <= eps\n\n\n# \u70B9 p \u304B\u3089\u76F4\u7DDA l \u3078\u4E0B\u308D\u3057\
-    \u305F\u5782\u7DDA\u306E\u8DB3\ndef projection_on_line(p: Point3D, l: Line3D)\
-    \ -> Point3D:\n    v = vec(l)\n    assert length(v) > eps\n    return add(l[0],\
-    \ mul(v, dot(sub(p, l[0]), v) / norm(v)))\n\n\n# \u70B9 p \u3092\u76F4\u7DDA l\
-    \ \u306B\u95A2\u3057\u3066\u5BFE\u79F0\u79FB\u52D5\u3057\u305F\u70B9\ndef reflection_about_line(p:\
-    \ Point3D, l: Line3D) -> Point3D:\n    return sub(mul(projection_on_line(p, l),\
-    \ 2), p)\n\n\n# \u7DDA\u5206 s \u4E0A\u3067\u70B9 p \u306B\u6700\u3082\u8FD1\u3044\
-    \u70B9\ndef closest_point_on_segment(p: Point3D, s: Line3D) -> Point3D:\n    v\
-    \ = vec(s)\n    if norm(v) < eps:\n        return s[0]\n    t = clamp01(dot(sub(p,\
-    \ s[0]), v) / norm(v))\n    return add(s[0], mul(v, t))\n\n\n# \u70B9 p \u3068\
-    \u76F4\u7DDA l \u306E\u8DDD\u96E2\ndef point_line_distance(p: Point3D, l: Line3D)\
-    \ -> float:\n    v = vec(l)\n    assert length(v) > eps\n    return length(cross(sub(p,\
-    \ l[0]), v)) / length(v)\n\n\n# \u70B9 p \u3068\u7DDA\u5206 s \u306E\u8DDD\u96E2\
-    \ndef point_segment_distance(p: Point3D, s: Line3D) -> float:\n    return dist(p,\
-    \ closest_point_on_segment(p, s))\n\n\n# 2\u76F4\u7DDA\u304C\u5E73\u884C\u304B\
-    \ndef is_parallel_lines(l1: Line3D, l2: Line3D) -> bool:\n    assert length(vec(l1))\
-    \ > eps and length(vec(l2)) > eps\n    return length(cross(vec(l1), vec(l2)))\
-    \ < eps\n\n\n# 2\u76F4\u7DDA\u304C\u76F4\u4EA4\u3059\u308B\u304B\ndef is_orthogonal_lines(l1:\
-    \ Line3D, l2: Line3D) -> bool:\n    assert length(vec(l1)) > eps and length(vec(l2))\
-    \ > eps\n    return abs(dot(vec(l1), vec(l2))) < eps\n\n\n# 2\u76F4\u7DDA\u304C\
-    \u540C\u4E00\u76F4\u7DDA\u304B\ndef same_line(l1: Line3D, l2: Line3D) -> bool:\n\
-    \    return is_parallel_lines(l1, l2) and point_on_line(l2[0], l1)\n\n\n# 2\u76F4\
-    \u7DDA\u9593\u306E\u8DDD\u96E2\u3002\u306D\u3058\u308C\u306E\u4F4D\u7F6E\u306B\
-    \u3082\u5BFE\u5FDC\ndef line_line_distance(l1: Line3D, l2: Line3D) -> float:\n\
-    \    u = vec(l1)\n    v = vec(l2)\n    assert length(u) > eps and length(v) >\
-    \ eps\n    w = cross(u, v)\n    if length(w) < eps:\n        return point_line_distance(l2[0],\
-    \ l1)\n    return abs(triple(sub(l2[0], l1[0]), u, v)) / length(w)\n\n\n# 2\u76F4\
-    \u7DDA\u4E0A\u306E\u6700\u8FD1\u70B9\u306E\u7D44\u3002\u5E73\u884C\u306A\u5834\
-    \u5408\u306F assert \u3067\u843D\u3068\u3059\ndef closest_points_between_lines(l1:\
-    \ Line3D, l2: Line3D) -> tuple[Point3D, Point3D]:\n    u = vec(l1)\n    v = vec(l2)\n\
-    \    w = sub(l1[0], l2[0])\n    a = dot(u, u)\n    b = dot(u, v)\n    c = dot(v,\
-    \ v)\n    d = dot(u, w)\n    e = dot(v, w)\n    den = a * c - b * b\n    assert\
-    \ length(u) > eps and length(v) > eps and abs(den) > eps\n    s = (b * e - c *\
-    \ d) / den\n    t = (a * e - b * d) / den\n    return add(l1[0], mul(u, s)), add(l2[0],\
-    \ mul(v, t))\n\n\n# 2\u76F4\u7DDA\u304C\u4EA4\u5DEE\u3059\u308B\u304B\ndef line_intersect(l1:\
-    \ Line3D, l2: Line3D) -> bool:\n    return line_line_distance(l1, l2) <= eps\n\
-    \n\n# 2\u76F4\u7DDA\u306E\u4EA4\u70B9\u3002\u5E73\u884C\u306A\u5834\u5408\u3084\
-    \u306D\u3058\u308C\u306E\u4F4D\u7F6E\u306E\u5834\u5408\u306F assert \u3067\u843D\
-    \u3068\u3059\ndef line_intersection(l1: Line3D, l2: Line3D) -> Point3D:\n    assert\
-    \ line_intersect(l1, l2) and not is_parallel_lines(l1, l2)\n    p, q = closest_points_between_lines(l1,\
+    \ q: Point3D) -> float:\n    lp, lq = length(p), length(q)\n    assert lp > eps\
+    \ and lq > eps\n    return math.acos(clamp_unit(dot(p, q) / lp / lq))\n\n\n# \u539F\
+    \u70B9\u3092\u901A\u308B axis \u3092\u8EF8\u3068\u3057\u3066 p \u3092 theta \u30E9\
+    \u30B8\u30A2\u30F3\u56DE\u8EE2\ndef rotate_around_axis(p: Point3D, axis: Point3D,\
+    \ theta: float) -> Point3D:\n    u = unit(axis)\n    c = math.cos(theta)\n   \
+    \ s = math.sin(theta)\n    return add(add(mul(p, c), mul(cross(u, p), s)), mul(u,\
+    \ dot(u, p) * (1 - c)))\n\n\n# \u76F4\u7DDA axis \u3092\u8EF8\u3068\u3057\u3066\
+    \ p \u3092 theta \u30E9\u30B8\u30A2\u30F3\u56DE\u8EE2\ndef rotate(p: Point3D,\
+    \ axis: Line3D, theta: float) -> Point3D:\n    return add(axis[0], rotate_around_axis(sub(p,\
+    \ axis[0]), vec(axis), theta))\n\n\n# 3\u70B9 a, b, c \u3092\u9802\u70B9\u3068\
+    \u3059\u308B\u4E09\u89D2\u5F62\u306E\u9762\u7A4D\ndef triangle_area(a: Point3D,\
+    \ b: Point3D, c: Point3D) -> float:\n    return length(cross(sub(b, a), sub(c,\
+    \ a))) / 2\n\n\n# 4\u70B9 a, b, c, d \u3092\u9802\u70B9\u3068\u3059\u308B\u56DB\
+    \u9762\u4F53\u306E\u4F53\u7A4D\ndef tetrahedron_volume(a: Point3D, b: Point3D,\
+    \ c: Point3D, d: Point3D) -> float:\n    return abs(triple(sub(b, a), sub(c, a),\
+    \ sub(d, a))) / 6\n\n\n# \u70B9 p \u304C\u76F4\u7DDA l \u4E0A\u306B\u3042\u308B\
+    \u304B\ndef point_on_line(p: Point3D, l: Line3D) -> bool:\n    v = vec(l)\n  \
+    \  assert length(v) > eps\n    return length(cross(sub(p, l[0]), v)) <= eps *\
+    \ length(v)\n\n\n# \u70B9 p \u304C\u7DDA\u5206 s \u4E0A\u306B\u3042\u308B\u304B\
+    \ndef point_on_segment(p: Point3D, s: Line3D) -> bool:\n    return point_on_line(p,\
+    \ s) and dot(sub(p, s[0]), sub(p, s[1])) <= eps\n\n\n# \u70B9 p \u304B\u3089\u76F4\
+    \u7DDA l \u3078\u4E0B\u308D\u3057\u305F\u5782\u7DDA\u306E\u8DB3\ndef projection_on_line(p:\
+    \ Point3D, l: Line3D) -> Point3D:\n    v = vec(l)\n    assert length(v) > eps\n\
+    \    return add(l[0], mul(v, dot(sub(p, l[0]), v) / norm(v)))\n\n\n# \u70B9 p\
+    \ \u3092\u76F4\u7DDA l \u306B\u95A2\u3057\u3066\u5BFE\u79F0\u79FB\u52D5\u3057\u305F\
+    \u70B9\ndef reflection_about_line(p: Point3D, l: Line3D) -> Point3D:\n    return\
+    \ sub(mul(projection_on_line(p, l), 2), p)\n\n\n# \u7DDA\u5206 s \u4E0A\u3067\u70B9\
+    \ p \u306B\u6700\u3082\u8FD1\u3044\u70B9\ndef closest_point_on_segment(p: Point3D,\
+    \ s: Line3D) -> Point3D:\n    v = vec(s)\n    if norm(v) < eps:\n        return\
+    \ s[0]\n    t = clamp01(dot(sub(p, s[0]), v) / norm(v))\n    return add(s[0],\
+    \ mul(v, t))\n\n\n# \u70B9 p \u3068\u76F4\u7DDA l \u306E\u8DDD\u96E2\ndef point_line_distance(p:\
+    \ Point3D, l: Line3D) -> float:\n    v = vec(l)\n    assert length(v) > eps\n\
+    \    return length(cross(sub(p, l[0]), v)) / length(v)\n\n\n# \u70B9 p \u3068\u7DDA\
+    \u5206 s \u306E\u8DDD\u96E2\ndef point_segment_distance(p: Point3D, s: Line3D)\
+    \ -> float:\n    return dist(p, closest_point_on_segment(p, s))\n\n\n# 2\u76F4\
+    \u7DDA\u304C\u5E73\u884C\u304B\ndef is_parallel_lines(l1: Line3D, l2: Line3D)\
+    \ -> bool:\n    assert length(vec(l1)) > eps and length(vec(l2)) > eps\n    return\
+    \ length(cross(vec(l1), vec(l2))) < eps\n\n\n# 2\u76F4\u7DDA\u304C\u76F4\u4EA4\
+    \u3059\u308B\u304B\ndef is_orthogonal_lines(l1: Line3D, l2: Line3D) -> bool:\n\
+    \    assert length(vec(l1)) > eps and length(vec(l2)) > eps\n    return abs(dot(vec(l1),\
+    \ vec(l2))) < eps\n\n\n# 2\u76F4\u7DDA\u304C\u540C\u4E00\u76F4\u7DDA\u304B\ndef\
+    \ same_line(l1: Line3D, l2: Line3D) -> bool:\n    return is_parallel_lines(l1,\
+    \ l2) and point_on_line(l2[0], l1)\n\n\n# 2\u76F4\u7DDA\u9593\u306E\u8DDD\u96E2\
+    \u3002\u306D\u3058\u308C\u306E\u4F4D\u7F6E\u306B\u3082\u5BFE\u5FDC\ndef line_line_distance(l1:\
+    \ Line3D, l2: Line3D) -> float:\n    u = vec(l1)\n    v = vec(l2)\n    assert\
+    \ length(u) > eps and length(v) > eps\n    w = cross(u, v)\n    if length(w) <\
+    \ eps:\n        return point_line_distance(l2[0], l1)\n    return abs(triple(sub(l2[0],\
+    \ l1[0]), u, v)) / length(w)\n\n\n# 2\u76F4\u7DDA\u4E0A\u306E\u6700\u8FD1\u70B9\
+    \u306E\u7D44\u3002\u5E73\u884C\u306A\u5834\u5408\u306F assert \u3067\u843D\u3068\
+    \u3059\ndef closest_points_between_lines(l1: Line3D, l2: Line3D) -> tuple[Point3D,\
+    \ Point3D]:\n    u = vec(l1)\n    v = vec(l2)\n    w = sub(l1[0], l2[0])\n   \
+    \ a = dot(u, u)\n    b = dot(u, v)\n    c = dot(v, v)\n    d = dot(u, w)\n   \
+    \ e = dot(v, w)\n    den = a * c - b * b\n    assert length(u) > eps and length(v)\
+    \ > eps and abs(den) > eps\n    s = (b * e - c * d) / den\n    t = (a * e - b\
+    \ * d) / den\n    return add(l1[0], mul(u, s)), add(l2[0], mul(v, t))\n\n\n# 2\u76F4\
+    \u7DDA\u304C\u4EA4\u5DEE\u3059\u308B\u304B\ndef line_intersect(l1: Line3D, l2:\
+    \ Line3D) -> bool:\n    return line_line_distance(l1, l2) <= eps\n\n\n# 2\u76F4\
+    \u7DDA\u306E\u4EA4\u70B9\u3002\u5E73\u884C\u306A\u5834\u5408\u3084\u306D\u3058\
+    \u308C\u306E\u4F4D\u7F6E\u306E\u5834\u5408\u306F assert \u3067\u843D\u3068\u3059\
+    \ndef line_intersection(l1: Line3D, l2: Line3D) -> Point3D:\n    assert line_intersect(l1,\
+    \ l2) and not is_parallel_lines(l1, l2)\n    p, q = closest_points_between_lines(l1,\
     \ l2)\n    return div(add(p, q), 2)\n\n\n# 2\u7DDA\u5206\u4E0A\u306E\u6700\u8FD1\
     \u70B9\u306E\u7D44\u3002\u7DDA\u5206\u304C\u9000\u5316\u3057\u3066\u70B9\u306B\
     \u306A\u3063\u3066\u3044\u308B\u5834\u5408\u306B\u3082\u5BFE\u5FDC\ndef closest_points_between_segments(s1:\
@@ -230,7 +230,7 @@ data:
   isVerificationFile: false
   path: algorithm_library/python/math/geometry3d.py
   requiredBy: []
-  timestamp: '2026-10-16 13:28:30+09:00'
+  timestamp: '2026-10-20 11:51:17+09:00'
   verificationStatus: LIBRARY_NO_TESTS
   verifiedWith: []
 documentation_of: algorithm_library/python/math/geometry3d.py

@@ -8,20 +8,19 @@ data:
   _verificationStatusIcon: ':warning:'
   attributes:
     links: []
-  bundledCode: "Traceback (most recent call last):\n  File \"/opt/hostedtoolcache/Python/3.11.0/x64/lib/python3.11/site-packages/onlinejudge_verify/documentation/build.py\"\
+  bundledCode: "Traceback (most recent call last):\n  File \"/opt/hostedtoolcache/PyPy/3.11.16/x64/lib/pypy3.11/site-packages/onlinejudge_verify/documentation/build.py\"\
     , line 71, in _render_source_code_stat\n    bundled_code = language.bundle(stat.path,\
     \ basedir=basedir, options={'include_paths': [basedir]}).decode()\n          \
-    \         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n\
-    \  File \"/opt/hostedtoolcache/Python/3.11.0/x64/lib/python3.11/site-packages/onlinejudge_verify/languages/python.py\"\
+    \                  ^^^^^^\n  File \"/opt/hostedtoolcache/PyPy/3.11.16/x64/lib/pypy3.11/site-packages/onlinejudge_verify/languages/python.py\"\
     , line 96, in bundle\n    raise NotImplementedError\nNotImplementedError\n"
   code: "# O(|S|)\n# Z[i] := S[0:|S|) \u3068 S[i:|S|) \u306E\u6700\u9577\u5171\u901A\
-    \u63A5\u982D\u8F9E\u306E\u9577\u3055\ndef z_algo(S):\n    Z = [0] * len(S)\n \
-    \   Z[0] = len(S)\n    i, j = 1, 0\n    while i < len(S):\n        # \u4E00\u81F4\
-    \u3059\u308B\u9650\u308A\u5EF6\u9577\u3059\u308B\n        while i + j < len(S)\
-    \ and S[j] == S[i + j]:\n            j += 1\n        Z[i] = j\n\n        # \u4E00\
-    \u6587\u5B57\u3082\u4E00\u81F4\u3057\u306A\u3044\u306A\u3089\u30B3\u30D4\u30FC\
-    \u3067\u304D\u306A\u3044\u306E\u3067\u6B21\u306B\u9032\u3080\n        if j ==\
-    \ 0:\n            i += 1\n            continue\n\n        k = 1\n        # k+Z[k]>j\
+    \u63A5\u982D\u8F9E\u306E\u9577\u3055\ndef z_algo(S):\n    n = len(S)\n    Z =\
+    \ [0] * n\n    Z[0] = n\n    i, j = 1, 0\n    while i < n:\n        # \u4E00\u81F4\
+    \u3059\u308B\u9650\u308A\u5EF6\u9577\u3059\u308B\n        while i + j < n and\
+    \ S[j] == S[i + j]:\n            j += 1\n        Z[i] = j\n\n        # \u4E00\u6587\
+    \u5B57\u3082\u4E00\u81F4\u3057\u306A\u3044\u306A\u3089\u30B3\u30D4\u30FC\u3067\
+    \u304D\u306A\u3044\u306E\u3067\u6B21\u306B\u9032\u3080\n        if j == 0:\n \
+    \           i += 1\n            continue\n\n        k = 1\n        # k+Z[k]>j\
     \ \u306A\u30891\u56DE\u76EE\u306E\u767B\u5834\u306E\u969B\u306B\u306F\u307F\u51FA\
     \u3057\u3066\u3057\u307E\u3063\u3066\u3044\u308B\n        # k+Z[k]=j \u306A\u3089\
     2\u56DE\u76EE\u306E\u767B\u5834\u306E\u969B\u306B\u306F\u307F\u51FA\u3059\u53EF\
@@ -34,7 +33,7 @@ data:
   isVerificationFile: false
   path: algorithm_library/python/string/Z-algo.py
   requiredBy: []
-  timestamp: '2026-10-16 13:28:30+09:00'
+  timestamp: '2026-10-20 11:35:57+09:00'
   verificationStatus: LIBRARY_NO_TESTS
   verifiedWith: []
 documentation_of: algorithm_library/python/string/Z-algo.py

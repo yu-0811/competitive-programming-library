@@ -8,11 +8,10 @@ data:
   _verificationStatusIcon: ':warning:'
   attributes:
     links: []
-  bundledCode: "Traceback (most recent call last):\n  File \"/opt/hostedtoolcache/Python/3.11.0/x64/lib/python3.11/site-packages/onlinejudge_verify/documentation/build.py\"\
+  bundledCode: "Traceback (most recent call last):\n  File \"/opt/hostedtoolcache/PyPy/3.11.16/x64/lib/pypy3.11/site-packages/onlinejudge_verify/documentation/build.py\"\
     , line 71, in _render_source_code_stat\n    bundled_code = language.bundle(stat.path,\
     \ basedir=basedir, options={'include_paths': [basedir]}).decode()\n          \
-    \         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n\
-    \  File \"/opt/hostedtoolcache/Python/3.11.0/x64/lib/python3.11/site-packages/onlinejudge_verify/languages/python.py\"\
+    \                  ^^^^^^\n  File \"/opt/hostedtoolcache/PyPy/3.11.16/x64/lib/pypy3.11/site-packages/onlinejudge_verify/languages/python.py\"\
     , line 96, in bundle\n    raise NotImplementedError\nNotImplementedError\n"
   code: "from itertools import accumulate\n\n\n# \u4E8C\u6B21\u5143\u306Eimos\u6CD5\
     \nclass imos:\n    def __init__(self, H: int, W: int):\n        self.grid = [[0]\
@@ -28,15 +27,16 @@ data:
     \            self.grid[i0][j1 + 1] -= increment\n        if i1 + 1 < len(self.grid)\
     \ and j1 + 1 < len(self.grid[0]):\n            self.grid[i1 + 1][j1 + 1] += increment\n\
     \n    # \u4E8C\u6B21\u5143\u7D2F\u7A4D\u548C\u3092\u53D6\u308B\n    def cross_accumulate(self):\n\
-    \        self.flag = True\n        for i in range(len(self.grid)):\n         \
-    \   self.grid[i] = list(accumulate(self.grid[i]))\n        for j in range(len(self.grid[0])):\n\
-    \            for i in range(1, len(self.grid)):\n                self.grid[i][j]\
-    \ += self.grid[i - 1][j]\n        return self.grid\n"
+    \        self.flag = True\n        grid = self.grid\n        H, W = len(grid),\
+    \ len(grid[0])\n        grid[0] = list(accumulate(grid[0]))\n        for i in\
+    \ range(1, H):\n            prev, cur = grid[i - 1], grid[i]\n            total\
+    \ = 0\n            for j in range(W):\n                total += cur[j]\n     \
+    \           cur[j] = prev[j] + total\n        return grid\n"
   dependsOn: []
   isVerificationFile: false
   path: algorithm_library/python/techniques/imos.py
   requiredBy: []
-  timestamp: '2026-10-16 13:28:30+09:00'
+  timestamp: '2026-10-20 11:41:54+09:00'
   verificationStatus: LIBRARY_NO_TESTS
   verifiedWith: []
 documentation_of: algorithm_library/python/techniques/imos.py

@@ -81,7 +81,7 @@ data:
   isVerificationFile: false
   path: algorithm_library/cpp-from-py/string/changeable_RollingHash.cpp
   requiredBy: []
-  timestamp: '2026-10-16 13:28:30+09:00'
+  timestamp: '2026-06-17 23:24:12+09:00'
   verificationStatus: LIBRARY_NO_TESTS
   verifiedWith: []
 documentation_of: algorithm_library/cpp-from-py/string/changeable_RollingHash.cpp

@@ -8,11 +8,10 @@ data:
   _verificationStatusIcon: ':warning:'
   attributes:
     links: []
-  bundledCode: "Traceback (most recent call last):\n  File \"/opt/hostedtoolcache/Python/3.11.0/x64/lib/python3.11/site-packages/onlinejudge_verify/documentation/build.py\"\
+  bundledCode: "Traceback (most recent call last):\n  File \"/opt/hostedtoolcache/PyPy/3.11.16/x64/lib/pypy3.11/site-packages/onlinejudge_verify/documentation/build.py\"\
     , line 71, in _render_source_code_stat\n    bundled_code = language.bundle(stat.path,\
     \ basedir=basedir, options={'include_paths': [basedir]}).decode()\n          \
-    \         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n\
-    \  File \"/opt/hostedtoolcache/Python/3.11.0/x64/lib/python3.11/site-packages/onlinejudge_verify/languages/python.py\"\
+    \                  ^^^^^^\n  File \"/opt/hostedtoolcache/PyPy/3.11.16/x64/lib/pypy3.11/site-packages/onlinejudge_verify/languages/python.py\"\
     , line 96, in bundle\n    raise NotImplementedError\nNotImplementedError\n"
   code: "# \u62E1\u5F35\u30E6\u30FC\u30AF\u30EA\u30C3\u30C9\u306E\u4E92\u9664\u6CD5\
     , \u4E00\u6B21\u5408\u540C\u5F0F\n\n# ax + by = gcd(a,b) \u3092\u6E80\u305F\u3059\
@@ -26,21 +25,22 @@ data:
     \ m)\n    assert g == 1, \"a \u3068 m \u304C\u4E92\u3044\u306B\u7D20\u3067\u306A\
     \u3044\"\n    return x % m\n\n\n# ax \u2261 b (mod m) \u3092\u6E80\u305F\u3059\
     \ x \u3092\u6C42\u3081\u308B\ndef modlin(a, b, m) -> int:\n    g, x, y = extGCD(a,\
-    \ m)\n    if b % g != 0:\n        return None  # \u89E3\u306A\u3057\n    a //=\
-    \ g\n    b //= g\n    m //= g\n    inv_a = modinv(a, m)\n    return (inv_a * b)\
-    \ % m\n\n\n# \u4E2D\u56FD\u5270\u4F59\u5B9A\u7406\n# x \u2261 B[i] (mod M[i])\
-    \ \u3092\u6E80\u305F\u3059 x \u2261 r (mod lcm(M)) \u3092\u6C42\u3081\u308B\n\
-    # \u8FD4\u308A\u5024\uFF1A\u89E3 r, lcm(M)\ndef chineseRem(B: list[int], M: list[int])\
-    \ -> tuple[int, int]:\n    assert len(B) == len(M)\n    n = len(B)\n    r = 0\n\
-    \    m = 1\n    for i in range(n):\n        d, p, q = extGCD(m, M[i])\n      \
-    \  if (B[i] - r) % d != 0:\n            return None, None  # \u89E3\u306A\u3057\
-    \n        tmp = (B[i] - r) // d * p % (M[i] // d)\n        r += m * tmp\n    \
-    \    m *= M[i] // d\n    return r % m, m\n"
+    \ m)\n    if b % g != 0:\n        return None  # \u89E3\u306A\u3057\n    # a*x\
+    \ + m*y = g \u3088\u308A\u3001x \u306F a/g \u306E mod m/g \u306B\u304A\u3051\u308B\
+    \u9006\u5143\n    return x * (b // g) % (m // g)\n\n\n# \u4E2D\u56FD\u5270\u4F59\
+    \u5B9A\u7406\n# x \u2261 B[i] (mod M[i]) \u3092\u6E80\u305F\u3059 x \u2261 r (mod\
+    \ lcm(M)) \u3092\u6C42\u3081\u308B\n# \u8FD4\u308A\u5024\uFF1A\u89E3 r, lcm(M)\n\
+    def chineseRem(B: list[int], M: list[int]) -> tuple[int, int]:\n    assert len(B)\
+    \ == len(M)\n    n = len(B)\n    r = 0\n    m = 1\n    for i in range(n):\n  \
+    \      d, p, q = extGCD(m, M[i])\n        if (B[i] - r) % d != 0:\n          \
+    \  return None, None  # \u89E3\u306A\u3057\n        tmp = (B[i] - r) // d * p\
+    \ % (M[i] // d)\n        r += m * tmp\n        m *= M[i] // d\n    return r %\
+    \ m, m\n"
   dependsOn: []
   isVerificationFile: false
   path: algorithm_library/python/math/extGCD.py
   requiredBy: []
-  timestamp: '2026-10-16 13:28:30+09:00'
+  timestamp: '2026-10-20 11:51:17+09:00'
   verificationStatus: LIBRARY_NO_TESTS
   verifiedWith: []
 documentation_of: algorithm_library/python/math/extGCD.py

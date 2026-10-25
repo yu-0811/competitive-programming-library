@@ -107,7 +107,7 @@ data:
   isVerificationFile: false
   path: algorithm_library/cpp/RangeSet.cpp
   requiredBy: []
-  timestamp: '2026-10-16 13:28:30+09:00'
+  timestamp: '2026-06-17 12:52:17+09:00'
   verificationStatus: LIBRARY_NO_TESTS
   verifiedWith: []
 documentation_of: algorithm_library/cpp/RangeSet.cpp

@@ -8,11 +8,10 @@ data:
   _verificationStatusIcon: ':warning:'
   attributes:
     links: []
-  bundledCode: "Traceback (most recent call last):\n  File \"/opt/hostedtoolcache/Python/3.11.0/x64/lib/python3.11/site-packages/onlinejudge_verify/documentation/build.py\"\
+  bundledCode: "Traceback (most recent call last):\n  File \"/opt/hostedtoolcache/PyPy/3.11.16/x64/lib/pypy3.11/site-packages/onlinejudge_verify/documentation/build.py\"\
     , line 71, in _render_source_code_stat\n    bundled_code = language.bundle(stat.path,\
     \ basedir=basedir, options={'include_paths': [basedir]}).decode()\n          \
-    \         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n\
-    \  File \"/opt/hostedtoolcache/Python/3.11.0/x64/lib/python3.11/site-packages/onlinejudge_verify/languages/python.py\"\
+    \                  ^^^^^^\n  File \"/opt/hostedtoolcache/PyPy/3.11.16/x64/lib/pypy3.11/site-packages/onlinejudge_verify/languages/python.py\"\
     , line 96, in bundle\n    raise NotImplementedError\nNotImplementedError\n"
   code: "import math\n\neps = 1e-10\nINF = 10**18\n\nPoint = tuple[float, float]\n\
     Line = tuple[Point, Point]\nCircle = tuple[Point, float]\n\n\n# \u88DC\u52A9\u95A2\
@@ -86,19 +85,20 @@ data:
     \ l1),\n    )\n\n\n# /////////////////////////////////////////////\n\n\n# \u76F4\
     \u7DDA l \u3068\u5186 c \u306E\u4EA4\u70B9\u3002\u4EA4\u70B9\u304C\u306A\u3044\
     \u5834\u5408\u306F assert \u3067\u843D\u3068\u3059\ndef line_circle_intersection(l:\
-    \ Line, c: Circle) -> tuple[Point, Point]:\n    center, radius = c\n    assert\
-    \ length(vec(l)) > eps\n    p = projection(center, l)\n    d = point_line_distance(center,\
-    \ l)\n    assert d <= radius + eps\n    h = math.sqrt(max(0.0, radius * radius\
-    \ - d * d))\n    u = div(vec(l), length(vec(l)))\n    return add(p, mul(u, h)),\
-    \ sub(p, mul(u, h))\n\n\n# 2\u5186 c1, c2 \u306E\u4EA4\u70B9\u3002\u4EA4\u70B9\
-    \u304C\u306A\u3044\u5834\u5408\u3084\u540C\u5FC3\u5186\u306E\u5834\u5408\u306F\
-    \ assert \u3067\u843D\u3068\u3059\ndef circle_intersection(c1: Circle, c2: Circle)\
-    \ -> tuple[Point, Point]:\n    center1, radius1 = c1\n    center2, radius2 = c2\n\
-    \    d = dist(center1, center2)\n    assert d > eps\n    assert abs(radius1 -\
-    \ radius2) <= d + eps and d <= radius1 + radius2 + eps\n    m = (radius1 * radius1\
-    \ - radius2 * radius2 + d * d) / (d * 2)\n    midpoint = add(center1, mul(div(sub(center2,\
-    \ center1), d), m))\n    h = math.sqrt(max(0.0, radius1 * radius1 - m * m))\n\
-    \    normal = mul(div(rotate90(sub(center2, center1)), d), h)\n    return sub(midpoint,\
+    \ Line, c: Circle) -> tuple[Point, Point]:\n    center, radius = c\n    v = vec(l)\n\
+    \    v_len = length(v)\n    assert v_len > eps\n    rel = sub(center, l[0])\n\
+    \    p = add(l[0], mul(v, dot(rel, v) / norm(v)))\n    d = abs(cross(rel, v))\
+    \ / v_len\n    assert d <= radius + eps\n    h = math.sqrt(max(0.0, radius * radius\
+    \ - d * d))\n    u = div(v, v_len)\n    return add(p, mul(u, h)), sub(p, mul(u,\
+    \ h))\n\n\n# 2\u5186 c1, c2 \u306E\u4EA4\u70B9\u3002\u4EA4\u70B9\u304C\u306A\u3044\
+    \u5834\u5408\u3084\u540C\u5FC3\u5186\u306E\u5834\u5408\u306F assert \u3067\u843D\
+    \u3068\u3059\ndef circle_intersection(c1: Circle, c2: Circle) -> tuple[Point,\
+    \ Point]:\n    center1, radius1 = c1\n    center2, radius2 = c2\n    d = dist(center1,\
+    \ center2)\n    assert d > eps\n    assert abs(radius1 - radius2) <= d + eps and\
+    \ d <= radius1 + radius2 + eps\n    m = (radius1 * radius1 - radius2 * radius2\
+    \ + d * d) / (d * 2)\n    midpoint = add(center1, mul(div(sub(center2, center1),\
+    \ d), m))\n    h = math.sqrt(max(0.0, radius1 * radius1 - m * m))\n    normal\
+    \ = mul(div(rotate90(sub(center2, center1)), d), h)\n    return sub(midpoint,\
     \ normal), add(midpoint, normal)\n\n\n# \u70B9 p \u304B\u3089\u5186 c \u3078\u5F15\
     \u3044\u305F 2 \u672C\u306E\u63A5\u7DDA\u306E\u63A5\u70B9\u3002p \u304C\u5186\u306E\
     \u5185\u5074\u306B\u3042\u308B\u5834\u5408\u306F assert \u3067\u843D\u3068\u3059\
@@ -136,7 +136,7 @@ data:
   isVerificationFile: false
   path: algorithm_library/python/math/circle.py
   requiredBy: []
-  timestamp: '2026-10-16 13:28:30+09:00'
+  timestamp: '2026-10-20 11:51:17+09:00'
   verificationStatus: LIBRARY_NO_TESTS
   verifiedWith: []
 documentation_of: algorithm_library/python/math/circle.py
