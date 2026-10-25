@@ -228,6 +228,9 @@ data:
       path: algorithm_library/python/data-structure/Mos_algorithm.py
       title: algorithm_library/python/data-structure/Mos_algorithm.py
     - icon: ':warning:'
+      path: algorithm_library/python/data-structure/PackedTupleHeap.py
+      title: algorithm_library/python/data-structure/PackedTupleHeap.py
+    - icon: ':warning:'
       path: algorithm_library/python/data-structure/Segtree.py
       title: algorithm_library/python/data-structure/Segtree.py
     - icon: ':warning:'
@@ -236,9 +239,6 @@ data:
     - icon: ':warning:'
       path: algorithm_library/python/data-structure/TopK.py
       title: algorithm_library/python/data-structure/TopK.py
-    - icon: ':warning:'
-      path: algorithm_library/python/data-structure/TupleHeap.py
-      title: algorithm_library/python/data-structure/TupleHeap.py
     - icon: ':warning:'
       path: algorithm_library/python/data-structure/TupleLazySegtree.py
       title: algorithm_library/python/data-structure/TupleLazySegtree.py

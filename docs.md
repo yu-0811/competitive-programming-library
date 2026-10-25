@@ -94,8 +94,8 @@
 
 ## data-structure
 
-- TupleHeap.py
-    - 2 要素タプル用の最小ヒープ。成分分離型の `TupleHeap` と整数符号化型の `PackedTupleHeap`
+- TupleHeap.py / PackedTupleHeap.py
+    - 任意の要素数に対応する写経用の最小ヒープ。本体は成分分離型 54 行、整数符号化型 34 行
     - [使い方・PyPy / CPython での速度測定](documents/algo_library/data_structure/TupleHeap.md)
 
 ## techniques
