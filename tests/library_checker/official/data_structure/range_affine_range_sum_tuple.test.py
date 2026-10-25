@@ -66,15 +66,15 @@ class TupleLazySegtree:
         assert len(e) in COLUMN_TYPES and len(ide) in COLUMN_TYPES
         d = s.d = COLUMN_TYPES[len(e)](2 * z, e)
         s.lz = COLUMN_TYPES[len(ide)](z, ide)
-        s.pending = [False] * z
+        s.pend = [False] * z
         for i, value in enumerate(v, z):
             d[i] = value
         for i in range(z - 1, 0, -1):
             d[i] = op(d[2 * i], d[2 * i + 1])
 
     def _push(s, k):
-        pending = s.pending
-        if not pending[k]:
+        pend = s.pend
+        if not pend[k]:
             return
         d, lz, mp, comp = s.d, s.lz, s.mp, s.comp
         f = lz[k]
@@ -82,10 +82,10 @@ class TupleLazySegtree:
         d[c] = mp(f, d[c])
         d[c + 1] = mp(f, d[c + 1])
         if c < s.z:
-            lz[c] = comp(f, lz[c]) if pending[c] else f
-            lz[c + 1] = comp(f, lz[c + 1]) if pending[c + 1] else f
-            pending[c] = pending[c + 1] = True
-        pending[k] = False
+            lz[c] = comp(f, lz[c]) if pend[c] else f
+            lz[c + 1] = comp(f, lz[c + 1]) if pend[c + 1] else f
+            pend[c] = pend[c + 1] = True
+        pend[k] = False
 
     def set(s, p, x):
         """p 番目の値をタプル x に更新する。"""
@@ -152,7 +152,7 @@ class TupleLazySegtree:
         assert 0 <= l <= r <= s.n
         if l == r:
             return
-        d, lz, pending = s.d, s.lz, s.pending
+        d, lz, pend = s.d, s.lz, s.pend
         op, mp, comp = s.op, s.mp, s.comp
         push, z = s._push, s.z
         l += z
@@ -169,15 +169,15 @@ class TupleLazySegtree:
             if l & 1:
                 d[l] = mp(f, d[l])
                 if l < z:
-                    lz[l] = comp(f, lz[l]) if pending[l] else f
-                    pending[l] = True
+                    lz[l] = comp(f, lz[l]) if pend[l] else f
+                    pend[l] = True
                 l += 1
             if r & 1:
                 r -= 1
                 d[r] = mp(f, d[r])
                 if r < z:
-                    lz[r] = comp(f, lz[r]) if pending[r] else f
-                    pending[r] = True
+                    lz[r] = comp(f, lz[r]) if pend[r] else f
+                    pend[r] = True
             l >>= 1
             r >>= 1
         for i in range(1, s.log + 1):
