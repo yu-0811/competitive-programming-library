@@ -1,7 +1,7 @@
 """
-PackedTupleHeap(arity=2, bits=20, values=()): 整数タプルの辞書順最小ヒープ。
+PackedTupleHeap(arity=2, bits=20, values=None): 整数タプルの辞書順最小ヒープ。
 arity: タプルの長さ
-values: 初期タプル列（例: [(1, 2, 3)]）。省略時の () は空。
+values: list[tuple[int, ...]]（例: [(1, 2, 3)]）。省略時の None は空。
 bits: 第2成分以降の範囲を表す int または整数の列。3要素 (a, b, c) の場合:
   bits=8       → b, c は各 0～255。
   bits=(8, 12) → b は 0～255、c は 0～4095。
@@ -17,9 +17,14 @@ from heapq import heapify, heappop, heappush
 
 
 class PackedTupleHeap:
-    def __init__(s, arity=2, bits=20, values=()):
+    def __init__(
+        s,
+        arity: int = 2,
+        bits: int | list[int] = 20,
+        values: list[tuple[int, ...]] | None = None,
+    ) -> None:
         s.bits = (bits,) * (arity - 1) if isinstance(bits, int) else tuple(bits)
-        s.q = [s._pack(x) for x in values]
+        s.q = [s._pack(x) for x in values or ()]
         heapify(s.q)
 
     def __len__(s):
