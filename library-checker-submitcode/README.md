@@ -56,7 +56,7 @@ if __name__ == "__main__":
 
 ## 追加済みの提出コード
 
-20 個のライブラリを、21 問・24 本の提出コードで確認できます。
+21 個のライブラリを、21 問・25 本の提出コードで確認できます。
 同じ問題に複数の実装を用意しているものもあります。
 
 | ライブラリ | 提出コード | Library Checker 問題 |
@@ -71,6 +71,7 @@ if __name__ == "__main__":
 | `data-structure/BIT.py` | [data_structure/point_add_range_sum_bit.py](data_structure/point_add_range_sum_bit.py) | [Point Add Range Sum](https://judge.yosupo.jp/problem/point_add_range_sum) |
 | `data-structure/Segtree.py` | [data_structure/point_add_range_sum_segtree.py](data_structure/point_add_range_sum_segtree.py) | [Point Add Range Sum](https://judge.yosupo.jp/problem/point_add_range_sum) |
 | `data-structure/Segtree.py` | [data_structure/point_set_range_composite.py](data_structure/point_set_range_composite.py) | [Point Set Range Composite](https://judge.yosupo.jp/problem/point_set_range_composite) |
+| `data-structure/TupleSegtree.py` | [data_structure/point_set_range_composite_tuple.py](data_structure/point_set_range_composite_tuple.py) | [Point Set Range Composite](https://judge.yosupo.jp/problem/point_set_range_composite) |
 | `data-structure/SparseTable.py` | [data_structure/staticrmq.py](data_structure/staticrmq.py) | [Static RMQ](https://judge.yosupo.jp/problem/staticrmq) |
 | `data-structure/DisjointSparseTable.py` | [data_structure/static_range_sum.py](data_structure/static_range_sum.py) | [Static Range Sum](https://judge.yosupo.jp/problem/static_range_sum) |
 | `data-structure/MargeSortTree.py` | [data_structure/static_range_frequency.py](data_structure/static_range_frequency.py) | [Static Range Frequency](https://judge.yosupo.jp/problem/static_range_frequency) |

@@ -26,12 +26,12 @@ def affine_tree(values, mod=None):
         return normalize(f[0] * g[0]), normalize(f[0] * g[1] + f[1])
 
     return TupleLazySegtree(
-        V=[(normalize(x), 1) for x in values],
+        v=[(normalize(x), 1) for x in values],
         op=op,
-        E=(0, 0),
+        e=(0, 0),
         mp=mp,
         comp=comp,
-        ID=(1, 0),
+        ide=(1, 0),
     )
 
 

@@ -1,9 +1,9 @@
 class Columns2:
     __slots__ = ("a", "b")
 
-    def __init__(s, n, E):
-        s.a = [E[0]] * n
-        s.b = [E[1]] * n
+    def __init__(s, n, e):
+        s.a = [e[0]] * n
+        s.b = [e[1]] * n
 
     def __getitem__(s, i):
         return s.a[i], s.b[i]
@@ -15,10 +15,10 @@ class Columns2:
 class Columns3:
     __slots__ = ("a", "b", "c")
 
-    def __init__(s, n, E):
-        s.a = [E[0]] * n
-        s.b = [E[1]] * n
-        s.c = [E[2]] * n
+    def __init__(s, n, e):
+        s.a = [e[0]] * n
+        s.b = [e[1]] * n
+        s.c = [e[2]] * n
 
     def __getitem__(s, i):
         return s.a[i], s.b[i], s.c[i]
@@ -33,20 +33,20 @@ COLUMN_TYPES = {2: Columns2, 3: Columns3}
 
 class TupleLazySegtree:
     # タプルをそのまま載せるだけでいい
-    def __init__(s, V, op, E, mp, comp, ID):
-        s.n = len(V)
+    def __init__(s, v, op, e, mp, comp, ide):
+        s.n = len(v)
         s.log = (max(1, s.n) - 1).bit_length()
         z = s.z = 1 << s.log
-        s.e = E = tuple(E)
-        s.ide = ID = tuple(ID)
+        s.e = e = tuple(e)
+        s.ide = ide = tuple(ide)
         s.op = op
         s.mp = mp
         s.comp = comp
-        assert len(E) in COLUMN_TYPES and len(ID) in COLUMN_TYPES
-        d = s.d = COLUMN_TYPES[len(E)](2 * z, E)
-        s.lz = COLUMN_TYPES[len(ID)](z, ID)
+        assert len(e) in COLUMN_TYPES and len(ide) in COLUMN_TYPES
+        d = s.d = COLUMN_TYPES[len(e)](2 * z, e)
+        s.lz = COLUMN_TYPES[len(ide)](z, ide)
         s.pending = [False] * z
-        for i, value in enumerate(V, z):
+        for i, value in enumerate(v, z):
             d[i] = value
         for i in range(z - 1, 0, -1):
             d[i] = op(d[2 * i], d[2 * i + 1])

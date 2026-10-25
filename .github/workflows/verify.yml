@@ -45,11 +45,27 @@ jobs:
         restore-keys: |
           ${{ runner.os }}-library-checker-v1-${{ steps.library-checker-version.outputs.commit }}-
 
+    # Keep verification timestamps out of main so CI does not diverge from local clones.
+    - name: Restore verification timestamps
+      uses: actions/cache/restore@v4
+      with:
+        path: .verify-helper/timestamps.remote.json
+        key: ${{ runner.os }}-verification-timestamps-v1-${{ github.sha }}-${{ github.run_id }}-${{ github.run_attempt }}
+        restore-keys: |
+          ${{ runner.os }}-verification-timestamps-v1-
+
     - name: Verify with official cases
       env:
-        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         YUKICODER_TOKEN: ${{ secrets.YUKICODER_TOKEN }}
-      run: oj-verify run --timeout inf
+      # oj-verify pushes timestamps to main when GITHUB_TOKEN is present.
+      run: env -u GITHUB_TOKEN oj-verify run --timeout inf
+
+    - name: Save verification timestamps
+      if: always()
+      uses: actions/cache/save@v4
+      with:
+        path: .verify-helper/timestamps.remote.json
+        key: ${{ runner.os }}-verification-timestamps-v1-${{ github.sha }}-${{ github.run_id }}-${{ github.run_attempt }}
 
     # oj-verify docs switches to gh-pages and removes the working files.
     - name: Save Library Checker cases and generators
