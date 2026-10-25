@@ -7,7 +7,6 @@ from itertools import combinations,permutations,accumulate,product
 from bisect import bisect_left,bisect_right
 from heapq import heappop,heappush,heapify
 #from more_itertools import distinct_permutations,distinct_combinations
-readline = sys.stdin.buffer.readline
 def input():return sys.stdin.readline().rstrip()
 def ii(): return int(input())
 def ms(): return map(int, input().split())

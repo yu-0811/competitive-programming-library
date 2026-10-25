@@ -1,3 +1,7 @@
+[tool.ruff]
+extend-exclude = ["algorithm_library/python/template.py"]
+force-exclude = true
+
 [tool.ruff.lint]
 ignore = [
     "F821",

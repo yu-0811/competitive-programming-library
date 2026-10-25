@@ -92,6 +92,12 @@
     - 行列 A,B の積を返す
     - 行列 A の累乗 A^K
 
+## data-structure
+
+- TupleHeap.py
+    - 2 要素タプル用の最小ヒープ。成分分離型の `TupleHeap` と整数符号化型の `PackedTupleHeap`
+    - [使い方・PyPy / CPython での速度測定](documents/algo_library/data_structure/TupleHeap.md)
+
 ## techniques
 
 - CmpSort.py
