@@ -1,7 +1,10 @@
 ---
 data:
   _extendedDependsOn: []
-  _extendedRequiredBy: []
+  _extendedRequiredBy:
+  - icon: ':warning:'
+    path: tests/math/test_cmp_sort.py
+    title: tests/math/test_cmp_sort.py
   _extendedVerifiedWith: []
   _isVerificationFailed: false
   _pathExtension: py
@@ -35,13 +38,16 @@ data:
     \u3070\u3001\u9006\u5411\u304D\uFF08180\u5EA6\u53CD\u5BFE\uFF09\u307E\u305F\u306F\
     \u539F\u70B9\u3092\u542B\u3093\u3067\u3044\u308B\n    #    \u5185\u7A4D > 0 \u306A\
     \u3089\u3070\u540C\u3058\u5411\u304D\n    if ax * bx + ay * by > 0:\n        return\
-    \ True\n\n    return False\n\n\n# \u4F7F\u7528\u4F8B\n# A = [(0,1),(1,1),(1,0),(1,-1),(0,-1),(-1,-1),(-1,0),(-1,1)]\n\
-    # A.sort(key=cmp_to_key(compare))\n"
+    \ True\n\n    return False\n\n\n# \u4F7F\u7528\u4F8B\n# from algorithm_library.python.techniques.CmpSort\
+    \ import cmp_sort\n# A = [(0,1),(1,1),(1,0),(1,-1),(0,-1),(-1,-1),(-1,0),(-1,1)]\n\
+    # A = cmp_sort(A, compare)\n# \u203B compare \u3067\u504F\u89D2\u3092\u4E26\u3079\
+    \u308B\u969B\u306F\u539F\u70B9 (0, 0) \u3092\u5225\u306B\u6271\u3046\u3002\n"
   dependsOn: []
   isVerificationFile: false
   path: algorithm_library/python/math/AngularSort.py
-  requiredBy: []
-  timestamp: '2026-01-25 12:47:09+09:00'
+  requiredBy:
+  - tests/math/test_cmp_sort.py
+  timestamp: '2026-10-25 18:45:29+09:00'
   verificationStatus: LIBRARY_NO_TESTS
   verifiedWith: []
 documentation_of: algorithm_library/python/math/AngularSort.py

@@ -15,21 +15,20 @@ data:
     \                  ^^^^^^\n  File \"/opt/hostedtoolcache/PyPy/3.11.16/x64/lib/pypy3.11/site-packages/onlinejudge_verify/languages/python.py\"\
     , line 96, in bundle\n    raise NotImplementedError\nNotImplementedError\n"
   code: "# problem: https://judge.yosupo.jp/problem/sort_points_by_argument\n# include:\
-    \ algorithm_library/python/math/AngularSort.py\n\nfrom functools import cmp_to_key\n\
+    \ algorithm_library/python/math/AngularSort.py\n# include: algorithm_library/python/techniques/CmpSort.py\n\
     \n\ndef main():\n    N = int(readline())\n    lower, zeros, upper = [], [], []\n\
     \    for _ in range(N):\n        point = tuple(map(int, readline().split()))\n\
     \        if point == (0, 0):\n            zeros.append(point)\n        elif point[1]\
     \ < 0:\n            lower.append(point)\n        else:\n            upper.append(point)\n\
     \    # The library starts at angle 0; the problem uses (-pi, pi], with arg(0)=0.\n\
-    \    lower.sort(key=cmp_to_key(compare))\n    upper.sort(key=cmp_to_key(compare))\n\
-    \    points = lower + zeros + upper\n    sys.stdout.write(\"\\n\".join(f\"{x}\
-    \ {y}\" for x, y in points) + \"\\n\")\n\n\nif __name__ == \"__main__\":\n   \
-    \ main()\n"
+    \    cmp_sort(lower, compare)\n    cmp_sort(upper, compare)\n    points = lower\
+    \ + zeros + upper\n    sys.stdout.write(\"\\n\".join(f\"{x} {y}\" for x, y in\
+    \ points) + \"\\n\")\n\n\nif __name__ == \"__main__\":\n    main()\n"
   dependsOn: []
   isVerificationFile: false
   path: library-checker-submitcode/src/math/sort_points_by_argument.py
   requiredBy: []
-  timestamp: '2026-10-20 13:27:19+09:00'
+  timestamp: '2026-10-25 18:45:29+09:00'
   verificationStatus: LIBRARY_NO_TESTS
   verifiedWith: []
 documentation_of: library-checker-submitcode/src/math/sort_points_by_argument.py

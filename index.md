@@ -237,6 +237,9 @@ data:
       path: algorithm_library/python/data-structure/TopK.py
       title: algorithm_library/python/data-structure/TopK.py
     - icon: ':warning:'
+      path: algorithm_library/python/data-structure/TupleHeap.py
+      title: algorithm_library/python/data-structure/TupleHeap.py
+    - icon: ':warning:'
       path: algorithm_library/python/data-structure/TupleLazySegtree.py
       title: algorithm_library/python/data-structure/TupleLazySegtree.py
     - icon: ':warning:'
@@ -383,6 +386,9 @@ data:
     - icon: ':warning:'
       path: algorithm_library/python/techniques/3buntansaku.py
       title: algorithm_library/python/techniques/3buntansaku.py
+    - icon: ':warning:'
+      path: algorithm_library/python/techniques/CmpSort.py
+      title: algorithm_library/python/techniques/CmpSort.py
     - icon: ':warning:'
       path: algorithm_library/python/techniques/Compression.py
       title: algorithm_library/python/techniques/Compression.py
@@ -709,6 +715,9 @@ data:
   - name: tests/data_structure
     pages:
     - icon: ':warning:'
+      path: tests/data_structure/benchmark_tuple_heap.py
+      title: tests/data_structure/benchmark_tuple_heap.py
+    - icon: ':warning:'
       path: tests/data_structure/benchmark_tuple_lazy_segtree.py
       title: tests/data_structure/benchmark_tuple_lazy_segtree.py
     - icon: ':warning:'
@@ -717,6 +726,9 @@ data:
     - icon: ':warning:'
       path: tests/data_structure/test_static_structures.py
       title: tests/data_structure/test_static_structures.py
+    - icon: ':warning:'
+      path: tests/data_structure/test_tuple_heap.py
+      title: tests/data_structure/test_tuple_heap.py
     - icon: ':warning:'
       path: tests/data_structure/test_tuple_lazy_segtree.py
       title: tests/data_structure/test_tuple_lazy_segtree.py
@@ -733,6 +745,12 @@ data:
       title: tests/graph/test_graph_regressions.py
   - name: tests/math
     pages:
+    - icon: ':warning:'
+      path: tests/math/benchmark_cmp_sort.py
+      title: tests/math/benchmark_cmp_sort.py
+    - icon: ':warning:'
+      path: tests/math/test_cmp_sort.py
+      title: tests/math/test_cmp_sort.py
     - icon: ':warning:'
       path: tests/math/test_matrix_power.py
       title: tests/math/test_matrix_power.py
