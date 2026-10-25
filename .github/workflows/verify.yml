@@ -27,6 +27,11 @@ jobs:
     - name: Check Library Checker submission code
       run: python library-checker-submitcode/generate.py --check
 
+    - name: Install lxml build dependencies
+      run: |
+        sudo apt-get update
+        sudo apt-get install -y --no-install-recommends libxml2-dev libxslt1-dev
+
     - name: Install dependencies
       run: python -m pip install -r library-checker-submitcode/requirements-verify.txt
 
