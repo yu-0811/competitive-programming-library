@@ -41,5 +41,7 @@ def is_same_angle(p1, p2):
 
 
 # 使用例
+# from algorithm_library.python.techniques.CmpSort import cmp_sort
 # A = [(0,1),(1,1),(1,0),(1,-1),(0,-1),(-1,-1),(-1,0),(-1,1)]
-# A.sort(key=cmp_to_key(compare))
+# A = cmp_sort(A, compare)
+# ※ compare で偏角を並べる際は原点 (0, 0) を別に扱う。

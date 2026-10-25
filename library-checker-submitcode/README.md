@@ -56,7 +56,7 @@ if __name__ == "__main__":
 
 ## 追加済みの提出コード
 
-21 個のライブラリを、21 問・25 本の提出コードで確認できます。
+22 個のライブラリを、21 問・25 本の提出コードで確認できます。
 同じ問題に複数の実装を用意しているものもあります。
 
 | ライブラリ | 提出コード | Library Checker 問題 |
@@ -85,7 +85,7 @@ if __name__ == "__main__":
 | `math/FFT.py` | [math/convolution_mod.py](math/convolution_mod.py) | [Convolution](https://judge.yosupo.jp/problem/convolution_mod) |
 | `math/MatrixPower.py` | [math/matrix_product.py](math/matrix_product.py) | [Matrix Product](https://judge.yosupo.jp/problem/matrix_product) |
 | `math/MatrixPower.py` | [math/pow_of_matrix.py](math/pow_of_matrix.py) | [Power of Matrix](https://judge.yosupo.jp/problem/pow_of_matrix) |
-| `math/AngularSort.py` | [math/sort_points_by_argument.py](math/sort_points_by_argument.py) | [Sort Points by Argument](https://judge.yosupo.jp/problem/sort_points_by_argument) |
+| `math/AngularSort.py` + `techniques/CmpSort.py` | [math/sort_points_by_argument.py](math/sort_points_by_argument.py) | [Sort Points by Argument](https://judge.yosupo.jp/problem/sort_points_by_argument) |
 
 ## ローカルでの確認
 

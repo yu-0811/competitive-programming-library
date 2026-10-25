@@ -18,6 +18,7 @@
 ## math
 ### 幾何
 - AngularSort.py
+    - 比較関数 `compare` による偏角ソート。`cmp_sort(A, compare)` で利用
     - 2点 p1, p2 が原点から見て同じ偏角（同じ方向）にあるか判定する
 
 - geometry.py
@@ -90,3 +91,9 @@
 - MatrixPower.py
     - 行列 A,B の積を返す
     - 行列 A の累乗 A^K
+
+## techniques
+
+- CmpSort.py
+    - 任意の比較関数を直接渡せる安定ソート。入力リストを並べ替えて返す
+    - [使い方・PyPy での速度測定](documents/algo_library/techniques/CmpSort.md)
