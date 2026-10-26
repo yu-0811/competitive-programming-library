@@ -201,6 +201,14 @@ data:
     - icon: ':warning:'
       path: algorithm_library/cpp-from-py/techniques/imos.cpp
       title: algorithm_library/cpp-from-py/techniques/imos.cpp
+  - name: algorithm_library/python
+    pages:
+    - icon: ':warning:'
+      path: algorithm_library/python/ICPCtemplate.py
+      title: algorithm_library/python/ICPCtemplate.py
+    - icon: ':warning:'
+      path: algorithm_library/python/template.py
+      title: algorithm_library/python/template.py
   - name: algorithm_library/python/data-structure
     pages:
     - icon: ':warning:'
@@ -413,11 +421,6 @@ data:
     - icon: ':warning:'
       path: algorithm_library/python/techniques/imos.py
       title: algorithm_library/python/techniques/imos.py
-  - name: algorithm_library/python
-    pages:
-    - icon: ':warning:'
-      path: algorithm_library/python/template.py
-      title: algorithm_library/python/template.py
   - name: heuristic_library/cpp
     pages:
     - icon: ':warning:'
