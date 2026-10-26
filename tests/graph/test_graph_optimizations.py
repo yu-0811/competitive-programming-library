@@ -70,9 +70,9 @@ class TreeOptimizationTests(unittest.TestCase):
         for n in [0, 1, 2, 3, 7, 8, 9, 63, 64, 65, 127]:
             values = [rng.randrange(-100, 101) for _ in range(n)]
             tour = EulerTour(1)
-            tour.edge_cost = values[:]
+            tour.ws = values[:]
             tour._build_fentree()
-            self.assertEqual(tour.edge_cost, values)
+            self.assertEqual(tour.ws, values)
             if values:
                 values[0] = 0
             for r in range(n + 1):
