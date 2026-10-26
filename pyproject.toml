@@ -1,5 +1,8 @@
 [tool.ruff]
-extend-exclude = ["algorithm_library/python/template.py"]
+extend-exclude = [
+    "algorithm_library/python/template.py",
+    "algorithm_library/python/ICPCtemplate.py",
+]
 force-exclude = true
 
 [tool.ruff.lint]
