@@ -16,3 +16,5 @@ from collections import defaultdict,deque
 from itertools import combinations,permutations,accumulate,product
 from bisect import bisect_left,bisect_right
 from heapq import heappop,heappush,heapify
+from functools import cache
+# @cache
