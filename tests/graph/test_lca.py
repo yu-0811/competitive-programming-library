@@ -52,6 +52,10 @@ class LCATests(unittest.TestCase):
                 self.assertEqual(row[v], ancestor)
         for u in vertices:
             for v in vertices:
+                ancestor = v
+                while ancestor != -1 and ancestor != u:
+                    ancestor = parents[ancestor]
+                self.assertEqual(tree.is_in_subtree(u, v), ancestor == u)
                 common = naive_lca(u, v, parents, depths)
                 self.assertEqual(tree.lca(u, v), common)
                 distance = depths[u] + depths[v] - 2 * depths[common]

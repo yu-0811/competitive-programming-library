@@ -41,6 +41,10 @@ class LCA:
                 u, v = x, y
         return a[u]
 
+    # 構築時の根を基準に、v が u の部分木に含まれるか O(log N)
+    def is_in_subtree(s, u, v):
+        return s.lca(u, v) == u
+
     # u と v の距離を返す
     def get_distance(s, u, v):
         d = s.depth
