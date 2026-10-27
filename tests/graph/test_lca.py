@@ -35,21 +35,10 @@ class LCATests(unittest.TestCase):
     def check_tree(self, n, graph, root, vertices):
         tree = LCA(n, graph, root)
         parents, depths = rooted_tree(graph, root)
-        self.assertEqual(tree.N, n)
-        self.assertEqual(tree.bit, n.bit_length())
         self.assertEqual(tree.depth[: len(graph)], depths)
         self.assertEqual(len(tree.depth), n + 1)
-        self.assertEqual(len(tree.parent), tree.bit)
-        # parent は jump_on_tree などからも参照される公開のダブリング表。
-        for k, row in enumerate(tree.parent):
-            self.assertEqual(len(row), n + 1)
-            for v in vertices:
-                ancestor = v
-                for _ in range(1 << k):
-                    ancestor = parents[ancestor]
-                    if ancestor == -1:
-                        break
-                self.assertEqual(row[v], ancestor)
+        self.assertEqual(tree.p[: len(graph)], parents)
+        self.assertEqual(len(tree.p), n + 1)
         for u in vertices:
             for v in vertices:
                 ancestor = v
@@ -100,9 +89,33 @@ class LCATests(unittest.TestCase):
         tree = LCA(6, graph, 1)
         self.assertEqual(tree.depth[0], -1)
         self.assertEqual(tree.depth[6], -1)
-        for row in tree.parent:
-            self.assertEqual(row[0], -1)
-            self.assertEqual(row[6], -1)
+        self.assertEqual(tree.p[0], -1)
+        self.assertEqual(tree.p[6], -1)
+
+    def test_larger_relabelled_trees(self):
+        rng = random.Random(20261027)
+        for n in [31, 32, 33, 63, 64, 65, 127, 128, 129, 257, 1023]:
+            labels = rng.sample(range(n), n)
+            graph = [[] for _ in range(n)]
+            for i in range(1, n):
+                u, v = labels[rng.randrange(i)], labels[i]
+                graph[u].append(v)
+                graph[v].append(u)
+            for root in [labels[0], labels[n // 2]]:
+                tree = LCA(n, graph, root)
+                parents, depths = rooted_tree(graph, root)
+                for _ in range(1000):
+                    u, v = rng.randrange(n), rng.randrange(n)
+                    common = naive_lca(u, v, parents, depths)
+                    self.assertEqual(tree.lca(u, v), common)
+                    self.assertEqual(
+                        tree.get_distance(u, v),
+                        depths[u] + depths[v] - 2 * depths[common],
+                    )
+                    ancestor = v
+                    while ancestor != -1 and ancestor != u:
+                        ancestor = parents[ancestor]
+                    self.assertEqual(tree.is_in_subtree(u, v), ancestor == u)
 
     def test_long_chain_and_shallow_tree(self):
         n = 10000
@@ -120,8 +133,7 @@ class LCATests(unittest.TestCase):
         star = [list(range(1, n))] + [[] for _ in range(n - 1)]
         tree = LCA(n, star, 0)
         self.assertEqual(tree.lca(n - 1, n - 2), 0)
-        for row in tree.parent[1:]:
-            self.assertEqual(row, [-1] * (n + 1))
+        self.assertEqual(tree.p[:n], [-1] + [0] * (n - 1))
 
 
 if __name__ == "__main__":

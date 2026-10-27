@@ -12,7 +12,7 @@ from pathlib import Path
 
 LIBRARY = Path(__file__).resolve().parents[2] / "algorithm_library/python/graph/LCA.py"
 SHAPES = ["chain", "star", "balanced", "random", "broom"]
-PHASES = ["build", "lca", "distance", "is_on_path"]
+PHASES = ["build", "lca", "subtree", "distance", "is_on_path"]
 
 
 def measure(cls, graph, queries):
@@ -21,13 +21,22 @@ def measure(cls, graph, queries):
     built = time.perf_counter()
     lca_checksum = sum(tree.lca(u, v) for u, v, _ in queries)
     queried = time.perf_counter()
+    is_in_subtree = getattr(tree, "is_in_subtree", lambda u, v: tree.lca(u, v) == u)
+    subtree_checksum = sum(is_in_subtree(u, v) for u, v, _ in queries)
+    subtrees = time.perf_counter()
     distance_checksum = sum(tree.get_distance(u, v) for u, v, _ in queries)
     distances = time.perf_counter()
     path_checksum = sum(tree.is_on_path(u, v, a) for u, v, a in queries)
     finished = time.perf_counter()
     return (
-        (built - start, queried - built, distances - queried, finished - distances),
-        (lca_checksum, distance_checksum, path_checksum),
+        (
+            built - start,
+            queried - built,
+            subtrees - queried,
+            distances - subtrees,
+            finished - distances,
+        ),
+        (lca_checksum, subtree_checksum, distance_checksum, path_checksum),
     )
 
 

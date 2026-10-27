@@ -1,49 +1,63 @@
+# HLD。参考: https://judge.yosupo.jp/submission/400748
 class LCA:
+    # O(N) 時間・空間。G を変更せず、0-index / 1-index の両方に対応。
     def __init__(s, N, G, root):
-        s.N = N
-        s.bit = N.bit_length()
-        p = s.parent = [[-1] * (N + 1) for _ in range(s.bit)]
-        d = s.depth = [-1] * (N + 1)  # 根からの距離
-        d[root] = 0
+        p = s.p = [-1] * (N + 1)
+        d = s.depth = [-1] * (N + 1)
+        z = s.size = [1] * (N + 1)
+        h = s.up = [-1] * (N + 1)
+        t = s.tin = [-1] * (N + 1)
+        heavy = [-1] * (N + 1)
+        offset = [1] * (N + 1)
         q = [root]
+        d[root] = t[root] = 0
+        # BFSで親と深さを求める。
         for u in q:
             for v in G[u]:
                 if d[v] < 0:
                     d[v] = d[u] + 1
-                    p[0][v] = u
+                    p[v] = u
                     q.append(v)
-
-        for k in range(1, d[q[-1]].bit_length()):
-            a, b = p[k - 1], p[k]
-            for v in range(N + 1):
-                if a[v] >= 0:
-                    b[v] = a[a[v]]
+        # 部分木サイズと、部分木が最大の子（heavy）を求める。
+        for u in q[:0:-1]:
+            v = p[u]
+            z[v] += z[u]
+            if heavy[v] < 0 or z[u] > z[heavy[v]]:
+                heavy[v] = u
+        # heavyの部分木を先に置くDFS順を割り当てる。
+        # up[u] は u が属する重パスの先頭の親。
+        for u in q[1:]:
+            v = p[u]
+            if heavy[v] == u:
+                h[u] = h[v]
+                t[u] = t[v] + 1
+            else:
+                h[u] = v
+                t[u] = t[v] + z[heavy[v]] + offset[v]
+                offset[v] += z[u]
 
     # u と v の LCA を返す O(log N)
     def lca(s, u, v):
-        p, d = s.parent, s.depth
-        if d[u] < d[v]:  # 深さを同じにする
+        p = s.p
+        if p[u] == p[v]:
+            return u if u == v else p[u]
+        t, h = s.tin, s.up
+        a, b = t[u], t[v]
+        if a > b:
+            a, b = b, a
             u, v = v, u
-        x = d[u] - d[v]
-        while x:
-            k = x.bit_length() - 1
-            u = p[k][u]
-            x ^= 1 << k
-        if u == v:
+        if b < a + s.size[u]:
             return u
-        a = p[0]
-        if a[u] == a[v]:
-            return a[u]
-        for k in range((d[u] - 1).bit_length() - 1, -1, -1):
-            b = p[k]
-            x, y = b[u], b[v]
-            if x != y:
-                u, v = x, y
-        return a[u]
+        # DFS順が後ろの側だけを、重パス単位で上げる。
+        while a < b:
+            v = h[v]
+            b = t[v]
+        return v
 
-    # 構築時の根を基準に、v が u の部分木に含まれるか O(log N)
+    # 構築時の根を基準に、v が u の部分木に含まれるか（u 自身を含む）O(1)
     def is_in_subtree(s, u, v):
-        return s.lca(u, v) == u
+        t = s.tin
+        return t[u] <= t[v] < t[u] + s.size[u]
 
     # u と v の距離を返す
     def get_distance(s, u, v):
@@ -52,6 +66,6 @@ class LCA:
 
     # u-v のパス上に a が存在するか
     def is_on_path(s, u, v, a):
-        x = s.lca(u, a) == a
-        y = s.lca(v, a) == a
+        x = s.is_in_subtree(a, u)
+        y = s.is_in_subtree(a, v)
         return x != y or x and s.lca(u, v) == a

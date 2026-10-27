@@ -13,7 +13,7 @@ def main():
     tree = LCA(N, graph, 0)
     # Build the jump table through Doubling.py as well as testing LCA.py.
     dp = [[0] * N for _ in range(N.bit_length())]
-    dp[0] = [max(0, parent) for parent in tree.parent[0][:N]]
+    dp[0] = [max(0, parent) for parent in tree.p[:N]]
     doubling(dp, N, len(dp))
     ans = []
     for _ in range(Q):
