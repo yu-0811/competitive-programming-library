@@ -3,16 +3,15 @@
 
 
 def main():
+    readline = sys.stdin.buffer.readline
     N, Q = map(int, readline().split())
-    graph = [[] for _ in range(N)]
-    for v, parent in enumerate(map(int, readline().split()), 1):
-        graph[parent].append(v)
-    tree = LCA(N, graph, 0)
-    ans = []
-    for _ in range(Q):
+    edges = ((p, v) for v, p in enumerate(map(int, readline().split()), 1))
+    tree = LCA(N, edges)
+    ans = [0] * Q
+    for i in range(Q):
         u, v = map(int, readline().split())
-        ans.append(str(tree.lca(u, v)))
-    sys.stdout.write("\n".join(ans) + "\n")
+        ans[i] = tree.lca(u, v)
+    sys.stdout.write("\n".join(map(str, ans)) + "\n")
 
 
 if __name__ == "__main__":

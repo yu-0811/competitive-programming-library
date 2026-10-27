@@ -1,71 +1,83 @@
 # HLD。参考: https://judge.yosupo.jp/submission/400748
 class LCA:
-    # O(N) 時間・空間。G を変更せず、0-index / 1-index の両方に対応。
-    def __init__(s, N, G, root):
-        p = s.p = [-1] * (N + 1)
-        d = s.depth = [-1] * (N + 1)
-        z = s.size = [1] * (N + 1)
-        h = s.up = [-1] * (N + 1)
-        t = s.tin = [-1] * (N + 1)
-        heavy = [-1] * (N + 1)
-        offset = [1] * (N + 1)
-        q = [root]
-        d[root] = t[root] = 0
-        # BFSで親と深さを求める。
-        for u in q:
-            for v in G[u]:
-                if d[v] < 0:
-                    d[v] = d[u] + 1
-                    p[v] = u
-                    q.append(v)
-        # 部分木サイズと、部分木が最大の子（heavy）を求める。
-        for u in q[:0:-1]:
-            v = p[u]
-            z[v] += z[u]
-            if heavy[v] < 0 or z[u] > z[heavy[v]]:
-                heavy[v] = u
-        # heavyの部分木を先に置くDFS順を割り当てる。
-        # up[u] は u が属する重パスの先頭の親。
-        for u in q[1:]:
-            v = p[u]
-            if heavy[v] == u:
-                h[u] = h[v]
-                t[u] = t[v] + 1
+    # n: 頂点数、E: 辺集合, root: 木の根
+    def __init__(self, n, E, root=0):
+        par = self.par = [0] * (n + 1)
+        dep = self.dep = [-1] * (n + 1)
+        siz = self.siz = [1] * (n + 1)
+        jmp = self.jmp = [-1] * (n + 1)
+        tin = self.tin = [0] * (n + 1)
+        deg = [0] * (n + 1)
+
+        for u, v in E:
+            deg[u] += 1
+            deg[v] += 1
+            par[u] ^= v
+            par[v] ^= u
+        que = []
+        for u in range(n + 1):
+            if deg[u] == 1 and u != root:
+                que.append(u)
+            elif deg[u] == 0:
+                par[u] = -1
+        for u in que:
+            v = par[u]
+            siz[v] += siz[u]
+            if siz[u] > tin[v]:
+                tin[v] = siz[u]
+                jmp[v] = u
+            par[v] ^= u
+            deg[v] -= 1
+            if deg[v] == 1 and v != root:
+                que.append(v)
+        par[root] = -1
+
+        if jmp[root] >= 0:
+            siz[jmp[root]] = -siz[jmp[root]]
+        jmp[root] = -1
+        siz[root] = tin[root] + 1
+        dep[root] = tin[root] = 0
+        for u in reversed(que):
+            v = par[u]
+            dep[u] = dep[v] + 1
+            h, b = jmp[u], tin[u] + 1
+            if h >= 0:
+                siz[h] = -siz[h]
+            if siz[u] < 0:
+                tin[u] = tin[v] + 1
+                jmp[u] = jmp[v]
             else:
-                h[u] = v
-                t[u] = t[v] + z[heavy[v]] + offset[v]
-                offset[v] += z[u]
+                tin[u] = tin[v] + siz[v]
+                siz[v] += siz[u]
+                jmp[u] = v
+            siz[u] = b
 
     # u と v の LCA を返す O(log N)
-    def lca(s, u, v):
-        p = s.p
-        if p[u] == p[v]:
-            return u if u == v else p[u]
-        t, h = s.tin, s.up
-        a, b = t[u], t[v]
-        if a > b:
-            a, b = b, a
+    def lca(self, u, v):
+        tin, jmp = self.tin, self.jmp
+        l, r = tin[u], tin[v]
+        if l > r:
+            l, r = r, l
             u, v = v, u
-        if b < a + s.size[u]:
+        if r < l + self.siz[u]:
             return u
-        # DFS順が後ろの側だけを、重パス単位で上げる。
-        while a < b:
-            v = h[v]
-            b = t[v]
+        v = jmp[v]
+        while l < tin[v]:
+            v = jmp[v]
         return v
 
-    # 構築時の根を基準に、v が u の部分木に含まれるか（u 自身を含む）O(1)
-    def is_in_subtree(s, u, v):
-        t = s.tin
-        return t[u] <= t[v] < t[u] + s.size[u]
+    # 構築時の根を基準に、u の部分木に v が含まれるか O(1)
+    def is_in_subtree(self, u, v):
+        tin = self.tin
+        return tin[u] <= tin[v] < tin[u] + self.siz[u]
 
     # u と v の距離を返す
-    def get_distance(s, u, v):
-        d = s.depth
-        return d[u] + d[v] - 2 * d[s.lca(u, v)]
+    def get_distance(self, u, v):
+        dep = self.dep
+        return dep[u] + dep[v] - 2 * dep[self.lca(u, v)]
 
-    # u-v のパス上に a が存在するか
-    def is_on_path(s, u, v, a):
-        x = s.is_in_subtree(a, u)
-        y = s.is_in_subtree(a, v)
-        return x != y or x and s.lca(u, v) == a
+    # u-v のパスがviaを通るか（端点も含む）
+    def is_on_path(self, u, v, via):
+        anc_u = self.is_in_subtree(via, u)
+        anc_v = self.is_in_subtree(via, v)
+        return anc_u != anc_v or anc_u and self.lca(u, v) == via
