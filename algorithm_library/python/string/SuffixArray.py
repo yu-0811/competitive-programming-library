@@ -4,23 +4,15 @@
 
 def sa_is(s, upper):
     n = len(s)
-    if n == 0:
-        return []
-    if n == 1:
-        return [0]
-    if n == 2:
-        if s[0] < s[1]:
-            return [0, 1]
-        else:
-            return [1, 0]
-    sa = [0] * n
+    if n < 2:
+        return list(range(n))
     ls = [0] * n
     for i in range(n - 2, -1, -1):
-        ls[i] = ls[i + 1] if (s[i] == s[i + 1]) else (s[i] < s[i + 1])
+        ls[i] = ls[i + 1] if s[i] == s[i + 1] else s[i] < s[i + 1]
     sum_l = [0] * (upper + 1)
     sum_s = [0] * (upper + 1)
     for i in range(n):
-        if not (ls[i]):
+        if not ls[i]:
             sum_s[s[i]] += 1
         else:
             sum_l[s[i] + 1] += 1
@@ -30,96 +22,64 @@ def sa_is(s, upper):
             sum_l[i + 1] += sum_s[i]
 
     def induce(lms):
-        for i in range(n):
-            sa[i] = -1
+        sa = [-1] * n
         buf = sum_s[:]
         for d in lms:
-            if d == n:
-                continue
             sa[buf[s[d]]] = d
             buf[s[d]] += 1
         buf = sum_l[:]
-        sa[buf[s[n - 1]]] = n - 1
-        buf[s[n - 1]] += 1
-        for i in range(n):
-            v = sa[i]
-            if v >= 1 and not (ls[v - 1]):
+        sa[buf[s[-1]]] = n - 1
+        buf[s[-1]] += 1
+        for v in sa:
+            if v > 0 and not ls[v - 1]:
                 sa[buf[s[v - 1]]] = v - 1
                 buf[s[v - 1]] += 1
         buf = sum_l[:]
-        for i in range(n - 1, -1, -1):
-            v = sa[i]
-            if v >= 1 and ls[v - 1]:
+        for v in reversed(sa):
+            if v > 0 and ls[v - 1]:
                 buf[s[v - 1] + 1] -= 1
                 sa[buf[s[v - 1] + 1]] = v - 1
+        return sa
 
-    lms_map = [-1] * (n + 1)
-    m = 0
-    for i in range(1, n):
-        if not (ls[i - 1]) and ls[i]:
-            lms_map[i] = m
-            m += 1
-    lms = []
-    for i in range(1, n):
-        if not (ls[i - 1]) and ls[i]:
-            lms.append(i)
-    induce(lms)
+    lms = [i for i in range(1, n) if not ls[i - 1] and ls[i]]
+    m = len(lms)
+    ids = [-1] * n
+    for i, v in enumerate(lms):
+        ids[v] = i
+    sa = induce(lms)
     if m:
-        sorted_lms = []
-        for v in sa:
-            if lms_map[v] != -1:
-                sorted_lms.append(v)
-        rec_s = [0] * m
-        rec_upper = 0
-        rec_s[lms_map[sorted_lms[0]]] = 0
-        for i in range(1, m):
-            l = sorted_lms[i - 1]
-            r = sorted_lms[i]
-            end_l = lms[lms_map[l] + 1] if (lms_map[l] + 1 < m) else n
-            end_r = lms[lms_map[r] + 1] if (lms_map[r] + 1 < m) else n
-            same = True
-            if end_l - l != end_r - r:
-                same = False
-            else:
-                while l < end_l:
-                    if s[l] != s[r]:
-                        break
-                    l += 1
-                    r += 1
-                if (l == n) or (s[l] != s[r]):
-                    same = False
-            if not (same):
-                rec_upper += 1
-            rec_s[lms_map[sorted_lms[i]]] = rec_upper
-        rec_sa = sa_is(rec_s, rec_upper)
-        for i in range(m):
-            sorted_lms[i] = lms[rec_sa[i]]
-        induce(sorted_lms)
+        order = [v for v in sa if ids[v] != -1]
+        lms.append(n)
+        rec = [0] * m
+        rank = 0
+        # LMS 部分文字列は次の LMS 位置の文字まで含めて比較する。
+        # 各区間の比較は高々 2 回なので、スライスの合計長も O(n)。
+        for l, r in zip(order, order[1:]):
+            el, er = lms[ids[l] + 1], lms[ids[r] + 1]
+            rank += s[l : el + 1] != s[r : er + 1]
+            rec[ids[r]] = rank
+        sa = induce([lms[i] for i in sa_is(rec, rank)])
     return sa
 
 
 def suffix_array_upper(s, upper):
     assert 0 <= upper
     for d in s:
-        assert 0 <= d and d <= upper
+        assert 0 <= d <= upper
     return sa_is(s, upper)
 
 
 def suffix_array(s) -> list[int]:
     n = len(s)
     if type(s) == str:
-        s2 = [ord(i) for i in s]
-        return sa_is(s2, 255)
-    else:
-        idx = list(range(n))
-        idx.sort(key=lambda x: s[x])
-        s2 = [0] * n
-        now = 0
-        for i in range(n):
-            if i and s[idx[i - 1]] != s[idx[i]]:
-                now += 1
-            s2[idx[i]] = now
-        return sa_is(s2, now)
+        return sa_is(list(map(ord, s)), 255)
+    idx = sorted(range(n), key=s.__getitem__)
+    s2 = [0] * n
+    now = 0
+    for i, j in zip(idx, idx[1:]):
+        now += s[i] != s[j]
+        s2[j] = now
+    return sa_is(s2, now)
 
 
 # lcp[i] = S の SA[i] 文字目から始まる suffix と S の SA[i+1] 文字目から始まる suffix の共通接頭辞の長さ
@@ -127,19 +87,17 @@ def lcp_array(s: str, sa: list[int]) -> list[int]:
     n = len(s)
     assert n >= 1
     rnk = [0] * n
-    for i in range(n):
-        rnk[sa[i]] = i
+    for i, v in enumerate(sa):
+        rnk[v] = i
     lcp = [0] * (n - 1)
     h = 0
     for i in range(n):
-        if h > 0:
+        if h:
             h -= 1
         if rnk[i] == 0:
             continue
         j = sa[rnk[i] - 1]
-        while j + h < n and i + h < n:
-            if s[j + h] != s[i + h]:
-                break
+        while j + h < n and i + h < n and s[j + h] == s[i + h]:
             h += 1
         lcp[rnk[i] - 1] = h
     return lcp
@@ -149,7 +107,7 @@ def lcp_array(s: str, sa: list[int]) -> list[int]:
 # T <= S[SA[i] : SA[i] + len(T)] を満たす最小の i
 def suffix_array_bisect(S, SA, T):
     ng, ok = -1, len(S)
-    while abs(ok - ng) > 1:
+    while ok - ng > 1:
         mid = (ok + ng) // 2
         idx = SA[mid]
         if T <= S[idx : idx + len(T)]:
