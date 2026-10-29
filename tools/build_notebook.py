@@ -2,6 +2,7 @@
 """Build the Python library notebook with LuaLaTeX."""
 
 import argparse
+import os
 from pathlib import Path
 import shutil
 import subprocess
@@ -58,7 +59,10 @@ def main():
     )
     if not files:
         parser.error(f"No Python files found in {source}")
-    preamble = r"""\documentclass[a4paper,9pt,twocolumn]{extarticle}
+    # Suppress volatile PDF metadata, including the trailer ID derived from
+    # the randomly named temporary build directory.
+    preamble = r"""\pdfvariable suppressoptionalinfo 767\relax
+\documentclass[a4paper,9pt,twocolumn]{extarticle}
 \usepackage[margin=10mm,top=15mm,bottom=15mm]{geometry}
 \usepackage{luatexja-fontspec}
 \setmainjfont{IPAexGothic}
@@ -124,6 +128,7 @@ def main():
                 stdout=subprocess.PIPE,
                 stderr=subprocess.STDOUT,
                 text=True,
+                env={**os.environ, "SOURCE_DATE_EPOCH": "0", "FORCE_SOURCE_DATE": "1"},
             )
             if result.returncode:
                 raise SystemExit(result.stdout)

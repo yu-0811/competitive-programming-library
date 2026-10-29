@@ -15,3 +15,9 @@ repos:
         language: system
         pass_filenames: false
         files: ^(algorithm_library/python/|library-checker-submitcode/)
+      - id: generate-python-notebook
+        name: Generate Python notebook PDF
+        entry: python3 tools/build_notebook.py
+        language: system
+        pass_filenames: false
+        files: ^(algorithm_library/python/.*\.py$|tools/build_notebook\.py$)
