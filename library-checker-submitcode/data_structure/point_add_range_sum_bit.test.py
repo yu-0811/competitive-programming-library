@@ -21,68 +21,56 @@ mod = 998244353
 # BEGIN LIBRARY: algorithm_library/python/data-structure/BIT.py
 class BIT:
     def __init__(self, n):
-        self.n = n + 1
+        self.n = n
         self.bit = [[0] * self.n for _ in range(2)]
-
-    def _add_sub(self, p, i, x):
-        idx = i
-        while idx < self.n:
-            self.bit[p][idx] += x
-            idx += idx & -idx
 
     def add(self, l, r, x):  # [l,r)にxを加算
         bit0, bit1 = self.bit
         n = self.n
-        c = -x * (l - 1)
+        c = -x * l
         while l < n:
             bit0[l] += c
             bit1[l] += x
-            l += l & -l
-        c = x * (r - 1)
+            l |= l + 1
+        c = x * r
         while r < n:
             bit0[r] += c
             bit1[r] -= x
-            r += r & -r
+            r |= r + 1
 
-    def _sum_sub(self, p, i):
-        s = 0
-        idx = i
-        while idx > 0:
-            s += self.bit[p][idx]
-            idx -= idx & -idx
-        return s
-
+    # 区間 [0, i) の和を取得
     def SUM(self, i):
         bit0, bit1 = self.bit
         s0 = s1 = 0
-        idx = i
-        while idx > 0:
+        idx = i - 1
+        while idx >= 0:
             s0 += bit0[idx]
             s1 += bit1[idx]
-            idx -= idx & -idx
+            idx = (idx & (idx + 1)) - 1
         return s0 + s1 * i
 
-    # 任意の区間[l,r)の区間をを取得
+    # 区間 [l, r) の和を取得
     def range_sum(self, l, r):
-        return self.SUM(r - 1) - self.SUM(l - 1)
+        return self.SUM(r) - self.SUM(l)
 
-    # a_1 + a_2 + ... + a_x >= w となる最小の x を O(log n) で求める
-    # 各要素は非負であること。w <= 0 なら 0、見つからなければ要素数 + 1
+    # a[0] + ... + a[x] >= w となる最小の x を O(log n) で求める
+    # 各要素は非負であること。w <= 0 なら 0、見つからなければ n
     def lower_bound(self, w):
         if w <= 0:
             return 0
 
         bit0, bit1 = self.bit
         n = self.n
-        x = s0 = s1 = 0
-        step = 1 << (n.bit_length() - 1)
+        x = -1
+        s0 = s1 = 0
+        step = 1 << n.bit_length()
         while step:
             nxt = x + step
             if nxt < n:
                 t0 = s0 + bit0[nxt]
                 t1 = s1 + bit1[nxt]
-                # SUM(nxt) を2本のBITの累積値から復元する
-                if t0 + t1 * nxt < w:
+                # SUM(nxt + 1) を2本のBITの累積値から復元する
+                if t0 + t1 * (nxt + 1) < w:
                     x, s0, s1 = nxt, t0, t1
             step >>= 1
         return x + 1
@@ -92,15 +80,15 @@ class BIT:
 def main():
     N, Q = map(int, readline().split())
     bit = BIT(N)
-    for i, value in enumerate(map(int, readline().split()), 1):
+    for i, value in enumerate(map(int, readline().split())):
         bit.add(i, i + 1, value)
     ans = []
     for _ in range(Q):
         t, x, y = map(int, readline().split())
         if t == 0:
-            bit.add(x + 1, x + 2, y)
+            bit.add(x, x + 1, y)
         else:
-            ans.append(str(bit.range_sum(x + 1, y + 1)))
+            ans.append(str(bit.range_sum(x, y)))
     sys.stdout.write("\n".join(ans) + ("\n" if ans else ""))
 
 

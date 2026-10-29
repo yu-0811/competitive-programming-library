@@ -10,14 +10,12 @@ class SparseTable:
         self.n = n = len(arr)
         mk = n.bit_length()
         # table[k][i] = i から長さ 2^k の区間に対する演算結果
-        self.table = table = [arr[:]] if n else []
+        self.tab = tab = [arr[:]] if n else []
 
         for k in range(1, mk):
-            half_len = 1 << (k - 1)
-            prev = table[-1]
-            table.append(
-                [op(prev[i], prev[i + half_len]) for i in range(n - (1 << k) + 1)]
-            )
+            half = 1 << (k - 1)
+            prev = tab[-1]
+            tab.append([op(prev[i], prev[i + half]) for i in range(n - (1 << k) + 1)])
 
     def query(self, l, r):
         """
@@ -27,4 +25,4 @@ class SparseTable:
         # 2^k <= r - l を満たす最大の k を求める
         k = (r - l).bit_length() - 1
         # [l, l + 2^k) と [r - 2^k, r) の区間に分割して計算
-        return self.op(self.table[k][l], self.table[k][r - (1 << k)])
+        return self.op(self.tab[k][l], self.tab[k][r - (1 << k)])

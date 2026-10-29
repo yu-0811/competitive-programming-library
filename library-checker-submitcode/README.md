@@ -55,7 +55,7 @@ if __name__ == "__main__":
 
 ## 追加済みの提出コード
 
-22 個のライブラリを、21 問・25 本の提出コードで確認できます。
+22 個のライブラリを、22 問・26 本の提出コードで確認できます。
 同じ問題に複数の実装を用意しているものもあります。
 
 | ライブラリ | 提出コード | Library Checker 問題 |
@@ -68,6 +68,7 @@ if __name__ == "__main__":
 | `graph/LCA.py` + `techniques/Doubling.py` | [graph/jump_on_tree.test.py](graph/jump_on_tree.test.py) | [Jump on Tree](https://judge.yosupo.jp/problem/jump_on_tree) |
 | `graph/maxflow.py` | [graph/bipartitematching.test.py](graph/bipartitematching.test.py) | [Bipartite Matching](https://judge.yosupo.jp/problem/bipartitematching) |
 | `data-structure/BIT.py` | [data_structure/point_add_range_sum_bit.test.py](data_structure/point_add_range_sum_bit.test.py) | [Point Add Range Sum](https://judge.yosupo.jp/problem/point_add_range_sum) |
+| `data-structure/BIT.py` | [data_structure/predecessor_problem_bit.test.py](data_structure/predecessor_problem_bit.test.py) | [Predecessor Problem](https://judge.yosupo.jp/problem/predecessor_problem) |
 | `data-structure/Segtree.py` | [data_structure/point_add_range_sum_segtree.test.py](data_structure/point_add_range_sum_segtree.test.py) | [Point Add Range Sum](https://judge.yosupo.jp/problem/point_add_range_sum) |
 | `data-structure/Segtree.py` | [data_structure/point_set_range_composite.test.py](data_structure/point_set_range_composite.test.py) | [Point Set Range Composite](https://judge.yosupo.jp/problem/point_set_range_composite) |
 | `data-structure/TupleSegtree.py` | [data_structure/point_set_range_composite_tuple.test.py](data_structure/point_set_range_composite_tuple.test.py) | [Point Set Range Composite](https://judge.yosupo.jp/problem/point_set_range_composite) |
