@@ -4,6 +4,8 @@
 
 ## PythonライブラリのPDF生成
 
+PDFに載せないファイルは `tools/notebook-exclude.txt` に、`algorithm_library/python/` またはリポジトリのトップからの相対パスを1行ずつ書いてください（`math/FFT.py` と `algorithm_library/python/math/FFT.py` のどちらも指定できます）。空行と `#` で始まるコメント行は無視します。除外設定の変更時もpre-commitでPDFを再生成します。
+
 `algorithm_library/python` 以下の `.py` ファイル（`template.py` を除く）を、カテゴリ別目次・行番号付きのA4・2段組PDFにまとめます。`ICPCtemplate.py` は収録し、カテゴリは Templates、gen、残りのカテゴリの名前順で並べます。日本語コメントと長い行の折り返しに対応しています。
 
 コードはカラーのシンタックスハイライト付きです。必要環境は Python 3、Pygments、LuaLaTeX、LuaTeX-ja、fvextra、IPAexフォントです。Ubuntu / Debianでは次のようにインストールできます。

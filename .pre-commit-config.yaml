@@ -20,4 +20,4 @@ repos:
         entry: python3 tools/build_notebook.py
         language: system
         pass_filenames: false
-        files: ^(algorithm_library/python/.*\.py$|tools/build_notebook\.py$)
+        files: ^(algorithm_library/python/.*\.py$|tools/build_notebook\.py$|tools/notebook-exclude\.txt$)

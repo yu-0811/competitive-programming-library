@@ -41,6 +41,12 @@ def main():
     if not shutil.which("lualatex"):
         parser.error("lualatex is required (see README.md)")
     source = ROOT / "algorithm_library/python"
+    exclude_file = ROOT / "tools/notebook-exclude.txt"
+    excluded = {
+        line.strip()
+        for line in exclude_file.read_text(encoding="utf-8").splitlines()
+        if line.strip() and not line.lstrip().startswith("#")
+    }
 
     def file_order(path):
         relative = path.relative_to(source)
@@ -54,7 +60,12 @@ def main():
         return priority, relative.as_posix()
 
     files = sorted(
-        (path for path in source.rglob("*.py") if path != source / "template.py"),
+        (
+            path
+            for path in source.rglob("*.py")
+            if path.relative_to(source).as_posix() not in excluded
+            and path.relative_to(ROOT).as_posix() not in excluded
+        ),
         key=file_order,
     )
     if not files:
