@@ -1,148 +1,126 @@
-class SparseTable:
-    def __init__(self, arr, op):
-        """
-        arr: 配列
-        op: 演算 (結合則、冪等則を満たすこと)
-        時間計算量: O(n log n) 構築, O(1) クエリ
-        空間計算量: O(n log n)
-        """
-        self.op = op
-        self.n = n = len(arr)
-        mk = n.bit_length()
-        # table[k][i] = i から長さ 2^k の区間に対する演算結果
-        self.table = table = [arr[:]] if n else []
-
-        for k in range(1, mk):
-            half_len = 1 << (k - 1)
-            prev = table[-1]
-            table.append(
-                [op(prev[i], prev[i + half_len]) for i in range(n - (1 << k) + 1)]
-            )
-
-    def query(self, l, r):
-        """
-        [l, r) の区間に対する演算結果を返す O(1)
-        """
-        assert 0 <= l < r <= self.n
-        # 2^k <= r - l を満たす最大の k を求める
-        k = (r - l).bit_length() - 1
-        # [l, l + 2^k) と [r - 2^k, r) の区間に分割して計算
-        return self.op(self.table[k][l], self.table[k][r - (1 << k)])
-
-
 class fenwick_tree:
-    n = 1
-    data = [0 for i in range(n)]
+    def __init__(self, n):
+        self.n = n
+        self.data = [0] * n
 
-    # N 要素の配列を 0 で初期化する
-    def __init__(self, N):
-        self.n = N
-        self.data = [0 for i in range(N)]
-
-    # p 番目の要素に x を加算する
     def add(self, p, x):
-        assert 0 <= p < self.n, "0<=p<n,p={0},n={1}".format(p, self.n)
-        p += 1
-        while p <= self.n:
-            self.data[p - 1] += x
-            p += p & -p
+        assert 0 <= p < self.n
+        data = self.data
+        while p < self.n:
+            data[p] += x
+            p |= p + 1
 
-    # [l, r) の和を返す
-    def sum(self, l, r):
-        assert 0 <= l and l <= r and r <= self.n, "0<=l<=r<=n,l={0},r={1},n={2}".format(
-            l, r, self.n
-        )
-        return self.sum0(r) - self.sum0(l)
-
-    # [0, r) の和を返す
     def sum0(self, r):
         s = 0
-        data = self.data
-        while r > 0:
-            s += data[r - 1]
-            r -= r & -r
+        while r:
+            s += self.data[r - 1]
+            r &= r - 1
         return s
+
+    def sum(self, l, r):
+        assert 0 <= l <= r <= self.n
+        return self.sum0(r) - self.sum0(l)
 
 
 class EulerTour:
-    # N 頂点の木を初期化する
+    # 任意の頂点番号・根・辺重み。頂点は 0..N-1 または 1..N。
     def __init__(s, N):
         s.N = N
         s.G = [[] for _ in range(N + 1)]
-        s._in = [-1] * (N + 1)  # 各頂点の訪問開始時刻
-        s._out = [-1] * (N + 1)  # 各頂点の訪問終了時刻
-        s.m = 0  # 辺数
-        s.ws = []  # ツアー順の辺の重み
-        s.es = []  # ツアー順の辺番号
-        s.vs = []  # ツアー順の頂点番号
-        s.depth = [-1]
+        s._in = [-1] * (N + 1)
+        s._out = [-1] * (N + 1)
+        s.m = 0
+        s.vs, s.ws, s.es, s.depth = [], [], [], []
         s.base = 1 << N.bit_length()
         s.mask = s.base - 1
 
-    # 辺の重みの和を管理する Fenwick Tree を O(N) で構築する
-    def _build_fentree(s):
-        n = len(s.ws)
-        s.fen = fenwick_tree(n)
-        d = s.fen.data = s.ws[:]
-        if d:
-            d[0] = 0
-        for i in range(1, n + 1):
-            j = i + (i & -i)
-            if j <= n:
-                d[j - 1] += d[i - 1]
-
-    # LCA 用の区間最小値を求める SparseTable を構築する
-    def _build_lca(s):
-        a = [d * s.base + abs(v) for d, v in zip(s.depth, s.vs)]
-        s.lca_table = SparseTable(a, min)
-
-    # 無向辺 u-v を重さ w で追加する
     def add_edge(s, u, v, w):
         s.m += 1
         s.G[u].append((v, w, s.m))
         s.G[v].append((u, w, s.m))
 
-    # root を根としてオイラーツアーとクエリ用のデータ構造を構築する
-    def build(s, root):
-        s.root = root
-        st = [(root, 0, 0)]
-        while st:
-            v, w, i = st.pop()
-            t = len(s.es)
-            if v >= 0:
-                s._in[v] = s._out[v] = t
-                s.vs.append(v)
-                s.depth.append(s.depth[-1] + 1)
-                for e in s.G[v]:
-                    if s._in[e[0]] < 0:
-                        st.append((~v, -e[1], -e[2]))
-                        st.append(e)
-            else:
-                v = ~v
-                s._out[v] = t
-                s.vs.append(-v)
-                s.depth.append(s.depth[-1] - 1)
-            s.es.append(i)
-            s.ws.append(w)
-        s.depth.pop(0)
-        s._build_fentree()
-        s._build_lca()
+    def _build_fentree(s):
+        n = len(s.ws)
+        s.fen = fenwick_tree(n)
+        d = s.fen.data = s.ws[:]
+        for i in range(n):
+            j = i | (i + 1)
+            if j < n:
+                d[j] += d[i]
 
-    # 根から u へのパスのコストの和を返す
+    def _build_lca(s):
+        order = s.order = [v for v, e in zip(s.vs, s.es) if e >= 0]
+        rank = s.rank = [0] * (s.N + 1)
+        for i, v in enumerate(order):
+            rank[v] = i
+        # 行きがけ順で u<v なら、区間 (u,v] の親の最小順位が LCA。
+        a = [rank[abs(s.vs[s._in[v] - 1])] for v in order[1:]]
+        tab = s.lca_tab = [a]
+        for k in range(len(a).bit_length() - 1):
+            prev = tab[-1]
+            row = prev[1 << k :]
+            for i in range(len(row)):
+                if prev[i] < row[i]:
+                    row[i] = prev[i]
+            tab.append(row)
+
+    # vs/ws/es/depth と _in/_out（終了位置を含む）を構築
+    def build(s, root, *, lca=True, path_sum=True):
+        s.root = root
+        s.fen = s.lca_tab = None
+        s._in[:] = s._out[:] = [-1] * (s.N + 1)
+        tin, tout = s._in, s._out
+        n = sum(map(len, s.G)) + 1
+        s.vs, s.ws, s.es, s.depth = ([0] * n for _ in range(4))
+        vs, ws, es, depth = s.vs, s.ws, s.es, s.depth
+        parent = [-1] * (s.N + 1)
+        stack = [root]
+        t, d = 0, -1
+        while stack:
+            v = stack.pop()
+            if v >= 0:
+                tin[v] = tout[v] = t
+                vs[t] = v
+                d += 1
+                for u, w, i in s.G[v]:
+                    if u == parent[v]:
+                        ws[t], es[t] = w, i
+                    else:
+                        parent[u] = v
+                        stack.extend((~u, u))
+            else:
+                child = ~v
+                v = parent[child]
+                tout[v] = t
+                vs[t] = -v
+                ws[t], es[t] = -ws[tin[child]], -es[tin[child]]
+                d -= 1
+            depth[t] = d
+            t += 1
+        for a in (vs, ws, es, depth):
+            del a[t:]
+        if path_sum:
+            s._build_fentree()
+        if lca:
+            s._build_lca()
+
     def path_sum(s, u):
+        if s.fen is None:
+            s._build_fentree()
         return s.fen.sum0(s._in[u] + 1)
 
-    # u と v の最小共通祖先を O(1) で返す
     def lca(s, u, v):
-        l, r = s._in[u], s._in[v]
-        if l > r:
-            l, r = r, l
-            u = v
-        if r <= s._out[u]:
+        if s._in[u] > s._in[v]:
+            u, v = v, u
+        if s._in[v] <= s._out[u]:
             return u
-        return s.lca_table.query(l, r + 1) & s.mask
+        if s.lca_tab is None:
+            s._build_lca()
+        l, r = s.rank[u], s.rank[v]
+        k = (r - l).bit_length() - 1
+        row = s.lca_tab[k]
+        return s.order[min(row[l], row[r - (1 << k)])]
 
-    # パス u-v のコストの和を返す
     def get_distance(s, u, v):
         a = s.lca(u, v)
         return s.path_sum(u) + s.path_sum(v) - 2 * s.path_sum(a)

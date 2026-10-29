@@ -55,7 +55,7 @@ if __name__ == "__main__":
 
 ## 追加済みの提出コード
 
-25 個のライブラリを、25 問・30 本の提出コードで確認できます。
+26 個のライブラリを、26 問・31 本の提出コードで確認できます。
 同じ問題に複数の実装を用意しているものもあります。
 
 | ライブラリ | 提出コード | Library Checker 問題 |
@@ -65,8 +65,9 @@ if __name__ == "__main__":
 | `graph/SCC.py` | [graph/scc.test.py](graph/scc.test.py) | [Strongly Connected Components](https://judge.yosupo.jp/problem/scc) |
 | `graph/LCA.py` | [graph/lca.test.py](graph/lca.test.py) | [Lowest Common Ancestor](https://judge.yosupo.jp/problem/lca) |
 | `graph/EulerTour.py` | [graph/lca_euler_tour.test.py](graph/lca_euler_tour.test.py) | [Lowest Common Ancestor](https://judge.yosupo.jp/problem/lca) |
+| `graph/EulerTour.py` | [graph/vertex_add_path_sum_euler_tour.test.py](graph/vertex_add_path_sum_euler_tour.test.py) | [Vertex Add Path Sum](https://judge.yosupo.jp/problem/vertex_add_path_sum) |
 | `graph/LCA.py` + `techniques/Doubling.py` | [graph/jump_on_tree.test.py](graph/jump_on_tree.test.py) | [Jump on Tree](https://judge.yosupo.jp/problem/jump_on_tree) |
-| `graph/EulerTour.py` | [graph/vertex_add_subtree_sum.test.py](graph/vertex_add_subtree_sum.test.py) | [Vertex Add Subtree Sum](https://judge.yosupo.jp/problem/vertex_add_subtree_sum) |
+| `graph/VertexAddSubtreeSum.py` | [graph/vertex_add_subtree_sum.test.py](graph/vertex_add_subtree_sum.test.py) | [Vertex Add Subtree Sum](https://judge.yosupo.jp/problem/vertex_add_subtree_sum) |
 | `graph/Rerooting.py` | [graph/tree_path_composite_sum.test.py](graph/tree_path_composite_sum.test.py) | [Tree Path Composite Sum](https://judge.yosupo.jp/problem/tree_path_composite_sum) |
 | `graph/cycle_detect.py` | [graph/cycle_detection_undirected.test.py](graph/cycle_detection_undirected.test.py) | [Cycle Detection (Undirected)](https://judge.yosupo.jp/problem/cycle_detection_undirected) |
 | `graph/maxflow.py` | [graph/bipartitematching.test.py](graph/bipartitematching.test.py) | [Bipartite Matching](https://judge.yosupo.jp/problem/bipartitematching) |

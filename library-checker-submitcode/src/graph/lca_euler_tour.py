@@ -7,12 +7,13 @@ def main():
     tree = EulerTour(N)
     for v, parent in enumerate(map(int, readline().split()), 1):
         tree.add_edge(parent, v, 1)
-    tree.build(0)
-    ans = []
-    for _ in range(Q):
+    tree.build(0, path_sum=False)
+    ans = [0] * Q
+    for i in range(Q):
         u, v = map(int, readline().split())
-        ans.append(str(tree.lca(u, v)))
-    sys.stdout.write("\n".join(ans) + "\n")
+        ans[i] = tree.lca(u, v)
+    for i in range(0, Q, 8192):
+        sys.stdout.write("\n".join(map(str, ans[i:i + 8192])) + "\n")
 
 
 if __name__ == "__main__":
