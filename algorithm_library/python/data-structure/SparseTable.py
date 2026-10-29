@@ -8,14 +8,15 @@ class SparseTable:
         """
         self.op = op
         self.n = n = len(arr)
-        mk = n.bit_length()
         # table[k][i] = i から長さ 2^k の区間に対する演算結果
-        self.tab = tab = [arr[:]] if n else []
+        self.tab = tab = [list(arr)] if n else []
 
-        for k in range(1, mk):
-            half = 1 << (k - 1)
+        for k in range(n.bit_length() - 1):
             prev = tab[-1]
-            tab.append([op(prev[i], prev[i + half]) for i in range(n - (1 << k) + 1)])
+            row = prev[1 << k :]
+            for i in range(len(row)):
+                row[i] = op(prev[i], row[i])
+            tab.append(row)
 
     def query(self, l, r):
         """
