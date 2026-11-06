@@ -90,7 +90,7 @@ if __name__ == "__main__":
 | `string/SuffixArray.py` | [string/suffixarray.test.py](string/suffixarray.test.py) | [Suffix Array](https://judge.yosupo.jp/problem/suffixarray) |
 | `string/SuffixArray.py` | [string/number_of_substrings.test.py](string/number_of_substrings.test.py) | [Number of Substrings](https://judge.yosupo.jp/problem/number_of_substrings) |
 | `string/SuffixArray.py` | [string/longest_common_substring.test.py](string/longest_common_substring.test.py) | [Longest Common Substring](https://judge.yosupo.jp/problem/longest_common_substring) |
-| `string/Z-algo.py` | [string/zalgorithm.test.py](string/zalgorithm.test.py) | [Z Algorithm](https://judge.yosupo.jp/problem/zalgorithm) |
+| `string/Z_algo.py` | [string/zalgorithm.test.py](string/zalgorithm.test.py) | [Z Algorithm](https://judge.yosupo.jp/problem/zalgorithm) |
 | `math/FFT.py` | [math/convolution_mod.test.py](math/convolution_mod.test.py) | [Convolution](https://judge.yosupo.jp/problem/convolution_mod) |
 | `math/MatrixPower.py` | [math/matrix_product.test.py](math/matrix_product.test.py) | [Matrix Product](https://judge.yosupo.jp/problem/matrix_product) |
 | `math/MatrixPower.py` | [math/pow_of_matrix.test.py](math/pow_of_matrix.test.py) | [Power of Matrix](https://judge.yosupo.jp/problem/pow_of_matrix) |

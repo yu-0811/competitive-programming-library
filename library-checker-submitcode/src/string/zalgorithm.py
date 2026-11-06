@@ -1,5 +1,5 @@
 # problem: https://judge.yosupo.jp/problem/zalgorithm
-# include: algorithm_library/python/string/Z-algo.py
+# include: algorithm_library/python/string/Z_algo.py
 
 
 def main():

@@ -1,33 +1,5 @@
-# O(|S|)
-# Z[i] := S[0:|S|) と S[i:|S|) の最長共通接頭辞の長さ
-def z_algo(S):
-    n = len(S)
-    Z = [0] * n
-    Z[0] = n
-    i, j = 1, 0
-    while i < n:
-        # 一致する限り延長する
-        while i + j < n and S[j] == S[i + j]:
-            j += 1
-        Z[i] = j
-
-        # 一文字も一致しないならコピーできないので次に進む
-        if j == 0:
-            i += 1
-            continue
-
-        k = 1
-        # k+Z[k]>j なら1回目の登場の際にはみ出してしまっている
-        # k+Z[k]=j なら2回目の登場の際にはみ出す可能性がある
-        while k < j and k + Z[k] < j:
-            Z[i + k] = Z[k]
-            k += 1
-        # まだ未確定なところまで i を進める
-        i += k
-        # j を i に合わせる
-        j -= k
-
-    return Z
+from algorithm_library.python.string.Z_algo import z_algo
+from algorithm_library.python.techniques.CmpSort import cmp_sort
 
 
 # reference: https://info.atcoder.jp/entry/algorithm_lectures/lex_min_string_concatenation
@@ -76,28 +48,4 @@ def sort_by_concat(T: list[str]) -> list[str]:
 
         return -f if isrev else f
 
-    def merge_sort(arr: list[int]):
-        # arr の要素は T のインデックス
-        if len(arr) <= 1:
-            return arr
-
-        mid = len(arr) // 2
-        left = merge_sort(arr[:mid])
-        right = merge_sort(arr[mid:])
-
-        res = []
-        i = j = 0
-
-        while i < len(left) and j < len(right):
-            if cmp(left[i], right[j]) <= 0:
-                res.append(left[i])
-                i += 1
-            else:
-                res.append(right[j])
-                j += 1
-
-        res.extend(left[i:])
-        res.extend(right[j:])
-        return res
-
-    return [T[i] for i in merge_sort(list(range(len(T))))]
+    return [T[i] for i in cmp_sort(list(range(len(T))), cmp)]
