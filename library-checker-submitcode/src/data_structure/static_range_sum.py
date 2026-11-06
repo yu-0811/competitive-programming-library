@@ -1,5 +1,5 @@
 # problem: https://judge.yosupo.jp/problem/static_range_sum
-# include: algorithm_library/python/data-structure/DisjointSparseTable.py
+# include: algorithm_library/python/data_structure/DisjointSparseTable.py
 
 
 def main():

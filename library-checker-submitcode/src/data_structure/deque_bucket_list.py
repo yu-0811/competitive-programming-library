@@ -1,5 +1,5 @@
 # problem: https://judge.yosupo.jp/problem/deque
-# include: algorithm_library/python/data-structure/BucketList.py
+# include: algorithm_library/python/data_structure/BucketList.py
 
 
 def main():

@@ -1,5 +1,5 @@
 # problem: https://judge.yosupo.jp/problem/point_add_range_sum
-# include: algorithm_library/python/data-structure/BIT.py
+# include: algorithm_library/python/data_structure/BIT.py
 
 
 def main():

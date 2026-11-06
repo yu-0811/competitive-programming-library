@@ -1,5 +1,5 @@
 # problem: https://judge.yosupo.jp/problem/static_range_frequency
-# include: algorithm_library/python/data-structure/MargeSortTree.py
+# include: algorithm_library/python/data_structure/MargeSortTree.py
 
 
 def main():

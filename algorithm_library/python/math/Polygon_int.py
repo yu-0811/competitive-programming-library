@@ -8,21 +8,6 @@ Point = tuple[int, int]
 Polygon = list[Point]
 
 
-# ベクトル p - q
-def sub(p: Point, q: Point) -> Point:
-    return p[0] - q[0], p[1] - q[1]
-
-
-# 内積
-def dot(p: Point, q: Point) -> int:
-    return p[0] * q[0] + p[1] * q[1]
-
-
-# 外積
-def cross(p: Point, q: Point) -> int:
-    return p[0] * q[1] - p[1] * q[0]
-
-
 # 多角形 q と点 p の包含判定
 # _OUT: 外部, _ON: 辺上, _IN: 内部
 def contains(q: Polygon, p: Point) -> int:

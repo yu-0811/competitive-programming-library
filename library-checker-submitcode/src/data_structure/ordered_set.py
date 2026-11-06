@@ -1,5 +1,5 @@
 # problem: https://judge.yosupo.jp/problem/ordered_set
-# include: algorithm_library/python/data-structure/SortedSet.py
+# include: algorithm_library/python/data_structure/SortedSet.py
 
 
 def main():

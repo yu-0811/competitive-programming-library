@@ -1,5 +1,5 @@
 # problem: https://judge.yosupo.jp/problem/range_affine_range_sum
-# include: algorithm_library/python/data-structure/TupleLazySegtree.py
+# include: algorithm_library/python/data_structure/TupleLazySegtree.py
 
 
 def combine(left, right):

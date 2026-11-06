@@ -1,3 +1,5 @@
+from algorithm_library.python.math.line import sub, dot, cross
+
 eps = 1e-10
 
 # contains の返り値
@@ -8,21 +10,6 @@ _IN = 2
 
 Point = tuple[float, float]
 Polygon = list[Point]
-
-
-# ベクトル p - q
-def sub(p: Point, q: Point) -> Point:
-    return p[0] - q[0], p[1] - q[1]
-
-
-# 内積
-def dot(p: Point, q: Point) -> float:
-    return p[0] * q[0] + p[1] * q[1]
-
-
-# 外積
-def cross(p: Point, q: Point) -> float:
-    return p[0] * q[1] - p[1] * q[0]
 
 
 # 多角形 q と点 p の包含判定

@@ -1,5 +1,5 @@
 # problem: https://judge.yosupo.jp/problem/predecessor_problem
-# include: algorithm_library/python/data-structure/BIT.py
+# include: algorithm_library/python/data_structure/BIT.py
 
 
 def main():

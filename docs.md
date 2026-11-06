@@ -92,7 +92,7 @@
     - 行列 A,B の積を返す
     - 行列 A の累乗 A^K
 
-## data-structure
+## data_structure
 
 - TupleHeap.py / PackedTupleHeap.py
     - 任意の要素数に対応する写経用の最小ヒープ。本体は成分分離型 54 行、整数符号化型 39 行

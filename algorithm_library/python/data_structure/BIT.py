@@ -53,3 +53,27 @@ class BIT:
                     x, s0, s1 = nxt, t0, t1
             step >>= 1
         return x + 1
+
+
+class fenwick_tree:
+    def __init__(self, n):
+        self.n = n
+        self.data = [0] * n
+
+    def add(self, p, x):
+        assert 0 <= p < self.n
+        data = self.data
+        while p < self.n:
+            data[p] += x
+            p |= p + 1
+
+    def sum0(self, r):
+        s = 0
+        while r:
+            s += self.data[r - 1]
+            r &= r - 1
+        return s
+
+    def sum(self, l, r):
+        assert 0 <= l <= r <= self.n
+        return self.sum0(r) - self.sum0(l)

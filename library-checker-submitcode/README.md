@@ -36,8 +36,9 @@ python3 library-checker-submitcode/generate.py --check
 `src/graph/xxx.py` などを作り、問題 URL と必要なライブラリを指定してから、
 問題ごとの入出力コードを書きます。`# include:` のパスはリポジトリ直下からの
 相対パスです。複数のライブラリが必要なら、必要な順序で複数行指定できます。
-指定したファイルをそのまま埋め込むので、その中のローカルライブラリへの
-import は自動展開されません。必要なファイルはそれぞれ明示してください。
+指定したファイル内の `from algorithm_library.python... import ...` も再帰的に
+展開します。同じライブラリは一度だけ埋め込まれます。
+内部ライブラリの import には絶対パスを使い、別名や `*` は使いません。
 
 ```python
 # problem: https://judge.yosupo.jp/problem/unionfind
@@ -71,21 +72,21 @@ if __name__ == "__main__":
 | `graph/Rerooting.py` | [graph/tree_path_composite_sum.test.py](graph/tree_path_composite_sum.test.py) | [Tree Path Composite Sum](https://judge.yosupo.jp/problem/tree_path_composite_sum) |
 | `graph/cycle_detect.py` | [graph/cycle_detection_undirected.test.py](graph/cycle_detection_undirected.test.py) | [Cycle Detection (Undirected)](https://judge.yosupo.jp/problem/cycle_detection_undirected) |
 | `graph/maxflow.py` | [graph/bipartitematching.test.py](graph/bipartitematching.test.py) | [Bipartite Matching](https://judge.yosupo.jp/problem/bipartitematching) |
-| `data-structure/BIT.py` | [data_structure/point_add_range_sum_bit.test.py](data_structure/point_add_range_sum_bit.test.py) | [Point Add Range Sum](https://judge.yosupo.jp/problem/point_add_range_sum) |
-| `data-structure/BIT.py` | [data_structure/predecessor_problem_bit.test.py](data_structure/predecessor_problem_bit.test.py) | [Predecessor Problem](https://judge.yosupo.jp/problem/predecessor_problem) |
-| `data-structure/BucketList.py` | [data_structure/deque_bucket_list.test.py](data_structure/deque_bucket_list.test.py) | [Deque](https://judge.yosupo.jp/problem/deque) |
-| `data-structure/SortedSet.py` | [data_structure/ordered_set.test.py](data_structure/ordered_set.test.py) | [Ordered Set](https://judge.yosupo.jp/problem/ordered_set) |
-| `data-structure/SortedMultiset.py` | [data_structure/ordered_set_multiset.test.py](data_structure/ordered_set_multiset.test.py) | [Ordered Set](https://judge.yosupo.jp/problem/ordered_set) |
-| `data-structure/SortedMultiset.py` | [data_structure/double_ended_priority_queue_multiset.test.py](data_structure/double_ended_priority_queue_multiset.test.py) | [Double-Ended Priority Queue](https://judge.yosupo.jp/problem/double_ended_priority_queue) |
-| `data-structure/Segtree.py` | [data_structure/point_add_range_sum_segtree.test.py](data_structure/point_add_range_sum_segtree.test.py) | [Point Add Range Sum](https://judge.yosupo.jp/problem/point_add_range_sum) |
-| `data-structure/Segtree.py` | [data_structure/point_set_range_composite.test.py](data_structure/point_set_range_composite.test.py) | [Point Set Range Composite](https://judge.yosupo.jp/problem/point_set_range_composite) |
-| `data-structure/TupleSegtree.py` | [data_structure/point_set_range_composite_tuple.test.py](data_structure/point_set_range_composite_tuple.test.py) | [Point Set Range Composite](https://judge.yosupo.jp/problem/point_set_range_composite) |
-| `data-structure/SparseTable.py` | [data_structure/staticrmq.test.py](data_structure/staticrmq.test.py) | [Static RMQ](https://judge.yosupo.jp/problem/staticrmq) |
-| `data-structure/DisjointSparseTable.py` | [data_structure/static_range_sum.test.py](data_structure/static_range_sum.test.py) | [Static Range Sum](https://judge.yosupo.jp/problem/static_range_sum) |
-| `data-structure/MargeSortTree.py` | [data_structure/static_range_frequency.test.py](data_structure/static_range_frequency.test.py) | [Static Range Frequency](https://judge.yosupo.jp/problem/static_range_frequency) |
-| `data-structure/CartesianTree.py` | [data_structure/cartesian_tree.test.py](data_structure/cartesian_tree.test.py) | [Cartesian Tree](https://judge.yosupo.jp/problem/cartesian_tree) |
-| `data-structure/LazySegtree.py` | [data_structure/range_affine_range_sum.test.py](data_structure/range_affine_range_sum.test.py) | [Range Affine Range Sum](https://judge.yosupo.jp/problem/range_affine_range_sum) |
-| `data-structure/TupleLazySegtree.py` | [data_structure/range_affine_range_sum_tuple.test.py](data_structure/range_affine_range_sum_tuple.test.py) | [Range Affine Range Sum](https://judge.yosupo.jp/problem/range_affine_range_sum) |
+| `data_structure/BIT.py` | [data_structure/point_add_range_sum_bit.test.py](data_structure/point_add_range_sum_bit.test.py) | [Point Add Range Sum](https://judge.yosupo.jp/problem/point_add_range_sum) |
+| `data_structure/BIT.py` | [data_structure/predecessor_problem_bit.test.py](data_structure/predecessor_problem_bit.test.py) | [Predecessor Problem](https://judge.yosupo.jp/problem/predecessor_problem) |
+| `data_structure/BucketList.py` | [data_structure/deque_bucket_list.test.py](data_structure/deque_bucket_list.test.py) | [Deque](https://judge.yosupo.jp/problem/deque) |
+| `data_structure/SortedSet.py` | [data_structure/ordered_set.test.py](data_structure/ordered_set.test.py) | [Ordered Set](https://judge.yosupo.jp/problem/ordered_set) |
+| `data_structure/SortedMultiset.py` | [data_structure/ordered_set_multiset.test.py](data_structure/ordered_set_multiset.test.py) | [Ordered Set](https://judge.yosupo.jp/problem/ordered_set) |
+| `data_structure/SortedMultiset.py` | [data_structure/double_ended_priority_queue_multiset.test.py](data_structure/double_ended_priority_queue_multiset.test.py) | [Double-Ended Priority Queue](https://judge.yosupo.jp/problem/double_ended_priority_queue) |
+| `data_structure/Segtree.py` | [data_structure/point_add_range_sum_segtree.test.py](data_structure/point_add_range_sum_segtree.test.py) | [Point Add Range Sum](https://judge.yosupo.jp/problem/point_add_range_sum) |
+| `data_structure/Segtree.py` | [data_structure/point_set_range_composite.test.py](data_structure/point_set_range_composite.test.py) | [Point Set Range Composite](https://judge.yosupo.jp/problem/point_set_range_composite) |
+| `data_structure/TupleSegtree.py` | [data_structure/point_set_range_composite_tuple.test.py](data_structure/point_set_range_composite_tuple.test.py) | [Point Set Range Composite](https://judge.yosupo.jp/problem/point_set_range_composite) |
+| `data_structure/SparseTable.py` | [data_structure/staticrmq.test.py](data_structure/staticrmq.test.py) | [Static RMQ](https://judge.yosupo.jp/problem/staticrmq) |
+| `data_structure/DisjointSparseTable.py` | [data_structure/static_range_sum.test.py](data_structure/static_range_sum.test.py) | [Static Range Sum](https://judge.yosupo.jp/problem/static_range_sum) |
+| `data_structure/MargeSortTree.py` | [data_structure/static_range_frequency.test.py](data_structure/static_range_frequency.test.py) | [Static Range Frequency](https://judge.yosupo.jp/problem/static_range_frequency) |
+| `data_structure/CartesianTree.py` | [data_structure/cartesian_tree.test.py](data_structure/cartesian_tree.test.py) | [Cartesian Tree](https://judge.yosupo.jp/problem/cartesian_tree) |
+| `data_structure/LazySegtree.py` | [data_structure/range_affine_range_sum.test.py](data_structure/range_affine_range_sum.test.py) | [Range Affine Range Sum](https://judge.yosupo.jp/problem/range_affine_range_sum) |
+| `data_structure/TupleLazySegtree.py` | [data_structure/range_affine_range_sum_tuple.test.py](data_structure/range_affine_range_sum_tuple.test.py) | [Range Affine Range Sum](https://judge.yosupo.jp/problem/range_affine_range_sum) |
 | `string/SuffixArray.py` | [string/suffixarray.test.py](string/suffixarray.test.py) | [Suffix Array](https://judge.yosupo.jp/problem/suffixarray) |
 | `string/SuffixArray.py` | [string/number_of_substrings.test.py](string/number_of_substrings.test.py) | [Number of Substrings](https://judge.yosupo.jp/problem/number_of_substrings) |
 | `string/SuffixArray.py` | [string/longest_common_substring.test.py](string/longest_common_substring.test.py) | [Longest Common Substring](https://judge.yosupo.jp/problem/longest_common_substring) |

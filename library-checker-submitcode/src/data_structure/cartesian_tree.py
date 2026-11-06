@@ -1,5 +1,5 @@
 # problem: https://judge.yosupo.jp/problem/cartesian_tree
-# include: algorithm_library/python/data-structure/CartesianTree.py
+# include: algorithm_library/python/data_structure/CartesianTree.py
 
 
 def main():

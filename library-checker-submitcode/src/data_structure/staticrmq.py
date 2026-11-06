@@ -1,5 +1,5 @@
 # problem: https://judge.yosupo.jp/problem/staticrmq
-# include: algorithm_library/python/data-structure/SparseTable.py
+# include: algorithm_library/python/data_structure/SparseTable.py
 
 
 def main():

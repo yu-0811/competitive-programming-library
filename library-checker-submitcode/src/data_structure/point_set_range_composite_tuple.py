@@ -1,5 +1,5 @@
 # problem: https://judge.yosupo.jp/problem/point_set_range_composite
-# include: algorithm_library/python/data-structure/TupleSegtree.py
+# include: algorithm_library/python/data_structure/TupleSegtree.py
 
 
 def compose(left, right):

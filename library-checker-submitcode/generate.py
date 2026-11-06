@@ -1,6 +1,7 @@
 """Build standalone submissions from the template, libraries, and problem code."""
 
 import argparse
+import ast
 import re
 import sys
 from pathlib import Path
@@ -15,15 +16,41 @@ PROBLEM = re.compile(
 
 
 def render(source):
-    def include(match):
-        path = ROOT / match.group(1).strip()
+    included = set()
+
+    def expand(path):
+        path = path.resolve()
+        if path in included:
+            return ""
+        included.add(path)
+        content = path.read_text(encoding="utf-8").rstrip()
+        lines = content.splitlines(keepends=True)
+        chunks = []
+        cursor = 0
+        for node in ast.parse(content).body:
+            if not isinstance(node, ast.ImportFrom) or not node.module:
+                continue
+            if not node.module.startswith("algorithm_library.python."):
+                continue
+            parts = node.module.split(".")
+            dependency = ROOT.joinpath(*parts).with_suffix(".py")
+            if node.level or any(alias.asname or alias.name == "*" for alias in node.names):
+                raise ValueError(f"Unsupported library import in {path}: {ast.unparse(node)}")
+            chunks.extend(lines[cursor : node.lineno - 1])
+            chunks.append(expand(dependency) + "\n")
+            cursor = node.end_lineno
+        chunks.extend(lines[cursor:])
         return "\n".join(
             [
                 f"# BEGIN LIBRARY: {path.relative_to(ROOT).as_posix()}",
-                path.read_text(encoding="utf-8").rstrip(),
+                "".join(chunks).rstrip(),
                 "# END LIBRARY",
             ]
         )
+
+    def include(match):
+        path = ROOT / match.group(1).strip()
+        return expand(path)
 
     template = (BASE / "template.py").read_text(encoding="utf-8").rstrip()
     body = INCLUDE.sub(include, source.read_text(encoding="utf-8")).rstrip()
