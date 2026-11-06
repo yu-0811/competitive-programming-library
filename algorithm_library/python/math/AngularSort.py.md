@@ -1,20 +1,17 @@
 ---
 data:
   _extendedDependsOn: []
-  _extendedRequiredBy:
-  - icon: ':warning:'
-    path: tests/math/test_cmp_sort.py
-    title: tests/math/test_cmp_sort.py
+  _extendedRequiredBy: []
   _extendedVerifiedWith: []
   _isVerificationFailed: false
   _pathExtension: py
   _verificationStatusIcon: ':warning:'
   attributes:
     links: []
-  bundledCode: "Traceback (most recent call last):\n  File \"/opt/hostedtoolcache/PyPy/3.11.16/x64/lib/pypy3.11/site-packages/onlinejudge_verify/documentation/build.py\"\
+  bundledCode: "Traceback (most recent call last):\n  File \"/opt/hostedtoolcache/PyPy/3.11.17/x64/lib/pypy3.11/site-packages/onlinejudge_verify/documentation/build.py\"\
     , line 71, in _render_source_code_stat\n    bundled_code = language.bundle(stat.path,\
     \ basedir=basedir, options={'include_paths': [basedir]}).decode()\n          \
-    \                  ^^^^^^\n  File \"/opt/hostedtoolcache/PyPy/3.11.16/x64/lib/pypy3.11/site-packages/onlinejudge_verify/languages/python.py\"\
+    \                  ^^^^^^\n  File \"/opt/hostedtoolcache/PyPy/3.11.17/x64/lib/pypy3.11/site-packages/onlinejudge_verify/languages/python.py\"\
     , line 96, in bundle\n    raise NotImplementedError\nNotImplementedError\n"
   code: "def compare(a: tuple[int, int], b: tuple[int, int]):\n    ax, ay = a\n  \
     \  bx, by = b\n\n    # \u9818\u57DF\u5224\u5B9A (0: \u4E0A\u534A\u5E73\u9762 [0,\
@@ -45,8 +42,7 @@ data:
   dependsOn: []
   isVerificationFile: false
   path: algorithm_library/python/math/AngularSort.py
-  requiredBy:
-  - tests/math/test_cmp_sort.py
+  requiredBy: []
   timestamp: '2026-10-25 18:45:29+09:00'
   verificationStatus: LIBRARY_NO_TESTS
   verifiedWith: []

@@ -209,53 +209,62 @@ data:
     - icon: ':warning:'
       path: algorithm_library/python/template.py
       title: algorithm_library/python/template.py
-  - name: algorithm_library/python/data-structure
+  - name: algorithm_library/python/data_structure
     pages:
     - icon: ':warning:'
-      path: algorithm_library/python/data-structure/2DSparseTable.py
-      title: algorithm_library/python/data-structure/2DSparseTable.py
+      path: algorithm_library/python/data_structure/2DSparseTable.py
+      title: algorithm_library/python/data_structure/2DSparseTable.py
     - icon: ':warning:'
-      path: algorithm_library/python/data-structure/BIT.py
-      title: algorithm_library/python/data-structure/BIT.py
+      path: algorithm_library/python/data_structure/BIT.py
+      title: algorithm_library/python/data_structure/BIT.py
     - icon: ':warning:'
-      path: algorithm_library/python/data-structure/CartesianTree.py
-      title: algorithm_library/python/data-structure/CartesianTree.py
+      path: algorithm_library/python/data_structure/BucketList.py
+      title: algorithm_library/python/data_structure/BucketList.py
     - icon: ':warning:'
-      path: algorithm_library/python/data-structure/DisjointSparseTable.py
-      title: algorithm_library/python/data-structure/DisjointSparseTable.py
+      path: algorithm_library/python/data_structure/CartesianTree.py
+      title: algorithm_library/python/data_structure/CartesianTree.py
     - icon: ':warning:'
-      path: algorithm_library/python/data-structure/LazySegtree.py
-      title: algorithm_library/python/data-structure/LazySegtree.py
+      path: algorithm_library/python/data_structure/DisjointSparseTable.py
+      title: algorithm_library/python/data_structure/DisjointSparseTable.py
     - icon: ':warning:'
-      path: algorithm_library/python/data-structure/LinearImos.py
-      title: algorithm_library/python/data-structure/LinearImos.py
+      path: algorithm_library/python/data_structure/LazySegtree.py
+      title: algorithm_library/python/data_structure/LazySegtree.py
     - icon: ':warning:'
-      path: algorithm_library/python/data-structure/MargeSortTree.py
-      title: algorithm_library/python/data-structure/MargeSortTree.py
+      path: algorithm_library/python/data_structure/LinearImos.py
+      title: algorithm_library/python/data_structure/LinearImos.py
     - icon: ':warning:'
-      path: algorithm_library/python/data-structure/Mos_algorithm.py
-      title: algorithm_library/python/data-structure/Mos_algorithm.py
+      path: algorithm_library/python/data_structure/MargeSortTree.py
+      title: algorithm_library/python/data_structure/MargeSortTree.py
     - icon: ':warning:'
-      path: algorithm_library/python/data-structure/PackedTupleHeap.py
-      title: algorithm_library/python/data-structure/PackedTupleHeap.py
+      path: algorithm_library/python/data_structure/Mos_algorithm.py
+      title: algorithm_library/python/data_structure/Mos_algorithm.py
     - icon: ':warning:'
-      path: algorithm_library/python/data-structure/Segtree.py
-      title: algorithm_library/python/data-structure/Segtree.py
+      path: algorithm_library/python/data_structure/PackedTupleHeap.py
+      title: algorithm_library/python/data_structure/PackedTupleHeap.py
     - icon: ':warning:'
-      path: algorithm_library/python/data-structure/SparseTable.py
-      title: algorithm_library/python/data-structure/SparseTable.py
+      path: algorithm_library/python/data_structure/Segtree.py
+      title: algorithm_library/python/data_structure/Segtree.py
     - icon: ':warning:'
-      path: algorithm_library/python/data-structure/TopK.py
-      title: algorithm_library/python/data-structure/TopK.py
+      path: algorithm_library/python/data_structure/SortedMultiset.py
+      title: algorithm_library/python/data_structure/SortedMultiset.py
     - icon: ':warning:'
-      path: algorithm_library/python/data-structure/TupleLazySegtree.py
-      title: algorithm_library/python/data-structure/TupleLazySegtree.py
+      path: algorithm_library/python/data_structure/SortedSet.py
+      title: algorithm_library/python/data_structure/SortedSet.py
     - icon: ':warning:'
-      path: algorithm_library/python/data-structure/TupleSegtree.py
-      title: algorithm_library/python/data-structure/TupleSegtree.py
+      path: algorithm_library/python/data_structure/SparseTable.py
+      title: algorithm_library/python/data_structure/SparseTable.py
     - icon: ':warning:'
-      path: algorithm_library/python/data-structure/TwoWayList.py
-      title: algorithm_library/python/data-structure/TwoWayList.py
+      path: algorithm_library/python/data_structure/TopK.py
+      title: algorithm_library/python/data_structure/TopK.py
+    - icon: ':warning:'
+      path: algorithm_library/python/data_structure/TupleLazySegtree.py
+      title: algorithm_library/python/data_structure/TupleLazySegtree.py
+    - icon: ':warning:'
+      path: algorithm_library/python/data_structure/TupleSegtree.py
+      title: algorithm_library/python/data_structure/TupleSegtree.py
+    - icon: ':warning:'
+      path: algorithm_library/python/data_structure/TwoWayList.py
+      title: algorithm_library/python/data_structure/TwoWayList.py
   - name: algorithm_library/python/gen
     pages:
     - icon: ':warning:'
@@ -278,21 +287,24 @@ data:
     - icon: ':warning:'
       path: algorithm_library/python/graph/LCA.py
       title: algorithm_library/python/graph/LCA.py
-    - icon: ':heavy_check_mark:'
+    - icon: ':warning:'
       path: algorithm_library/python/graph/PotentialUnionFind.py
       title: algorithm_library/python/graph/PotentialUnionFind.py
     - icon: ':warning:'
       path: algorithm_library/python/graph/Rerooting.py
       title: algorithm_library/python/graph/Rerooting.py
-    - icon: ':heavy_check_mark:'
+    - icon: ':warning:'
       path: algorithm_library/python/graph/SCC.py
       title: algorithm_library/python/graph/SCC.py
     - icon: ':warning:'
       path: algorithm_library/python/graph/TopologicalSort.py
       title: algorithm_library/python/graph/TopologicalSort.py
-    - icon: ':heavy_check_mark:'
+    - icon: ':warning:'
       path: algorithm_library/python/graph/UnionFind.py
       title: algorithm_library/python/graph/UnionFind.py
+    - icon: ':warning:'
+      path: algorithm_library/python/graph/VertexAddSubtreeSum.py
+      title: algorithm_library/python/graph/VertexAddSubtreeSum.py
     - icon: ':warning:'
       path: algorithm_library/python/graph/WarshallFloyd.py
       title: algorithm_library/python/graph/WarshallFloyd.py
@@ -392,6 +404,9 @@ data:
   - name: algorithm_library/python/techniques
     pages:
     - icon: ':warning:'
+      path: algorithm_library/python/techniques/2-SAT.py
+      title: algorithm_library/python/techniques/2-SAT.py
+    - icon: ':warning:'
       path: algorithm_library/python/techniques/3buntansaku.py
       title: algorithm_library/python/techniques/3buntansaku.py
     - icon: ':warning:'
@@ -458,38 +473,6 @@ data:
     - icon: ':warning:'
       path: heuristic_library/pacher-optuna/optimize.py
       title: heuristic_library/pacher-optuna/optimize.py
-  - name: library-checker-submitcode/data_structure
-    pages:
-    - icon: ':warning:'
-      path: library-checker-submitcode/data_structure/cartesian_tree.py
-      title: library-checker-submitcode/data_structure/cartesian_tree.py
-    - icon: ':warning:'
-      path: library-checker-submitcode/data_structure/point_add_range_sum_bit.py
-      title: library-checker-submitcode/data_structure/point_add_range_sum_bit.py
-    - icon: ':warning:'
-      path: library-checker-submitcode/data_structure/point_add_range_sum_segtree.py
-      title: library-checker-submitcode/data_structure/point_add_range_sum_segtree.py
-    - icon: ':warning:'
-      path: library-checker-submitcode/data_structure/point_set_range_composite.py
-      title: library-checker-submitcode/data_structure/point_set_range_composite.py
-    - icon: ':warning:'
-      path: library-checker-submitcode/data_structure/point_set_range_composite_tuple.py
-      title: library-checker-submitcode/data_structure/point_set_range_composite_tuple.py
-    - icon: ':warning:'
-      path: library-checker-submitcode/data_structure/range_affine_range_sum.py
-      title: library-checker-submitcode/data_structure/range_affine_range_sum.py
-    - icon: ':warning:'
-      path: library-checker-submitcode/data_structure/range_affine_range_sum_tuple.py
-      title: library-checker-submitcode/data_structure/range_affine_range_sum_tuple.py
-    - icon: ':warning:'
-      path: library-checker-submitcode/data_structure/static_range_frequency.py
-      title: library-checker-submitcode/data_structure/static_range_frequency.py
-    - icon: ':warning:'
-      path: library-checker-submitcode/data_structure/static_range_sum.py
-      title: library-checker-submitcode/data_structure/static_range_sum.py
-    - icon: ':warning:'
-      path: library-checker-submitcode/data_structure/staticrmq.py
-      title: library-checker-submitcode/data_structure/staticrmq.py
   - name: library-checker-submitcode
     pages:
     - icon: ':warning:'
@@ -498,48 +481,23 @@ data:
     - icon: ':warning:'
       path: library-checker-submitcode/template.py
       title: library-checker-submitcode/template.py
-  - name: library-checker-submitcode/graph
-    pages:
-    - icon: ':warning:'
-      path: library-checker-submitcode/graph/bipartitematching.py
-      title: library-checker-submitcode/graph/bipartitematching.py
-    - icon: ':warning:'
-      path: library-checker-submitcode/graph/jump_on_tree.py
-      title: library-checker-submitcode/graph/jump_on_tree.py
-    - icon: ':warning:'
-      path: library-checker-submitcode/graph/lca.py
-      title: library-checker-submitcode/graph/lca.py
-    - icon: ':warning:'
-      path: library-checker-submitcode/graph/lca_euler_tour.py
-      title: library-checker-submitcode/graph/lca_euler_tour.py
-    - icon: ':warning:'
-      path: library-checker-submitcode/graph/scc.py
-      title: library-checker-submitcode/graph/scc.py
-    - icon: ':warning:'
-      path: library-checker-submitcode/graph/unionfind.py
-      title: library-checker-submitcode/graph/unionfind.py
-    - icon: ':warning:'
-      path: library-checker-submitcode/graph/unionfind_with_potential.py
-      title: library-checker-submitcode/graph/unionfind_with_potential.py
-  - name: library-checker-submitcode/math
-    pages:
-    - icon: ':warning:'
-      path: library-checker-submitcode/math/convolution_mod.py
-      title: library-checker-submitcode/math/convolution_mod.py
-    - icon: ':warning:'
-      path: library-checker-submitcode/math/matrix_product.py
-      title: library-checker-submitcode/math/matrix_product.py
-    - icon: ':warning:'
-      path: library-checker-submitcode/math/pow_of_matrix.py
-      title: library-checker-submitcode/math/pow_of_matrix.py
-    - icon: ':warning:'
-      path: library-checker-submitcode/math/sort_points_by_argument.py
-      title: library-checker-submitcode/math/sort_points_by_argument.py
   - name: library-checker-submitcode/src/data_structure
     pages:
     - icon: ':warning:'
       path: library-checker-submitcode/src/data_structure/cartesian_tree.py
       title: library-checker-submitcode/src/data_structure/cartesian_tree.py
+    - icon: ':warning:'
+      path: library-checker-submitcode/src/data_structure/deque_bucket_list.py
+      title: library-checker-submitcode/src/data_structure/deque_bucket_list.py
+    - icon: ':warning:'
+      path: library-checker-submitcode/src/data_structure/double_ended_priority_queue_multiset.py
+      title: library-checker-submitcode/src/data_structure/double_ended_priority_queue_multiset.py
+    - icon: ':warning:'
+      path: library-checker-submitcode/src/data_structure/ordered_set.py
+      title: library-checker-submitcode/src/data_structure/ordered_set.py
+    - icon: ':warning:'
+      path: library-checker-submitcode/src/data_structure/ordered_set_multiset.py
+      title: library-checker-submitcode/src/data_structure/ordered_set_multiset.py
     - icon: ':warning:'
       path: library-checker-submitcode/src/data_structure/point_add_range_sum_bit.py
       title: library-checker-submitcode/src/data_structure/point_add_range_sum_bit.py
@@ -552,6 +510,9 @@ data:
     - icon: ':warning:'
       path: library-checker-submitcode/src/data_structure/point_set_range_composite_tuple.py
       title: library-checker-submitcode/src/data_structure/point_set_range_composite_tuple.py
+    - icon: ':warning:'
+      path: library-checker-submitcode/src/data_structure/predecessor_problem_bit.py
+      title: library-checker-submitcode/src/data_structure/predecessor_problem_bit.py
     - icon: ':warning:'
       path: library-checker-submitcode/src/data_structure/range_affine_range_sum.py
       title: library-checker-submitcode/src/data_structure/range_affine_range_sum.py
@@ -573,6 +534,9 @@ data:
       path: library-checker-submitcode/src/graph/bipartitematching.py
       title: library-checker-submitcode/src/graph/bipartitematching.py
     - icon: ':warning:'
+      path: library-checker-submitcode/src/graph/cycle_detection_undirected.py
+      title: library-checker-submitcode/src/graph/cycle_detection_undirected.py
+    - icon: ':warning:'
       path: library-checker-submitcode/src/graph/jump_on_tree.py
       title: library-checker-submitcode/src/graph/jump_on_tree.py
     - icon: ':warning:'
@@ -585,11 +549,20 @@ data:
       path: library-checker-submitcode/src/graph/scc.py
       title: library-checker-submitcode/src/graph/scc.py
     - icon: ':warning:'
+      path: library-checker-submitcode/src/graph/tree_path_composite_sum.py
+      title: library-checker-submitcode/src/graph/tree_path_composite_sum.py
+    - icon: ':warning:'
       path: library-checker-submitcode/src/graph/unionfind.py
       title: library-checker-submitcode/src/graph/unionfind.py
     - icon: ':warning:'
       path: library-checker-submitcode/src/graph/unionfind_with_potential.py
       title: library-checker-submitcode/src/graph/unionfind_with_potential.py
+    - icon: ':warning:'
+      path: library-checker-submitcode/src/graph/vertex_add_path_sum_euler_tour.py
+      title: library-checker-submitcode/src/graph/vertex_add_path_sum_euler_tour.py
+    - icon: ':warning:'
+      path: library-checker-submitcode/src/graph/vertex_add_subtree_sum.py
+      title: library-checker-submitcode/src/graph/vertex_add_subtree_sum.py
   - name: library-checker-submitcode/src/math
     pages:
     - icon: ':warning:'
@@ -618,20 +591,11 @@ data:
     - icon: ':warning:'
       path: library-checker-submitcode/src/string/zalgorithm.py
       title: library-checker-submitcode/src/string/zalgorithm.py
-  - name: library-checker-submitcode/string
+  - name: library-checker-submitcode/src/techniques
     pages:
     - icon: ':warning:'
-      path: library-checker-submitcode/string/longest_common_substring.py
-      title: library-checker-submitcode/string/longest_common_substring.py
-    - icon: ':warning:'
-      path: library-checker-submitcode/string/number_of_substrings.py
-      title: library-checker-submitcode/string/number_of_substrings.py
-    - icon: ':warning:'
-      path: library-checker-submitcode/string/suffixarray.py
-      title: library-checker-submitcode/string/suffixarray.py
-    - icon: ':warning:'
-      path: library-checker-submitcode/string/zalgorithm.py
-      title: library-checker-submitcode/string/zalgorithm.py
+      path: library-checker-submitcode/src/techniques/two_sat.py
+      title: library-checker-submitcode/src/techniques/two_sat.py
   - name: tatyam_set
     pages:
     - icon: ':warning:'
@@ -715,142 +679,126 @@ data:
     - icon: ':warning:'
       path: tatyam_set/test/test_SortedSet.py
       title: tatyam_set/test/test_SortedSet.py
-  - name: tests/data_structure
+  - name: tools
     pages:
     - icon: ':warning:'
-      path: tests/data_structure/benchmark_tuple_heap.py
-      title: tests/data_structure/benchmark_tuple_heap.py
-    - icon: ':warning:'
-      path: tests/data_structure/benchmark_tuple_lazy_segtree.py
-      title: tests/data_structure/benchmark_tuple_lazy_segtree.py
-    - icon: ':warning:'
-      path: tests/data_structure/test_bit.py
-      title: tests/data_structure/test_bit.py
-    - icon: ':warning:'
-      path: tests/data_structure/test_static_structures.py
-      title: tests/data_structure/test_static_structures.py
-    - icon: ':warning:'
-      path: tests/data_structure/test_tuple_heap.py
-      title: tests/data_structure/test_tuple_heap.py
-    - icon: ':warning:'
-      path: tests/data_structure/test_tuple_lazy_segtree.py
-      title: tests/data_structure/test_tuple_lazy_segtree.py
-    - icon: ':warning:'
-      path: tests/data_structure/test_tuple_segtree.py
-      title: tests/data_structure/test_tuple_segtree.py
-  - name: tests/graph
-    pages:
-    - icon: ':warning:'
-      path: tests/graph/test_graph_optimizations.py
-      title: tests/graph/test_graph_optimizations.py
-    - icon: ':warning:'
-      path: tests/graph/test_graph_regressions.py
-      title: tests/graph/test_graph_regressions.py
-  - name: tests/math
-    pages:
-    - icon: ':warning:'
-      path: tests/math/benchmark_cmp_sort.py
-      title: tests/math/benchmark_cmp_sort.py
-    - icon: ':warning:'
-      path: tests/math/test_cmp_sort.py
-      title: tests/math/test_cmp_sort.py
-    - icon: ':warning:'
-      path: tests/math/test_matrix_power.py
-      title: tests/math/test_matrix_power.py
+      path: tools/build_notebook.py
+      title: tools/build_notebook.py
   verificationCategories:
-  - name: tests/graph
+  - name: library-checker-submitcode/data_structure
     pages:
     - icon: ':heavy_check_mark:'
-      path: tests/graph/PotentialUnionFind_yosupo.test.py
-      title: tests/graph/PotentialUnionFind_yosupo.test.py
+      path: library-checker-submitcode/data_structure/cartesian_tree.test.py
+      title: library-checker-submitcode/data_structure/cartesian_tree.test.py
     - icon: ':heavy_check_mark:'
-      path: tests/graph/scc_yosupo.test.py
-      title: tests/graph/scc_yosupo.test.py
+      path: library-checker-submitcode/data_structure/deque_bucket_list.test.py
+      title: library-checker-submitcode/data_structure/deque_bucket_list.test.py
     - icon: ':heavy_check_mark:'
-      path: tests/graph/unionFind_yosupo.test.py
-      title: tests/graph/unionFind_yosupo.test.py
-  - name: tests/library_checker/official/data_structure
+      path: library-checker-submitcode/data_structure/double_ended_priority_queue_multiset.test.py
+      title: library-checker-submitcode/data_structure/double_ended_priority_queue_multiset.test.py
+    - icon: ':heavy_check_mark:'
+      path: library-checker-submitcode/data_structure/ordered_set.test.py
+      title: library-checker-submitcode/data_structure/ordered_set.test.py
+    - icon: ':heavy_check_mark:'
+      path: library-checker-submitcode/data_structure/ordered_set_multiset.test.py
+      title: library-checker-submitcode/data_structure/ordered_set_multiset.test.py
+    - icon: ':heavy_check_mark:'
+      path: library-checker-submitcode/data_structure/point_add_range_sum_bit.test.py
+      title: library-checker-submitcode/data_structure/point_add_range_sum_bit.test.py
+    - icon: ':heavy_check_mark:'
+      path: library-checker-submitcode/data_structure/point_add_range_sum_segtree.test.py
+      title: library-checker-submitcode/data_structure/point_add_range_sum_segtree.test.py
+    - icon: ':heavy_check_mark:'
+      path: library-checker-submitcode/data_structure/point_set_range_composite.test.py
+      title: library-checker-submitcode/data_structure/point_set_range_composite.test.py
+    - icon: ':heavy_check_mark:'
+      path: library-checker-submitcode/data_structure/point_set_range_composite_tuple.test.py
+      title: library-checker-submitcode/data_structure/point_set_range_composite_tuple.test.py
+    - icon: ':heavy_check_mark:'
+      path: library-checker-submitcode/data_structure/predecessor_problem_bit.test.py
+      title: library-checker-submitcode/data_structure/predecessor_problem_bit.test.py
+    - icon: ':heavy_check_mark:'
+      path: library-checker-submitcode/data_structure/range_affine_range_sum.test.py
+      title: library-checker-submitcode/data_structure/range_affine_range_sum.test.py
+    - icon: ':heavy_check_mark:'
+      path: library-checker-submitcode/data_structure/range_affine_range_sum_tuple.test.py
+      title: library-checker-submitcode/data_structure/range_affine_range_sum_tuple.test.py
+    - icon: ':heavy_check_mark:'
+      path: library-checker-submitcode/data_structure/static_range_frequency.test.py
+      title: library-checker-submitcode/data_structure/static_range_frequency.test.py
+    - icon: ':heavy_check_mark:'
+      path: library-checker-submitcode/data_structure/static_range_sum.test.py
+      title: library-checker-submitcode/data_structure/static_range_sum.test.py
+    - icon: ':heavy_check_mark:'
+      path: library-checker-submitcode/data_structure/staticrmq.test.py
+      title: library-checker-submitcode/data_structure/staticrmq.test.py
+  - name: library-checker-submitcode/graph
     pages:
     - icon: ':heavy_check_mark:'
-      path: tests/library_checker/official/data_structure/cartesian_tree.test.py
-      title: tests/library_checker/official/data_structure/cartesian_tree.test.py
+      path: library-checker-submitcode/graph/bipartitematching.test.py
+      title: library-checker-submitcode/graph/bipartitematching.test.py
     - icon: ':heavy_check_mark:'
-      path: tests/library_checker/official/data_structure/point_add_range_sum_bit.test.py
-      title: tests/library_checker/official/data_structure/point_add_range_sum_bit.test.py
+      path: library-checker-submitcode/graph/cycle_detection_undirected.test.py
+      title: library-checker-submitcode/graph/cycle_detection_undirected.test.py
     - icon: ':heavy_check_mark:'
-      path: tests/library_checker/official/data_structure/point_add_range_sum_segtree.test.py
-      title: tests/library_checker/official/data_structure/point_add_range_sum_segtree.test.py
+      path: library-checker-submitcode/graph/jump_on_tree.test.py
+      title: library-checker-submitcode/graph/jump_on_tree.test.py
     - icon: ':heavy_check_mark:'
-      path: tests/library_checker/official/data_structure/point_set_range_composite.test.py
-      title: tests/library_checker/official/data_structure/point_set_range_composite.test.py
+      path: library-checker-submitcode/graph/lca.test.py
+      title: library-checker-submitcode/graph/lca.test.py
     - icon: ':heavy_check_mark:'
-      path: tests/library_checker/official/data_structure/point_set_range_composite_tuple.test.py
-      title: tests/library_checker/official/data_structure/point_set_range_composite_tuple.test.py
+      path: library-checker-submitcode/graph/lca_euler_tour.test.py
+      title: library-checker-submitcode/graph/lca_euler_tour.test.py
     - icon: ':heavy_check_mark:'
-      path: tests/library_checker/official/data_structure/range_affine_range_sum.test.py
-      title: tests/library_checker/official/data_structure/range_affine_range_sum.test.py
+      path: library-checker-submitcode/graph/scc.test.py
+      title: library-checker-submitcode/graph/scc.test.py
     - icon: ':heavy_check_mark:'
-      path: tests/library_checker/official/data_structure/range_affine_range_sum_tuple.test.py
-      title: tests/library_checker/official/data_structure/range_affine_range_sum_tuple.test.py
+      path: library-checker-submitcode/graph/tree_path_composite_sum.test.py
+      title: library-checker-submitcode/graph/tree_path_composite_sum.test.py
     - icon: ':heavy_check_mark:'
-      path: tests/library_checker/official/data_structure/static_range_frequency.test.py
-      title: tests/library_checker/official/data_structure/static_range_frequency.test.py
+      path: library-checker-submitcode/graph/unionfind.test.py
+      title: library-checker-submitcode/graph/unionfind.test.py
     - icon: ':heavy_check_mark:'
-      path: tests/library_checker/official/data_structure/static_range_sum.test.py
-      title: tests/library_checker/official/data_structure/static_range_sum.test.py
+      path: library-checker-submitcode/graph/unionfind_with_potential.test.py
+      title: library-checker-submitcode/graph/unionfind_with_potential.test.py
     - icon: ':heavy_check_mark:'
-      path: tests/library_checker/official/data_structure/staticrmq.test.py
-      title: tests/library_checker/official/data_structure/staticrmq.test.py
-  - name: tests/library_checker/official/graph
+      path: library-checker-submitcode/graph/vertex_add_path_sum_euler_tour.test.py
+      title: library-checker-submitcode/graph/vertex_add_path_sum_euler_tour.test.py
+    - icon: ':heavy_check_mark:'
+      path: library-checker-submitcode/graph/vertex_add_subtree_sum.test.py
+      title: library-checker-submitcode/graph/vertex_add_subtree_sum.test.py
+  - name: library-checker-submitcode/math
     pages:
     - icon: ':heavy_check_mark:'
-      path: tests/library_checker/official/graph/bipartitematching.test.py
-      title: tests/library_checker/official/graph/bipartitematching.test.py
+      path: library-checker-submitcode/math/convolution_mod.test.py
+      title: library-checker-submitcode/math/convolution_mod.test.py
     - icon: ':heavy_check_mark:'
-      path: tests/library_checker/official/graph/jump_on_tree.test.py
-      title: tests/library_checker/official/graph/jump_on_tree.test.py
+      path: library-checker-submitcode/math/matrix_product.test.py
+      title: library-checker-submitcode/math/matrix_product.test.py
     - icon: ':heavy_check_mark:'
-      path: tests/library_checker/official/graph/lca.test.py
-      title: tests/library_checker/official/graph/lca.test.py
+      path: library-checker-submitcode/math/pow_of_matrix.test.py
+      title: library-checker-submitcode/math/pow_of_matrix.test.py
     - icon: ':heavy_check_mark:'
-      path: tests/library_checker/official/graph/lca_euler_tour.test.py
-      title: tests/library_checker/official/graph/lca_euler_tour.test.py
-    - icon: ':heavy_check_mark:'
-      path: tests/library_checker/official/graph/scc.test.py
-      title: tests/library_checker/official/graph/scc.test.py
-    - icon: ':heavy_check_mark:'
-      path: tests/library_checker/official/graph/unionfind.test.py
-      title: tests/library_checker/official/graph/unionfind.test.py
-    - icon: ':heavy_check_mark:'
-      path: tests/library_checker/official/graph/unionfind_with_potential.test.py
-      title: tests/library_checker/official/graph/unionfind_with_potential.test.py
-  - name: tests/library_checker/official/math
+      path: library-checker-submitcode/math/sort_points_by_argument.test.py
+      title: library-checker-submitcode/math/sort_points_by_argument.test.py
+  - name: library-checker-submitcode/string
     pages:
     - icon: ':heavy_check_mark:'
-      path: tests/library_checker/official/math/convolution_mod.test.py
-      title: tests/library_checker/official/math/convolution_mod.test.py
+      path: library-checker-submitcode/string/longest_common_substring.test.py
+      title: library-checker-submitcode/string/longest_common_substring.test.py
     - icon: ':heavy_check_mark:'
-      path: tests/library_checker/official/math/matrix_product.test.py
-      title: tests/library_checker/official/math/matrix_product.test.py
+      path: library-checker-submitcode/string/number_of_substrings.test.py
+      title: library-checker-submitcode/string/number_of_substrings.test.py
     - icon: ':heavy_check_mark:'
-      path: tests/library_checker/official/math/pow_of_matrix.test.py
-      title: tests/library_checker/official/math/pow_of_matrix.test.py
+      path: library-checker-submitcode/string/suffixarray.test.py
+      title: library-checker-submitcode/string/suffixarray.test.py
     - icon: ':heavy_check_mark:'
-      path: tests/library_checker/official/math/sort_points_by_argument.test.py
-      title: tests/library_checker/official/math/sort_points_by_argument.test.py
-  - name: tests/library_checker/official/string
+      path: library-checker-submitcode/string/zalgorithm.test.py
+      title: library-checker-submitcode/string/zalgorithm.test.py
+  - name: library-checker-submitcode/techniques
     pages:
     - icon: ':heavy_check_mark:'
-      path: tests/library_checker/official/string/longest_common_substring.test.py
-      title: tests/library_checker/official/string/longest_common_substring.test.py
-    - icon: ':heavy_check_mark:'
-      path: tests/library_checker/official/string/number_of_substrings.test.py
-      title: tests/library_checker/official/string/number_of_substrings.test.py
-    - icon: ':heavy_check_mark:'
-      path: tests/library_checker/official/string/suffixarray.test.py
-      title: tests/library_checker/official/string/suffixarray.test.py
-    - icon: ':heavy_check_mark:'
-      path: tests/library_checker/official/string/zalgorithm.test.py
-      title: tests/library_checker/official/string/zalgorithm.test.py
+      path: library-checker-submitcode/techniques/two_sat.test.py
+      title: library-checker-submitcode/techniques/two_sat.test.py
 layout: toppage
 ---

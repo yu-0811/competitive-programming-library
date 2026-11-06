@@ -9,13 +9,13 @@ data:
   attributes:
     links:
     - https://judge.yosupo.jp/problem/point_set_range_composite
-  bundledCode: "Traceback (most recent call last):\n  File \"/opt/hostedtoolcache/PyPy/3.11.16/x64/lib/pypy3.11/site-packages/onlinejudge_verify/documentation/build.py\"\
+  bundledCode: "Traceback (most recent call last):\n  File \"/opt/hostedtoolcache/PyPy/3.11.17/x64/lib/pypy3.11/site-packages/onlinejudge_verify/documentation/build.py\"\
     , line 71, in _render_source_code_stat\n    bundled_code = language.bundle(stat.path,\
     \ basedir=basedir, options={'include_paths': [basedir]}).decode()\n          \
-    \                  ^^^^^^\n  File \"/opt/hostedtoolcache/PyPy/3.11.16/x64/lib/pypy3.11/site-packages/onlinejudge_verify/languages/python.py\"\
+    \                  ^^^^^^\n  File \"/opt/hostedtoolcache/PyPy/3.11.17/x64/lib/pypy3.11/site-packages/onlinejudge_verify/languages/python.py\"\
     , line 96, in bundle\n    raise NotImplementedError\nNotImplementedError\n"
   code: "# problem: https://judge.yosupo.jp/problem/point_set_range_composite\n# include:\
-    \ algorithm_library/python/data-structure/Segtree.py\n\n\ndef compose(left, right):\n\
+    \ algorithm_library/python/data_structure/Segtree.py\n\n\ndef compose(left, right):\n\
     \    a, b = left\n    c, d = right\n    return a * c % mod, (b * c + d) % mod\n\
     \n\ndef main():\n    N, Q = map(int, readline().split())\n    functions = [tuple(map(int,\
     \ readline().split())) for _ in range(N)]\n    tree = segtree(functions, compose,\
@@ -29,7 +29,7 @@ data:
   isVerificationFile: false
   path: library-checker-submitcode/src/data_structure/point_set_range_composite.py
   requiredBy: []
-  timestamp: '2026-10-20 13:27:19+09:00'
+  timestamp: '2026-11-06 23:20:20+09:00'
   verificationStatus: LIBRARY_NO_TESTS
   verifiedWith: []
 documentation_of: library-checker-submitcode/src/data_structure/point_set_range_composite.py

@@ -7,9 +7,8 @@
 python3 library-checker-submitcode/generate.py
 ```
 
-たとえば `src/graph/unionfind.py` から `graph/unionfind.py` と
-`../tests/library_checker/official/graph/unionfind.test.py` を生成します。
-検証用ファイルは提出コードの先頭に `verification-helper: PROBLEM` を付けたものです。
+たとえば `src/graph/unionfind.py` から `graph/unionfind.test.py` を生成します。
+生成コードの先頭に `verification-helper: PROBLEM` を付け、提出用と検証用で兼用します。
 生成されたファイルを Library Checker に提出してください。
 提出コードを直す場合は `src/`、ライブラリを直す場合は
 `algorithm_library/python/` を編集します。
@@ -37,8 +36,9 @@ python3 library-checker-submitcode/generate.py --check
 `src/graph/xxx.py` などを作り、問題 URL と必要なライブラリを指定してから、
 問題ごとの入出力コードを書きます。`# include:` のパスはリポジトリ直下からの
 相対パスです。複数のライブラリが必要なら、必要な順序で複数行指定できます。
-指定したファイルをそのまま埋め込むので、その中のローカルライブラリへの
-import は自動展開されません。必要なファイルはそれぞれ明示してください。
+指定したファイル内の `from algorithm_library.python... import ...` も再帰的に
+展開します。同じライブラリは一度だけ埋め込まれます。
+内部ライブラリの import には絶対パスを使い、別名や `*` は使いません。
 
 ```python
 # problem: https://judge.yosupo.jp/problem/unionfind
@@ -56,36 +56,46 @@ if __name__ == "__main__":
 
 ## 追加済みの提出コード
 
-22 個のライブラリを、21 問・25 本の提出コードで確認できます。
+29 個のライブラリを、30 問・35 本の提出コードで確認できます。
 同じ問題に複数の実装を用意しているものもあります。
 
 | ライブラリ | 提出コード | Library Checker 問題 |
 | --- | --- | --- |
-| `graph/UnionFind.py` | [graph/unionfind.py](graph/unionfind.py) | [Unionfind](https://judge.yosupo.jp/problem/unionfind) |
-| `graph/PotentialUnionFind.py` | [graph/unionfind_with_potential.py](graph/unionfind_with_potential.py) | [Unionfind with Potential](https://judge.yosupo.jp/problem/unionfind_with_potential) |
-| `graph/SCC.py` | [graph/scc.py](graph/scc.py) | [Strongly Connected Components](https://judge.yosupo.jp/problem/scc) |
-| `graph/LCA.py` | [graph/lca.py](graph/lca.py) | [Lowest Common Ancestor](https://judge.yosupo.jp/problem/lca) |
-| `graph/EulerTour.py` | [graph/lca_euler_tour.py](graph/lca_euler_tour.py) | [Lowest Common Ancestor](https://judge.yosupo.jp/problem/lca) |
-| `graph/LCA.py` + `techniques/Doubling.py` | [graph/jump_on_tree.py](graph/jump_on_tree.py) | [Jump on Tree](https://judge.yosupo.jp/problem/jump_on_tree) |
-| `graph/maxflow.py` | [graph/bipartitematching.py](graph/bipartitematching.py) | [Bipartite Matching](https://judge.yosupo.jp/problem/bipartitematching) |
-| `data-structure/BIT.py` | [data_structure/point_add_range_sum_bit.py](data_structure/point_add_range_sum_bit.py) | [Point Add Range Sum](https://judge.yosupo.jp/problem/point_add_range_sum) |
-| `data-structure/Segtree.py` | [data_structure/point_add_range_sum_segtree.py](data_structure/point_add_range_sum_segtree.py) | [Point Add Range Sum](https://judge.yosupo.jp/problem/point_add_range_sum) |
-| `data-structure/Segtree.py` | [data_structure/point_set_range_composite.py](data_structure/point_set_range_composite.py) | [Point Set Range Composite](https://judge.yosupo.jp/problem/point_set_range_composite) |
-| `data-structure/TupleSegtree.py` | [data_structure/point_set_range_composite_tuple.py](data_structure/point_set_range_composite_tuple.py) | [Point Set Range Composite](https://judge.yosupo.jp/problem/point_set_range_composite) |
-| `data-structure/SparseTable.py` | [data_structure/staticrmq.py](data_structure/staticrmq.py) | [Static RMQ](https://judge.yosupo.jp/problem/staticrmq) |
-| `data-structure/DisjointSparseTable.py` | [data_structure/static_range_sum.py](data_structure/static_range_sum.py) | [Static Range Sum](https://judge.yosupo.jp/problem/static_range_sum) |
-| `data-structure/MargeSortTree.py` | [data_structure/static_range_frequency.py](data_structure/static_range_frequency.py) | [Static Range Frequency](https://judge.yosupo.jp/problem/static_range_frequency) |
-| `data-structure/CartesianTree.py` | [data_structure/cartesian_tree.py](data_structure/cartesian_tree.py) | [Cartesian Tree](https://judge.yosupo.jp/problem/cartesian_tree) |
-| `data-structure/LazySegtree.py` | [data_structure/range_affine_range_sum.py](data_structure/range_affine_range_sum.py) | [Range Affine Range Sum](https://judge.yosupo.jp/problem/range_affine_range_sum) |
-| `data-structure/TupleLazySegtree.py` | [data_structure/range_affine_range_sum_tuple.py](data_structure/range_affine_range_sum_tuple.py) | [Range Affine Range Sum](https://judge.yosupo.jp/problem/range_affine_range_sum) |
-| `string/SuffixArray.py` | [string/suffixarray.py](string/suffixarray.py) | [Suffix Array](https://judge.yosupo.jp/problem/suffixarray) |
-| `string/SuffixArray.py` | [string/number_of_substrings.py](string/number_of_substrings.py) | [Number of Substrings](https://judge.yosupo.jp/problem/number_of_substrings) |
-| `string/SuffixArray.py` | [string/longest_common_substring.py](string/longest_common_substring.py) | [Longest Common Substring](https://judge.yosupo.jp/problem/longest_common_substring) |
-| `string/Z-algo.py` | [string/zalgorithm.py](string/zalgorithm.py) | [Z Algorithm](https://judge.yosupo.jp/problem/zalgorithm) |
-| `math/FFT.py` | [math/convolution_mod.py](math/convolution_mod.py) | [Convolution](https://judge.yosupo.jp/problem/convolution_mod) |
-| `math/MatrixPower.py` | [math/matrix_product.py](math/matrix_product.py) | [Matrix Product](https://judge.yosupo.jp/problem/matrix_product) |
-| `math/MatrixPower.py` | [math/pow_of_matrix.py](math/pow_of_matrix.py) | [Power of Matrix](https://judge.yosupo.jp/problem/pow_of_matrix) |
-| `math/AngularSort.py` + `techniques/CmpSort.py` | [math/sort_points_by_argument.py](math/sort_points_by_argument.py) | [Sort Points by Argument](https://judge.yosupo.jp/problem/sort_points_by_argument) |
+| `graph/UnionFind.py` | [graph/unionfind.test.py](graph/unionfind.test.py) | [Unionfind](https://judge.yosupo.jp/problem/unionfind) |
+| `graph/PotentialUnionFind.py` | [graph/unionfind_with_potential.test.py](graph/unionfind_with_potential.test.py) | [Unionfind with Potential](https://judge.yosupo.jp/problem/unionfind_with_potential) |
+| `graph/SCC.py` | [graph/scc.test.py](graph/scc.test.py) | [Strongly Connected Components](https://judge.yosupo.jp/problem/scc) |
+| `graph/LCA.py` | [graph/lca.test.py](graph/lca.test.py) | [Lowest Common Ancestor](https://judge.yosupo.jp/problem/lca) |
+| `graph/EulerTour.py` | [graph/lca_euler_tour.test.py](graph/lca_euler_tour.test.py) | [Lowest Common Ancestor](https://judge.yosupo.jp/problem/lca) |
+| `graph/EulerTour.py` | [graph/vertex_add_path_sum_euler_tour.test.py](graph/vertex_add_path_sum_euler_tour.test.py) | [Vertex Add Path Sum](https://judge.yosupo.jp/problem/vertex_add_path_sum) |
+| `graph/LCA.py` + `techniques/Doubling.py` | [graph/jump_on_tree.test.py](graph/jump_on_tree.test.py) | [Jump on Tree](https://judge.yosupo.jp/problem/jump_on_tree) |
+| `graph/VertexAddSubtreeSum.py` | [graph/vertex_add_subtree_sum.test.py](graph/vertex_add_subtree_sum.test.py) | [Vertex Add Subtree Sum](https://judge.yosupo.jp/problem/vertex_add_subtree_sum) |
+| `graph/Rerooting.py` | [graph/tree_path_composite_sum.test.py](graph/tree_path_composite_sum.test.py) | [Tree Path Composite Sum](https://judge.yosupo.jp/problem/tree_path_composite_sum) |
+| `graph/cycle_detect.py` | [graph/cycle_detection_undirected.test.py](graph/cycle_detection_undirected.test.py) | [Cycle Detection (Undirected)](https://judge.yosupo.jp/problem/cycle_detection_undirected) |
+| `graph/maxflow.py` | [graph/bipartitematching.test.py](graph/bipartitematching.test.py) | [Bipartite Matching](https://judge.yosupo.jp/problem/bipartitematching) |
+| `data_structure/BIT.py` | [data_structure/point_add_range_sum_bit.test.py](data_structure/point_add_range_sum_bit.test.py) | [Point Add Range Sum](https://judge.yosupo.jp/problem/point_add_range_sum) |
+| `data_structure/BIT.py` | [data_structure/predecessor_problem_bit.test.py](data_structure/predecessor_problem_bit.test.py) | [Predecessor Problem](https://judge.yosupo.jp/problem/predecessor_problem) |
+| `data_structure/BucketList.py` | [data_structure/deque_bucket_list.test.py](data_structure/deque_bucket_list.test.py) | [Deque](https://judge.yosupo.jp/problem/deque) |
+| `data_structure/SortedSet.py` | [data_structure/ordered_set.test.py](data_structure/ordered_set.test.py) | [Ordered Set](https://judge.yosupo.jp/problem/ordered_set) |
+| `data_structure/SortedMultiset.py` | [data_structure/ordered_set_multiset.test.py](data_structure/ordered_set_multiset.test.py) | [Ordered Set](https://judge.yosupo.jp/problem/ordered_set) |
+| `data_structure/SortedMultiset.py` | [data_structure/double_ended_priority_queue_multiset.test.py](data_structure/double_ended_priority_queue_multiset.test.py) | [Double-Ended Priority Queue](https://judge.yosupo.jp/problem/double_ended_priority_queue) |
+| `data_structure/Segtree.py` | [data_structure/point_add_range_sum_segtree.test.py](data_structure/point_add_range_sum_segtree.test.py) | [Point Add Range Sum](https://judge.yosupo.jp/problem/point_add_range_sum) |
+| `data_structure/Segtree.py` | [data_structure/point_set_range_composite.test.py](data_structure/point_set_range_composite.test.py) | [Point Set Range Composite](https://judge.yosupo.jp/problem/point_set_range_composite) |
+| `data_structure/TupleSegtree.py` | [data_structure/point_set_range_composite_tuple.test.py](data_structure/point_set_range_composite_tuple.test.py) | [Point Set Range Composite](https://judge.yosupo.jp/problem/point_set_range_composite) |
+| `data_structure/SparseTable.py` | [data_structure/staticrmq.test.py](data_structure/staticrmq.test.py) | [Static RMQ](https://judge.yosupo.jp/problem/staticrmq) |
+| `data_structure/DisjointSparseTable.py` | [data_structure/static_range_sum.test.py](data_structure/static_range_sum.test.py) | [Static Range Sum](https://judge.yosupo.jp/problem/static_range_sum) |
+| `data_structure/MargeSortTree.py` | [data_structure/static_range_frequency.test.py](data_structure/static_range_frequency.test.py) | [Static Range Frequency](https://judge.yosupo.jp/problem/static_range_frequency) |
+| `data_structure/CartesianTree.py` | [data_structure/cartesian_tree.test.py](data_structure/cartesian_tree.test.py) | [Cartesian Tree](https://judge.yosupo.jp/problem/cartesian_tree) |
+| `data_structure/LazySegtree.py` | [data_structure/range_affine_range_sum.test.py](data_structure/range_affine_range_sum.test.py) | [Range Affine Range Sum](https://judge.yosupo.jp/problem/range_affine_range_sum) |
+| `data_structure/TupleLazySegtree.py` | [data_structure/range_affine_range_sum_tuple.test.py](data_structure/range_affine_range_sum_tuple.test.py) | [Range Affine Range Sum](https://judge.yosupo.jp/problem/range_affine_range_sum) |
+| `string/SuffixArray.py` | [string/suffixarray.test.py](string/suffixarray.test.py) | [Suffix Array](https://judge.yosupo.jp/problem/suffixarray) |
+| `string/SuffixArray.py` | [string/number_of_substrings.test.py](string/number_of_substrings.test.py) | [Number of Substrings](https://judge.yosupo.jp/problem/number_of_substrings) |
+| `string/SuffixArray.py` | [string/longest_common_substring.test.py](string/longest_common_substring.test.py) | [Longest Common Substring](https://judge.yosupo.jp/problem/longest_common_substring) |
+| `string/Z-algo.py` | [string/zalgorithm.test.py](string/zalgorithm.test.py) | [Z Algorithm](https://judge.yosupo.jp/problem/zalgorithm) |
+| `math/FFT.py` | [math/convolution_mod.test.py](math/convolution_mod.test.py) | [Convolution](https://judge.yosupo.jp/problem/convolution_mod) |
+| `math/MatrixPower.py` | [math/matrix_product.test.py](math/matrix_product.test.py) | [Matrix Product](https://judge.yosupo.jp/problem/matrix_product) |
+| `math/MatrixPower.py` | [math/pow_of_matrix.test.py](math/pow_of_matrix.test.py) | [Power of Matrix](https://judge.yosupo.jp/problem/pow_of_matrix) |
+| `math/AngularSort.py` + `techniques/CmpSort.py` | [math/sort_points_by_argument.test.py](math/sort_points_by_argument.test.py) | [Sort Points by Argument](https://judge.yosupo.jp/problem/sort_points_by_argument) |
+| `techniques/2-SAT.py` | [techniques/two_sat.test.py](techniques/two_sat.test.py) | [2 Sat](https://judge.yosupo.jp/problem/two_sat) |
 
 ## ローカルでの確認
 
@@ -98,7 +108,7 @@ Python 3.11 と C++ コンパイラ、Git を用意し、リポジトリ直下�
 ```bash
 python3 -m pip install -r library-checker-submitcode/requirements-verify.txt
 python3 library-checker-submitcode/generate.py
-oj-verify run tests/library_checker/official/graph/unionfind.test.py
+oj-verify run library-checker-submitcode/graph/unionfind.test.py
 ```
 
 全件を検証する場合は `oj-verify run` を実行します。検証済みのコードは、

@@ -1,20 +1,17 @@
 ---
 data:
   _extendedDependsOn: []
-  _extendedRequiredBy:
-  - icon: ':warning:'
-    path: tests/math/test_cmp_sort.py
-    title: tests/math/test_cmp_sort.py
+  _extendedRequiredBy: []
   _extendedVerifiedWith: []
   _isVerificationFailed: false
   _pathExtension: py
   _verificationStatusIcon: ':warning:'
   attributes:
     links: []
-  bundledCode: "Traceback (most recent call last):\n  File \"/opt/hostedtoolcache/PyPy/3.11.16/x64/lib/pypy3.11/site-packages/onlinejudge_verify/documentation/build.py\"\
+  bundledCode: "Traceback (most recent call last):\n  File \"/opt/hostedtoolcache/PyPy/3.11.17/x64/lib/pypy3.11/site-packages/onlinejudge_verify/documentation/build.py\"\
     , line 71, in _render_source_code_stat\n    bundled_code = language.bundle(stat.path,\
     \ basedir=basedir, options={'include_paths': [basedir]}).decode()\n          \
-    \                  ^^^^^^\n  File \"/opt/hostedtoolcache/PyPy/3.11.16/x64/lib/pypy3.11/site-packages/onlinejudge_verify/languages/python.py\"\
+    \                  ^^^^^^\n  File \"/opt/hostedtoolcache/PyPy/3.11.17/x64/lib/pypy3.11/site-packages/onlinejudge_verify/languages/python.py\"\
     , line 96, in bundle\n    raise NotImplementedError\nNotImplementedError\n"
   code: "def cmp_sort(a, cmp):\n    \"\"\"\u6BD4\u8F03\u95A2\u6570 cmp \u306B\u5F93\
     \u3063\u3066\u30EA\u30B9\u30C8 a \u3092\u7834\u58CA\u7684\u306B\u5B89\u5B9A\u30BD\
@@ -45,8 +42,7 @@ data:
   dependsOn: []
   isVerificationFile: false
   path: algorithm_library/python/techniques/CmpSort.py
-  requiredBy:
-  - tests/math/test_cmp_sort.py
+  requiredBy: []
   timestamp: '2026-10-25 21:47:50+09:00'
   verificationStatus: LIBRARY_NO_TESTS
   verifiedWith: []

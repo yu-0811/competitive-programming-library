@@ -9,13 +9,13 @@ data:
   attributes:
     links:
     - https://judge.yosupo.jp/problem/range_affine_range_sum
-  bundledCode: "Traceback (most recent call last):\n  File \"/opt/hostedtoolcache/PyPy/3.11.16/x64/lib/pypy3.11/site-packages/onlinejudge_verify/documentation/build.py\"\
+  bundledCode: "Traceback (most recent call last):\n  File \"/opt/hostedtoolcache/PyPy/3.11.17/x64/lib/pypy3.11/site-packages/onlinejudge_verify/documentation/build.py\"\
     , line 71, in _render_source_code_stat\n    bundled_code = language.bundle(stat.path,\
     \ basedir=basedir, options={'include_paths': [basedir]}).decode()\n          \
-    \                  ^^^^^^\n  File \"/opt/hostedtoolcache/PyPy/3.11.16/x64/lib/pypy3.11/site-packages/onlinejudge_verify/languages/python.py\"\
+    \                  ^^^^^^\n  File \"/opt/hostedtoolcache/PyPy/3.11.17/x64/lib/pypy3.11/site-packages/onlinejudge_verify/languages/python.py\"\
     , line 96, in bundle\n    raise NotImplementedError\nNotImplementedError\n"
   code: "# problem: https://judge.yosupo.jp/problem/range_affine_range_sum\n# include:\
-    \ algorithm_library/python/data-structure/TupleLazySegtree.py\n\n\ndef combine(left,\
+    \ algorithm_library/python/data_structure/TupleLazySegtree.py\n\n\ndef combine(left,\
     \ right):\n    return (left[0] + right[0]) % mod, left[1] + right[1]\n\n\ndef\
     \ mapping(f, value):\n    a, b = f\n    total, length = value\n    return (a *\
     \ total + b * length) % mod, length\n\n\ndef composition(f, g):\n    a, b = f\n\
@@ -31,7 +31,7 @@ data:
   isVerificationFile: false
   path: library-checker-submitcode/src/data_structure/range_affine_range_sum_tuple.py
   requiredBy: []
-  timestamp: '2026-10-20 13:27:19+09:00'
+  timestamp: '2026-11-06 23:20:20+09:00'
   verificationStatus: LIBRARY_NO_TESTS
   verifiedWith: []
 documentation_of: library-checker-submitcode/src/data_structure/range_affine_range_sum_tuple.py

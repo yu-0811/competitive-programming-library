@@ -1,17 +1,20 @@
 ---
 data:
   _extendedDependsOn: []
-  _extendedRequiredBy: []
+  _extendedRequiredBy:
+  - icon: ':warning:'
+    path: algorithm_library/python/math/circle_int.py
+    title: algorithm_library/python/math/circle_int.py
   _extendedVerifiedWith: []
   _isVerificationFailed: false
   _pathExtension: py
   _verificationStatusIcon: ':warning:'
   attributes:
     links: []
-  bundledCode: "Traceback (most recent call last):\n  File \"/opt/hostedtoolcache/PyPy/3.11.16/x64/lib/pypy3.11/site-packages/onlinejudge_verify/documentation/build.py\"\
+  bundledCode: "Traceback (most recent call last):\n  File \"/opt/hostedtoolcache/PyPy/3.11.17/x64/lib/pypy3.11/site-packages/onlinejudge_verify/documentation/build.py\"\
     , line 71, in _render_source_code_stat\n    bundled_code = language.bundle(stat.path,\
     \ basedir=basedir, options={'include_paths': [basedir]}).decode()\n          \
-    \                  ^^^^^^\n  File \"/opt/hostedtoolcache/PyPy/3.11.16/x64/lib/pypy3.11/site-packages/onlinejudge_verify/languages/python.py\"\
+    \                  ^^^^^^\n  File \"/opt/hostedtoolcache/PyPy/3.11.17/x64/lib/pypy3.11/site-packages/onlinejudge_verify/languages/python.py\"\
     , line 96, in bundle\n    raise NotImplementedError\nNotImplementedError\n"
   code: "Point = tuple[int, int]\nLine = tuple[Point, Point]\n\n\n# \u7B26\u53F7\u3092\
     \u8FD4\u3059\u3002\u6B63: 1, \u8CA0: -1, 0: 0\ndef sgn(x: int) -> int:\n    if\
@@ -55,7 +58,8 @@ data:
   dependsOn: []
   isVerificationFile: false
   path: algorithm_library/python/math/line_int.py
-  requiredBy: []
+  requiredBy:
+  - algorithm_library/python/math/circle_int.py
   timestamp: '2026-07-02 13:56:21+09:00'
   verificationStatus: LIBRARY_NO_TESTS
   verifiedWith: []

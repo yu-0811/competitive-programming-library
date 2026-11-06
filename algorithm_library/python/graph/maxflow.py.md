@@ -1,20 +1,17 @@
 ---
 data:
   _extendedDependsOn: []
-  _extendedRequiredBy:
-  - icon: ':warning:'
-    path: tests/graph/test_graph_optimizations.py
-    title: tests/graph/test_graph_optimizations.py
+  _extendedRequiredBy: []
   _extendedVerifiedWith: []
   _isVerificationFailed: false
   _pathExtension: py
   _verificationStatusIcon: ':warning:'
   attributes:
     links: []
-  bundledCode: "Traceback (most recent call last):\n  File \"/opt/hostedtoolcache/PyPy/3.11.16/x64/lib/pypy3.11/site-packages/onlinejudge_verify/documentation/build.py\"\
+  bundledCode: "Traceback (most recent call last):\n  File \"/opt/hostedtoolcache/PyPy/3.11.17/x64/lib/pypy3.11/site-packages/onlinejudge_verify/documentation/build.py\"\
     , line 71, in _render_source_code_stat\n    bundled_code = language.bundle(stat.path,\
     \ basedir=basedir, options={'include_paths': [basedir]}).decode()\n          \
-    \                  ^^^^^^\n  File \"/opt/hostedtoolcache/PyPy/3.11.16/x64/lib/pypy3.11/site-packages/onlinejudge_verify/languages/python.py\"\
+    \                  ^^^^^^\n  File \"/opt/hostedtoolcache/PyPy/3.11.17/x64/lib/pypy3.11/site-packages/onlinejudge_verify/languages/python.py\"\
     , line 96, in bundle\n    raise NotImplementedError\nNotImplementedError\n"
   code: "# Dinic\u6CD5 O(V^2 E)\nclass maxflow_edge:\n    def __init__(self, to, cap,\
     \ rev_idx):\n        self.to = to  # \u884C\u304D\u5148\n        self.cap = cap\
@@ -52,8 +49,7 @@ data:
   dependsOn: []
   isVerificationFile: false
   path: algorithm_library/python/graph/maxflow.py
-  requiredBy:
-  - tests/graph/test_graph_optimizations.py
+  requiredBy: []
   timestamp: '2026-10-20 12:07:51+09:00'
   verificationStatus: LIBRARY_NO_TESTS
   verifiedWith: []

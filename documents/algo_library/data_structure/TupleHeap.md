@@ -5,8 +5,8 @@
 
 | ファイル | 本体の長さ（冒頭の使い方コメントを除く） | 方式 |
 | --- | ---: | --- |
-| `algorithm_library/python/data-structure/TupleHeap.py` | 54 行・1,229 字 | 成分を別々のリストに保存する自作二分ヒープ |
-| `algorithm_library/python/data-structure/PackedTupleHeap.py` | 39 行・916 字 | 整数タプルを 1 整数に符号化して `heapq` を使う |
+| `algorithm_library/python/data_structure/TupleHeap.py` | 54 行・1,229 字 | 成分を別々のリストに保存する自作二分ヒープ |
+| `algorithm_library/python/data_structure/PackedTupleHeap.py` | 39 行・916 字 | 整数タプルを 1 整数に符号化して `heapq` を使う |
 
 ## 使い方
 
