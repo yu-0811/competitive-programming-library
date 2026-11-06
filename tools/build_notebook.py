@@ -100,7 +100,7 @@ def main():
         work = Path(directory)
         formatter = LatexFormatter(
             style="friendly",
-            verboptions=r"fontsize=\fontsize{6}{7}\selectfont,numbers=left,numbersep=3pt,breaklines=true,breakanywhere=true,tabsize=4",
+            verboptions=r"fontsize=\fontsize{8}{8}\selectfont,numbers=left,numbersep=3pt,breaklines=true,breakanywhere=true,tabsize=4",
         )
         parts = [
             preamble.replace(
