@@ -23,17 +23,6 @@ class segtree:  # すべて 0-index
             d[p] = op(d[2 * p], d[2 * p + 1])
             p >>= 1
 
-    # 1 点加算
-    def add(s, p, x):
-        assert 0 <= p and p < s.n
-        d, op = s.d, s.op
-        p += s.z
-        d[p] += x
-        p >>= 1
-        while p:
-            d[p] = op(d[2 * p], d[2 * p + 1])
-            p >>= 1
-
     # 元の配列の p 番目の要素を取得
     def get(s, p):
         assert 0 <= p and p < s.n
@@ -58,12 +47,23 @@ class segtree:  # すべて 0-index
             l >>= 1
             r >>= 1
         return op(sml, smr)
+    
+    # option: 1 点加算
+    def add(s, p, x):
+        assert 0 <= p and p < s.n
+        d, op = s.d, s.op
+        p += s.z
+        d[p] += x
+        p >>= 1
+        while p:
+            d[p] = op(d[2 * p], d[2 * p + 1])
+            p >>= 1
 
-    # 全区間の演算結果を返す
+    # option: 全区間の演算結果を返す
     def all_prod(s):
         return s.d[1]
 
-    # check(operate(data[l],data[l+1],...,data[r-1])) = True
+    # option: check(operate(data[l],data[l+1],...,data[r-1])) = True
     # を満たす最大の r を返す
     def max_right(s, l, check):
         assert 0 <= l and l <= s.n
@@ -88,7 +88,7 @@ class segtree:  # すべて 0-index
                 break
         return s.n
 
-    # check(operate(data[l],data[l+1],...,data[r-1])) = True
+    # option: check(operate(data[l],data[l+1],...,data[r-1])) = True
     # を満たす最小の l を返す
     def min_left(s, r, check):
         assert 0 <= r and r <= s.n
@@ -113,6 +113,6 @@ class segtree:  # すべて 0-index
                 break
         return 0
 
-    # print(seg) で葉の値（元の配列）を表示する
+    # option: print(seg) で葉の値（元の配列）を表示する
     def __str__(s):
         return str([s.get(i) for i in range(s.n)])

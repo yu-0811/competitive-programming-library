@@ -50,28 +50,6 @@ class lazy_segtree:  # すべて 0-index
         for i in range(z - 1, 0, -1):
             d[i] = op(d[2 * i], d[2 * i + 1])
 
-    # 一点更新
-    def set(s, p, x):
-        assert 0 <= p < s.n
-        d, op, push = s.d, s.op, s._push
-        p += s.z
-        for i in range(s.log, 0, -1):
-            push(p >> i)
-        d[p] = x
-        p >>= 1
-        while p:
-            d[p] = op(d[2 * p], d[2 * p + 1])
-            p >>= 1
-
-    # d[p] を取得する
-    def get(s, p):
-        assert 0 <= p < s.n
-        push = s._push
-        p += s.z
-        for i in range(s.log, 0, -1):
-            push(p >> i)
-        return s.d[p]
-
     # 区間 [l,r) の演算結果を返す
     def prod(s, l, r):
         assert 0 <= l <= r <= s.n
@@ -98,23 +76,6 @@ class lazy_segtree:  # すべて 0-index
             l >>= 1
             r >>= 1
         return op(sml, smr)
-
-    # 全区間の演算結果を返す
-    def all_prod(s):
-        return s.d[1]
-
-    # 一点に対して操作する
-    def apply_point(s, p, f):
-        assert 0 <= p < s.n
-        d, op, push = s.d, s.op, s._push
-        p += s.z
-        for i in range(s.log, 0, -1):
-            push(p >> i)
-        d[p] = s.mp(f, d[p])
-        p >>= 1
-        while p:
-            d[p] = op(d[2 * p], d[2 * p + 1])
-            p >>= 1
 
     # 区間操作
     # f は mp に与える引数の f
@@ -157,7 +118,46 @@ class lazy_segtree:  # すべて 0-index
                 k = r2 >> i
                 d[k] = op(d[2 * k], d[2 * k + 1])
 
-    # check(operate(data[l],data[l+1],...,data[r-1])) = True
+    # option: 一点更新
+    def set(s, p, x):
+        assert 0 <= p < s.n
+        d, op, push = s.d, s.op, s._push
+        p += s.z
+        for i in range(s.log, 0, -1):
+            push(p >> i)
+        d[p] = x
+        p >>= 1
+        while p:
+            d[p] = op(d[2 * p], d[2 * p + 1])
+            p >>= 1
+
+    # option: d[p] を取得する
+    def get(s, p):
+        assert 0 <= p < s.n
+        push = s._push
+        p += s.z
+        for i in range(s.log, 0, -1):
+            push(p >> i)
+        return s.d[p]
+
+    # option: 一点に対して操作する
+    def apply_point(s, p, f):
+        assert 0 <= p < s.n
+        d, op, push = s.d, s.op, s._push
+        p += s.z
+        for i in range(s.log, 0, -1):
+            push(p >> i)
+        d[p] = s.mp(f, d[p])
+        p >>= 1
+        while p:
+            d[p] = op(d[2 * p], d[2 * p + 1])
+            p >>= 1
+    
+    # option: 全区間の演算結果を返す
+    def all_prod(s):
+        return s.d[1]
+
+    # option: check(operate(data[l],data[l+1],...,data[r-1])) = True
     # を満たす最大の r を返す
     def max_right(s, l, check):
         assert 0 <= l <= s.n
@@ -188,7 +188,7 @@ class lazy_segtree:  # すべて 0-index
             if (l & -l) == l:
                 return s.n
 
-    # check(operate(data[l],data[l+1],...,data[r-1])) = True
+    # option: check(operate(data[l],data[l+1],...,data[r-1])) = True
     # を満たす最小の l を返す
     def min_left(s, r, check):
         assert 0 <= r <= s.n
@@ -219,7 +219,7 @@ class lazy_segtree:  # すべて 0-index
             if (r & -r) == r:
                 return 0
 
-    # print(seg) で遅延を反映した要素を表示（O(N log N)）
+    # option: print(seg) で遅延を反映した要素を表示（O(N log N)）
     def __str__(s):
         return str([s.get(i) for i in range(s.n)])
 
