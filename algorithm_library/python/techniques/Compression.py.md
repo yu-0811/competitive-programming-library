@@ -13,15 +13,14 @@ data:
     \ basedir=basedir, options={'include_paths': [basedir]}).decode()\n          \
     \                  ^^^^^^\n  File \"/opt/hostedtoolcache/PyPy/3.11.17/x64/lib/pypy3.11/site-packages/onlinejudge_verify/languages/python.py\"\
     , line 96, in bundle\n    raise NotImplementedError\nNotImplementedError\n"
-  code: "# \u5EA7\u6A19\u5727\u7E2E\n# ex. A=[2,9,9,7,9,2,4]\_-> \u8FD4\u308A\u5024\
-    =[1,4,4,3,4,1,2]\ndef compression(A):\n    B = [0] * len(A)\n    Adic = {x: i\
-    \ for i, x in enumerate(sorted(list(set(A))))}\n    for i in range(len(A)):\n\
-    \        B[i] = Adic[A[i]]\n    return B\n"
+  code: "# \u5EA7\u6A19\u5727\u7E2E\n# ex. A=[2,9,9,7,9,2,4] -> \u8FD4\u308A\u5024\
+    =[0,3,3,2,3,0,1]\ndef compression(A):\n    Adic = {x: i for i, x in enumerate(sorted(set(A)))}\n\
+    \    return [Adic[A[i]] for i in range(len(A))]\n"
   dependsOn: []
   isVerificationFile: false
   path: algorithm_library/python/techniques/Compression.py
   requiredBy: []
-  timestamp: '2026-08-23 01:02:55+09:00'
+  timestamp: '2026-11-08 19:01:56+09:00'
   verificationStatus: LIBRARY_NO_TESTS
   verifiedWith: []
 documentation_of: algorithm_library/python/techniques/Compression.py

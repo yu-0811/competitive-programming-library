@@ -53,9 +53,10 @@ data:
     \ start != goal\n        graph = self.G\n        total_flow = 0\n        inf =\
     \ sum(edge.cap for edge in graph[start])\n        while True:\n            level\
     \ = self.level = [-1] * (self.N + 1)\n            level[start] = 0\n         \
-    \   que = [start]\n            for v in que:\n                for edge in graph[v]:\n\
-    \                    if edge.cap > 0 and level[edge.to] == -1:\n             \
-    \           level[edge.to] = level[v] + 1\n                        que.append(edge.to)\n\
+    \   que = [start]\n            for v in que:\n                if level[goal] !=\
+    \ -1:\n                    break\n                for edge in graph[v]:\n    \
+    \                if edge.cap > 0 and level[edge.to] == -1:\n                 \
+    \       level[edge.to] = level[v] + 1\n                        que.append(edge.to)\n\
     \            if level[goal] == -1:\n                return total_flow\n\n    \
     \        self.it = [0] * (self.N + 1)\n            while True:\n             \
     \   res = self.dfs(start, goal, inf)\n                if res == 0:\n         \
@@ -72,7 +73,7 @@ data:
   isVerificationFile: true
   path: library-checker-submitcode/graph/bipartitematching.test.py
   requiredBy: []
-  timestamp: '2026-10-27 19:55:13+09:00'
+  timestamp: '2026-11-08 19:01:56+09:00'
   verificationStatus: TEST_ACCEPTED
   verifiedWith: []
 documentation_of: library-checker-submitcode/graph/bipartitematching.test.py

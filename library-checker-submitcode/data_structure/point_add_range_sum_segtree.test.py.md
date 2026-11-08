@@ -51,28 +51,29 @@ data:
     \u306E\u6F14\u7B97\u7D50\u679C\u3092\u8FD4\u3059\n    def all_prod(s):\n     \
     \   return s.d[1]\n\n    # option: check(operate(data[l],data[l+1],...,data[r-1]))\
     \ = True\n    # \u3092\u6E80\u305F\u3059\u6700\u5927\u306E r \u3092\u8FD4\u3059\
-    \n    def max_right(s, l, check):\n        assert 0 <= l and l <= s.n\n      \
-    \  assert check(s.e)\n        if l == s.n:\n            return s.n\n        l\
-    \ += s.z\n        sm = s.e\n        while True:\n            while l % 2 == 0:\n\
-    \                l >>= 1\n            if not (check(s.op(sm, s.d[l]))):\n    \
-    \            while l < s.z:\n                    l = 2 * l\n                 \
-    \   if check(s.op(sm, s.d[l])):\n                        sm = s.op(sm, s.d[l])\n\
-    \                        l += 1\n                return l - s.z\n            sm\
-    \ = s.op(sm, s.d[l])\n            l += 1\n            if (l & -l) == l:\n    \
-    \            break\n        return s.n\n\n    # option: check(operate(data[l],data[l+1],...,data[r-1]))\
-    \ = True\n    # \u3092\u6E80\u305F\u3059\u6700\u5C0F\u306E l \u3092\u8FD4\u3059\
-    \n    def min_left(s, r, check):\n        assert 0 <= r and r <= s.n\n       \
-    \ assert check(s.e)\n        if r == 0:\n            return 0\n        r += s.z\n\
-    \        sm = s.e\n        while True:\n            r -= 1\n            while\
-    \ r > 1 and (r % 2):\n                r >>= 1\n            if not (check(s.op(s.d[r],\
-    \ sm))):\n                while r < s.z:\n                    r = 2 * r + 1\n\
-    \                    if check(s.op(s.d[r], sm)):\n                        sm =\
-    \ s.op(s.d[r], sm)\n                        r -= 1\n                return r +\
-    \ 1 - s.z\n            sm = s.op(s.d[r], sm)\n            if (r & -r) == r:\n\
-    \                break\n        return 0\n\n    # option: print(seg) \u3067\u8449\
-    \u306E\u5024\uFF08\u5143\u306E\u914D\u5217\uFF09\u3092\u8868\u793A\u3059\u308B\
-    \n    def __str__(s):\n        return str([s.get(i) for i in range(s.n)])\n# END\
-    \ LIBRARY\n\n\ndef main():\n    N, Q = map(int, readline().split())\n    tree\
+    \n    def max_right(s, l, check):\n        assert 0 <= l <= s.n\n        assert\
+    \ check(s.e)\n        if l == s.n:\n            return s.n\n        d, op, z =\
+    \ s.d, s.op, s.z\n        l += z\n        sm = s.e\n        while True:\n    \
+    \        while l % 2 == 0:\n                l >>= 1\n            nxt = op(sm,\
+    \ d[l])\n            if not check(nxt):\n                while l < z:\n      \
+    \              l *= 2\n                    nxt = op(sm, d[l])\n              \
+    \      if check(nxt):\n                        sm = nxt\n                    \
+    \    l += 1\n                return l - z\n            sm = nxt\n            l\
+    \ += 1\n            if (l & -l) == l:\n                return s.n\n\n    # option:\
+    \ check(operate(data[l],data[l+1],...,data[r-1])) = True\n    # \u3092\u6E80\u305F\
+    \u3059\u6700\u5C0F\u306E l \u3092\u8FD4\u3059\n    def min_left(s, r, check):\n\
+    \        assert 0 <= r <= s.n\n        assert check(s.e)\n        if r == 0:\n\
+    \            return 0\n        d, op, z = s.d, s.op, s.z\n        r += z\n   \
+    \     sm = s.e\n        while True:\n            r -= 1\n            while r >\
+    \ 1 and (r % 2):\n                r >>= 1\n            nxt = op(d[r], sm)\n  \
+    \          if not check(nxt):\n                while r < z:\n                \
+    \    r = 2 * r + 1\n                    nxt = op(d[r], sm)\n                 \
+    \   if check(nxt):\n                        sm = nxt\n                       \
+    \ r -= 1\n                return r + 1 - z\n            sm = nxt\n           \
+    \ if (r & -r) == r:\n                return 0\n\n    # option: print(seg) \u3067\
+    \u8449\u306E\u5024\uFF08\u5143\u306E\u914D\u5217\uFF09\u3092\u8868\u793A\u3059\
+    \u308B\n    def __str__(s):\n        return str([s.get(i) for i in range(s.n)])\n\
+    # END LIBRARY\n\n\ndef main():\n    N, Q = map(int, readline().split())\n    tree\
     \ = segtree(list(map(int, readline().split())), lambda a, b: a + b, 0)\n    ans\
     \ = []\n    for _ in range(Q):\n        t, x, y = map(int, readline().split())\n\
     \        if t == 0:\n            tree.add(x, y)\n        else:\n            ans.append(str(tree.prod(x,\
@@ -82,7 +83,7 @@ data:
   isVerificationFile: true
   path: library-checker-submitcode/data_structure/point_add_range_sum_segtree.test.py
   requiredBy: []
-  timestamp: '2026-11-06 23:20:20+09:00'
+  timestamp: '2026-11-08 19:01:56+09:00'
   verificationStatus: TEST_ACCEPTED
   verifiedWith: []
 documentation_of: library-checker-submitcode/data_structure/point_add_range_sum_segtree.test.py

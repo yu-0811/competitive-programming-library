@@ -24,44 +24,46 @@ data:
     \ x):\n        \"x \u3092\u633F\u5165\u3059\u308B\u30D0\u30B1\u30C3\u30C8\u3001\
     \u305D\u306E\u6DFB\u5B57\u3001\u30D0\u30B1\u30C3\u30C8\u5185\u306E\u633F\u5165\
     \u4F4D\u7F6E\u3092\u8FD4\u3059\u3002s \u306F\u7A7A\u3067\u306A\u3044\u3053\u3068\
-    \u3002\"\n        for i, a in enumerate(s.a):\n            if x <= a[-1]: break\n\
-    \        return (a, i, bisect_left(a, x))\n\n    def __contains__(s, x):\n   \
-    \     if s.size == 0: return False\n        a, _, i = s._position(x)\n       \
-    \ return i != len(a) and a[i] == x\n\n    def add(s, x):\n        \"x \u3092\u8FFD\
-    \u52A0\u3057\u3001\u8FFD\u52A0\u3067\u304D\u305F\u3089 True \u3092\u8FD4\u3059\
-    \u3002 / O(\u221AN)\"\n        if s.size == 0:\n            s.a = [[x]]\n    \
-    \        s.size = 1\n            return True\n        a, b, i = s._position(x)\n\
-    \        if i != len(a) and a[i] == x: return False\n        a.insert(i, x)\n\
-    \        s.size += 1\n        if len(a) > len(s.a) * s.sr:\n            mid =\
-    \ len(a) >> 1\n            s.a[b:b+1] = [a[:mid], a[mid:]]\n        return True\n\
-    \    \n    def _pop(s, a, b, i):\n        ans = a.pop(i)\n        s.size -= 1\n\
-    \        if not a: del s.a[b]\n        return ans\n\n    def discard(s, x):\n\
-    \        \"x \u3092\u524A\u9664\u3057\u3001\u524A\u9664\u3067\u304D\u305F\u3089\
-    \ True \u3092\u8FD4\u3059\u3002 / O(\u221AN)\"\n        if s.size == 0: return\
-    \ False\n        a, b, i = s._position(x)\n        if i == len(a) or a[i] != x:\
-    \ return False\n        s._pop(a, b, i)\n        return True\n    \n    # lt\u30FB\
-    gt\u30FBindex_right \u306F\u6574\u6570\u7528\u3002\u5C0F\u6570\u3067\u306F le\u30FB\
-    ge\u30FBindex \u3092\u8907\u88FD\u3057\u3001\u4EE5\u4E0B\u306E\u30B3\u30E1\u30F3\
-    \u30C8\u306B\u5F93\u3063\u3066\u5909\u66F4\u3059\u308B\u3002\n    def lt(s, x):\n\
-    \        \"x \u672A\u6E80\u306E\u6700\u5927\u306E\u8981\u7D20\u3092\u8FD4\u3059\
-    \u3002\u5B58\u5728\u3057\u306A\u3051\u308C\u3070 None \u3092\u8FD4\u3059\u3002\
-    \"\n        return s.le(x - 1)\n\n    def le(s, x):\n        \"x \u4EE5\u4E0B\u306E\
+    \u3002\"\n        l, r = 0, len(s.a) - 1\n        while l < r:\n            m\
+    \ = (l + r) // 2\n            if x <= s.a[m][-1]:\n                r = m\n   \
+    \         else:\n                l = m + 1\n        a = s.a[l]\n        return\
+    \ (a, l, bisect_left(a, x))\n\n    def __contains__(s, x):\n        if s.size\
+    \ == 0: return False\n        a, _, i = s._position(x)\n        return i != len(a)\
+    \ and a[i] == x\n\n    def add(s, x):\n        \"x \u3092\u8FFD\u52A0\u3057\u3001\
+    \u8FFD\u52A0\u3067\u304D\u305F\u3089 True \u3092\u8FD4\u3059\u3002 / O(\u221A\
+    N)\"\n        if s.size == 0:\n            s.a = [[x]]\n            s.size = 1\n\
+    \            return True\n        a, b, i = s._position(x)\n        if i != len(a)\
+    \ and a[i] == x: return False\n        a.insert(i, x)\n        s.size += 1\n \
+    \       if len(a) > len(s.a) * s.sr:\n            mid = len(a) >> 1\n        \
+    \    s.a[b:b+1] = [a[:mid], a[mid:]]\n        return True\n    \n    def _pop(s,\
+    \ a, b, i):\n        ans = a.pop(i)\n        s.size -= 1\n        if not a: del\
+    \ s.a[b]\n        return ans\n\n    def discard(s, x):\n        \"x \u3092\u524A\
+    \u9664\u3057\u3001\u524A\u9664\u3067\u304D\u305F\u3089 True \u3092\u8FD4\u3059\
+    \u3002 / O(\u221AN)\"\n        if s.size == 0: return False\n        a, b, i =\
+    \ s._position(x)\n        if i == len(a) or a[i] != x: return False\n        s._pop(a,\
+    \ b, i)\n        return True\n    \n    # lt\u30FBgt\u30FBindex_right \u306F\u6574\
+    \u6570\u7528\u3002\u5C0F\u6570\u3067\u306F le\u30FBge\u30FBindex \u3092\u8907\u88FD\
+    \u3057\u3001\u4EE5\u4E0B\u306E\u30B3\u30E1\u30F3\u30C8\u306B\u5F93\u3063\u3066\
+    \u5909\u66F4\u3059\u308B\u3002\n    def lt(s, x):\n        \"x \u672A\u6E80\u306E\
     \u6700\u5927\u306E\u8981\u7D20\u3092\u8FD4\u3059\u3002\u5B58\u5728\u3057\u306A\
-    \u3051\u308C\u3070 None \u3092\u8FD4\u3059\u3002\"\n        for a in reversed(s.a):\n\
-    \            if a[0] <= x:  # lt \u306A\u3089 <\n                return a[bisect_right(a,\
-    \ x) - 1]  # lt \u306A\u3089 bisect_left\n\n    def gt(s, x):\n        \"x \u3088\
-    \u308A\u5927\u304D\u3044\u6700\u5C0F\u306E\u8981\u7D20\u3092\u8FD4\u3059\u3002\
-    \u5B58\u5728\u3057\u306A\u3051\u308C\u3070 None \u3092\u8FD4\u3059\u3002\"\n \
-    \       return s.ge(x + 1)\n\n    def ge(s, x):\n        \"x \u4EE5\u4E0A\u306E\
-    \u6700\u5C0F\u306E\u8981\u7D20\u3092\u8FD4\u3059\u3002\u5B58\u5728\u3057\u306A\
-    \u3051\u308C\u3070 None \u3092\u8FD4\u3059\u3002\"\n        for a in s.a:\n  \
-    \          if a[-1] >= x:  # gt \u306A\u3089 >\n                return a[bisect_left(a,\
-    \ x)]  # gt \u306A\u3089 bisect_right\n    \n    def __getitem__(s, i):\n    \
-    \    \"i \u756A\u76EE\u306E\u8981\u7D20\u3092\u8FD4\u3059\u3002\"\n        if\
-    \ i < 0:\n            for a in reversed(s.a):\n                i += len(a)\n \
-    \               if i >= 0: return a[i]\n        else:\n            for a in s.a:\n\
-    \                if i < len(a): return a[i]\n                i -= len(a)\n   \
-    \     raise IndexError\n    \n    def pop(s, i=-1):\n        \"i \u756A\u76EE\u306E\
+    \u3051\u308C\u3070 None \u3092\u8FD4\u3059\u3002\"\n        return s.le(x - 1)\n\
+    \n    def le(s, x):\n        \"x \u4EE5\u4E0B\u306E\u6700\u5927\u306E\u8981\u7D20\
+    \u3092\u8FD4\u3059\u3002\u5B58\u5728\u3057\u306A\u3051\u308C\u3070 None \u3092\
+    \u8FD4\u3059\u3002\"\n        for a in reversed(s.a):\n            if a[0] <=\
+    \ x:  # lt \u306A\u3089 <\n                return a[bisect_right(a, x) - 1]  #\
+    \ lt \u306A\u3089 bisect_left\n\n    def gt(s, x):\n        \"x \u3088\u308A\u5927\
+    \u304D\u3044\u6700\u5C0F\u306E\u8981\u7D20\u3092\u8FD4\u3059\u3002\u5B58\u5728\
+    \u3057\u306A\u3051\u308C\u3070 None \u3092\u8FD4\u3059\u3002\"\n        return\
+    \ s.ge(x + 1)\n\n    def ge(s, x):\n        \"x \u4EE5\u4E0A\u306E\u6700\u5C0F\
+    \u306E\u8981\u7D20\u3092\u8FD4\u3059\u3002\u5B58\u5728\u3057\u306A\u3051\u308C\
+    \u3070 None \u3092\u8FD4\u3059\u3002\"\n        for a in s.a:\n            if\
+    \ a[-1] >= x:  # gt \u306A\u3089 >\n                return a[bisect_left(a, x)]\
+    \  # gt \u306A\u3089 bisect_right\n    \n    def __getitem__(s, i):\n        \"\
+    i \u756A\u76EE\u306E\u8981\u7D20\u3092\u8FD4\u3059\u3002\"\n        if i < 0:\n\
+    \            for a in reversed(s.a):\n                i += len(a)\n          \
+    \      if i >= 0: return a[i]\n        else:\n            for a in s.a:\n    \
+    \            if i < len(a): return a[i]\n                i -= len(a)\n       \
+    \ raise IndexError\n    \n    def pop(s, i=-1):\n        \"i \u756A\u76EE\u306E\
     \u8981\u7D20\u3092\u524A\u9664\u3057\u3066\u8FD4\u3059\u3002\"\n        if i <\
     \ 0:\n            for b, a in enumerate(reversed(s.a)):\n                i +=\
     \ len(a)\n                if i >= 0: return s._pop(a, ~b, i)\n        else:\n\
@@ -79,7 +81,7 @@ data:
   isVerificationFile: false
   path: algorithm_library/python/data_structure/SortedSet.py
   requiredBy: []
-  timestamp: '2026-11-06 23:20:20+09:00'
+  timestamp: '2026-11-08 19:01:56+09:00'
   verificationStatus: LIBRARY_NO_TESTS
   verifiedWith: []
 documentation_of: algorithm_library/python/data_structure/SortedSet.py

@@ -32,17 +32,18 @@ data:
     \ ([], [])\u3002\n\n    \u9802\u70B9\u306F 0-indexed\u3001\u8FBA ID \u306F edges\
     \ \u5185\u306E\u4F4D\u7F6E\u3002\u81EA\u5DF1\u30EB\u30FC\u30D7\u30FB\u591A\u91CD\
     \u8FBA\u306B\u5BFE\u5FDC\u3002\n    \u6642\u9593\u30FB\u7A7A\u9593\u8A08\u7B97\
-    \u91CF O(n + m)\u3002\n    \"\"\"\n    g = [[] for _ in range(n)]\n    for i,\
-    \ (u, v) in enumerate(edges):\n        g[u].append((v, i))\n        g[v].append((u,\
-    \ i))\n    pos = [-1] * n\n    for r in range(n):\n        if pos[r] != -1:\n\
-    \            continue\n        vs, es = [r], [-1]\n        pos[r] = 0\n      \
-    \  while vs:\n            v = vs[-1]\n            if not g[v]:\n             \
-    \   pos[v] = -2\n                vs.pop()\n                es.pop()\n        \
-    \        continue\n            u, i = g[v].pop()\n            if i == es[-1]:\n\
-    \                continue\n            if pos[u] >= 0:\n                return\
-    \ vs[pos[u]:], es[pos[u] + 1:] + [i]\n            if pos[u] == -1:\n         \
-    \       pos[u] = len(vs)\n                vs.append(u)\n                es.append(i)\n\
-    \    return [], []\n# END LIBRARY\n\n\ndef main():\n    N, M = map(int, readline().split())\n\
+    \u91CF O(n + m)\u3002\n    \"\"\"\n    g = [[] for _ in range(n)]\n    to = []\n\
+    \    for i, (u, v) in enumerate(edges):\n        g[u].append(2 * i)\n        g[v].append(2\
+    \ * i + 1)\n        to.extend((v, u))\n    pos = [-1] * n\n    for r in range(n):\n\
+    \        if pos[r] != -1:\n            continue\n        vs, es = [r], [-1]\n\
+    \        pos[r] = 0\n        while vs:\n            v = vs[-1]\n            if\
+    \ not g[v]:\n                pos[v] = -2\n                vs.pop()\n         \
+    \       es.pop()\n                continue\n            j = g[v].pop()\n     \
+    \       i = j >> 1\n            if i == es[-1]:\n                continue\n  \
+    \          u = to[j]\n            if pos[u] >= 0:\n                return vs[pos[u]:],\
+    \ es[pos[u] + 1:] + [i]\n            if pos[u] == -1:\n                pos[u]\
+    \ = len(vs)\n                vs.append(u)\n                es.append(i)\n    return\
+    \ [], []\n# END LIBRARY\n\n\ndef main():\n    N, M = map(int, readline().split())\n\
     \    edges = [tuple(map(int, readline().split())) for _ in range(M)]\n    vertices,\
     \ edge_ids = cycle_detect(N, edges)\n    if not vertices:\n        print(-1)\n\
     \        return\n    print(len(vertices))\n    print(*vertices)\n    print(*edge_ids)\n\
@@ -51,7 +52,7 @@ data:
   isVerificationFile: true
   path: library-checker-submitcode/graph/cycle_detection_undirected.test.py
   requiredBy: []
-  timestamp: '2026-10-29 14:17:33+09:00'
+  timestamp: '2026-11-08 19:01:56+09:00'
   verificationStatus: TEST_ACCEPTED
   verifiedWith: []
 documentation_of: library-checker-submitcode/graph/cycle_detection_undirected.test.py

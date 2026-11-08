@@ -24,13 +24,13 @@ data:
     \u304C\u5165\u308B\n    \"\"\"\n    n = len(A).bit_length() - 1\n    assert len(A)\
     \ == (1 << n), \"\u914D\u5217\u306E\u9577\u3055\u306F 2^N \u3067\u3042\u308B\u5FC5\
     \u8981\u304C\u3042\u308A\u307E\u3059\"\n\n    for i in range(n):\n        bit\
-    \ = 1 << i\n        for mask in range(1 << n):\n            if not (mask & bit):\n\
-    \                A[mask] -= A[mask | bit]\n    return A\n"
+    \ = 1 << i\n        mask = 0\n        while mask < 1 << n:\n            A[mask]\
+    \ -= A[mask + bit]\n            mask = (mask + 1 + bit) & ~bit\n    return A\n"
   dependsOn: []
   isVerificationFile: false
   path: algorithm_library/python/math/mobius.py
   requiredBy: []
-  timestamp: '2025-11-30 11:48:08+09:00'
+  timestamp: '2026-11-08 19:01:56+09:00'
   verificationStatus: LIBRARY_NO_TESTS
   verifiedWith: []
 documentation_of: algorithm_library/python/math/mobius.py

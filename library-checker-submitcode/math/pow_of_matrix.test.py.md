@@ -29,9 +29,10 @@ data:
     \ LIBRARY: algorithm_library/python/math/MatrixPower.py\ndef vec_mul(v: list[int],\
     \ M: list[list[int]], mod: int):\n    n = len(v)\n    assert n == len(M)\n   \
     \ res = [0] * n\n    for i in range(n):\n        x, row = v[i], M[i]\n       \
-    \ for j in range(n):\n            res[j] = (res[j] + x * row[j]) % mod\n    return\
-    \ res\n\n\n# \u884C\u5217 A \u3068 \u884C\u5217 B \u306E\u7A4D\u3092\u8FD4\u3059\
-    \ndef mat_mul(A: list[list[int]], B: list[list[int]], mod):\n    assert len(A[0])\
+    \ for j in range(n):\n            res[j] += x * row[j]\n        if i % 8 == 7:\n\
+    \            res = [x % mod for x in res]\n    return [x % mod for x in res]\n\
+    \n\n# \u884C\u5217 A \u3068 \u884C\u5217 B \u306E\u7A4D\u3092\u8FD4\u3059\ndef\
+    \ mat_mul(A: list[list[int]], B: list[list[int]], mod):\n    assert len(A[0])\
     \ == len(B)\n    K = len(B)\n    end = K & -8\n    BT = list(zip(*B))\n    res\
     \ = []\n    for row in A:\n        out = []\n        for col in BT:\n        \
     \    total = 0\n            # \u591A\u500D\u9577\u6574\u6570\u306E\u6210\u9577\
@@ -61,7 +62,7 @@ data:
   isVerificationFile: true
   path: library-checker-submitcode/math/pow_of_matrix.test.py
   requiredBy: []
-  timestamp: '2026-10-27 19:55:13+09:00'
+  timestamp: '2026-11-08 19:01:56+09:00'
   verificationStatus: TEST_ACCEPTED
   verifiedWith: []
 documentation_of: library-checker-submitcode/math/pow_of_matrix.test.py

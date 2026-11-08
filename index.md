@@ -514,6 +514,9 @@ data:
       path: library-checker-submitcode/src/data_structure/predecessor_problem_bit.py
       title: library-checker-submitcode/src/data_structure/predecessor_problem_bit.py
     - icon: ':warning:'
+      path: library-checker-submitcode/src/data_structure/predecessor_problem_segtree.py
+      title: library-checker-submitcode/src/data_structure/predecessor_problem_segtree.py
+    - icon: ':warning:'
       path: library-checker-submitcode/src/data_structure/range_affine_range_sum.py
       title: library-checker-submitcode/src/data_structure/range_affine_range_sum.py
     - icon: ':warning:'
@@ -566,14 +569,23 @@ data:
   - name: library-checker-submitcode/src/math
     pages:
     - icon: ':warning:'
+      path: library-checker-submitcode/src/math/bitwise_and_convolution.py
+      title: library-checker-submitcode/src/math/bitwise_and_convolution.py
+    - icon: ':warning:'
       path: library-checker-submitcode/src/math/convolution_mod.py
       title: library-checker-submitcode/src/math/convolution_mod.py
+    - icon: ':warning:'
+      path: library-checker-submitcode/src/math/enumerate_primes.py
+      title: library-checker-submitcode/src/math/enumerate_primes.py
     - icon: ':warning:'
       path: library-checker-submitcode/src/math/matrix_product.py
       title: library-checker-submitcode/src/math/matrix_product.py
     - icon: ':warning:'
       path: library-checker-submitcode/src/math/pow_of_matrix.py
       title: library-checker-submitcode/src/math/pow_of_matrix.py
+    - icon: ':warning:'
+      path: library-checker-submitcode/src/math/pow_of_matrix_vec.py
+      title: library-checker-submitcode/src/math/pow_of_matrix_vec.py
     - icon: ':warning:'
       path: library-checker-submitcode/src/math/sort_points_by_argument.py
       title: library-checker-submitcode/src/math/sort_points_by_argument.py
@@ -582,6 +594,9 @@ data:
     - icon: ':warning:'
       path: library-checker-submitcode/src/string/longest_common_substring.py
       title: library-checker-submitcode/src/string/longest_common_substring.py
+    - icon: ':warning:'
+      path: library-checker-submitcode/src/string/longest_common_substring_rollinghash.py
+      title: library-checker-submitcode/src/string/longest_common_substring_rollinghash.py
     - icon: ':warning:'
       path: library-checker-submitcode/src/string/number_of_substrings.py
       title: library-checker-submitcode/src/string/number_of_substrings.py
@@ -721,6 +736,9 @@ data:
       path: library-checker-submitcode/data_structure/predecessor_problem_bit.test.py
       title: library-checker-submitcode/data_structure/predecessor_problem_bit.test.py
     - icon: ':heavy_check_mark:'
+      path: library-checker-submitcode/data_structure/predecessor_problem_segtree.test.py
+      title: library-checker-submitcode/data_structure/predecessor_problem_segtree.test.py
+    - icon: ':heavy_check_mark:'
       path: library-checker-submitcode/data_structure/range_affine_range_sum.test.py
       title: library-checker-submitcode/data_structure/range_affine_range_sum.test.py
     - icon: ':heavy_check_mark:'
@@ -773,14 +791,23 @@ data:
   - name: library-checker-submitcode/math
     pages:
     - icon: ':heavy_check_mark:'
+      path: library-checker-submitcode/math/bitwise_and_convolution.test.py
+      title: library-checker-submitcode/math/bitwise_and_convolution.test.py
+    - icon: ':heavy_check_mark:'
       path: library-checker-submitcode/math/convolution_mod.test.py
       title: library-checker-submitcode/math/convolution_mod.test.py
+    - icon: ':heavy_check_mark:'
+      path: library-checker-submitcode/math/enumerate_primes.test.py
+      title: library-checker-submitcode/math/enumerate_primes.test.py
     - icon: ':heavy_check_mark:'
       path: library-checker-submitcode/math/matrix_product.test.py
       title: library-checker-submitcode/math/matrix_product.test.py
     - icon: ':heavy_check_mark:'
       path: library-checker-submitcode/math/pow_of_matrix.test.py
       title: library-checker-submitcode/math/pow_of_matrix.test.py
+    - icon: ':heavy_check_mark:'
+      path: library-checker-submitcode/math/pow_of_matrix_vec.test.py
+      title: library-checker-submitcode/math/pow_of_matrix_vec.test.py
     - icon: ':heavy_check_mark:'
       path: library-checker-submitcode/math/sort_points_by_argument.test.py
       title: library-checker-submitcode/math/sort_points_by_argument.test.py
@@ -789,6 +816,9 @@ data:
     - icon: ':heavy_check_mark:'
       path: library-checker-submitcode/string/longest_common_substring.test.py
       title: library-checker-submitcode/string/longest_common_substring.test.py
+    - icon: ':heavy_check_mark:'
+      path: library-checker-submitcode/string/longest_common_substring_rollinghash.test.py
+      title: library-checker-submitcode/string/longest_common_substring_rollinghash.test.py
     - icon: ':heavy_check_mark:'
       path: library-checker-submitcode/string/number_of_substrings.test.py
       title: library-checker-submitcode/string/number_of_substrings.test.py
