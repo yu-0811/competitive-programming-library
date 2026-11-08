@@ -4,11 +4,11 @@ def compare(a: tuple[int, int], b: tuple[int, int]):
 
     # 領域判定 (0: 上半平面 [0, 180度), 1: 下半平面 [180, 360度))
     # ay < 0 または (ay == 0 かつ ax < 0) の場合が下半平面
-    ah = 1 if (ay < 0 or (ay == 0 and ax < 0)) else 0
-    bh = 1 if (by < 0 or (by == 0 and bx < 0)) else 0
+    ah = ay < 0 or ay == 0 and ax < 0
+    bh = by < 0 or by == 0 and bx < 0
     # 領域が異なる場合上半平面を優先
     if ah != bh:
-        return -1 if ah < bh else 1
+        return 1 if ah else -1
 
     # 外積計算 (ax*by - ay*bx)
     # 正なら反時計回り(aが先)、負なら時計回り(bが先)

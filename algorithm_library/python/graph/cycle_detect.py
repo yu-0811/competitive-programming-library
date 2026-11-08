@@ -5,9 +5,11 @@ def cycle_detect(n, edges):
     時間・空間計算量 O(n + m)。
     """
     g = [[] for _ in range(n)]
+    to = []
     for i, (u, v) in enumerate(edges):
-        g[u].append((v, i))
-        g[v].append((u, i))
+        g[u].append(2 * i)
+        g[v].append(2 * i + 1)
+        to.extend((v, u))
     pos = [-1] * n
     for r in range(n):
         if pos[r] != -1:
@@ -21,9 +23,11 @@ def cycle_detect(n, edges):
                 vs.pop()
                 es.pop()
                 continue
-            u, i = g[v].pop()
+            j = g[v].pop()
+            i = j >> 1
             if i == es[-1]:
                 continue
+            u = to[j]
             if pos[u] >= 0:
                 return vs[pos[u]:], es[pos[u] + 1:] + [i]
             if pos[u] == -1:

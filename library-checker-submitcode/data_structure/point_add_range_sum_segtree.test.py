@@ -87,52 +87,56 @@ class segtree:  # すべて 0-index
     # option: check(operate(data[l],data[l+1],...,data[r-1])) = True
     # を満たす最大の r を返す
     def max_right(s, l, check):
-        assert 0 <= l and l <= s.n
+        assert 0 <= l <= s.n
         assert check(s.e)
         if l == s.n:
             return s.n
-        l += s.z
+        d, op, z = s.d, s.op, s.z
+        l += z
         sm = s.e
         while True:
             while l % 2 == 0:
                 l >>= 1
-            if not (check(s.op(sm, s.d[l]))):
-                while l < s.z:
-                    l = 2 * l
-                    if check(s.op(sm, s.d[l])):
-                        sm = s.op(sm, s.d[l])
+            nxt = op(sm, d[l])
+            if not check(nxt):
+                while l < z:
+                    l *= 2
+                    nxt = op(sm, d[l])
+                    if check(nxt):
+                        sm = nxt
                         l += 1
-                return l - s.z
-            sm = s.op(sm, s.d[l])
+                return l - z
+            sm = nxt
             l += 1
             if (l & -l) == l:
-                break
-        return s.n
+                return s.n
 
     # option: check(operate(data[l],data[l+1],...,data[r-1])) = True
     # を満たす最小の l を返す
     def min_left(s, r, check):
-        assert 0 <= r and r <= s.n
+        assert 0 <= r <= s.n
         assert check(s.e)
         if r == 0:
             return 0
-        r += s.z
+        d, op, z = s.d, s.op, s.z
+        r += z
         sm = s.e
         while True:
             r -= 1
             while r > 1 and (r % 2):
                 r >>= 1
-            if not (check(s.op(s.d[r], sm))):
-                while r < s.z:
+            nxt = op(d[r], sm)
+            if not check(nxt):
+                while r < z:
                     r = 2 * r + 1
-                    if check(s.op(s.d[r], sm)):
-                        sm = s.op(s.d[r], sm)
+                    nxt = op(d[r], sm)
+                    if check(nxt):
+                        sm = nxt
                         r -= 1
-                return r + 1 - s.z
-            sm = s.op(s.d[r], sm)
+                return r + 1 - z
+            sm = nxt
             if (r & -r) == r:
-                break
-        return 0
+                return 0
 
     # option: print(seg) で葉の値（元の配列）を表示する
     def __str__(s):

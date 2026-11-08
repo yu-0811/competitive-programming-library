@@ -56,7 +56,7 @@ if __name__ == "__main__":
 
 ## 追加済みの提出コード
 
-29 個のライブラリを、30 問・35 本の提出コードで確認できます。
+33 個のライブラリを、33 問・41 本の提出コードで確認できます。
 同じ問題に複数の実装を用意しているものもあります。
 
 | ライブラリ | 提出コード | Library Checker 問題 |
@@ -80,6 +80,7 @@ if __name__ == "__main__":
 | `data_structure/SortedMultiset.py` | [data_structure/double_ended_priority_queue_multiset.test.py](data_structure/double_ended_priority_queue_multiset.test.py) | [Double-Ended Priority Queue](https://judge.yosupo.jp/problem/double_ended_priority_queue) |
 | `data_structure/Segtree.py` | [data_structure/point_add_range_sum_segtree.test.py](data_structure/point_add_range_sum_segtree.test.py) | [Point Add Range Sum](https://judge.yosupo.jp/problem/point_add_range_sum) |
 | `data_structure/Segtree.py` | [data_structure/point_set_range_composite.test.py](data_structure/point_set_range_composite.test.py) | [Point Set Range Composite](https://judge.yosupo.jp/problem/point_set_range_composite) |
+| `data_structure/Segtree.py`（左右の境界探索） | [data_structure/predecessor_problem_segtree.test.py](data_structure/predecessor_problem_segtree.test.py) | [Predecessor Problem](https://judge.yosupo.jp/problem/predecessor_problem) |
 | `data_structure/TupleSegtree.py` | [data_structure/point_set_range_composite_tuple.test.py](data_structure/point_set_range_composite_tuple.test.py) | [Point Set Range Composite](https://judge.yosupo.jp/problem/point_set_range_composite) |
 | `data_structure/SparseTable.py` | [data_structure/staticrmq.test.py](data_structure/staticrmq.test.py) | [Static RMQ](https://judge.yosupo.jp/problem/staticrmq) |
 | `data_structure/DisjointSparseTable.py` | [data_structure/static_range_sum.test.py](data_structure/static_range_sum.test.py) | [Static Range Sum](https://judge.yosupo.jp/problem/static_range_sum) |
@@ -90,12 +91,17 @@ if __name__ == "__main__":
 | `string/SuffixArray.py` | [string/suffixarray.test.py](string/suffixarray.test.py) | [Suffix Array](https://judge.yosupo.jp/problem/suffixarray) |
 | `string/SuffixArray.py` | [string/number_of_substrings.test.py](string/number_of_substrings.test.py) | [Number of Substrings](https://judge.yosupo.jp/problem/number_of_substrings) |
 | `string/SuffixArray.py` | [string/longest_common_substring.test.py](string/longest_common_substring.test.py) | [Longest Common Substring](https://judge.yosupo.jp/problem/longest_common_substring) |
+| `string/RollingHash.py`（クラス版） | [string/longest_common_substring_rollinghash.test.py](string/longest_common_substring_rollinghash.test.py) | [Longest Common Substring](https://judge.yosupo.jp/problem/longest_common_substring) |
 | `string/Z_algo.py` | [string/zalgorithm.test.py](string/zalgorithm.test.py) | [Z Algorithm](https://judge.yosupo.jp/problem/zalgorithm) |
 | `math/FFT.py` | [math/convolution_mod.test.py](math/convolution_mod.test.py) | [Convolution](https://judge.yosupo.jp/problem/convolution_mod) |
 | `math/MatrixPower.py` | [math/matrix_product.test.py](math/matrix_product.test.py) | [Matrix Product](https://judge.yosupo.jp/problem/matrix_product) |
 | `math/MatrixPower.py` | [math/pow_of_matrix.test.py](math/pow_of_matrix.test.py) | [Power of Matrix](https://judge.yosupo.jp/problem/pow_of_matrix) |
+| `math/MatrixPower.py`（`vec_mul`） | [math/pow_of_matrix_vec.test.py](math/pow_of_matrix_vec.test.py) | [Power of Matrix](https://judge.yosupo.jp/problem/pow_of_matrix) |
+| `math/mobius.py` | [math/bitwise_and_convolution.test.py](math/bitwise_and_convolution.test.py) | [Bitwise And Convolution](https://judge.yosupo.jp/problem/bitwise_and_convolution) |
+| `math/factorization.py`（素数列挙） | [math/enumerate_primes.test.py](math/enumerate_primes.test.py) | [Enumerate Primes](https://judge.yosupo.jp/problem/enumerate_primes) |
 | `math/AngularSort.py` + `techniques/CmpSort.py` | [math/sort_points_by_argument.test.py](math/sort_points_by_argument.test.py) | [Sort Points by Argument](https://judge.yosupo.jp/problem/sort_points_by_argument) |
 | `techniques/2-SAT.py` | [techniques/two_sat.test.py](techniques/two_sat.test.py) | [2 Sat](https://judge.yosupo.jp/problem/two_sat) |
+| `techniques/Compression.py` + `data_structure/BIT.py`（Mo テンプレートの具体化） | [techniques/static_range_inversions_query.test.py](techniques/static_range_inversions_query.test.py) | [Static Range Inversions Query](https://judge.yosupo.jp/problem/static_range_inversions_query) |
 
 ## ローカルでの確認
 

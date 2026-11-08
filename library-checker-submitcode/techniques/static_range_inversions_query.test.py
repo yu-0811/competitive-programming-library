@@ -99,6 +99,13 @@ class fenwick_tree:
         assert 0 <= l <= r <= self.n
         return self.sum0(r) - self.sum0(l)
 # END LIBRARY
+# BEGIN LIBRARY: algorithm_library/python/techniques/Compression.py
+# 座標圧縮
+# ex. A=[2,9,9,7,9,2,4] -> 返り値=[0,3,3,2,3,0,1]
+def compression(A):
+    Adic = {x: i for i, x in enumerate(sorted(set(A)))}
+    return [Adic[A[i]] for i in range(len(A))]
+# END LIBRARY
 
 
 def mos_inversions(data, que):
@@ -111,9 +118,8 @@ def mos_inversions(data, que):
         return []
     B = max(1, ceil(sqrt(1.5) * n / sqrt(q)))
 
-    ranks = {value: i for i, value in enumerate(sorted(set(data)))}
-    data = [ranks[value] for value in data]
-    bit = fenwick_tree(len(ranks))
+    data = compression(data)
+    bit = fenwick_tree(max(data) + 1 if data else 0)
     add = bit.add
     prefix = bit.sum0
     inversions = size = 0

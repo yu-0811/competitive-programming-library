@@ -26,8 +26,10 @@ def vec_mul(v: list[int], M: list[list[int]], mod: int):
     for i in range(n):
         x, row = v[i], M[i]
         for j in range(n):
-            res[j] = (res[j] + x * row[j]) % mod
-    return res
+            res[j] += x * row[j]
+        if i % 8 == 7:
+            res = [x % mod for x in res]
+    return [x % mod for x in res]
 
 
 # 行列 A と 行列 B の積を返す

@@ -43,11 +43,11 @@ def sa_is(s, upper):
 
     lms = [i for i in range(1, n) if not ls[i - 1] and ls[i]]
     m = len(lms)
-    ids = [-1] * n
-    for i, v in enumerate(lms):
-        ids[v] = i
     sa = induce(lms)
     if m:
+        ids = [-1] * n
+        for i, v in enumerate(lms):
+            ids[v] = i
         order = [v for v in sa if ids[v] != -1]
         lms.append(n)
         rec = [0] * m
@@ -58,7 +58,9 @@ def sa_is(s, upper):
             el, er = lms[ids[l] + 1], lms[ids[r] + 1]
             rank += s[l : el + 1] != s[r : er + 1]
             rec[ids[r]] = rank
-        sa = induce([lms[i] for i in sa_is(rec, rank)])
+        if rank + 1 < m:
+            order = [lms[i] for i in sa_is(rec, rank)]
+        sa = induce(order)
     return sa
 
 

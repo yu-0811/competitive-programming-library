@@ -14,7 +14,8 @@ def mobius(A):
 
     for i in range(n):
         bit = 1 << i
-        for mask in range(1 << n):
-            if not (mask & bit):
-                A[mask] -= A[mask | bit]
+        mask = 0
+        while mask < 1 << n:
+            A[mask] -= A[mask + bit]
+            mask = (mask + 1 + bit) & ~bit
     return A

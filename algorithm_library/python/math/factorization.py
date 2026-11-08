@@ -1,4 +1,5 @@
 from collections import defaultdict
+from math import isqrt
 
 """
 高速素因数分解 https://atcoder.jp/contests/abc177/editorial/82
@@ -22,7 +23,7 @@ def init_factorization(N: int) -> list[int]:
     return D
 
 
-D = init_factorization()
+D = []  # 使用前に D = init_factorization(N) で初期化する
 
 
 # 素因数分解
@@ -56,12 +57,13 @@ def eratosthenes(N: int):
 # M 以下の素数リストを返す
 # O(M log log M)
 def res_primeList(M):
-    isprime = [True] * (M + 1)
-    isprime[0], isprime[1] = False, False
-    for i in range(2, M + 1):
-        if i * i > M:
-            break
-        if isprime[i]:
-            for j in range(i * i, M + 1, i):
-                isprime[j] = False
-    return [i for i in range(2, M + 1) if isprime[i]]
+    if M < 2:
+        return []
+    s = bytearray(b"\1") * ((M + 1) // 2)  # s[k] は奇数 2*k+1 のフラグ
+    for i in range(3, isqrt(M) + 1, 2):
+        if s[i // 2]:
+            j = i * i // 2
+            s[j::i] = bytes((len(s) - 1 - j) // i + 1)
+    res = [i for i in range(1, M + 1, 2) if s[i // 2]]
+    res[0] = 2
+    return res

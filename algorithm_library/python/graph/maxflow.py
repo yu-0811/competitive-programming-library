@@ -60,6 +60,8 @@ class maximum_flow:
             level[start] = 0
             que = [start]
             for v in que:
+                if level[goal] != -1:
+                    break
                 for edge in graph[v]:
                     if edge.cap > 0 and level[edge.to] == -1:
                         level[edge.to] = level[v] + 1

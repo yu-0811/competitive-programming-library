@@ -1,5 +1,6 @@
 # problem: https://judge.yosupo.jp/problem/static_range_inversions_query
 # include: algorithm_library/python/data_structure/BIT.py
+# include: algorithm_library/python/techniques/Compression.py
 
 
 def mos_inversions(data, que):
@@ -12,9 +13,8 @@ def mos_inversions(data, que):
         return []
     B = max(1, ceil(sqrt(1.5) * n / sqrt(q)))
 
-    ranks = {value: i for i, value in enumerate(sorted(set(data)))}
-    data = [ranks[value] for value in data]
-    bit = fenwick_tree(len(ranks))
+    data = compression(data)
+    bit = fenwick_tree(max(data) + 1 if data else 0)
     add = bit.add
     prefix = bit.sum0
     inversions = size = 0

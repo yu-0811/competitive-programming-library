@@ -18,9 +18,15 @@ class SortedMultiset:
     
     def _position(s, x):
         "x を挿入するバケット、その添字、バケット内の挿入位置を返す。s は空でないこと。"
-        for i, a in enumerate(s.a):
-            if x <= a[-1]: break
-        return (a, i, bisect_left(a, x))
+        l, r = 0, len(s.a) - 1
+        while l < r:
+            m = (l + r) // 2
+            if x <= s.a[m][-1]:
+                r = m
+            else:
+                l = m + 1
+        a = s.a[l]
+        return (a, l, bisect_left(a, x))
 
     def __contains__(s, x):
         if s.size == 0: return False
