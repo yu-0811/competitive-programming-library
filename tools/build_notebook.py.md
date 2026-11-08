@@ -50,7 +50,7 @@ data:
     \ Library}{title}\n\\section*{Python Algorithm Library}\n\\tableofcontents\n\\\
     clearpage\n\"\"\"\n    with tempfile.TemporaryDirectory(prefix=\"python-notebook-\"\
     ) as directory:\n        work = Path(directory)\n        formatter = LatexFormatter(\n\
-    \            style=\"friendly\",\n            verboptions=r\"fontsize=\\fontsize{6}{7}\\\
+    \            style=\"friendly\",\n            verboptions=r\"fontsize=\\fontsize{8}{8}\\\
     selectfont,numbers=left,numbersep=3pt,breaklines=true,breakanywhere=true,tabsize=4\"\
     ,\n        )\n        parts = [\n            preamble.replace(\n             \
     \   r\"\\begin{document}\",\n                formatter.get_style_defs() + \"\\\
@@ -81,7 +81,7 @@ data:
   isVerificationFile: false
   path: tools/build_notebook.py
   requiredBy: []
-  timestamp: '2026-10-29 11:17:37+09:00'
+  timestamp: '2026-11-06 23:29:09+09:00'
   verificationStatus: LIBRARY_NO_TESTS
   verifiedWith: []
 documentation_of: tools/build_notebook.py

@@ -56,43 +56,37 @@ data:
     \ END LIBRARY\n# BEGIN LIBRARY: algorithm_library/python/techniques/CmpSort.py\n\
     def cmp_sort(a, cmp):\n    \"\"\"\u6BD4\u8F03\u95A2\u6570 cmp \u306B\u5F93\u3063\
     \u3066\u30EA\u30B9\u30C8 a \u3092\u7834\u58CA\u7684\u306B\u5B89\u5B9A\u30BD\u30FC\
-    \u30C8\u3059\u308B\u3002\n\n    cmp(x, y) \u306F x \u304C\u5148\u306A\u3089\u8CA0\
-    \u3001\u540C\u9806\u4F4D\u306A\u3089 0\u3001\u5F8C\u306A\u3089\u6B63\u3092\u8FD4\
-    \u3059\u3002\n    \u6BD4\u8F03\u7D50\u679C\u306F\u4E00\u8CAB\u3057\u305F\u9806\
-    \u5E8F\u3092\u5B9A\u3081\u308B\u3053\u3068\u3002\u4E26\u3079\u66FF\u3048\u305F\
-    \u540C\u3058\u30EA\u30B9\u30C8 a \u3092\u8FD4\u3059\u3002\n    \u6642\u9593 O(n\
-    \ log n)\u3001\u8FFD\u52A0\u9818\u57DF O(n)\u3002\u6574\u5217\u6E08\u307F\u30FB\
-    \u72ED\u7FA9\u9006\u9806\u306A\u3089 O(n)\u3002\n    PyPy \u5411\u3051\u306B\u6BD4\
-    \u8F03\u95A2\u6570\u3092\u76F4\u63A5\u547C\u3073\u51FA\u3059\u3001\u975E\u518D\
-    \u5E30\u306E\u30DE\u30FC\u30B8\u30BD\u30FC\u30C8\u3002\n    \"\"\"\n    n = len(a)\n\
-    \    # \u5168\u4F53\u304C\u6607\u9806\u307E\u305F\u306F\u72ED\u7FA9\u964D\u9806\
-    \u306A\u3089 O(n) \u3067\u7D42\u4E86\u3059\u308B\u3002\n    if n > 1:\n      \
-    \  d = cmp(a[0], a[1]) > 0\n        r = 2\n        while r < n and (cmp(a[r -\
-    \ 1], a[r]) > 0) == d:\n            r += 1\n        if r == n:\n            if\
-    \ d:\n                a.reverse()\n            return a\n\n    # \u5E45 w \u306E\
-    \u6574\u5217\u6E08\u307F\u533A\u9593\u3092\u96A3\u540C\u58EB\u3067\u30DE\u30FC\
-    \u30B8\u3059\u308B\u3002\n    w = 1\n    while w < n:\n        for l in range(0,\
-    \ n - w, 2 * w):\n            m, r = l + w, min(l + 2 * w, n)\n            if\
-    \ cmp(a[m - 1], a[m]) <= 0:\n                continue\n            b = a[l:m]\
-    \  # \u5DE6\u5074\u3060\u3051\u9000\u907F\u3059\u308B\u3002\u9577\u3055\u306F\u5E38\
-    \u306B w\u3002\n            i, j, k = 0, m, l\n            while i < w and j <\
-    \ r:\n                if cmp(b[i], a[j]) <= 0:\n                    a[k] = b[i]\n\
-    \                    i += 1\n                else:\n                    a[k] =\
-    \ a[j]\n                    j += 1\n                k += 1\n            a[k:j]\
-    \ = b[i:]\n        w *= 2\n    return a\n# END LIBRARY\n\n\ndef main():\n    N\
-    \ = int(readline())\n    lower, zeros, upper = [], [], []\n    for _ in range(N):\n\
-    \        point = tuple(map(int, readline().split()))\n        if point == (0,\
-    \ 0):\n            zeros.append(point)\n        elif point[1] < 0:\n         \
-    \   lower.append(point)\n        else:\n            upper.append(point)\n    #\
-    \ The library starts at angle 0; the problem uses (-pi, pi], with arg(0)=0.\n\
-    \    cmp_sort(lower, compare)\n    cmp_sort(upper, compare)\n    points = lower\
-    \ + zeros + upper\n    sys.stdout.write(\"\\n\".join(f\"{x} {y}\" for x, y in\
-    \ points) + \"\\n\")\n\n\nif __name__ == \"__main__\":\n    main()\n"
+    \u30C8\u3059\u308B\u3002\n    \u6642\u9593 O(n log n)\u3001\u8FFD\u52A0\u9818\u57DF\
+    \ O(n)\u3002\u6574\u5217\u6E08\u307F\u30FB\u72ED\u7FA9\u9006\u9806\u306A\u3089\
+    \ O(n)\u3002\n    \"\"\"\n    n = len(a)\n    # \u5168\u4F53\u304C\u6607\u9806\
+    \u307E\u305F\u306F\u72ED\u7FA9\u964D\u9806\u306A\u3089 O(n) \u3067\u7D42\u4E86\
+    \u3059\u308B\u3002\n    if n > 1:\n        d = cmp(a[0], a[1]) > 0\n        r\
+    \ = 2\n        while r < n and (cmp(a[r - 1], a[r]) > 0) == d:\n            r\
+    \ += 1\n        if r == n:\n            if d:\n                a.reverse()\n \
+    \           return a\n\n    # \u5E45 w \u306E\u6574\u5217\u6E08\u307F\u533A\u9593\
+    \u3092\u96A3\u540C\u58EB\u3067\u30DE\u30FC\u30B8\u3059\u308B\u3002\n    w = 1\n\
+    \    while w < n:\n        for l in range(0, n - w, 2 * w):\n            m, r\
+    \ = l + w, min(l + 2 * w, n)\n            if cmp(a[m - 1], a[m]) <= 0:\n     \
+    \           continue\n            b = a[l:m]  # \u5DE6\u5074\u3060\u3051\u9000\
+    \u907F\u3059\u308B\u3002\u9577\u3055\u306F\u5E38\u306B w\u3002\n            i,\
+    \ j, k = 0, m, l\n            while i < w and j < r:\n                if cmp(b[i],\
+    \ a[j]) <= 0:\n                    a[k] = b[i]\n                    i += 1\n \
+    \               else:\n                    a[k] = a[j]\n                    j\
+    \ += 1\n                k += 1\n            a[k:j] = b[i:]\n        w *= 2\n \
+    \   return a\n# END LIBRARY\n\n\ndef main():\n    N = int(readline())\n    lower,\
+    \ zeros, upper = [], [], []\n    for _ in range(N):\n        point = tuple(map(int,\
+    \ readline().split()))\n        if point == (0, 0):\n            zeros.append(point)\n\
+    \        elif point[1] < 0:\n            lower.append(point)\n        else:\n\
+    \            upper.append(point)\n    # The library starts at angle 0; the problem\
+    \ uses (-pi, pi], with arg(0)=0.\n    cmp_sort(lower, compare)\n    cmp_sort(upper,\
+    \ compare)\n    points = lower + zeros + upper\n    sys.stdout.write(\"\\n\".join(f\"\
+    {x} {y}\" for x, y in points) + \"\\n\")\n\n\nif __name__ == \"__main__\":\n \
+    \   main()\n"
   dependsOn: []
   isVerificationFile: true
   path: library-checker-submitcode/math/sort_points_by_argument.test.py
   requiredBy: []
-  timestamp: '2026-10-27 19:55:13+09:00'
+  timestamp: '2026-11-06 23:36:52+09:00'
   verificationStatus: TEST_ACCEPTED
   verifiedWith: []
 documentation_of: library-checker-submitcode/math/sort_points_by_argument.test.py

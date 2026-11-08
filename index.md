@@ -236,9 +236,6 @@ data:
       path: algorithm_library/python/data_structure/MargeSortTree.py
       title: algorithm_library/python/data_structure/MargeSortTree.py
     - icon: ':warning:'
-      path: algorithm_library/python/data_structure/Mos_algorithm.py
-      title: algorithm_library/python/data_structure/Mos_algorithm.py
-    - icon: ':warning:'
       path: algorithm_library/python/data_structure/PackedTupleHeap.py
       title: algorithm_library/python/data_structure/PackedTupleHeap.py
     - icon: ':warning:'
@@ -393,8 +390,8 @@ data:
       path: algorithm_library/python/string/SuffixArray.py
       title: algorithm_library/python/string/SuffixArray.py
     - icon: ':warning:'
-      path: algorithm_library/python/string/Z-algo.py
-      title: algorithm_library/python/string/Z-algo.py
+      path: algorithm_library/python/string/Z_algo.py
+      title: algorithm_library/python/string/Z_algo.py
     - icon: ':warning:'
       path: algorithm_library/python/string/changeable_RollingHash.py
       title: algorithm_library/python/string/changeable_RollingHash.py
@@ -424,6 +421,9 @@ data:
     - icon: ':warning:'
       path: algorithm_library/python/techniques/MegruBisect.py
       title: algorithm_library/python/techniques/MegruBisect.py
+    - icon: ':warning:'
+      path: algorithm_library/python/techniques/Mos_algorithm.py
+      title: algorithm_library/python/techniques/Mos_algorithm.py
     - icon: ':warning:'
       path: algorithm_library/python/techniques/Rotate.py
       title: algorithm_library/python/techniques/Rotate.py
@@ -593,6 +593,9 @@ data:
       title: library-checker-submitcode/src/string/zalgorithm.py
   - name: library-checker-submitcode/src/techniques
     pages:
+    - icon: ':warning:'
+      path: library-checker-submitcode/src/techniques/static_range_inversions_query.py
+      title: library-checker-submitcode/src/techniques/static_range_inversions_query.py
     - icon: ':warning:'
       path: library-checker-submitcode/src/techniques/two_sat.py
       title: library-checker-submitcode/src/techniques/two_sat.py
@@ -797,6 +800,9 @@ data:
       title: library-checker-submitcode/string/zalgorithm.test.py
   - name: library-checker-submitcode/techniques
     pages:
+    - icon: ':heavy_check_mark:'
+      path: library-checker-submitcode/techniques/static_range_inversions_query.test.py
+      title: library-checker-submitcode/techniques/static_range_inversions_query.test.py
     - icon: ':heavy_check_mark:'
       path: library-checker-submitcode/techniques/two_sat.test.py
       title: library-checker-submitcode/techniques/two_sat.test.py
