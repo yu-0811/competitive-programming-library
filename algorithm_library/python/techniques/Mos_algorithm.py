@@ -4,6 +4,7 @@ def mos_algorithm(data, que):
     que : list of tuple : クエリのリスト
     クエリは 0-indexed で半開区間[l,r)
     更新関数には半開区間を渡し、回答の取得はクエリごとに1回だけ行う。
+    左右の追加・削除を別々に定義し、各要素を端から順に処理する。
     """
     from math import sqrt, ceil
 
@@ -16,16 +17,24 @@ def mos_algorithm(data, que):
     # 状態を初期化する処理を書く
     # ans = ?
 
-    def _add(left, right):
-        # 区間 [left, right) の要素を追加したときの状態に更新する
-        # ans は更新しない
+    def _add_left(left, right):
+        # 左端に [left, right) を追加する（右から左の順）
+        for i in range(right - 1, left - 1, -1):
+            pass
+
+    def _add_right(left, right):
+        # 右端に [left, right) を追加する（左から右の順）
         for i in range(left, right):
             pass
-            
 
-    def _del(left, right):
-        # [left, right) の要素を削除するしたときの状態に更新する
+    def _del_left(left, right):
+        # 左端の [left, right) を削除する（左から右の順）
         for i in range(left, right):
+            pass
+
+    def _del_right(left, right):
+        # 右端の [left, right) を削除する（右から左の順）
+        for i in range(right - 1, left - 1, -1):
             pass
 
     shift = q.bit_length()
@@ -46,13 +55,13 @@ def mos_algorithm(data, que):
         l, r = que[i]
 
         if L > l:
-            _add(l, L)
+            _add_left(l, L)
         if R < r:
-            _add(R, r)
+            _add_right(R, r)
         if L < l:
-            _del(L, l)
+            _del_left(L, l)
         if R > r:
-            _del(r, R)
+            _del_right(r, R)
         L, R = l, r
 
         # 更新された状態からクエリの答えを求める
