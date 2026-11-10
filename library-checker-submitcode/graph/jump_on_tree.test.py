@@ -104,11 +104,20 @@ class LCA:
         return anc_u != anc_v or anc_u and self.lca(u, v) == via
 # END LIBRARY
 # BEGIN LIBRARY: algorithm_library/python/techniques/Doubling.py
-def doubling(dp, LEN, POW):
-    for i in range(1, POW):
-        prev, cur = dp[i - 1], dp[i]
-        for j in range(LEN):
-            cur[j] = prev[prev[j]]
+from array import array
+def doubling(nxt: list[int], max_steps: int) -> list[array]:
+    """
+    nxt: 状態iから1回遷移した後の状態nxt[i]
+    max_steps: 最大遷移回数
+    return dp[i][v] := v から 2**i 回遷移した先
+    """
+    assert all(0 <= v < len(nxt) for v in nxt)
+    dp = [array('I', nxt)]
+    for _ in range(1, max_steps.bit_length()):
+        prev = dp[-1]
+        cur = array('I', [0]) * len(prev)
+        for v in range(len(prev)): cur[v] = prev[prev[v]]
+        dp.append(cur)
     return dp
 
 
