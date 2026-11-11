@@ -2,16 +2,13 @@
 """Build the Python library notebook with LuaLaTeX."""
 
 import argparse
+import hashlib
+import json
 import os
 from pathlib import Path
 import shutil
 import subprocess
 import tempfile
-
-from pygments import highlight
-from pygments.formatters import LatexFormatter
-from pygments.lexers import PythonLexer
-
 
 ROOT = Path(__file__).resolve().parents[1]
 
@@ -37,9 +34,10 @@ def main():
     parser.add_argument(
         "--output", type=Path, default=ROOT / "algorithm_library/python/notebook.pdf"
     )
+    parser.add_argument("--force", action="store_true", help="rebuild even if unchanged")
+    parser.add_argument("--stage", action="store_true", help="stage the PDF for commit")
     args = parser.parse_args()
-    if not shutil.which("lualatex"):
-        parser.error("lualatex is required (see README.md)")
+    output = args.output.resolve()
     source = ROOT / "algorithm_library/python"
     exclude_file = ROOT / "tools/notebook-exclude.txt"
     excluded = {
@@ -70,6 +68,39 @@ def main():
     )
     if not files:
         parser.error(f"No Python files found in {source}")
+
+    # Check contents rather than mtimes: pre-commit temporarily restores files.
+    digest = hashlib.sha256()
+    for path in [Path(__file__).resolve(), exclude_file, *files]:
+        digest.update(path.relative_to(ROOT).as_posix().encode())
+        digest.update(b"\0")
+        digest.update(path.read_bytes())
+        digest.update(b"\0")
+    source_hash = digest.hexdigest()
+    cache_key = hashlib.sha256(str(output).encode()).hexdigest()
+    cache_path = ROOT / "build/notebook" / f"{cache_key}.json"
+    try:
+        cache = json.loads(cache_path.read_text(encoding="utf-8"))
+    except (OSError, ValueError):
+        cache = {}
+    if (
+        not args.force
+        and isinstance(cache, dict)
+        and cache.get("source") == source_hash
+        and output.is_file()
+        and cache.get("pdf") == hashlib.sha256(output.read_bytes()).hexdigest()
+    ):
+        if args.stage:
+            subprocess.run(["git", "-C", str(ROOT), "add", "--", str(output)], check=True)
+        print(f"Up to date: {output}")
+        return
+
+    if not shutil.which("lualatex"):
+        parser.error("lualatex is required (see README.md)")
+    from pygments import highlight
+    from pygments.formatters import LatexFormatter
+    from pygments.lexers import PythonLexer
+
     # Suppress volatile PDF metadata, including the trailer ID derived from
     # the randomly named temporary build directory.
     preamble = r"""\pdfvariable suppressoptionalinfo 767\relax
@@ -143,9 +174,15 @@ def main():
             )
             if result.returncode:
                 raise SystemExit(result.stdout)
-        output = args.output.resolve()
         output.parent.mkdir(parents=True, exist_ok=True)
         shutil.copyfile(work / "notebook.pdf", output)
+    cache_path.parent.mkdir(parents=True, exist_ok=True)
+    cache_path.write_text(
+        json.dumps({"source": source_hash, "pdf": hashlib.sha256(output.read_bytes()).hexdigest()}),
+        encoding="utf-8",
+    )
+    if args.stage:
+        subprocess.run(["git", "-C", str(ROOT), "add", "--", str(output)], check=True)
     print(f"Created {output} ({len(files)} files)")
 
 

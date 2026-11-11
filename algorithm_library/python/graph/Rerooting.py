@@ -1,106 +1,64 @@
-# 全方位木DP
-class rerooting:
-    def __init__(
-        self,
-        n: int,
-        edges: list[tuple[int, int]],
-        e: int,
-        merge: callable,
-        calc_node_value: callable,
-        calc_ans: callable,
-    ):
-        self.n = n
-        self.e = e
-        self.merge = merge
-        self.calc_node_value = calc_node_value
-        self.calc_ans = calc_ans
-        # g[i] = i と隣接する頂点のリスト
-        g = self.g = [[] for _ in range(n + 1)]
-        # rev[i][j] = g[i][j](iのj番目の隣接頂点)にとって、iが何番目の隣接頂点か
-        # g[g[i][j]][rev[i][j]] == i である
-        rev = self.rev = [[] for _ in range(n + 1)]
-        for a, b in edges:
-            rev[a].append(len(g[b]))
-            rev[b].append(len(g[a]))
-            g[a].append(b)
-            g[b].append(a)
-        # dp[i] = iの子の部分木の値
-        # dp[i][j] = i を親とし、g[i][j]を根とした部分木の値
-        self.dp = [[e] * len(row) for row in g]
-        # ans[i] = i を根としたときの求めたい値
-        self.ans = [e] * (n + 1)
+# 全方位木DP。各操作が O(1) なら時間・空間 O(N)、再帰なし。
+def rerooting(g, e, merge, add_vertex, add_edge=lambda x, w: x):
+    """
+    全方位木DP：すべての頂点 r について「r を根としたときの木DPの値」を求める
 
-    # root から DFS して、子の部分木の値を計算
-    def _dfs1(self, root):
-        g, rev, dp = self.g, self.rev, self.dp
-        e, merge, add = self.e, self.merge, self.calc_node_value
-        par = self.par = [-1] * (self.n + 1)
-        order = self.order = []  # DFSでの訪問順
-        stack = [root]
-        while stack:
-            v = stack.pop()
-            order.append(v)
-            for u in g[v]:
-                if u != par[v]:
-                    par[u] = v
-                    stack.append(u)
-        # 訪問順を逆順にして、子から値を計算していく
-        for v in reversed(order[1:]):
-            p, x = par[v], e
-            for i, u in enumerate(g[v]):
-                if u == p:
-                    j = rev[v][i]
-                else:
-                    x = merge(x, dp[v][i])
-            # v を根とした部分木の値を親側に記録
-            dp[p][j] = add(x, v)
+    g[v] = [(隣接頂点, 辺の情報), ...]：0-indexed の無向木。
+    e：merge の単位元。merge は結合的で、g[v] の順に適用する。
+    merge(a, b)：同じ頂点から見た、別々の方向の情報をまとめる。
+    add_vertex(x, v)：v から見た周囲の情報 x に、v 自身を加える。
+    add_edge(x, w)：
+        状態 x に辺 w を追加したときの状態を追加する
+        w は g に入れた第二要素の辺の情報
+    各関数は入力を変更せず、新しい値を返す。
+    戻り値：ans[r] = r を根としたときの dp の状態
+    """
+    n = len(g)
+    parent = [-1] * n
+    order = [0]
+    for v in order:
+        for u, w in g[v]:
+            if u != parent[v]:
+                parent[u] = v
+                order.append(u)
 
-    # 親の部分木の値を使って、自分を根とした部分木の値を計算
-    def _dfs2(self):
-        g, rev, dp = self.g, self.rev, self.dp
-        e, merge, add = self.e, self.merge, self.calc_node_value
-        par, ans, answer = self.par, self.ans, self.calc_ans
-        for v in self.order:
-            val, idx, p = dp[v], rev[v], par[v]
-            # 子の部分木の値の左からの累積
-            left = e
-            # 子の部分木の値の右からの累積
-            # right[i] = merge(dp[v][i+1], dp[v][i+2], ..., dp[v][len(g[v])-1])
-            right = [e] * len(val)
-            for i in range(len(val) - 2, -1, -1):
-                right[i] = merge(val[i + 1], right[i + 1])
-            for j, u in enumerate(g[v]):
-                if u != p:
-                    # u が親、v が根の部分木の値を計算(u を考慮しないときの値)
-                    # maerge(left, right[j]) で u 以外の v の子の値を計算
-                    res = add(merge(left, right[j]), v)
-                    # いま親とした頂点の配列に記録
-                    dp[u][idx[j]] = res
-                # left を更新
-                left = merge(left, val[j])
-            # v を根としたときの求めたい値を計算
-            ans[v] = answer(left, v)
+    # down[v]：v 側から親へ届く情報。すでに親から見た状態。
+    down = [e] * n
+    for v in order[:0:-1]:
+        x = e
+        for u, w in g[v]:
+            if u == parent[v]:
+                parent_edge = w
+            else:
+                x = merge(x, down[u])
+        down[v] = add_edge(add_vertex(x, v), parent_edge)
 
-    def run(self, root=1):
-        self._dfs1(root)
-        self._dfs2()
-        return self.ans
+    # up[v]：親側から v へ届く情報。すでに v から見た状態。
+    up = [e] * n
+    ans = [e] * n
+    for v in order:
+        p = parent[v]
+        vals = [up[v] if u == p else down[u] for u, _ in g[v]]
+        right = [e] * (len(vals) + 1)
+        for i in range(len(vals) - 1, -1, -1):
+            right[i] = merge(vals[i], right[i + 1])
+        ans[v] = add_vertex(right[0], v)
+        left = e
+        for i, (u, w) in enumerate(g[v]):
+            if u != p:
+                # u 以外の全方向をまとめ、v を加えてから辺を渡る。
+                up[u] = add_edge(add_vertex(merge(left, right[i + 1]), v), w)
+            left = merge(left, vals[i])
+    return ans
 
 
-"""
-e = 頂点に持たせる値(関数のaに渡される)の単位元
-merge(a, b) = 部分木の値 a, b をマージする関数
-calc_node_value(a, v) = すべての子部分木の値をマージした値 a から頂点 v を根としたときの計算に使う値(DPの値)を計算する関数
-calc_ans(a, v) = すべての子部分木の値をマージした値 a から頂点 v を根としたときの求めたいものを計算する関数
-"""
-
-# e =
-# def merge(a,b):
-#   return
-# def calc_node_value(a,v):
-#   return
-# def calc_ans(a,v):
-#     return
-
-
-# rr = rerooting(N, edges, e, merge, calc_node_value, calc_ans)
+# 例：各頂点からの距離の総和。g[v] = [(隣接頂点, 辺の長さ), ...]
+# 状態は (距離の総和, 頂点数)。
+# def merge(a, b):
+#     return (a[0] + b[0], a[1] + b[1])
+# def add_vertex(x, v):
+#     return (x[0], x[1] + 1)
+# def add_edge(x, w):
+#     return (x[0] + w * x[1], x[1])
+# dp = rerooting(g, (0, 0), merge, add_vertex, add_edge)
+# ans = [x[0] for x in dp]

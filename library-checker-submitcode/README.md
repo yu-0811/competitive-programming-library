@@ -16,8 +16,8 @@ python3 library-checker-submitcode/generate.py
 ## 自動更新
 
 リポジトリの pre-commit フックで、コミット前に自動生成します。
-ライブラリやテンプレートの変更も反映されます。生成ファイルが変更された場合は
-コミットが一度止まるので、そのファイルも `git add` して再度コミットしてください。
+ライブラリやテンプレートの変更も反映されます。更新した生成ファイルは
+フック内で自動的にステージし、同じコミットに含めます。
 
 新しい作業環境では、最初にフックを有効にします。
 
@@ -56,7 +56,7 @@ if __name__ == "__main__":
 
 ## 追加済みの提出コード
 
-33 個のライブラリを、33 問・41 本の提出コードで確認できます。
+34 個のライブラリを、33 問・42 本の提出コードで確認できます。
 同じ問題に複数の実装を用意しているものもあります。
 
 | ライブラリ | 提出コード | Library Checker 問題 |
@@ -69,6 +69,7 @@ if __name__ == "__main__":
 | `graph/EulerTour.py` | [graph/vertex_add_path_sum_euler_tour.test.py](graph/vertex_add_path_sum_euler_tour.test.py) | [Vertex Add Path Sum](https://judge.yosupo.jp/problem/vertex_add_path_sum) |
 | `graph/LCA.py` + `techniques/Doubling.py` | [graph/jump_on_tree.test.py](graph/jump_on_tree.test.py) | [Jump on Tree](https://judge.yosupo.jp/problem/jump_on_tree) |
 | `graph/VertexAddSubtreeSum.py` | [graph/vertex_add_subtree_sum.test.py](graph/vertex_add_subtree_sum.test.py) | [Vertex Add Subtree Sum](https://judge.yosupo.jp/problem/vertex_add_subtree_sum) |
+| `graph/EulerTourOrder.py` + `data_structure/BIT.py` | [graph/vertex_add_subtree_sum_euler_tour.test.py](graph/vertex_add_subtree_sum_euler_tour.test.py) | [Vertex Add Subtree Sum](https://judge.yosupo.jp/problem/vertex_add_subtree_sum) |
 | `graph/Rerooting.py` | [graph/tree_path_composite_sum.test.py](graph/tree_path_composite_sum.test.py) | [Tree Path Composite Sum](https://judge.yosupo.jp/problem/tree_path_composite_sum) |
 | `graph/cycle_detect.py` | [graph/cycle_detection_undirected.test.py](graph/cycle_detection_undirected.test.py) | [Cycle Detection (Undirected)](https://judge.yosupo.jp/problem/cycle_detection_undirected) |
 | `graph/maxflow.py` | [graph/bipartitematching.test.py](graph/bipartitematching.test.py) | [Bipartite Matching](https://judge.yosupo.jp/problem/bipartitematching) |

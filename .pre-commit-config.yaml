@@ -3,13 +3,13 @@ repos:
     hooks:
       - id: generate-library-checker-submitcode
         name: Generate Library Checker submission code
-        entry: python3 library-checker-submitcode/generate.py
+        entry: python3 library-checker-submitcode/generate.py --stage
         language: system
         pass_filenames: false
         files: ^(algorithm_library/python/|library-checker-submitcode/)
       - id: generate-python-notebook
         name: Generate Python notebook PDF
-        entry: python3 tools/build_notebook.py
+        entry: python3 tools/build_notebook.py --stage
         language: system
         pass_filenames: false
         files: ^(algorithm_library/python/.*\.py$|tools/build_notebook\.py$|tools/notebook-exclude\.txt$)

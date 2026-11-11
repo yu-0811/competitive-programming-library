@@ -8,9 +8,8 @@ def main():
     edges = (map(int, readline().split()) for _ in range(N - 1))
     tree = LCA(N, edges)
     # Build the jump table through Doubling.py as well as testing LCA.py.
-    dp = [[0] * N for _ in range(N.bit_length())]
-    dp[0] = [max(0, parent) for parent in tree.par[:N]]
-    doubling(dp, N, len(dp))
+    nxt = [max(0, parent) for parent in tree.par[:N]]
+    dp = doubling(nxt, N - 1)
     ans = []
     for _ in range(Q):
         u, v, k = map(int, readline().split())

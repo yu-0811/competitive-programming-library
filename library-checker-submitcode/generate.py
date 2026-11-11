@@ -3,6 +3,7 @@
 import argparse
 import ast
 import re
+import subprocess
 import sys
 from pathlib import Path
 
@@ -64,10 +65,14 @@ def render(source):
 
 def main():
     parser = argparse.ArgumentParser(description=__doc__)
-    parser.add_argument(
+    mode = parser.add_mutually_exclusive_group()
+    mode.add_argument(
         "--check",
         action="store_true",
         help="report outdated submissions without writing",
+    )
+    mode.add_argument(
+        "--stage", action="store_true", help="stage generated submissions for commit"
     )
     args = parser.parse_args()
     outdated = False
@@ -91,6 +96,8 @@ def main():
         else:
             output.parent.mkdir(parents=True, exist_ok=True)
             output.write_text(content, encoding="utf-8")
+            if args.stage:
+                subprocess.run(["git", "-C", str(ROOT), "add", "--", str(output)], check=True)
             print(f"generated: {output.relative_to(ROOT)}")
     if outdated:
         print("Run: python3 library-checker-submitcode/generate.py", file=sys.stderr)

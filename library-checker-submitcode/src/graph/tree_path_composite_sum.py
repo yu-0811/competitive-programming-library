@@ -5,31 +5,25 @@
 def main():
     N = int(readline())
     values = list(map(int, readline().split()))
-    edges = []
-    coefficients = []
-    # 辺を中継頂点に置き換え、既存の頂点変換 API で一次関数を適用する。
-    for i in range(N - 1):
+    g = [[] for _ in range(N)]
+    for _ in range(N - 1):
         u, v, b, c = map(int, readline().split())
-        middle = N + i
-        edges.append((u, middle))
-        edges.append((middle, v))
-        coefficients.append((b, c))
+        g[u].append((v, (b, c)))
+        g[v].append((u, (b, c)))
 
-    # 状態は (値の総和, 元の木の頂点数)。中継頂点は数えない。
+    # 状態は (値の総和, 頂点数)。
     def merge(a, b):
         return ((a[0] + b[0]) % mod, a[1] + b[1])
 
-    def node_value(a, v):
-        if v < N:
-            return ((a[0] + values[v]) % mod, a[1] + 1)
-        b, c = coefficients[v - N]
-        return ((b * a[0] + c * a[1]) % mod, a[1])
+    def add_vertex(x, v):
+        return ((x[0] + values[v]) % mod, x[1] + 1)
 
-    def answer(a, v):
-        return node_value(a, v)[0]
+    def add_edge(x, w):
+        b, c = w
+        return ((b * x[0] + c * x[1]) % mod, x[1])
 
-    tree = rerooting(2 * N - 1, edges, (0, 0), merge, node_value, answer)
-    print(*tree.run(0)[:N])
+    dp = rerooting(g, (0, 0), merge, add_vertex, add_edge)
+    print(*(x[0] for x in dp))
 
 
 if __name__ == "__main__":

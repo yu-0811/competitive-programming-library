@@ -21,8 +21,8 @@ mod = 998244353
 # BEGIN LIBRARY: algorithm_library/python/graph/LCA.py
 # HLD。参考: https://judge.yosupo.jp/submission/400748
 class LCA:
-    # n: 頂点数、E: 辺集合, root: 木の根
-    def __init__(self, n, E, root=0):
+    # n: 頂点数、E: 辺集合, r: 木の根
+    def __init__(self, n, E, r=0):
         par = self.par = [0] * (n + 1)
         dep = self.dep = [-1] * (n + 1)
         siz = self.siz = [1] * (n + 1)
@@ -37,7 +37,7 @@ class LCA:
             par[v] ^= u
         que = []
         for u in range(n + 1):
-            if deg[u] == 1 and u != root:
+            if deg[u] == 1 and u != r:
                 que.append(u)
             elif deg[u] == 0:
                 par[u] = -1
@@ -49,15 +49,15 @@ class LCA:
                 jmp[v] = u
             par[v] ^= u
             deg[v] -= 1
-            if deg[v] == 1 and v != root:
+            if deg[v] == 1 and v != r:
                 que.append(v)
-        par[root] = -1
+        par[r] = -1
 
-        if jmp[root] >= 0:
-            siz[jmp[root]] = -siz[jmp[root]]
-        jmp[root] = -1
-        siz[root] = tin[root] + 1
-        dep[root] = tin[root] = 0
+        if jmp[r] >= 0:
+            siz[jmp[r]] = -siz[jmp[r]]
+        jmp[r] = -1
+        siz[r] = tin[r] + 1
+        dep[r] = tin[r] = 0
         for u in reversed(que):
             v = par[u]
             dep[u] = dep[v] + 1
