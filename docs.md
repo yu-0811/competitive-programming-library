@@ -1,3 +1,9 @@
+## graph
+
+- EulerTourOrder.py
+    - 反復 DFS で行きがけ順と部分木の半開区間を O(N) で構築
+    - [使い方](documents/algo_library/graph/EulerTourOrder.md)
+
 ## string
 
 - RollingHash.py

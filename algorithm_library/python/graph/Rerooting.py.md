@@ -13,78 +13,56 @@ data:
     \ basedir=basedir, options={'include_paths': [basedir]}).decode()\n          \
     \                  ^^^^^^\n  File \"/opt/hostedtoolcache/PyPy/3.11.17/x64/lib/pypy3.11/site-packages/onlinejudge_verify/languages/python.py\"\
     , line 96, in bundle\n    raise NotImplementedError\nNotImplementedError\n"
-  code: "# \u5168\u65B9\u4F4D\u6728DP\nclass rerooting:\n    def __init__(\n     \
-    \   self,\n        n: int,\n        edges: list[tuple[int, int]],\n        e:\
-    \ int,\n        merge: callable,\n        calc_node_value: callable,\n       \
-    \ calc_ans: callable,\n    ):\n        self.n = n\n        self.e = e\n      \
-    \  self.merge = merge\n        self.calc_node_value = calc_node_value\n      \
-    \  self.calc_ans = calc_ans\n        # g[i] = i \u3068\u96A3\u63A5\u3059\u308B\
-    \u9802\u70B9\u306E\u30EA\u30B9\u30C8\n        g = self.g = [[] for _ in range(n\
-    \ + 1)]\n        # rev[i][j] = g[i][j](i\u306Ej\u756A\u76EE\u306E\u96A3\u63A5\u9802\
-    \u70B9)\u306B\u3068\u3063\u3066\u3001i\u304C\u4F55\u756A\u76EE\u306E\u96A3\u63A5\
-    \u9802\u70B9\u304B\n        # g[g[i][j]][rev[i][j]] == i \u3067\u3042\u308B\n\
-    \        rev = self.rev = [[] for _ in range(n + 1)]\n        for a, b in edges:\n\
-    \            rev[a].append(len(g[b]))\n            rev[b].append(len(g[a]))\n\
-    \            g[a].append(b)\n            g[b].append(a)\n        # dp[i] = i\u306E\
-    \u5B50\u306E\u90E8\u5206\u6728\u306E\u5024\n        # dp[i][j] = i \u3092\u89AA\
-    \u3068\u3057\u3001g[i][j]\u3092\u6839\u3068\u3057\u305F\u90E8\u5206\u6728\u306E\
-    \u5024\n        self.dp = [[e] * len(row) for row in g]\n        # ans[i] = i\
-    \ \u3092\u6839\u3068\u3057\u305F\u3068\u304D\u306E\u6C42\u3081\u305F\u3044\u5024\
-    \n        self.ans = [e] * (n + 1)\n\n    # root \u304B\u3089 DFS \u3057\u3066\
-    \u3001\u5B50\u306E\u90E8\u5206\u6728\u306E\u5024\u3092\u8A08\u7B97\n    def _dfs1(self,\
-    \ root):\n        g, rev, dp = self.g, self.rev, self.dp\n        e, merge, add\
-    \ = self.e, self.merge, self.calc_node_value\n        par = self.par = [-1] *\
-    \ (self.n + 1)\n        order = self.order = []  # DFS\u3067\u306E\u8A2A\u554F\
-    \u9806\n        stack = [root]\n        while stack:\n            v = stack.pop()\n\
-    \            order.append(v)\n            for u in g[v]:\n                if u\
-    \ != par[v]:\n                    par[u] = v\n                    stack.append(u)\n\
-    \        # \u8A2A\u554F\u9806\u3092\u9006\u9806\u306B\u3057\u3066\u3001\u5B50\u304B\
-    \u3089\u5024\u3092\u8A08\u7B97\u3057\u3066\u3044\u304F\n        for v in reversed(order[1:]):\n\
-    \            p, x = par[v], e\n            for i, u in enumerate(g[v]):\n    \
-    \            if u == p:\n                    j = rev[v][i]\n                else:\n\
-    \                    x = merge(x, dp[v][i])\n            # v \u3092\u6839\u3068\
-    \u3057\u305F\u90E8\u5206\u6728\u306E\u5024\u3092\u89AA\u5074\u306B\u8A18\u9332\
-    \n            dp[p][j] = add(x, v)\n\n    # \u89AA\u306E\u90E8\u5206\u6728\u306E\
-    \u5024\u3092\u4F7F\u3063\u3066\u3001\u81EA\u5206\u3092\u6839\u3068\u3057\u305F\
-    \u90E8\u5206\u6728\u306E\u5024\u3092\u8A08\u7B97\n    def _dfs2(self):\n     \
-    \   g, rev, dp = self.g, self.rev, self.dp\n        e, merge, add = self.e, self.merge,\
-    \ self.calc_node_value\n        par, ans, answer = self.par, self.ans, self.calc_ans\n\
-    \        for v in self.order:\n            val, idx, p = dp[v], rev[v], par[v]\n\
-    \            # \u5B50\u306E\u90E8\u5206\u6728\u306E\u5024\u306E\u5DE6\u304B\u3089\
-    \u306E\u7D2F\u7A4D\n            left = e\n            # \u5B50\u306E\u90E8\u5206\
-    \u6728\u306E\u5024\u306E\u53F3\u304B\u3089\u306E\u7D2F\u7A4D\n            # right[i]\
-    \ = merge(dp[v][i+1], dp[v][i+2], ..., dp[v][len(g[v])-1])\n            right\
-    \ = [e] * len(val)\n            for i in range(len(val) - 2, -1, -1):\n      \
-    \          right[i] = merge(val[i + 1], right[i + 1])\n            for j, u in\
-    \ enumerate(g[v]):\n                if u != p:\n                    # u \u304C\
-    \u89AA\u3001v \u304C\u6839\u306E\u90E8\u5206\u6728\u306E\u5024\u3092\u8A08\u7B97\
-    (u \u3092\u8003\u616E\u3057\u306A\u3044\u3068\u304D\u306E\u5024)\n           \
-    \         # maerge(left, right[j]) \u3067 u \u4EE5\u5916\u306E v \u306E\u5B50\u306E\
-    \u5024\u3092\u8A08\u7B97\n                    res = add(merge(left, right[j]),\
-    \ v)\n                    # \u3044\u307E\u89AA\u3068\u3057\u305F\u9802\u70B9\u306E\
-    \u914D\u5217\u306B\u8A18\u9332\n                    dp[u][idx[j]] = res\n    \
-    \            # left \u3092\u66F4\u65B0\n                left = merge(left, val[j])\n\
-    \            # v \u3092\u6839\u3068\u3057\u305F\u3068\u304D\u306E\u6C42\u3081\u305F\
-    \u3044\u5024\u3092\u8A08\u7B97\n            ans[v] = answer(left, v)\n\n    def\
-    \ run(self, root=1):\n        self._dfs1(root)\n        self._dfs2()\n       \
-    \ return self.ans\n\n\n\"\"\"\ne = \u9802\u70B9\u306B\u6301\u305F\u305B\u308B\u5024\
-    (\u95A2\u6570\u306Ea\u306B\u6E21\u3055\u308C\u308B)\u306E\u5358\u4F4D\u5143\n\
-    merge(a, b) = \u90E8\u5206\u6728\u306E\u5024 a, b \u3092\u30DE\u30FC\u30B8\u3059\
-    \u308B\u95A2\u6570\ncalc_node_value(a, v) = \u3059\u3079\u3066\u306E\u5B50\u90E8\
-    \u5206\u6728\u306E\u5024\u3092\u30DE\u30FC\u30B8\u3057\u305F\u5024 a \u304B\u3089\
-    \u9802\u70B9 v \u3092\u6839\u3068\u3057\u305F\u3068\u304D\u306E\u8A08\u7B97\u306B\
-    \u4F7F\u3046\u5024(DP\u306E\u5024)\u3092\u8A08\u7B97\u3059\u308B\u95A2\u6570\n\
-    calc_ans(a, v) = \u3059\u3079\u3066\u306E\u5B50\u90E8\u5206\u6728\u306E\u5024\u3092\
-    \u30DE\u30FC\u30B8\u3057\u305F\u5024 a \u304B\u3089\u9802\u70B9 v \u3092\u6839\
-    \u3068\u3057\u305F\u3068\u304D\u306E\u6C42\u3081\u305F\u3044\u3082\u306E\u3092\
-    \u8A08\u7B97\u3059\u308B\u95A2\u6570\n\"\"\"\n\n# e =\n# def merge(a,b):\n#  \
-    \ return\n# def calc_node_value(a,v):\n#   return\n# def calc_ans(a,v):\n#   \
-    \  return\n\n\n# rr = rerooting(N, edges, e, merge, calc_node_value, calc_ans)\n"
+  code: "# \u5168\u65B9\u4F4D\u6728DP\u3002\u5404\u64CD\u4F5C\u304C O(1) \u306A\u3089\
+    \u6642\u9593\u30FB\u7A7A\u9593 O(N)\u3001\u518D\u5E30\u306A\u3057\u3002\ndef rerooting(g,\
+    \ e, merge, add_vertex, add_edge=lambda x, w: x):\n    \"\"\"\n    \u5168\u65B9\
+    \u4F4D\u6728DP\uFF1A\u3059\u3079\u3066\u306E\u9802\u70B9 r \u306B\u3064\u3044\u3066\
+    \u300Cr \u3092\u6839\u3068\u3057\u305F\u3068\u304D\u306E\u6728DP\u306E\u5024\u300D\
+    \u3092\u6C42\u3081\u308B\n\n    g[v] = [(\u96A3\u63A5\u9802\u70B9, \u8FBA\u306E\
+    \u60C5\u5831), ...]\uFF1A0-indexed \u306E\u7121\u5411\u6728\u3002\n    e\uFF1A\
+    merge \u306E\u5358\u4F4D\u5143\u3002merge \u306F\u7D50\u5408\u7684\u3067\u3001\
+    g[v] \u306E\u9806\u306B\u9069\u7528\u3059\u308B\u3002\n    merge(a, b)\uFF1A\u540C\
+    \u3058\u9802\u70B9\u304B\u3089\u898B\u305F\u3001\u5225\u3005\u306E\u65B9\u5411\
+    \u306E\u60C5\u5831\u3092\u307E\u3068\u3081\u308B\u3002\n    add_vertex(x, v)\uFF1A\
+    v \u304B\u3089\u898B\u305F\u5468\u56F2\u306E\u60C5\u5831 x \u306B\u3001v \u81EA\
+    \u8EAB\u3092\u52A0\u3048\u308B\u3002\n    add_edge(x, w)\uFF1A\n        \u72B6\
+    \u614B x \u306B\u8FBA w \u3092\u8FFD\u52A0\u3057\u305F\u3068\u304D\u306E\u72B6\
+    \u614B\u3092\u8FFD\u52A0\u3059\u308B\n        w \u306F g \u306B\u5165\u308C\u305F\
+    \u7B2C\u4E8C\u8981\u7D20\u306E\u8FBA\u306E\u60C5\u5831\n    \u5404\u95A2\u6570\
+    \u306F\u5165\u529B\u3092\u5909\u66F4\u305B\u305A\u3001\u65B0\u3057\u3044\u5024\
+    \u3092\u8FD4\u3059\u3002\n    \u623B\u308A\u5024\uFF1Aans[r] = r \u3092\u6839\u3068\
+    \u3057\u305F\u3068\u304D\u306E dp \u306E\u72B6\u614B\n    \"\"\"\n    n = len(g)\n\
+    \    parent = [-1] * n\n    order = [0]\n    for v in order:\n        for u, w\
+    \ in g[v]:\n            if u != parent[v]:\n                parent[u] = v\n  \
+    \              order.append(u)\n\n    # down[v]\uFF1Av \u5074\u304B\u3089\u89AA\
+    \u3078\u5C4A\u304F\u60C5\u5831\u3002\u3059\u3067\u306B\u89AA\u304B\u3089\u898B\
+    \u305F\u72B6\u614B\u3002\n    down = [e] * n\n    for v in order[:0:-1]:\n   \
+    \     x = e\n        for u, w in g[v]:\n            if u == parent[v]:\n     \
+    \           parent_edge = w\n            else:\n                x = merge(x, down[u])\n\
+    \        down[v] = add_edge(add_vertex(x, v), parent_edge)\n\n    # up[v]\uFF1A\
+    \u89AA\u5074\u304B\u3089 v \u3078\u5C4A\u304F\u60C5\u5831\u3002\u3059\u3067\u306B\
+    \ v \u304B\u3089\u898B\u305F\u72B6\u614B\u3002\n    up = [e] * n\n    ans = [e]\
+    \ * n\n    for v in order:\n        p = parent[v]\n        vals = [up[v] if u\
+    \ == p else down[u] for u, _ in g[v]]\n        right = [e] * (len(vals) + 1)\n\
+    \        for i in range(len(vals) - 1, -1, -1):\n            right[i] = merge(vals[i],\
+    \ right[i + 1])\n        ans[v] = add_vertex(right[0], v)\n        left = e\n\
+    \        for i, (u, w) in enumerate(g[v]):\n            if u != p:\n         \
+    \       # u \u4EE5\u5916\u306E\u5168\u65B9\u5411\u3092\u307E\u3068\u3081\u3001\
+    v \u3092\u52A0\u3048\u3066\u304B\u3089\u8FBA\u3092\u6E21\u308B\u3002\n       \
+    \         up[u] = add_edge(add_vertex(merge(left, right[i + 1]), v), w)\n    \
+    \        left = merge(left, vals[i])\n    return ans\n\n\n# \u4F8B\uFF1A\u5404\
+    \u9802\u70B9\u304B\u3089\u306E\u8DDD\u96E2\u306E\u7DCF\u548C\u3002g[v] = [(\u96A3\
+    \u63A5\u9802\u70B9, \u8FBA\u306E\u9577\u3055), ...]\n# \u72B6\u614B\u306F (\u8DDD\
+    \u96E2\u306E\u7DCF\u548C, \u9802\u70B9\u6570)\u3002\n# def merge(a, b):\n#   \
+    \  return (a[0] + b[0], a[1] + b[1])\n# def add_vertex(x, v):\n#     return (x[0],\
+    \ x[1] + 1)\n# def add_edge(x, w):\n#     return (x[0] + w * x[1], x[1])\n# dp\
+    \ = rerooting(g, (0, 0), merge, add_vertex, add_edge)\n# ans = [x[0] for x in\
+    \ dp]\n"
   dependsOn: []
   isVerificationFile: false
   path: algorithm_library/python/graph/Rerooting.py
   requiredBy: []
-  timestamp: '2026-11-06 23:09:34+09:00'
+  timestamp: '2026-11-11 22:38:10+09:00'
   verificationStatus: LIBRARY_NO_TESTS
   verifiedWith: []
 documentation_of: algorithm_library/python/graph/Rerooting.py

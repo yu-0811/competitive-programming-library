@@ -18,12 +18,12 @@ data:
     # include: algorithm_library/python/techniques/Doubling.py\n\n\ndef main():\n\
     \    N, Q = map(int, readline().split())\n    edges = (map(int, readline().split())\
     \ for _ in range(N - 1))\n    tree = LCA(N, edges)\n    # Build the jump table\
-    \ through Doubling.py as well as testing LCA.py.\n    dp = [[0] * N for _ in range(N.bit_length())]\n\
-    \    dp[0] = [max(0, parent) for parent in tree.par[:N]]\n    doubling(dp, N,\
-    \ len(dp))\n    ans = []\n    for _ in range(Q):\n        u, v, k = map(int, readline().split())\n\
-    \        ancestor = tree.lca(u, v)\n        up = tree.dep[u] - tree.dep[ancestor]\n\
-    \        distance = up + tree.dep[v] - tree.dep[ancestor]\n        if k > distance:\n\
-    \            ans.append(\"-1\")\n        elif k <= up:\n            ans.append(str(query(dp,\
+    \ through Doubling.py as well as testing LCA.py.\n    nxt = [max(0, parent) for\
+    \ parent in tree.par[:N]]\n    dp = doubling(nxt, N - 1)\n    ans = []\n    for\
+    \ _ in range(Q):\n        u, v, k = map(int, readline().split())\n        ancestor\
+    \ = tree.lca(u, v)\n        up = tree.dep[u] - tree.dep[ancestor]\n        distance\
+    \ = up + tree.dep[v] - tree.dep[ancestor]\n        if k > distance:\n        \
+    \    ans.append(\"-1\")\n        elif k <= up:\n            ans.append(str(query(dp,\
     \ u, k)))\n        else:\n            ans.append(str(query(dp, v, distance - k)))\n\
     \    sys.stdout.write(\"\\n\".join(ans) + \"\\n\")\n\n\nif __name__ == \"__main__\"\
     :\n    main()\n"
@@ -31,7 +31,7 @@ data:
   isVerificationFile: false
   path: library-checker-submitcode/src/graph/jump_on_tree.py
   requiredBy: []
-  timestamp: '2026-10-27 19:55:13+09:00'
+  timestamp: '2026-11-11 22:38:10+09:00'
   verificationStatus: LIBRARY_NO_TESTS
   verifiedWith: []
 documentation_of: library-checker-submitcode/src/graph/jump_on_tree.py

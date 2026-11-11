@@ -282,6 +282,9 @@ data:
       path: algorithm_library/python/graph/EulerTour.py
       title: algorithm_library/python/graph/EulerTour.py
     - icon: ':warning:'
+      path: algorithm_library/python/graph/EulerTourOrder.py
+      title: algorithm_library/python/graph/EulerTourOrder.py
+    - icon: ':warning:'
       path: algorithm_library/python/graph/LCA.py
       title: algorithm_library/python/graph/LCA.py
     - icon: ':warning:'
@@ -566,6 +569,9 @@ data:
     - icon: ':warning:'
       path: library-checker-submitcode/src/graph/vertex_add_subtree_sum.py
       title: library-checker-submitcode/src/graph/vertex_add_subtree_sum.py
+    - icon: ':warning:'
+      path: library-checker-submitcode/src/graph/vertex_add_subtree_sum_euler_tour.py
+      title: library-checker-submitcode/src/graph/vertex_add_subtree_sum_euler_tour.py
   - name: library-checker-submitcode/src/math
     pages:
     - icon: ':warning:'
@@ -788,6 +794,9 @@ data:
     - icon: ':heavy_check_mark:'
       path: library-checker-submitcode/graph/vertex_add_subtree_sum.test.py
       title: library-checker-submitcode/graph/vertex_add_subtree_sum.test.py
+    - icon: ':heavy_check_mark:'
+      path: library-checker-submitcode/graph/vertex_add_subtree_sum_euler_tour.test.py
+      title: library-checker-submitcode/graph/vertex_add_subtree_sum_euler_tour.test.py
   - name: library-checker-submitcode/math
     pages:
     - icon: ':heavy_check_mark:'
