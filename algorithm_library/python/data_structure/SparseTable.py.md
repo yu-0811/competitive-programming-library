@@ -20,21 +20,21 @@ data:
     \u8A08\u7B97\u91CF: O(n log n)\n        \"\"\"\n        self.op = op\n       \
     \ self.n = n = len(arr)\n        # table[k][i] = i \u304B\u3089\u9577\u3055 2^k\
     \ \u306E\u533A\u9593\u306B\u5BFE\u3059\u308B\u6F14\u7B97\u7D50\u679C\n       \
-    \ self.tab = tab = [list(arr)] if n else []\n\n        for k in range(n.bit_length()\
-    \ - 1):\n            prev = tab[-1]\n            row = prev[1 << k :]\n      \
-    \      for i in range(len(row)):\n                row[i] = op(prev[i], row[i])\n\
-    \            tab.append(row)\n\n    def query(self, l, r):\n        \"\"\"\n \
-    \       [l, r) \u306E\u533A\u9593\u306B\u5BFE\u3059\u308B\u6F14\u7B97\u7D50\u679C\
-    \u3092\u8FD4\u3059 O(1)\n        \"\"\"\n        assert 0 <= l < r <= self.n\n\
-    \        # 2^k <= r - l \u3092\u6E80\u305F\u3059\u6700\u5927\u306E k \u3092\u6C42\
-    \u3081\u308B\n        k = (r - l).bit_length() - 1\n        # [l, l + 2^k) \u3068\
-    \ [r - 2^k, r) \u306E\u533A\u9593\u306B\u5206\u5272\u3057\u3066\u8A08\u7B97\n\
-    \        return self.op(self.tab[k][l], self.tab[k][r - (1 << k)])\n"
+    \ self.tab = tab = [list(arr)]\n\n        for k in range(n.bit_length() - 1):\n\
+    \            prev = tab[-1]\n            row = prev[1 << k :]\n            for\
+    \ i in range(len(row)):\n                row[i] = op(prev[i], row[i])\n      \
+    \      tab.append(row)\n\n    def query(self, l, r):\n        \"\"\"\n       \
+    \ [l, r) \u306E\u533A\u9593\u306B\u5BFE\u3059\u308B\u6F14\u7B97\u7D50\u679C\u3092\
+    \u8FD4\u3059 O(1)\n        \"\"\"\n        assert 0 <= l < r <= self.n\n     \
+    \   # 2^k <= r - l \u3092\u6E80\u305F\u3059\u6700\u5927\u306E k \u3092\u6C42\u3081\
+    \u308B\n        k = (r - l).bit_length() - 1\n        # [l, l + 2^k) \u3068 [r\
+    \ - 2^k, r) \u306E\u533A\u9593\u306B\u5206\u5272\u3057\u3066\u8A08\u7B97\n   \
+    \     return self.op(self.tab[k][l], self.tab[k][r - (1 << k)])\n"
   dependsOn: []
   isVerificationFile: false
   path: algorithm_library/python/data_structure/SparseTable.py
   requiredBy: []
-  timestamp: '2026-11-06 23:20:20+09:00'
+  timestamp: '2026-11-14 00:15:09+09:00'
   verificationStatus: LIBRARY_NO_TESTS
   verifiedWith: []
 documentation_of: algorithm_library/python/data_structure/SparseTable.py

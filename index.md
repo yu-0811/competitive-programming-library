@@ -584,6 +584,9 @@ data:
       path: library-checker-submitcode/src/math/enumerate_primes.py
       title: library-checker-submitcode/src/math/enumerate_primes.py
     - icon: ':warning:'
+      path: library-checker-submitcode/src/math/gcd_convolution.py
+      title: library-checker-submitcode/src/math/gcd_convolution.py
+    - icon: ':warning:'
       path: library-checker-submitcode/src/math/matrix_product.py
       title: library-checker-submitcode/src/math/matrix_product.py
     - icon: ':warning:'
@@ -808,6 +811,9 @@ data:
     - icon: ':heavy_check_mark:'
       path: library-checker-submitcode/math/enumerate_primes.test.py
       title: library-checker-submitcode/math/enumerate_primes.test.py
+    - icon: ':heavy_check_mark:'
+      path: library-checker-submitcode/math/gcd_convolution.test.py
+      title: library-checker-submitcode/math/gcd_convolution.test.py
     - icon: ':heavy_check_mark:'
       path: library-checker-submitcode/math/matrix_product.test.py
       title: library-checker-submitcode/math/matrix_product.test.py
