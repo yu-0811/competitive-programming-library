@@ -30,7 +30,7 @@ class SparseTable:
         self.op = op
         self.n = n = len(arr)
         # table[k][i] = i から長さ 2^k の区間に対する演算結果
-        self.tab = tab = [list(arr)] if n else []
+        self.tab = tab = [list(arr)]
 
         for k in range(n.bit_length() - 1):
             prev = tab[-1]
