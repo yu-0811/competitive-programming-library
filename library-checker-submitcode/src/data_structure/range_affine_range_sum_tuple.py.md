@@ -21,17 +21,18 @@ data:
     \ total + b * length) % mod, length\n\n\ndef composition(f, g):\n    a, b = f\n\
     \    c, d = g\n    return a * c % mod, (a * d + b) % mod\n\n\ndef main():\n  \
     \  N, Q = map(int, readline().split())\n    values = [(a, 1) for a in map(int,\
-    \ readline().split())]\n    tree = TupleLazySegtree(values, combine, (0, 0), mapping,\
-    \ composition, (1, 0))\n    ans = []\n    for _ in range(Q):\n        t, l, r,\
-    \ *rest = map(int, readline().split())\n        if t == 0:\n            tree.apply(l,\
-    \ r, tuple(rest))\n        else:\n            ans.append(str(tree.prod(l, r)[0]))\n\
-    \    sys.stdout.write(\"\\n\".join(ans) + (\"\\n\" if ans else \"\"))\n\n\nif\
-    \ __name__ == \"__main__\":\n    main()\n"
+    \ readline().split())]\n    tree = TupleLazySegtree(\n        values, combine,\
+    \ (0, 0), mapping, composition, (1, 0),\n        columns=Columns2, lazy_columns=Columns2,\n\
+    \    )\n    ans = []\n    for _ in range(Q):\n        t, l, r, *rest = map(int,\
+    \ readline().split())\n        if t == 0:\n            tree.apply(l, r, tuple(rest))\n\
+    \        else:\n            ans.append(str(tree.prod(l, r)[0]))\n    sys.stdout.write(\"\
+    \\n\".join(ans) + (\"\\n\" if ans else \"\"))\n\n\nif __name__ == \"__main__\"\
+    :\n    main()\n"
   dependsOn: []
   isVerificationFile: false
   path: library-checker-submitcode/src/data_structure/range_affine_range_sum_tuple.py
   requiredBy: []
-  timestamp: '2026-11-06 23:20:20+09:00'
+  timestamp: '2026-11-15 11:08:10+09:00'
   verificationStatus: LIBRARY_NO_TESTS
   verifiedWith: []
 documentation_of: library-checker-submitcode/src/data_structure/range_affine_range_sum_tuple.py

@@ -14,21 +14,39 @@ data:
     \                  ^^^^^^\n  File \"/opt/hostedtoolcache/PyPy/3.11.17/x64/lib/pypy3.11/site-packages/onlinejudge_verify/languages/python.py\"\
     , line 96, in bundle\n    raise NotImplementedError\nNotImplementedError\n"
   code: "#!/usr/bin/env python3\n\"\"\"Build the Python library notebook with LuaLaTeX.\"\
-    \"\"\n\nimport argparse\nimport hashlib\nimport json\nimport os\nfrom pathlib\
-    \ import Path\nimport shutil\nimport subprocess\nimport tempfile\n\nROOT = Path(__file__).resolve().parents[1]\n\
-    \n\ndef escape(text):\n    replacements = {\n        \"\\\\\": r\"\\textbackslash{}\"\
-    ,\n        \"&\": r\"\\&\",\n        \"%\": r\"\\%\",\n        \"$\": r\"\\$\"\
-    ,\n        \"#\": r\"\\#\",\n        \"_\": r\"\\_\",\n        \"{\": r\"\\{\"\
-    ,\n        \"}\": r\"\\}\",\n        \"~\": r\"\\textasciitilde{}\",\n       \
-    \ \"^\": r\"\\textasciicircum{}\",\n    }\n    return \"\".join(replacements.get(c,\
-    \ c) for c in text)\n\n\ndef main():\n    parser = argparse.ArgumentParser(description=__doc__)\n\
-    \    parser.add_argument(\n        \"--output\", type=Path, default=ROOT / \"\
-    algorithm_library/python/notebook.pdf\"\n    )\n    parser.add_argument(\"--force\"\
-    , action=\"store_true\", help=\"rebuild even if unchanged\")\n    parser.add_argument(\"\
-    --stage\", action=\"store_true\", help=\"stage the PDF for commit\")\n    args\
-    \ = parser.parse_args()\n    output = args.output.resolve()\n    source = ROOT\
-    \ / \"algorithm_library/python\"\n    exclude_file = ROOT / \"tools/notebook-exclude.txt\"\
-    \n    excluded = {\n        line.strip()\n        for line in exclude_file.read_text(encoding=\"\
+    \"\"\n\nimport argparse\nimport ast\nimport hashlib\nimport json\nimport os\n\
+    from pathlib import Path\nimport shutil\nimport subprocess\nimport tempfile\n\n\
+    ROOT = Path(__file__).resolve().parents[1]\nPARTIAL_CLASSES = {\n    \"data_structure/TupleSegtree.py\"\
+    : (\"TupleSegtree\", {\"__init__\", \"add\"}),\n    \"data_structure/TupleLazySegtree.py\"\
+    : (\n        \"TupleLazySegtree\", {\"__init__\", \"_push\", \"apply\"}\n    ),\n\
+    }\n\n\ndef notebook_code(path, relative):\n    code = path.read_text(encoding=\"\
+    utf-8\")\n    if relative.as_posix() not in PARTIAL_CLASSES:\n        return code\n\
+    \n    class_name, method_names = PARTIAL_CLASSES[relative.as_posix()]\n    cls\
+    \ = next(\n        node for node in ast.parse(code).body\n        if isinstance(node,\
+    \ ast.ClassDef) and node.name == class_name\n    )\n    lines = code.splitlines(keepends=True)\n\
+    \    # Keep the instructions, Columns classes, and target class declaration.\n\
+    \    parts = [\"\".join(lines[:cls.lineno]).rstrip()]\n    found = set()\n   \
+    \ for method in cls.body:\n        if not isinstance(method, ast.FunctionDef)\
+    \ or method.name not in method_names:\n            continue\n        start = method.lineno\
+    \ - 1\n        # Include comments immediately above the selected method.\n   \
+    \     while start > cls.lineno and lines[start - 1].lstrip().startswith(\"#\"\
+    ):\n            start -= 1\n        parts.append(\"\".join(lines[start:method.end_lineno]).rstrip())\n\
+    \        found.add(method.name)\n    if found != method_names:\n        raise\
+    \ ValueError(f\"Missing notebook methods in {relative}: {method_names - found}\"\
+    )\n    return \"\\n\\n\".join(parts) + \"\\n\"\n\n\ndef escape(text):\n    replacements\
+    \ = {\n        \"\\\\\": r\"\\textbackslash{}\",\n        \"&\": r\"\\&\",\n \
+    \       \"%\": r\"\\%\",\n        \"$\": r\"\\$\",\n        \"#\": r\"\\#\",\n\
+    \        \"_\": r\"\\_\",\n        \"{\": r\"\\{\",\n        \"}\": r\"\\}\",\n\
+    \        \"~\": r\"\\textasciitilde{}\",\n        \"^\": r\"\\textasciicircum{}\"\
+    ,\n    }\n    return \"\".join(replacements.get(c, c) for c in text)\n\n\ndef\
+    \ main():\n    parser = argparse.ArgumentParser(description=__doc__)\n    parser.add_argument(\n\
+    \        \"--output\", type=Path, default=ROOT / \"algorithm_library/python/notebook.pdf\"\
+    \n    )\n    parser.add_argument(\"--force\", action=\"store_true\", help=\"rebuild\
+    \ even if unchanged\")\n    parser.add_argument(\"--stage\", action=\"store_true\"\
+    , help=\"stage the PDF for commit\")\n    args = parser.parse_args()\n    output\
+    \ = args.output.resolve()\n    source = ROOT / \"algorithm_library/python\"\n\
+    \    exclude_file = ROOT / \"tools/notebook-exclude.txt\"\n    excluded = {\n\
+    \        line.strip()\n        for line in exclude_file.read_text(encoding=\"\
     utf-8\").splitlines()\n        if line.strip() and not line.lstrip().startswith(\"\
     #\")\n    }\n\n    def file_order(path):\n        relative = path.relative_to(source)\n\
     \        priority = (\n            0\n            if relative.parent == Path(\"\
@@ -76,24 +94,26 @@ data:
     \                category = group\n                parts.append(\n           \
     \         r\"\\section{\"\n                    + escape(group if group != \".\"\
     \ else \"Templates\")\n                    + \"}\\n\"\n                )\n   \
-    \         parts.append(r\"\\subsection{\" + escape(path.name) + \"}\\n\")\n  \
-    \          # Pygments escapes TeX characters; source code is never executed.\n\
-    \            parts.append(\n                highlight(path.read_text(encoding=\"\
-    utf-8\"), PythonLexer(), formatter)\n            )\n        parts.append(r\"\\\
-    end{document}\")\n        (work / \"notebook.tex\").write_text(\"\".join(parts),\
-    \ encoding=\"utf-8\")\n        # Two passes resolve the table of contents and\
-    \ PDF links.\n        for _ in range(2):\n            result = subprocess.run(\n\
-    \                [\n                    \"lualatex\",\n                    \"\
-    -interaction=nonstopmode\",\n                    \"-halt-on-error\",\n       \
-    \             \"notebook.tex\",\n                ],\n                cwd=work,\n\
-    \                stdout=subprocess.PIPE,\n                stderr=subprocess.STDOUT,\n\
-    \                text=True,\n                env={**os.environ, \"SOURCE_DATE_EPOCH\"\
-    : \"0\", \"FORCE_SOURCE_DATE\": \"1\"},\n            )\n            if result.returncode:\n\
-    \                raise SystemExit(result.stdout)\n        output.parent.mkdir(parents=True,\
-    \ exist_ok=True)\n        shutil.copyfile(work / \"notebook.pdf\", output)\n \
-    \   cache_path.parent.mkdir(parents=True, exist_ok=True)\n    cache_path.write_text(\n\
-    \        json.dumps({\"source\": source_hash, \"pdf\": hashlib.sha256(output.read_bytes()).hexdigest()}),\n\
-    \        encoding=\"utf-8\",\n    )\n    if args.stage:\n        subprocess.run([\"\
+    \         title = path.name\n            if relative.as_posix() in PARTIAL_CLASSES:\n\
+    \                title += \"\uFF08\u5DEE\u5206\uFF09\"\n            parts.append(r\"\
+    \\subsection{\" + escape(title) + \"}\\n\")\n            # Pygments escapes TeX\
+    \ characters; source code is never executed.\n            parts.append(\n    \
+    \            highlight(notebook_code(path, relative), PythonLexer(), formatter)\n\
+    \            )\n        parts.append(r\"\\end{document}\")\n        (work / \"\
+    notebook.tex\").write_text(\"\".join(parts), encoding=\"utf-8\")\n        # Two\
+    \ passes resolve the table of contents and PDF links.\n        for _ in range(2):\n\
+    \            result = subprocess.run(\n                [\n                   \
+    \ \"lualatex\",\n                    \"-interaction=nonstopmode\",\n         \
+    \           \"-halt-on-error\",\n                    \"notebook.tex\",\n     \
+    \           ],\n                cwd=work,\n                stdout=subprocess.PIPE,\n\
+    \                stderr=subprocess.STDOUT,\n                text=True,\n     \
+    \           env={**os.environ, \"SOURCE_DATE_EPOCH\": \"0\", \"FORCE_SOURCE_DATE\"\
+    : \"1\"},\n            )\n            if result.returncode:\n                raise\
+    \ SystemExit(result.stdout)\n        output.parent.mkdir(parents=True, exist_ok=True)\n\
+    \        shutil.copyfile(work / \"notebook.pdf\", output)\n    cache_path.parent.mkdir(parents=True,\
+    \ exist_ok=True)\n    cache_path.write_text(\n        json.dumps({\"source\":\
+    \ source_hash, \"pdf\": hashlib.sha256(output.read_bytes()).hexdigest()}),\n \
+    \       encoding=\"utf-8\",\n    )\n    if args.stage:\n        subprocess.run([\"\
     git\", \"-C\", str(ROOT), \"add\", \"--\", str(output)], check=True)\n    print(f\"\
     Created {output} ({len(files)} files)\")\n\n\nif __name__ == \"__main__\":\n \
     \   main()\n"
@@ -101,7 +121,7 @@ data:
   isVerificationFile: false
   path: tools/build_notebook.py
   requiredBy: []
-  timestamp: '2026-11-11 22:38:10+09:00'
+  timestamp: '2026-11-15 11:08:10+09:00'
   verificationStatus: LIBRARY_NO_TESTS
   verifiedWith: []
 documentation_of: tools/build_notebook.py

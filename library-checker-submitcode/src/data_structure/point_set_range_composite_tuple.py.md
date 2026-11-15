@@ -19,17 +19,17 @@ data:
     \ right):\n    a, b = left\n    c, d = right\n    return a * c % mod, (b * c +\
     \ d) % mod\n\n\ndef main():\n    N, Q = map(int, readline().split())\n    functions\
     \ = [tuple(map(int, readline().split())) for _ in range(N)]\n    tree = TupleSegtree(functions,\
-    \ compose, (1, 0))\n    ans = []\n    for _ in range(Q):\n        t, *values =\
-    \ map(int, readline().split())\n        if t == 0:\n            p, a, b = values\n\
-    \            tree.set(p, (a, b))\n        else:\n            l, r, x = values\n\
-    \            a, b = tree.prod(l, r)\n            ans.append(str((a * x + b) %\
-    \ mod))\n    sys.stdout.write(\"\\n\".join(ans) + (\"\\n\" if ans else \"\"))\n\
-    \n\nif __name__ == \"__main__\":\n    main()\n"
+    \ compose, (1, 0), columns=Columns2)\n    ans = []\n    for _ in range(Q):\n \
+    \       t, *values = map(int, readline().split())\n        if t == 0:\n      \
+    \      p, a, b = values\n            tree.set(p, (a, b))\n        else:\n    \
+    \        l, r, x = values\n            a, b = tree.prod(l, r)\n            ans.append(str((a\
+    \ * x + b) % mod))\n    sys.stdout.write(\"\\n\".join(ans) + (\"\\n\" if ans else\
+    \ \"\"))\n\n\nif __name__ == \"__main__\":\n    main()\n"
   dependsOn: []
   isVerificationFile: false
   path: library-checker-submitcode/src/data_structure/point_set_range_composite_tuple.py
   requiredBy: []
-  timestamp: '2026-11-06 23:20:20+09:00'
+  timestamp: '2026-11-15 11:08:10+09:00'
   verificationStatus: LIBRARY_NO_TESTS
   verifiedWith: []
 documentation_of: library-checker-submitcode/src/data_structure/point_set_range_composite_tuple.py
