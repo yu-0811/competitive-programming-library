@@ -1,3 +1,11 @@
+# Segtree.py を写経済みの場合の変更手順:
+# 1. 使う成分数の Columns クラスを1つ追加する（2成分なら Columns2）。
+# 2. segtree の __init__ 全体を、下の __init__ に差し替える。
+# 3. add も使う場合は、下の「変更」と付けた2行を反映する。
+# ほかのメソッドはそのまま使える。
+# 呼び出し: segtree(v, op, (0, 0), Columns2)  # op に合う単位元を渡す
+
+
 class Columns2:
     __slots__ = ("a", "b")
 
@@ -27,20 +35,16 @@ class Columns3:
         s.a[i], s.b[i], s.c[i] = x
 
 
-# 4成分以上は同じ形のクラスを用意し、この辞書に追加する。
-COLUMN_TYPES = {2: Columns2, 3: Columns3}
-
-
 class TupleSegtree:  # すべて 0-index
-    # タプルをそのまま載せるだけでいい
-    def __init__(s, v, op, e):
+    # 変更: __init__ 全体を差し替える。
+    # columns に使うクラスを直接指定する。
+    def __init__(s, v, op, e, columns):
         s.n = len(v)
         z = s.z = 1 << (max(1, s.n) - 1).bit_length()
         s.e = e = tuple(e)
         s.op = op
-        assert len(e) in COLUMN_TYPES
-        d = s.d = COLUMN_TYPES[len(e)](2 * z, e)
-        for i, value in enumerate(v, z):
+        d = s.d = columns(2 * z, e)  # [e] のリストを Columns に置き換える
+        for i, value in enumerate(v, z):  # Columns はスライス代入できないので1点ずつ
             d[i] = value
         for i in range(z - 1, 0, -1):
             d[i] = op(d[2 * i], d[2 * i + 1])
@@ -59,10 +63,10 @@ class TupleSegtree:  # すべて 0-index
     # 1 点加算（タプルの成分ごとに加算）
     def add(s, p, x):
         assert 0 <= p < s.n
-        assert len(x) == len(s.e)
+        assert len(x) == len(s.e)  # 変更: この行を追加
         d, op = s.d, s.op
         p += s.z
-        d[p] = tuple(a + b for a, b in zip(d[p], x))
+        d[p] = tuple(a + b for a, b in zip(d[p], x))  # 変更: d[p] += x を置き換える
         p >>= 1
         while p:
             d[p] = op(d[2 * p], d[2 * p + 1])

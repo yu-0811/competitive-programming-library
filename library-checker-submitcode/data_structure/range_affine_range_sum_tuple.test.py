@@ -19,6 +19,15 @@ mod = 998244353
 
 # problem: https://judge.yosupo.jp/problem/range_affine_range_sum
 # BEGIN LIBRARY: algorithm_library/python/data_structure/TupleLazySegtree.py
+# LazySegtree.py を写経済みの場合の変更手順:
+# 1. data と lazy に使う成分数の Columns クラスを追加する（同じなら1つでよい）。
+# 2. __init__ と _push 全体を、下のものに差し替える。
+# 3. apply 内の「変更」と付けた行を反映する。
+# ほかのメソッドはそのまま使える。
+# 呼び出し: lazy_segtree(v, op, e, mp, comp, ide, Columns2, Columns2)
+# Columns は取得のたびにタプルを作るため、ide との is 比較は使わず pend で管理する。
+
+
 class Columns2:
     __slots__ = ("a", "b")
 
@@ -48,13 +57,10 @@ class Columns3:
         s.a[i], s.b[i], s.c[i] = x
 
 
-# 4成分以上は同じ形のクラスを用意し、この辞書に追加する。
-COLUMN_TYPES = {2: Columns2, 3: Columns3}
-
-
 class TupleLazySegtree:
-    # タプルをそのまま載せるだけでいい
-    def __init__(s, v, op, e, mp, comp, ide):
+    # 変更: __init__ 全体を差し替える。
+    # columns は data 用、lazy_columns は lazy 用のクラスを直接指定する。
+    def __init__(s, v, op, e, mp, comp, ide, columns, lazy_columns):
         s.n = len(v)
         s.log = (max(1, s.n) - 1).bit_length()
         z = s.z = 1 << s.log
@@ -63,15 +69,15 @@ class TupleLazySegtree:
         s.op = op
         s.mp = mp
         s.comp = comp
-        assert len(e) in COLUMN_TYPES and len(ide) in COLUMN_TYPES
-        d = s.d = COLUMN_TYPES[len(e)](2 * z, e)
-        s.lz = COLUMN_TYPES[len(ide)](z, ide)
-        s.pend = [False] * z
-        for i, value in enumerate(v, z):
+        d = s.d = columns(2 * z, e)  # data のリストを Columns に置き換える
+        s.lz = lazy_columns(z, ide)  # lazy のリストを Columns に置き換える
+        s.pend = [False] * z  # 各内部ノードに未伝播のタグがあるか
+        for i, value in enumerate(v, z):  # Columns はスライス代入できないので1点ずつ
             d[i] = value
         for i in range(z - 1, 0, -1):
             d[i] = op(d[2 * i], d[2 * i + 1])
 
+    # 変更: _push 全体を差し替える。タグの有無は pend で判定する。
     def _push(s, k):
         pend = s.pend
         if not pend[k]:
@@ -152,7 +158,7 @@ class TupleLazySegtree:
         assert 0 <= l <= r <= s.n
         if l == r:
             return
-        d, lz, pend = s.d, s.lz, s.pend
+        d, lz, pend = s.d, s.lz, s.pend  # 変更: pend を追加
         op, mp, comp = s.op, s.mp, s.comp
         push, z = s._push, s.z
         l += z
@@ -169,15 +175,15 @@ class TupleLazySegtree:
             if l & 1:
                 d[l] = mp(f, d[l])
                 if l < z:
-                    lz[l] = comp(f, lz[l]) if pend[l] else f
-                    pend[l] = True
+                    lz[l] = comp(f, lz[l]) if pend[l] else f  # 変更: タグがなければ f を代入
+                    pend[l] = True  # 変更: この行を追加
                 l += 1
             if r & 1:
                 r -= 1
                 d[r] = mp(f, d[r])
                 if r < z:
-                    lz[r] = comp(f, lz[r]) if pend[r] else f
-                    pend[r] = True
+                    lz[r] = comp(f, lz[r]) if pend[r] else f  # 変更: タグがなければ f を代入
+                    pend[r] = True  # 変更: この行を追加
             l >>= 1
             r >>= 1
         for i in range(1, s.log + 1):
@@ -272,7 +278,10 @@ def composition(f, g):
 def main():
     N, Q = map(int, readline().split())
     values = [(a, 1) for a in map(int, readline().split())]
-    tree = TupleLazySegtree(values, combine, (0, 0), mapping, composition, (1, 0))
+    tree = TupleLazySegtree(
+        values, combine, (0, 0), mapping, composition, (1, 0),
+        columns=Columns2, lazy_columns=Columns2,
+    )
     ans = []
     for _ in range(Q):
         t, l, r, *rest = map(int, readline().split())

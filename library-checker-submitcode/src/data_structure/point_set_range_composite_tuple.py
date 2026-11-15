@@ -11,7 +11,7 @@ def compose(left, right):
 def main():
     N, Q = map(int, readline().split())
     functions = [tuple(map(int, readline().split())) for _ in range(N)]
-    tree = TupleSegtree(functions, compose, (1, 0))
+    tree = TupleSegtree(functions, compose, (1, 0), columns=Columns2)
     ans = []
     for _ in range(Q):
         t, *values = map(int, readline().split())

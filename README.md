@@ -8,6 +8,8 @@ PDFに載せないファイルは `tools/notebook-exclude.txt` に、`algorithm_
 
 `algorithm_library/python` 以下の `.py` ファイル（`template.py` を除く）を、カテゴリ別目次・行番号付きのA4・2段組PDFにまとめます。`ICPCtemplate.py` は収録し、カテゴリは Templates、gen、残りのカテゴリの名前順で並べます。日本語コメントと長い行の折り返しに対応しています。
 
+`TupleSegtree.py` と `TupleLazySegtree.py` は、通常版からの変更に必要な部分を元のソースから自動で抜き出し、「差分」として収録します。掲載するのは変更手順のコメント、カラムのクラス、`__init__` と変更が必要なメソッド（通常版は `add`、遅延版は `_push`・`apply`）です。
+
 コードはカラーのシンタックスハイライト付きです。必要環境は Python 3、Pygments、LuaLaTeX、LuaTeX-ja、fvextra、IPAexフォントです。Ubuntu / Debianでは次のようにインストールできます。
 
 ```sh

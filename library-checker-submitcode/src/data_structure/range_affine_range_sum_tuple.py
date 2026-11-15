@@ -21,7 +21,10 @@ def composition(f, g):
 def main():
     N, Q = map(int, readline().split())
     values = [(a, 1) for a in map(int, readline().split())]
-    tree = TupleLazySegtree(values, combine, (0, 0), mapping, composition, (1, 0))
+    tree = TupleLazySegtree(
+        values, combine, (0, 0), mapping, composition, (1, 0),
+        columns=Columns2, lazy_columns=Columns2,
+    )
     ans = []
     for _ in range(Q):
         t, l, r, *rest = map(int, readline().split())

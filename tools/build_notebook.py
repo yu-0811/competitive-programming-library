@@ -2,6 +2,7 @@
 """Build the Python library notebook with LuaLaTeX."""
 
 import argparse
+import ast
 import hashlib
 import json
 import os
@@ -11,6 +12,40 @@ import subprocess
 import tempfile
 
 ROOT = Path(__file__).resolve().parents[1]
+PARTIAL_CLASSES = {
+    "data_structure/TupleSegtree.py": ("TupleSegtree", {"__init__", "add"}),
+    "data_structure/TupleLazySegtree.py": (
+        "TupleLazySegtree", {"__init__", "_push", "apply"}
+    ),
+}
+
+
+def notebook_code(path, relative):
+    code = path.read_text(encoding="utf-8")
+    if relative.as_posix() not in PARTIAL_CLASSES:
+        return code
+
+    class_name, method_names = PARTIAL_CLASSES[relative.as_posix()]
+    cls = next(
+        node for node in ast.parse(code).body
+        if isinstance(node, ast.ClassDef) and node.name == class_name
+    )
+    lines = code.splitlines(keepends=True)
+    # Keep the instructions, Columns classes, and target class declaration.
+    parts = ["".join(lines[:cls.lineno]).rstrip()]
+    found = set()
+    for method in cls.body:
+        if not isinstance(method, ast.FunctionDef) or method.name not in method_names:
+            continue
+        start = method.lineno - 1
+        # Include comments immediately above the selected method.
+        while start > cls.lineno and lines[start - 1].lstrip().startswith("#"):
+            start -= 1
+        parts.append("".join(lines[start:method.end_lineno]).rstrip())
+        found.add(method.name)
+    if found != method_names:
+        raise ValueError(f"Missing notebook methods in {relative}: {method_names - found}")
+    return "\n\n".join(parts) + "\n"
 
 
 def escape(text):
@@ -150,10 +185,13 @@ def main():
                     + escape(group if group != "." else "Templates")
                     + "}\n"
                 )
-            parts.append(r"\subsection{" + escape(path.name) + "}\n")
+            title = path.name
+            if relative.as_posix() in PARTIAL_CLASSES:
+                title += "（差分）"
+            parts.append(r"\subsection{" + escape(title) + "}\n")
             # Pygments escapes TeX characters; source code is never executed.
             parts.append(
-                highlight(path.read_text(encoding="utf-8"), PythonLexer(), formatter)
+                highlight(notebook_code(path, relative), PythonLexer(), formatter)
             )
         parts.append(r"\end{document}")
         (work / "notebook.tex").write_text("".join(parts), encoding="utf-8")
