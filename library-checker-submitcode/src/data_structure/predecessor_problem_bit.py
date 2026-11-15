@@ -5,7 +5,7 @@
 def main():
     N, Q = map(int, readline().split())
     T = bytearray(readline().strip())
-    bit = BIT(N)
+    bit = RangeAddBIT(N)
     l = 0
     for r in range(N + 1):
         if r == N or T[r] == 48:
@@ -23,10 +23,10 @@ def main():
         elif t == 2:
             ans.append(str(T[k] - 48))
         elif t == 3:
-            x = bit.lower_bound(bit.SUM(k) + 1)
+            x = bit.lower_bound(bit._sum(k) + 1)
             ans.append(str(x if x < N else -1))
         else:
-            w = bit.SUM(k + 1)
+            w = bit._sum(k + 1)
             ans.append(str(bit.lower_bound(w) if w else -1))
     sys.stdout.write("\n".join(ans) + ("\n" if ans else ""))
 

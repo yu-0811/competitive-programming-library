@@ -1,4 +1,4 @@
-from algorithm_library.python.data_structure.BIT import fenwick_tree
+from algorithm_library.python.data_structure.BIT import BIT
 
 
 class EulerTour:
@@ -20,7 +20,7 @@ class EulerTour:
 
     def _build_fentree(s):
         n = len(s.ws)
-        s.fen = fenwick_tree(n)
+        s.fen = BIT(n)
         d = s.fen.data = s.ws[:]
         for i in range(n):
             j = i | (i + 1)

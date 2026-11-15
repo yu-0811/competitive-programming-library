@@ -4,7 +4,7 @@
 
 def main():
     N, Q = map(int, readline().split())
-    bit = BIT(N)
+    bit = RangeAddBIT(N)
     for i, value in enumerate(map(int, readline().split())):
         bit.add(i, i + 1, value)
     ans = []

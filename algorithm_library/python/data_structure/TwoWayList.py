@@ -1,48 +1,31 @@
-# 双方向連結リスト https://atcoder.jp/contests/abc344/editorial/9487
-# 挿入・削除 O(1)
-# 要素の重複不可
+# 双方向連結リスト 
+# 要素はハッシュ可能・重複不可。挿入・削除は平均 O(1)。
 
 
 class TwoWayList:
-    def __init__(self, L):
-        self.head = -1
-        self.tail = pow(10, 18)
-        self.L = [self.head] + L + [self.tail]
-        self.front, self.back = dict(), dict()
-        for i in range(len(self.L) - 1):
-            self.back[self.L[i]] = self.L[i + 1]  # xの後ろ
-            self.front[self.L[i + 1]] = self.L[i]  # xの前
+    def __init__(self, L=()):
+        self.head, self.tail = object(), object()
+        self.front = {self.tail: self.head}
+        self.back = {self.head: self.tail}
+        for x in L:
+            self.insert_front(self.tail, x)
 
-    def insert_front(self, x, y):  # xの前にyを挿入する
-        # 現在 a -> x
-        # a -> y -> x
-        a = self.front[x]
-        self.back[a] = y
-        self.front[x] = y
-        self.back[y] = x
-        self.front[y] = a
+    def insert_front(self, x, y):  # 値xの前にyを挿入する
+        self.insert_back(self.front[x], y)
 
-    def insert_back(self, x, y):  # xの直後にyを挿入する
-        # 現在 x -> b
-        # x -> y -> b
+    def insert_back(self, x, y):  # 値xの直後にyを挿入する
         b = self.back[x]
-        self.back[x] = y
-        self.front[y] = x
-        self.back[y] = b
-        self.front[b] = y
+        self.back[x] = self.front[b] = y
+        self.front[y], self.back[y] = x, b
 
-    def del_x(self, x):  # xを削除する
-        a = self.front[x]
-        b = self.back[x]
-        self.back[a] = b
-        self.front[b] = a
-        del self.front[x]
-        del self.back[x]
+    def del_x(self, x):  # 値xを削除する
+        a, b = self.front.pop(x), self.back.pop(x)
+        self.back[a], self.front[b] = b, a
 
     def res_LIST(self):  # リストを返す
-        ans = list()
-        crr = self.back[self.head]
-        while crr != self.tail:
-            ans.append(crr)
-            crr = self.back[crr]
+        ans = []
+        x = self.back[self.head]
+        while x is not self.tail:
+            ans.append(x)
+            x = self.back[x]
         return ans

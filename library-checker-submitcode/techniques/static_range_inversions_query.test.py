@@ -19,7 +19,7 @@ mod = 998244353
 
 # problem: https://judge.yosupo.jp/problem/static_range_inversions_query
 # BEGIN LIBRARY: algorithm_library/python/data_structure/BIT.py
-class BIT:
+class RangeAddBIT:
     def __init__(self, n):
         self.n = n
         self.bit = [[0] * self.n for _ in range(2)]
@@ -39,7 +39,7 @@ class BIT:
             r |= r + 1
 
     # 区間 [0, i) の和を取得
-    def SUM(self, i):
+    def _sum(self, i):
         bit0, bit1 = self.bit
         s0 = s1 = 0
         idx = i - 1
@@ -51,7 +51,7 @@ class BIT:
 
     # 区間 [l, r) の和を取得
     def range_sum(self, l, r):
-        return self.SUM(r) - self.SUM(l)
+        return self._sum(r) - self._sum(l)
 
     # a[0] + ... + a[x] >= w となる最小の x を O(log n) で求める
     # 各要素は非負であること。w <= 0 なら 0、見つからなければ n
@@ -69,14 +69,14 @@ class BIT:
             if nxt < n:
                 t0 = s0 + bit0[nxt]
                 t1 = s1 + bit1[nxt]
-                # SUM(nxt + 1) を2本のBITの累積値から復元する
+                # _sum(nxt + 1) を2本のBITの累積値から復元する
                 if t0 + t1 * (nxt + 1) < w:
                     x, s0, s1 = nxt, t0, t1
             step >>= 1
         return x + 1
 
 
-class fenwick_tree:
+class BIT:
     def __init__(self, n):
         self.n = n
         self.data = [0] * n
@@ -119,7 +119,7 @@ def mos_inversions(data, que):
     B = max(1, ceil(sqrt(1.5) * n / sqrt(q)))
 
     data = compression(data)
-    bit = fenwick_tree(max(data) + 1 if data else 0)
+    bit = BIT(max(data) + 1 if data else 0)
     add = bit.add
     prefix = bit.sum0
     inversions = size = 0

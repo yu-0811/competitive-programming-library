@@ -13,7 +13,7 @@ def main():
         G[u].append(v)
         G[v].append(u)
     tin, tout, order = euler_tour(G, n - 1)
-    bit = fenwick_tree(n)
+    bit = BIT(n)
     data = bit.data = [values[n - 1 - v] for v in order]
     for i in range(n):
         j = i | (i + 1)

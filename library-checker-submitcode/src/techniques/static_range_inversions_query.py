@@ -14,7 +14,7 @@ def mos_inversions(data, que):
     B = max(1, ceil(sqrt(1.5) * n / sqrt(q)))
 
     data = compression(data)
-    bit = fenwick_tree(max(data) + 1 if data else 0)
+    bit = BIT(max(data) + 1 if data else 0)
     add = bit.add
     prefix = bit.sum0
     inversions = size = 0

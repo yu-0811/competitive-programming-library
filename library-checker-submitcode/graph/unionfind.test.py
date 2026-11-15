@@ -30,11 +30,8 @@ class UnionFind:
         # parents*-1 がその木のサイズ(要素数)
         s.parents = [-1] * n
 
-    # 頂点xの根を返す関数
-    # 根まで上にたどる
+    # 頂点xの根を返す関数 O(α(N))  
     # 経路圧縮で x から根までに通る頂点をすべて根につなぎなおす
-    # 経路圧縮によってこの関数が返す値は変わらない(根を返すから)
-    # O(α(N))
     def root(s, x):
         parents = s.parents
         r = x
@@ -49,7 +46,7 @@ class UnionFind:
         x = s.root(x)
         y = s.root(y)
         if x == y:
-            return x  # x,y が同じグループならなにもしない
+            return x  
         # x,y は根であり、parents の値*-1 がその木のサイズ(要素数)
         # サイズが小さい方につなげる (union by size)
         if s.parents[x] > s.parents[y]:
