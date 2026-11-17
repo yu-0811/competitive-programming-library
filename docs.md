@@ -77,8 +77,9 @@
     - L 以上で r ≡ x (mod m) を満たす最小の整数 x を求める
 
 - modComb.py
-    - 前計算 O(n)、クエリ O(1) で nCk, nHk を求める
-    - 前計算 O(k)、クエリ O(k) で nCk を求める
+    - 必要なクラスだけ写経する。以下の 2 種類は素数 mod 用（前計算の上限 < mod）
+    - 前計算 O(n + log mod)、クエリ O(1) で nCk, nHk を求める
+    - 前計算 O(k + log mod)、クエリ O(min(k, n-k)) で nCk を求める（n >= mod も可）
     - 任意 mod (素数でなくていい) で mod 上の nCk を O(N^2) で求める (パスカルの三角形)
 
 - factorization.py

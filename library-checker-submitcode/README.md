@@ -40,6 +40,12 @@ python3 library-checker-submitcode/generate.py --check
 展開します。同じライブラリは一度だけ埋め込まれます。
 内部ライブラリの import には絶対パスを使い、別名や `*` は使いません。
 
+同じファイルに写経用の同名クラスが複数ある場合は、
+`# include: algorithm_library/python/math/modComb.py:Comb:1` のように
+クラス名と定義順（1 始まり）を指定して、そのクラスだけを埋め込めます。
+クラス内のコメントも残ります。クラス外の import や補助定義が必要な場合は、
+別途含めてください。
+
 ```python
 # problem: https://judge.yosupo.jp/problem/unionfind
 # include: algorithm_library/python/graph/UnionFind.py
@@ -56,7 +62,7 @@ if __name__ == "__main__":
 
 ## 追加済みの提出コード
 
-35 個のライブラリを、34 問・43 本の提出コードで確認できます。
+36 個のライブラリを、35 問・45 本の提出コードで確認できます。
 同じ問題に複数の実装を用意しているものもあります。
 
 | ライブラリ | 提出コード | Library Checker 問題 |
@@ -95,6 +101,8 @@ if __name__ == "__main__":
 | `string/RollingHash.py`（クラス版） | [string/longest_common_substring_rollinghash.test.py](string/longest_common_substring_rollinghash.test.py) | [Longest Common Substring](https://judge.yosupo.jp/problem/longest_common_substring) |
 | `string/Z_algo.py` | [string/zalgorithm.test.py](string/zalgorithm.test.py) | [Z Algorithm](https://judge.yosupo.jp/problem/zalgorithm) |
 | `math/FFT.py` | [math/convolution_mod.test.py](math/convolution_mod.test.py) | [Convolution](https://judge.yosupo.jp/problem/convolution_mod) |
+| `math/modComb.py`（階乗表版） | [math/binomial_coefficient_prime_mod.test.py](math/binomial_coefficient_prime_mod.test.py) | [Binomial Coefficient (Prime Mod)](https://judge.yosupo.jp/problem/binomial_coefficient_prime_mod) |
+| `math/modComb.py`（小さい k 用・大きい k は階乗表の `H` を使用） | [math/binomial_coefficient_prime_mod_small_k.test.py](math/binomial_coefficient_prime_mod_small_k.test.py) | [Binomial Coefficient (Prime Mod)](https://judge.yosupo.jp/problem/binomial_coefficient_prime_mod) |
 | `math/MatrixPower.py` | [math/matrix_product.test.py](math/matrix_product.test.py) | [Matrix Product](https://judge.yosupo.jp/problem/matrix_product) |
 | `math/MatrixPower.py` | [math/pow_of_matrix.test.py](math/pow_of_matrix.test.py) | [Power of Matrix](https://judge.yosupo.jp/problem/pow_of_matrix) |
 | `math/MatrixPower.py`（`vec_mul`） | [math/pow_of_matrix_vec.test.py](math/pow_of_matrix_vec.test.py) | [Power of Matrix](https://judge.yosupo.jp/problem/pow_of_matrix) |

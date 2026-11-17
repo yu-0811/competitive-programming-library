@@ -19,12 +19,26 @@ PROBLEM = re.compile(
 def render(source):
     included = set()
 
-    def expand(path):
+    def expand(path, selection=""):
         path = path.resolve()
-        if path in included:
+        key = (path, selection)
+        if key in included:
             return ""
-        included.add(path)
+        included.add(key)
         content = path.read_text(encoding="utf-8").rstrip()
+        if selection:
+            name, _, occurrence = selection.partition(":")
+            definitions = [
+                node
+                for node in ast.parse(content).body
+                if isinstance(node, ast.ClassDef) and node.name == name
+            ]
+            index = int(occurrence or "1") - 1
+            if not 0 <= index < len(definitions):
+                raise ValueError(f"Class not found in {path}: {selection}")
+            node = definitions[index]
+            start = node.decorator_list[0].lineno if node.decorator_list else node.lineno
+            content = "\n".join(content.splitlines()[start - 1 : node.end_lineno])
         lines = content.splitlines(keepends=True)
         chunks = []
         cursor = 0
@@ -50,8 +64,8 @@ def render(source):
         )
 
     def include(match):
-        path = ROOT / match.group(1).strip()
-        return expand(path)
+        path, _, selection = match.group(1).strip().partition(":")
+        return expand(ROOT / path, selection)
 
     template = (BASE / "template.py").read_text(encoding="utf-8").rstrip()
     body = INCLUDE.sub(include, source.read_text(encoding="utf-8")).rstrip()

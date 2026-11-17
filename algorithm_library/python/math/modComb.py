@@ -5,63 +5,49 @@
 class Comb:
     def __init__(self, n, mod):
         self.mod = mod
-        self.n = n
-        size = max(2, n + 1)
-        fact = self.fact = [1] * size
-        factinv = self.factinv = [1] * size
-        inv = self.inv = [0, 1] + [0] * (size - 2)
+        fact = self.fact = [1] * (n + 1)
+        factinv = self.factinv = [1] * (n + 1)
         for i in range(2, n + 1):
             fact[i] = fact[i - 1] * i % mod
         factinv[n] = pow(fact[n], -1, mod)
         for i in range(n, 0, -1):
             factinv[i - 1] = factinv[i] * i % mod
-        for i in range(2, n + 1):
-            inv[i] = factinv[i] * fact[i - 1] % mod
 
-    def C(self, n, k):  # nCk % modを返す
-        assert n <= self.n
-        if (k < 0 or n < 0) or (n < k):
+    def C(self, n, k):  # nCk % modを返す（n <= 前計算の上限）
+        if not 0 <= k <= n:
             return 0
-        if k == 1:
-            return n
-        k = min(k, n - k)
-        return (
-            self.fact[n] * self.factinv[k] % self.mod * self.factinv[n - k] % self.mod
-        )
+        mod = self.mod
+        return self.fact[n] * self.factinv[k] % mod * self.factinv[n - k] % mod
 
     # 重複組合せ nHr % modを返す
     def H(self, n, r):
-        return self.C(n + r - 1, r)
+        return self.C(n + r - 1, r) if n else int(r == 0)
 
 
-# O(k) 前計算
+# O(k + log mod) 前計算
 # O(min(k, n-k)) で nCk を計算（n が大きいときでも使える）
 class Comb:
     def __init__(self, k, mod):
-        self.k = k
         self.mod = mod
-        self.fact_inv = [0] * (k + 1)
-        self.inv = [0] * (k + 1)
-        self.fact_inv[0] = 1
-        if k >= 1:
-            self.fact_inv[1] = 1
-            self.inv[1] = 1
-
+        f = self.fact_inv = [1] * (k + 1)
         for i in range(2, k + 1):
-            self.inv[i] = mod - self.inv[mod % i] * (mod // i) % mod
-            self.fact_inv[i] = self.fact_inv[i - 1] * self.inv[i] % mod
+            f[i] = f[i - 1] * i % mod
+        f[k] = pow(f[k], -1, mod)
+        for i in range(k, 0, -1):
+            f[i - 1] = f[i] * i % mod
 
-    def nCk(self, n, k):
-        if k < 0 or k > n:
+    def nCk(self, n, k):  # min(k, n-k) <= 前計算の上限
+        if not 0 <= k <= n:
             return 0
         k = min(k, n - k)
-        if k > self.k:
-            raise ValueError("precomputed k is too small")
         mod = self.mod
-        ans = 1
+        ans = self.fact_inv[k]
+        n %= mod
+        if n < k:
+            return 0
         for i in range(k):
             ans = ans * (n - i) % mod
-        return ans * self.fact_inv[k] % mod
+        return ans
 
 
 class PascalsTriangle:
