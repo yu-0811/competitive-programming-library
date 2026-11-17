@@ -10,9 +10,7 @@ def extGCD(a, b) -> tuple[int, int, int]:
     #   = b * s + (a - a//b * b) * t
     #   = a * t + b * s + (-a//b * b * t)
     #   = a * t + b * (s - a//b * t)
-    x = t
-    y = s - a // b * t
-    return g, x, y
+    return g, t, s - a // b * t
 
 
 # ax ≡ 1 (mod m) を満たす x (a の逆元) を求める

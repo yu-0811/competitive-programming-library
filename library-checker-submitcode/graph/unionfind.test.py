@@ -27,18 +27,18 @@ class UnionFind:
         s.n = n
         # 各頂点の親(1個上の要素)を記入
         # その頂点が根なら -1 以下の値
-        # parents*-1 がその木のサイズ(要素数)
-        s.parents = [-1] * n
+        # p*-1 がその木のサイズ(要素数)
+        s.p = [-1] * n
 
     # 頂点xの根を返す関数 O(α(N))  
     # 経路圧縮で x から根までに通る頂点をすべて根につなぎなおす
     def root(s, x):
-        parents = s.parents
+        p = s.p
         r = x
-        while parents[r] >= 0:
-            r = parents[r]
+        while p[r] >= 0:
+            r = p[r]
         while x != r:
-            parents[x], x = r, parents[x]
+            p[x], x = r, p[x]
         return r
 
     # マージ後の根を返す O(α(N))
@@ -47,17 +47,17 @@ class UnionFind:
         y = s.root(y)
         if x == y:
             return x  
-        # x,y は根であり、parents の値*-1 がその木のサイズ(要素数)
+        # x,y は根であり、p の値*-1 がその木のサイズ(要素数)
         # サイズが小さい方につなげる (union by size)
-        if s.parents[x] > s.parents[y]:
+        if s.p[x] > s.p[y]:
             x, y = y, x  # x が小さい方になるようにする
-        s.parents[x] += s.parents[y]  # サイズを更新
-        s.parents[y] = x
+        s.p[x] += s.p[y]  # サイズを更新
+        s.p[y] = x
         return x
 
     # 要素xが属するグループの要素数を返す O(α(N))
     def size(s, x):
-        return -s.parents[s.root(x)]
+        return -s.p[s.root(x)]
 
     # x,yが同じグループか(連結か)を返す関数 O(α(N))
     def isSame(s, x, y):
@@ -70,7 +70,7 @@ class UnionFind:
 
     # すべての根の要素をリストで返す O(N)
     def roots(s):
-        return [i for i, x in enumerate(s.parents) if x < 0]
+        return [i for i, x in enumerate(s.p) if x < 0]
 
     # グループの数を返す O(N)
     def group_count(s):

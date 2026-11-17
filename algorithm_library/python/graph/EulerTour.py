@@ -10,8 +10,6 @@ class EulerTour:
         s._out = [-1] * (N + 1)
         s.m = 0
         s.vs, s.ws, s.es, s.depth = [], [], [], []
-        s.base = 1 << N.bit_length()
-        s.mask = s.base - 1
 
     def add_edge(s, u, v, w):
         s.m += 1
@@ -21,7 +19,7 @@ class EulerTour:
     def _build_fentree(s):
         n = len(s.ws)
         s.fen = BIT(n)
-        d = s.fen.data = s.ws[:]
+        d = s.fen.d = s.ws[:]
         for i in range(n):
             j = i | (i + 1)
             if j < n:

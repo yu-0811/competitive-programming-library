@@ -5,11 +5,10 @@ class ZobristHash:
     # 比較したい配列を引数に渡す
     def __init__(self, A: list, B: list) -> None:
         MAX = (1 << 61) - 1
-        self.hash = dict()
-        for a in A:
-            self.hash[a] = randint(1, MAX)
-        for b in B:
-            self.hash[b] = randint(1, MAX)
+        h = self.hash = {}
+        for x in A + B:
+            if x not in h:
+                h[x] = randint(1, MAX)
         # ハッシュを取る
         self.hashA, self.hashB = [0], [0]
         setA, setB = set(), set()

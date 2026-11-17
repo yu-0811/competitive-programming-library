@@ -14,7 +14,7 @@ def main():
         G[v].append(u)
     tin, tout, order = euler_tour(G, n - 1)
     bit = BIT(n)
-    data = bit.data = [values[n - 1 - v] for v in order]
+    data = bit.d = [values[n - 1 - v] for v in order]
     for i in range(n):
         j = i | (i + 1)
         if j < n:

@@ -21,13 +21,13 @@ mod = 998244353
 # BEGIN LIBRARY: algorithm_library/python/graph/EulerTour.py
 # BEGIN LIBRARY: algorithm_library/python/data_structure/BIT.py
 class RangeAddBIT:
-    def __init__(self, n):
-        self.n = n
-        self.bit = [[0] * self.n for _ in range(2)]
+    def __init__(s, n):
+        s.n = n
+        s.bit = [[0] * s.n for _ in range(2)]
 
-    def add(self, l, r, x):  # [l,r)にxを加算
-        bit0, bit1 = self.bit
-        n = self.n
+    def add(s, l, r, x):  # [l,r)にxを加算
+        bit0, bit1 = s.bit
+        n = s.n
         c = -x * l
         while l < n:
             bit0[l] += c
@@ -40,8 +40,8 @@ class RangeAddBIT:
             r |= r + 1
 
     # 区間 [0, i) の和を取得
-    def _sum(self, i):
-        bit0, bit1 = self.bit
+    def _sum(s, i):
+        bit0, bit1 = s.bit
         s0 = s1 = 0
         idx = i - 1
         while idx >= 0:
@@ -51,17 +51,17 @@ class RangeAddBIT:
         return s0 + s1 * i
 
     # 区間 [l, r) の和を取得
-    def range_sum(self, l, r):
-        return self._sum(r) - self._sum(l)
+    def range_sum(s, l, r):
+        return s._sum(r) - s._sum(l)
 
     # a[0] + ... + a[x] >= w となる最小の x を O(log n) で求める
     # 各要素は非負であること。w <= 0 なら 0、見つからなければ n
-    def lower_bound(self, w):
+    def lower_bound(s, w):
         if w <= 0:
             return 0
 
-        bit0, bit1 = self.bit
-        n = self.n
+        bit0, bit1 = s.bit
+        n = s.n
         x = -1
         s0 = s1 = 0
         step = 1 << n.bit_length()
@@ -78,27 +78,27 @@ class RangeAddBIT:
 
 
 class BIT:
-    def __init__(self, n):
-        self.n = n
-        self.data = [0] * n
+    def __init__(s, n):
+        s.n = n
+        s.d = [0] * n
 
-    def add(self, p, x):
-        assert 0 <= p < self.n
-        data = self.data
-        while p < self.n:
-            data[p] += x
+    def add(s, p, x):
+        assert 0 <= p < s.n
+        d = s.d
+        while p < s.n:
+            d[p] += x
             p |= p + 1
 
-    def sum0(self, r):
-        s = 0
+    def sum0(s, r):
+        res = 0
         while r:
-            s += self.data[r - 1]
+            res += s.d[r - 1]
             r &= r - 1
-        return s
+        return res
 
-    def sum(self, l, r):
-        assert 0 <= l <= r <= self.n
-        return self.sum0(r) - self.sum0(l)
+    def sum(s, l, r):
+        assert 0 <= l <= r <= s.n
+        return s.sum0(r) - s.sum0(l)
 # END LIBRARY
 
 
@@ -111,8 +111,6 @@ class EulerTour:
         s._out = [-1] * (N + 1)
         s.m = 0
         s.vs, s.ws, s.es, s.depth = [], [], [], []
-        s.base = 1 << N.bit_length()
-        s.mask = s.base - 1
 
     def add_edge(s, u, v, w):
         s.m += 1
@@ -122,7 +120,7 @@ class EulerTour:
     def _build_fentree(s):
         n = len(s.ws)
         s.fen = BIT(n)
-        d = s.fen.data = s.ws[:]
+        d = s.fen.d = s.ws[:]
         for i in range(n):
             j = i | (i + 1)
             if j < n:

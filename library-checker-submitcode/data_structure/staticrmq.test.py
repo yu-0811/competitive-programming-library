@@ -20,16 +20,16 @@ mod = 998244353
 # problem: https://judge.yosupo.jp/problem/staticrmq
 # BEGIN LIBRARY: algorithm_library/python/data_structure/SparseTable.py
 class SparseTable:
-    def __init__(self, arr, op):
+    def __init__(s, arr, op):
         """
         arr: 配列
         op: 演算 (結合則、冪等則を満たすこと)
         時間計算量: O(n log n) 構築, O(1) クエリ
         """
-        self.op = op
-        self.n = n = len(arr)
+        s.op = op
+        s.n = n = len(arr)
         # table[k][i] = i から長さ 2^k の区間に対する演算結果
-        self.tab = tab = [arr[:]]
+        s.tab = tab = [arr[:]]
 
         for k in range(n.bit_length() - 1):
             prev = tab[-1]
@@ -38,12 +38,12 @@ class SparseTable:
                 row[i] = op(prev[i], row[i])
             tab.append(row)
 
-    def query(self, l, r):
-        assert 0 <= l < r <= self.n
+    def query(s, l, r):
+        assert 0 <= l < r <= s.n
         # 2^k <= r - l を満たす最大の k を求める
         k = (r - l).bit_length() - 1
         # [l, l + 2^k) と [r - 2^k, r) の区間に分割して計算
-        return self.op(self.tab[k][l], self.tab[k][r - (1 << k)])
+        return s.op(s.tab[k][l], s.tab[k][r - (1 << k)])
 # END LIBRARY
 
 

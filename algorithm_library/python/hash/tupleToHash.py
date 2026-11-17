@@ -8,15 +8,11 @@ MASK = (1 << 22) - 1
 
 
 def to_hash(x, y, z):
-    res = 0
-    res |= x << 44
-    res |= y << 22
-    res |= z
-    return res
+    return (x << 44) | (y << 22) | z
 
 
 def rev(h):
-    x = (h >> 44) & mask
-    y = (h >> 22) & mask
-    z = h & mask
+    x = (h >> 44) & MASK
+    y = (h >> 22) & MASK
+    z = h & MASK
     return x, y, z

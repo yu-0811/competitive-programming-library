@@ -4,11 +4,7 @@ Line = tuple[Point, Point]
 
 # 符号を返す。正: 1, 負: -1, 0: 0
 def sgn(x: int) -> int:
-    if x > 0:
-        return 1
-    if x < 0:
-        return -1
-    return 0
+    return (x > 0) - (x < 0)
 
 
 # 2点・2ベクトルが等しいか

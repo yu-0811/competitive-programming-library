@@ -62,7 +62,7 @@ if __name__ == "__main__":
 
 ## 追加済みの提出コード
 
-36 個のライブラリを、35 問・45 本の提出コードで確認できます。
+36 個のライブラリを、35 問・47 本の提出コードで確認できます。
 同じ問題に複数の実装を用意しているものもあります。
 
 | ライブラリ | 提出コード | Library Checker 問題 |
@@ -109,6 +109,8 @@ if __name__ == "__main__":
 | `math/mobius.py` | [math/bitwise_and_convolution.test.py](math/bitwise_and_convolution.test.py) | [Bitwise And Convolution](https://judge.yosupo.jp/problem/bitwise_and_convolution) |
 | `math/PIE.py` | [math/gcd_convolution.test.py](math/gcd_convolution.test.py) | [Gcd Convolution](https://judge.yosupo.jp/problem/gcd_convolution) |
 | `math/factorization.py`（素数列挙） | [math/enumerate_primes.test.py](math/enumerate_primes.test.py) | [Enumerate Primes](https://judge.yosupo.jp/problem/enumerate_primes) |
+| `math/factorization.py`（最小素因数表・大きいケースは奇数の篩） | [math/enumerate_primes_spf.test.py](math/enumerate_primes_spf.test.py) | [Enumerate Primes](https://judge.yosupo.jp/problem/enumerate_primes) |
+| `math/factorization.py`（素数フラグ表・大きいケースは奇数の篩） | [math/enumerate_primes_eratosthenes.test.py](math/enumerate_primes_eratosthenes.test.py) | [Enumerate Primes](https://judge.yosupo.jp/problem/enumerate_primes) |
 | `math/AngularSort.py` + `techniques/CmpSort.py` | [math/sort_points_by_argument.test.py](math/sort_points_by_argument.test.py) | [Sort Points by Argument](https://judge.yosupo.jp/problem/sort_points_by_argument) |
 | `techniques/2-SAT.py` | [techniques/two_sat.test.py](techniques/two_sat.test.py) | [2 Sat](https://judge.yosupo.jp/problem/two_sat) |
 | `techniques/Compression.py` + `data_structure/BIT.py`（Mo テンプレートの具体化） | [techniques/static_range_inversions_query.test.py](techniques/static_range_inversions_query.test.py) | [Static Range Inversions Query](https://judge.yosupo.jp/problem/static_range_inversions_query) |

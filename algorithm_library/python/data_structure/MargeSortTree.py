@@ -5,13 +5,13 @@ from bisect import bisect_left, bisect_right
 class MergeSortTree:
     """構築 O(n log n)、区間内の個数クエリ O(log n)。"""
 
-    def __init__(self, data):
-        self.n = len(data)
-        self.size = size = 1 << max(0, self.n - 1).bit_length()
-        self.tree = tree = [[]] * (2 * size)
-        self._left_prefix = links = [None] * size
+    def __init__(s, data):
+        s.n = len(data)
+        s.size = size = 1 << max(0, s.n - 1).bit_length()
+        s.tree = tree = [[]] * (2 * size)
+        s.link = links = [None] * size
 
-        tree[size : size + self.n] = [[x] for x in data]
+        tree[size : size + s.n] = [[x] for x in data]
         # 子ノードの要素をソートしてすべて持つように構築
         for i in range(size - 1, 0, -1):
             left = tree[2 * i]
@@ -27,8 +27,8 @@ class MergeSortTree:
                 prefix.append(rank)
             links[i] = prefix
 
-    def _count(self, l, r, lo, hi, node, height):
-        links = self._left_prefix
+    def _count(s, l, r, lo, hi, node, height):
+        links = s.link
         width = 1 << height
         mask = width - 1
         # 両端の累積個数を同じループで求め、その差を取る。
@@ -53,27 +53,27 @@ class MergeSortTree:
         return res
 
     # 区間 [l, r) で値が x 以下の要素数を求める
-    def query_leq(self, l, r, x):
+    def query_leq(s, l, r, x):
         if l >= r:
             return 0
         # 両端の葉を含む最小ノードでだけ二分探索する。
         height = (l ^ (r - 1)).bit_length()
-        node = (l + self.size) >> height
-        values = self.tree[node]
+        node = (l + s.size) >> height
+        values = s.tree[node]
         hi = bisect_right(values, x)
         if hi == len(values):
             return r - l
-        return self._count(l, r, 0, hi, node, height)
+        return s._count(l, r, 0, hi, node, height)
 
     # 区間[l, r) で値が a 以上 b 未満の要素数を求める
-    def query_range(self, l, r, a, b):
+    def query_range(s, l, r, a, b):
         if l >= r:
             return 0
         height = (l ^ (r - 1)).bit_length()
-        node = (l + self.size) >> height
-        values = self.tree[node]
+        node = (l + s.size) >> height
+        values = s.tree[node]
         lo = bisect_left(values, a)
         hi = bisect_left(values, b)
         if not lo and hi == len(values):
             return r - l
-        return self._count(l, r, lo, hi, node, height)
+        return s._count(l, r, lo, hi, node, height)
