@@ -77,10 +77,12 @@ def rerooting(g, e, merge, add_vertex, add_edge=lambda x, w: x):
 # 状態は (距離の総和, 頂点数)。
 # def merge(a, b):
 #     return (a[0] + b[0], a[1] + b[1])
-# def add_vertex(x, v):
-#     return (x[0], x[1] + 1)
 # def add_edge(x, w):
 #     return (x[0] + w * x[1], x[1])
+
+# x を構成する頂点集合 S と v を結ぶ辺の情報まで反映された (add_edge後の) vとSが隣接する辺の情報まで入った x が渡されてる
+# def add_vertex(x, v):
+#     return (x[0], x[1] + 1)
 # dp = rerooting(g, (0, 0), merge, add_vertex, add_edge)
 # ans = [x[0] for x in dp]
 # END LIBRARY

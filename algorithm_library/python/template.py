@@ -1,5 +1,5 @@
 # library: https://github.com/yu-0811/competitive-programming-library
-import sys,math;sys.setrecursionlimit(10**9)
+import sys,math;sys.setrecursionlimit(10**8)
 # import pypyjit
 # pypyjit.set_param('max_unroll_recursion=-1')
 from collections import defaultdict,deque

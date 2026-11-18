@@ -62,7 +62,7 @@ if __name__ == "__main__":
 
 ## 追加済みの提出コード
 
-36 個のライブラリを、35 問・47 本の提出コードで確認できます。
+37 個のライブラリを、36 問・49 本の提出コードで確認できます。
 同じ問題に複数の実装を用意しているものもあります。
 
 | ライブラリ | 提出コード | Library Checker 問題 |
@@ -79,12 +79,14 @@ if __name__ == "__main__":
 | `graph/Rerooting.py` | [graph/tree_path_composite_sum.test.py](graph/tree_path_composite_sum.test.py) | [Tree Path Composite Sum](https://judge.yosupo.jp/problem/tree_path_composite_sum) |
 | `graph/cycle_detect.py` | [graph/cycle_detection_undirected.test.py](graph/cycle_detection_undirected.test.py) | [Cycle Detection (Undirected)](https://judge.yosupo.jp/problem/cycle_detection_undirected) |
 | `graph/maxflow.py` | [graph/bipartitematching.test.py](graph/bipartitematching.test.py) | [Bipartite Matching](https://judge.yosupo.jp/problem/bipartitematching) |
+| `data_structure/TupleHeap.py`（距離だけで比較） | [graph/shortest_path_tuple_heap.test.py](graph/shortest_path_tuple_heap.test.py) | [Shortest Path](https://judge.yosupo.jp/problem/shortest_path) |
 | `data_structure/BIT.py` | [data_structure/point_add_range_sum_bit.test.py](data_structure/point_add_range_sum_bit.test.py) | [Point Add Range Sum](https://judge.yosupo.jp/problem/point_add_range_sum) |
 | `data_structure/BIT.py` | [data_structure/predecessor_problem_bit.test.py](data_structure/predecessor_problem_bit.test.py) | [Predecessor Problem](https://judge.yosupo.jp/problem/predecessor_problem) |
 | `data_structure/BucketList.py` | [data_structure/deque_bucket_list.test.py](data_structure/deque_bucket_list.test.py) | [Deque](https://judge.yosupo.jp/problem/deque) |
 | `data_structure/SortedSet.py` | [data_structure/ordered_set.test.py](data_structure/ordered_set.test.py) | [Ordered Set](https://judge.yosupo.jp/problem/ordered_set) |
 | `data_structure/SortedMultiset.py` | [data_structure/ordered_set_multiset.test.py](data_structure/ordered_set_multiset.test.py) | [Ordered Set](https://judge.yosupo.jp/problem/ordered_set) |
 | `data_structure/SortedMultiset.py` | [data_structure/double_ended_priority_queue_multiset.test.py](data_structure/double_ended_priority_queue_multiset.test.py) | [Double-Ended Priority Queue](https://judge.yosupo.jp/problem/double_ended_priority_queue) |
+| `data_structure/TupleHeap.py`（先頭1・2成分で比較） | [data_structure/double_ended_priority_queue_tuple_heap.test.py](data_structure/double_ended_priority_queue_tuple_heap.test.py) | [Double-Ended Priority Queue](https://judge.yosupo.jp/problem/double_ended_priority_queue) |
 | `data_structure/Segtree.py` | [data_structure/point_add_range_sum_segtree.test.py](data_structure/point_add_range_sum_segtree.test.py) | [Point Add Range Sum](https://judge.yosupo.jp/problem/point_add_range_sum) |
 | `data_structure/Segtree.py` | [data_structure/point_set_range_composite.test.py](data_structure/point_set_range_composite.test.py) | [Point Set Range Composite](https://judge.yosupo.jp/problem/point_set_range_composite) |
 | `data_structure/Segtree.py`（左右の境界探索） | [data_structure/predecessor_problem_segtree.test.py](data_structure/predecessor_problem_segtree.test.py) | [Predecessor Problem](https://judge.yosupo.jp/problem/predecessor_problem) |

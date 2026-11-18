@@ -4,7 +4,7 @@ def euler_tour(G, r=0):
     tin: 各頂点を訪れた時刻
     tout: 各頂点から帰る時刻
     od: 行きがけ順に頂点を並べた列
-    部分木 v = od[tin[v]:tout[v]]（v 自身を含む）
+    部分木 v = od[tin[v]:tout[v])（v 自身を含む）
     """
     tin = [-1] * len(G)
     tout = [-1] * len(G)
@@ -18,7 +18,7 @@ def euler_tour(G, r=0):
             tin[v] = len(od)
             od.append(v)
             st.append(~v)
-            for u in reversed(G[v]):
+            for u in G[v]:
                 if tin[u] < 0:
                     st.append(u)
     return tin, tout, od

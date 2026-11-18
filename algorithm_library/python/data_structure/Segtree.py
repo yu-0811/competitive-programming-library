@@ -1,6 +1,3 @@
-from warnings import warn
-
-
 class segtree:  # すべて 0-index
     def __init__(s, v, op, e):
         s.n = len(v)
@@ -14,7 +11,7 @@ class segtree:  # すべて 0-index
 
     # 1 点更新
     def set(s, p, x):
-        assert 0 <= p and p < s.n
+        assert 0 <= p < s.n
         d, op = s.d, s.op
         p += s.z
         d[p] = x
@@ -25,15 +22,12 @@ class segtree:  # すべて 0-index
 
     # 元の配列の p 番目の要素を取得
     def get(s, p):
-        assert 0 <= p and p < s.n
+        assert 0 <= p < s.n
         return s.d[p + s.z]
 
     # [l,r) の演算結果を返す
     def prod(s, l, r):
-        assert 0 <= l and l <= r and r <= s.n
-        if l == r:
-            warn("l=r in prod(l,r)")
-            return s.e
+        assert 0 <= l <= r <= s.n
         d, op = s.d, s.op
         sml = smr = s.e
         l += s.z
@@ -50,7 +44,7 @@ class segtree:  # すべて 0-index
     
     # option: 1 点加算
     def add(s, p, x):
-        assert 0 <= p and p < s.n
+        assert 0 <= p < s.n
         d, op = s.d, s.op
         p += s.z
         d[p] += x

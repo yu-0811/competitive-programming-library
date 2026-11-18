@@ -53,8 +53,6 @@ class lazy_segtree:  # すべて 0-index
     # 区間 [l,r) の演算結果を返す
     def prod(s, l, r):
         assert 0 <= l <= r <= s.n
-        if l == r:
-            return s.e
         d, op, push = s.d, s.op, s._push
         l += s.z
         r += s.z

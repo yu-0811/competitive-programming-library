@@ -102,8 +102,9 @@
 ## data_structure
 
 - TupleHeap.py / PackedTupleHeap.py
-    - 任意の要素数に対応する写経用の最小ヒープ。本体は成分分離型 54 行、整数符号化型 39 行
-    - [使い方・PyPy / CPython での速度測定](documents/algo_library/data_structure/TupleHeap.md)
+    - TupleHeap はタプルの先頭 k 成分だけを比較する最小ヒープ。後続のデータは比較しない
+    - PackedTupleHeap は整数タプルの全成分を符号化して比較する最小ヒープ
+    - [使い方・計算量・Library Checker での確認](documents/algo_library/data_structure/TupleHeap.md)
 
 ## techniques
 
