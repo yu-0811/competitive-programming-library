@@ -77,8 +77,9 @@
     - L 以上で r ≡ x (mod m) を満たす最小の整数 x を求める
 
 - modComb.py
-    - 前計算 O(n)、クエリ O(1) で nCk, nHk を求める
-    - 前計算 O(k)、クエリ O(k) で nCk を求める
+    - 必要なクラスだけ写経する。以下の 2 種類は素数 mod 用（前計算の上限 < mod）
+    - 前計算 O(n + log mod)、クエリ O(1) で nCk, nHk を求める
+    - 前計算 O(k + log mod)、クエリ O(min(k, n-k)) で nCk を求める（n >= mod も可）
     - 任意 mod (素数でなくていい) で mod 上の nCk を O(N^2) で求める (パスカルの三角形)
 
 - factorization.py
@@ -101,8 +102,9 @@
 ## data_structure
 
 - TupleHeap.py / PackedTupleHeap.py
-    - 任意の要素数に対応する写経用の最小ヒープ。本体は成分分離型 54 行、整数符号化型 39 行
-    - [使い方・PyPy / CPython での速度測定](documents/algo_library/data_structure/TupleHeap.md)
+    - TupleHeap はタプルの先頭 k 成分だけを比較する最小ヒープ。後続のデータは比較しない
+    - PackedTupleHeap は整数タプルの全成分を符号化して比較する最小ヒープ
+    - [使い方・計算量・Library Checker での確認](documents/algo_library/data_structure/TupleHeap.md)
 
 ## techniques
 

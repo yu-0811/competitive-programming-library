@@ -15,13 +15,13 @@ data:
     , line 96, in bundle\n    raise NotImplementedError\nNotImplementedError\n"
   code: "# \u5207\u308A\u4E0A\u3052\u9664\u7B97\ndef ceilDiv(p: int, q: int) -> int:\n\
     \    return (p + q - 1) // q\n\n\n# \u7B49\u5DEE\u6570\u5217\u306E\u548C\n# \u521D\
-    \u9805 a1, \u9805\u6570 n, \u516C\u5DEE d\ndef cal(a1, n, d):\n    if n == 0:\n\
-    \        return 0\n    return (n * (2 * a1 + (n - 1) * d)) // 2\n"
+    \u9805 a1, \u9805\u6570 n, \u516C\u5DEE d\ndef cal(a1, n, d):\n    return (n *\
+    \ (2 * a1 + (n - 1) * d)) // 2\n"
   dependsOn: []
   isVerificationFile: false
   path: algorithm_library/python/math/calc.py
   requiredBy: []
-  timestamp: '2026-08-23 01:02:55+09:00'
+  timestamp: '2026-11-17 18:24:35+09:00'
   verificationStatus: LIBRARY_NO_TESTS
   verifiedWith: []
 documentation_of: algorithm_library/python/math/calc.py

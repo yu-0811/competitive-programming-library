@@ -254,6 +254,9 @@ data:
       path: algorithm_library/python/data_structure/TopK.py
       title: algorithm_library/python/data_structure/TopK.py
     - icon: ':warning:'
+      path: algorithm_library/python/data_structure/TupleHeap.py
+      title: algorithm_library/python/data_structure/TupleHeap.py
+    - icon: ':warning:'
       path: algorithm_library/python/data_structure/TupleLazySegtree.py
       title: algorithm_library/python/data_structure/TupleLazySegtree.py
     - icon: ':warning:'
@@ -496,6 +499,9 @@ data:
       path: library-checker-submitcode/src/data_structure/double_ended_priority_queue_multiset.py
       title: library-checker-submitcode/src/data_structure/double_ended_priority_queue_multiset.py
     - icon: ':warning:'
+      path: library-checker-submitcode/src/data_structure/double_ended_priority_queue_tuple_heap.py
+      title: library-checker-submitcode/src/data_structure/double_ended_priority_queue_tuple_heap.py
+    - icon: ':warning:'
       path: library-checker-submitcode/src/data_structure/ordered_set.py
       title: library-checker-submitcode/src/data_structure/ordered_set.py
     - icon: ':warning:'
@@ -555,6 +561,9 @@ data:
       path: library-checker-submitcode/src/graph/scc.py
       title: library-checker-submitcode/src/graph/scc.py
     - icon: ':warning:'
+      path: library-checker-submitcode/src/graph/shortest_path_tuple_heap.py
+      title: library-checker-submitcode/src/graph/shortest_path_tuple_heap.py
+    - icon: ':warning:'
       path: library-checker-submitcode/src/graph/tree_path_composite_sum.py
       title: library-checker-submitcode/src/graph/tree_path_composite_sum.py
     - icon: ':warning:'
@@ -575,6 +584,12 @@ data:
   - name: library-checker-submitcode/src/math
     pages:
     - icon: ':warning:'
+      path: library-checker-submitcode/src/math/binomial_coefficient_prime_mod.py
+      title: library-checker-submitcode/src/math/binomial_coefficient_prime_mod.py
+    - icon: ':warning:'
+      path: library-checker-submitcode/src/math/binomial_coefficient_prime_mod_small_k.py
+      title: library-checker-submitcode/src/math/binomial_coefficient_prime_mod_small_k.py
+    - icon: ':warning:'
       path: library-checker-submitcode/src/math/bitwise_and_convolution.py
       title: library-checker-submitcode/src/math/bitwise_and_convolution.py
     - icon: ':warning:'
@@ -583,6 +598,12 @@ data:
     - icon: ':warning:'
       path: library-checker-submitcode/src/math/enumerate_primes.py
       title: library-checker-submitcode/src/math/enumerate_primes.py
+    - icon: ':warning:'
+      path: library-checker-submitcode/src/math/enumerate_primes_eratosthenes.py
+      title: library-checker-submitcode/src/math/enumerate_primes_eratosthenes.py
+    - icon: ':warning:'
+      path: library-checker-submitcode/src/math/enumerate_primes_spf.py
+      title: library-checker-submitcode/src/math/enumerate_primes_spf.py
     - icon: ':warning:'
       path: library-checker-submitcode/src/math/gcd_convolution.py
       title: library-checker-submitcode/src/math/gcd_convolution.py
@@ -724,6 +745,9 @@ data:
       path: library-checker-submitcode/data_structure/double_ended_priority_queue_multiset.test.py
       title: library-checker-submitcode/data_structure/double_ended_priority_queue_multiset.test.py
     - icon: ':heavy_check_mark:'
+      path: library-checker-submitcode/data_structure/double_ended_priority_queue_tuple_heap.test.py
+      title: library-checker-submitcode/data_structure/double_ended_priority_queue_tuple_heap.test.py
+    - icon: ':heavy_check_mark:'
       path: library-checker-submitcode/data_structure/ordered_set.test.py
       title: library-checker-submitcode/data_structure/ordered_set.test.py
     - icon: ':heavy_check_mark:'
@@ -783,6 +807,9 @@ data:
       path: library-checker-submitcode/graph/scc.test.py
       title: library-checker-submitcode/graph/scc.test.py
     - icon: ':heavy_check_mark:'
+      path: library-checker-submitcode/graph/shortest_path_tuple_heap.test.py
+      title: library-checker-submitcode/graph/shortest_path_tuple_heap.test.py
+    - icon: ':heavy_check_mark:'
       path: library-checker-submitcode/graph/tree_path_composite_sum.test.py
       title: library-checker-submitcode/graph/tree_path_composite_sum.test.py
     - icon: ':heavy_check_mark:'
@@ -803,6 +830,12 @@ data:
   - name: library-checker-submitcode/math
     pages:
     - icon: ':heavy_check_mark:'
+      path: library-checker-submitcode/math/binomial_coefficient_prime_mod.test.py
+      title: library-checker-submitcode/math/binomial_coefficient_prime_mod.test.py
+    - icon: ':heavy_check_mark:'
+      path: library-checker-submitcode/math/binomial_coefficient_prime_mod_small_k.test.py
+      title: library-checker-submitcode/math/binomial_coefficient_prime_mod_small_k.test.py
+    - icon: ':heavy_check_mark:'
       path: library-checker-submitcode/math/bitwise_and_convolution.test.py
       title: library-checker-submitcode/math/bitwise_and_convolution.test.py
     - icon: ':heavy_check_mark:'
@@ -811,6 +844,12 @@ data:
     - icon: ':heavy_check_mark:'
       path: library-checker-submitcode/math/enumerate_primes.test.py
       title: library-checker-submitcode/math/enumerate_primes.test.py
+    - icon: ':heavy_check_mark:'
+      path: library-checker-submitcode/math/enumerate_primes_eratosthenes.test.py
+      title: library-checker-submitcode/math/enumerate_primes_eratosthenes.test.py
+    - icon: ':heavy_check_mark:'
+      path: library-checker-submitcode/math/enumerate_primes_spf.test.py
+      title: library-checker-submitcode/math/enumerate_primes_spf.test.py
     - icon: ':heavy_check_mark:'
       path: library-checker-submitcode/math/gcd_convolution.test.py
       title: library-checker-submitcode/math/gcd_convolution.test.py

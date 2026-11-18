@@ -54,15 +54,18 @@ data:
     \u9802\u70B9\u304B\u3089\u306E\u8DDD\u96E2\u306E\u7DCF\u548C\u3002g[v] = [(\u96A3\
     \u63A5\u9802\u70B9, \u8FBA\u306E\u9577\u3055), ...]\n# \u72B6\u614B\u306F (\u8DDD\
     \u96E2\u306E\u7DCF\u548C, \u9802\u70B9\u6570)\u3002\n# def merge(a, b):\n#   \
-    \  return (a[0] + b[0], a[1] + b[1])\n# def add_vertex(x, v):\n#     return (x[0],\
-    \ x[1] + 1)\n# def add_edge(x, w):\n#     return (x[0] + w * x[1], x[1])\n# dp\
-    \ = rerooting(g, (0, 0), merge, add_vertex, add_edge)\n# ans = [x[0] for x in\
-    \ dp]\n"
+    \  return (a[0] + b[0], a[1] + b[1])\n# def add_edge(x, w):\n#     return (x[0]\
+    \ + w * x[1], x[1])\n\n# x \u3092\u69CB\u6210\u3059\u308B\u9802\u70B9\u96C6\u5408\
+    \ S \u3068 v \u3092\u7D50\u3076\u8FBA\u306E\u60C5\u5831\u307E\u3067\u53CD\u6620\
+    \u3055\u308C\u305F (add_edge\u5F8C\u306E) v\u3068S\u304C\u96A3\u63A5\u3059\u308B\
+    \u8FBA\u306E\u60C5\u5831\u307E\u3067\u5165\u3063\u305F x \u304C\u6E21\u3055\u308C\
+    \u3066\u308B\n# def add_vertex(x, v):\n#     return (x[0], x[1] + 1)\n# dp = rerooting(g,\
+    \ (0, 0), merge, add_vertex, add_edge)\n# ans = [x[0] for x in dp]\n"
   dependsOn: []
   isVerificationFile: false
   path: algorithm_library/python/graph/Rerooting.py
   requiredBy: []
-  timestamp: '2026-11-11 22:38:10+09:00'
+  timestamp: '2026-11-18 22:17:14+09:00'
   verificationStatus: LIBRARY_NO_TESTS
   verifiedWith: []
 documentation_of: algorithm_library/python/graph/Rerooting.py

@@ -21,9 +21,13 @@ data:
     \u306B1\u56DE\u3060\u3051\u884C\u3046\u3002\n    \u5DE6\u53F3\u306E\u8FFD\u52A0\
     \u30FB\u524A\u9664\u3092\u5225\u3005\u306B\u5B9A\u7FA9\u3057\u3001\u5404\u8981\
     \u7D20\u3092\u7AEF\u304B\u3089\u9806\u306B\u51E6\u7406\u3059\u308B\u3002\n   \
-    \ \"\"\"\n    from math import sqrt, ceil\n\n    n = len(data)\n    q = len(que)\n\
-    \    if q == 0:\n        return []\n    B = max(1, ceil(sqrt(1.5) * n / sqrt(q)))\n\
-    \n    # \u72B6\u614B\u3092\u521D\u671F\u5316\u3059\u308B\u51E6\u7406\u3092\u66F8\
+    \ \u8981\u7D201\u500B\u306E\u8FFD\u52A0\u30FB\u524A\u9664\u306B\u304B\u304B\u308B\
+    \u8A08\u7B97\u91CF\u3092 O(T)\u30011\u3064\u306E\u30AF\u30A8\u30EA\u306E\u7B54\
+    \u3048\u3092\u6C42\u3081\u308B\u306E\u306B\u304B\u304B\u308B\u6642\u9593\u3092\
+    \ O(A)\u3068\u3057\u305F\u3068\u304D\u3001O(N\u221AQ T + QA)\n    \"\"\"\n   \
+    \ from math import sqrt, ceil\n\n    n = len(data)\n    q = len(que)\n    if q\
+    \ == 0:\n        return []\n    B = max(1, ceil(sqrt(1.5) * n / sqrt(q)))\n\n\
+    \    # \u72B6\u614B\u3092\u521D\u671F\u5316\u3059\u308B\u51E6\u7406\u3092\u66F8\
     \u304F\n    # ans = ?\n\n    def _add_left(left, right):\n        # \u5DE6\u7AEF\
     \u306B [left, right) \u3092\u8FFD\u52A0\u3059\u308B\uFF08\u53F3\u304B\u3089\u5DE6\
     \u306E\u9806\uFF09\n        for i in range(right - 1, left - 1, -1):\n       \
@@ -50,7 +54,7 @@ data:
   isVerificationFile: false
   path: algorithm_library/python/techniques/Mos_algorithm.py
   requiredBy: []
-  timestamp: '2026-11-08 10:24:58+09:00'
+  timestamp: '2026-11-15 12:34:50+09:00'
   verificationStatus: LIBRARY_NO_TESTS
   verifiedWith: []
 documentation_of: algorithm_library/python/techniques/Mos_algorithm.py

@@ -16,17 +16,17 @@ data:
     , line 96, in bundle\n    raise NotImplementedError\nNotImplementedError\n"
   code: "# problem: https://judge.yosupo.jp/problem/point_add_range_sum\n# include:\
     \ algorithm_library/python/data_structure/BIT.py\n\n\ndef main():\n    N, Q =\
-    \ map(int, readline().split())\n    bit = BIT(N)\n    for i, value in enumerate(map(int,\
-    \ readline().split())):\n        bit.add(i, i + 1, value)\n    ans = []\n    for\
-    \ _ in range(Q):\n        t, x, y = map(int, readline().split())\n        if t\
-    \ == 0:\n            bit.add(x, x + 1, y)\n        else:\n            ans.append(str(bit.range_sum(x,\
-    \ y)))\n    sys.stdout.write(\"\\n\".join(ans) + (\"\\n\" if ans else \"\"))\n\
-    \n\nif __name__ == \"__main__\":\n    main()\n"
+    \ map(int, readline().split())\n    bit = RangeAddBIT(N)\n    for i, value in\
+    \ enumerate(map(int, readline().split())):\n        bit.add(i, i + 1, value)\n\
+    \    ans = []\n    for _ in range(Q):\n        t, x, y = map(int, readline().split())\n\
+    \        if t == 0:\n            bit.add(x, x + 1, y)\n        else:\n       \
+    \     ans.append(str(bit.range_sum(x, y)))\n    sys.stdout.write(\"\\n\".join(ans)\
+    \ + (\"\\n\" if ans else \"\"))\n\n\nif __name__ == \"__main__\":\n    main()\n"
   dependsOn: []
   isVerificationFile: false
   path: library-checker-submitcode/src/data_structure/point_add_range_sum_bit.py
   requiredBy: []
-  timestamp: '2026-11-06 23:20:20+09:00'
+  timestamp: '2026-11-15 12:34:50+09:00'
   verificationStatus: LIBRARY_NO_TESTS
   verifiedWith: []
 documentation_of: library-checker-submitcode/src/data_structure/point_add_range_sum_bit.py

@@ -16,7 +16,7 @@ data:
     , line 96, in bundle\n    raise NotImplementedError\nNotImplementedError\n"
   code: '# library: https://github.com/yu-0811/competitive-programming-library
 
-    import sys,math;sys.setrecursionlimit(10**9)
+    import sys,math;sys.setrecursionlimit(10**8)
 
     # import pypyjit
 
@@ -52,7 +52,7 @@ data:
   isVerificationFile: false
   path: algorithm_library/python/template.py
   requiredBy: []
-  timestamp: '2026-10-25 21:47:50+09:00'
+  timestamp: '2026-11-18 22:17:14+09:00'
   verificationStatus: LIBRARY_NO_TESTS
   verifiedWith: []
 documentation_of: algorithm_library/python/template.py

@@ -1,12 +1,12 @@
 # Euler Tour 順による部分木の区間化
 
-`algorithm_library/python/graph/EulerTourOrder.py` の `euler_tour(G, root=0)` は、
+`algorithm_library/python/graph/EulerTourOrder.py` の `euler_tour(G, r=0)` は、
 木を DFS の行きがけ順に並べ、`tin, tout, order` を返します。
 構築時間・空間は O(N)。反復 DFS なので深い木でも再帰上限の変更は不要です。
 
 - `G[v]`: 頂点 v の隣接頂点。無向木でも、親から子への辺だけでも使えます。
-- `root`: 根。頂点番号は `0 <= v < len(G)`。1-indexed の場合は `G[0]` を空にします。
-- `order[i]`: i 番目に訪問した頂点。各頂点は1回だけ現れ、子は隣接リストの順に訪問します。
+- `r`: 根。頂点番号は `0 <= v < len(G)`。1-indexed の場合は `G[0]` を空にします。
+- `order[i]`: i 番目に訪問した頂点。各頂点は1回だけ現れ、子は隣接リストと逆の順に訪問します。
 - `tin[v]`: 頂点 v の位置。`order[tin[v]] == v`。
 - `tout[v]`: 部分木の右端（含まない）。葉なら `tout[v] == tin[v] + 1`。
 

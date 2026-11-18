@@ -16,18 +16,17 @@ data:
     \ basedir=basedir, options={'include_paths': [basedir]}).decode()\n          \
     \                  ^^^^^^\n  File \"/opt/hostedtoolcache/PyPy/3.11.17/x64/lib/pypy3.11/site-packages/onlinejudge_verify/languages/python.py\"\
     , line 96, in bundle\n    raise NotImplementedError\nNotImplementedError\n"
-  code: "from algorithm_library.python.data_structure.BIT import fenwick_tree\n\n\n\
-    class EulerTour:\n    # \u4EFB\u610F\u306E\u9802\u70B9\u756A\u53F7\u30FB\u6839\
-    \u30FB\u8FBA\u91CD\u307F\u3002\u9802\u70B9\u306F 0..N-1 \u307E\u305F\u306F 1..N\u3002\
-    \n    def __init__(s, N):\n        s.N = N\n        s.G = [[] for _ in range(N\
-    \ + 1)]\n        s._in = [-1] * (N + 1)\n        s._out = [-1] * (N + 1)\n   \
-    \     s.m = 0\n        s.vs, s.ws, s.es, s.depth = [], [], [], []\n        s.base\
-    \ = 1 << N.bit_length()\n        s.mask = s.base - 1\n\n    def add_edge(s, u,\
-    \ v, w):\n        s.m += 1\n        s.G[u].append((v, w, s.m))\n        s.G[v].append((u,\
+  code: "from algorithm_library.python.data_structure.BIT import BIT\n\n\nclass EulerTour:\n\
+    \    # \u4EFB\u610F\u306E\u9802\u70B9\u756A\u53F7\u30FB\u6839\u30FB\u8FBA\u91CD\
+    \u307F\u3002\u9802\u70B9\u306F 0..N-1 \u307E\u305F\u306F 1..N\u3002\n    def __init__(s,\
+    \ N):\n        s.N = N\n        s.G = [[] for _ in range(N + 1)]\n        s._in\
+    \ = [-1] * (N + 1)\n        s._out = [-1] * (N + 1)\n        s.m = 0\n       \
+    \ s.vs, s.ws, s.es, s.depth = [], [], [], []\n\n    def add_edge(s, u, v, w):\n\
+    \        s.m += 1\n        s.G[u].append((v, w, s.m))\n        s.G[v].append((u,\
     \ w, s.m))\n\n    def _build_fentree(s):\n        n = len(s.ws)\n        s.fen\
-    \ = fenwick_tree(n)\n        d = s.fen.data = s.ws[:]\n        for i in range(n):\n\
-    \            j = i | (i + 1)\n            if j < n:\n                d[j] += d[i]\n\
-    \n    def _build_lca(s):\n        order = s.order = [v for v, e in zip(s.vs, s.es)\
+    \ = BIT(n)\n        d = s.fen.d = s.ws[:]\n        for i in range(n):\n      \
+    \      j = i | (i + 1)\n            if j < n:\n                d[j] += d[i]\n\n\
+    \    def _build_lca(s):\n        order = s.order = [v for v, e in zip(s.vs, s.es)\
     \ if e >= 0]\n        rank = s.rank = [0] * (s.N + 1)\n        for i, v in enumerate(order):\n\
     \            rank[v] = i\n        # \u884C\u304D\u304C\u3051\u9806\u3067 u<v \u306A\
     \u3089\u3001\u533A\u9593 (u,v] \u306E\u89AA\u306E\u6700\u5C0F\u9806\u4F4D\u304C\
@@ -67,7 +66,7 @@ data:
   isVerificationFile: false
   path: algorithm_library/python/graph/EulerTour.py
   requiredBy: []
-  timestamp: '2026-11-06 23:20:20+09:00'
+  timestamp: '2026-11-17 18:24:35+09:00'
   verificationStatus: LIBRARY_NO_TESTS
   verifiedWith: []
 documentation_of: algorithm_library/python/graph/EulerTour.py

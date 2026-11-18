@@ -1,5 +1,6 @@
 # 検証方針
 
+- 動作確認はPyPyのみでよい
 - ライブラリの動作確認は、`library-checker-submitcode` の提出コードを使い、Library Checker の公式ケースだけで行う。
 - `library-checker-submitcode/generate.py` が生成する `library-checker-submitcode/**/*.test.py` を提出用と検証用で兼用する。`tests` ディレクトリや重複する検証コードは作らない。
 - 独自の単体テスト、乱数テスト、回帰テストなどの補助テストは不要。リポジトリに追加・保存しない。

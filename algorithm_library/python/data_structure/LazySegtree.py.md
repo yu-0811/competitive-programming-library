@@ -26,70 +26,69 @@ data:
     \ = comp\n        s.ide = ide\n        d[z : z + s.n] = v\n        for i in range(z\
     \ - 1, 0, -1):\n            d[i] = op(d[2 * i], d[2 * i + 1])\n\n    # \u533A\u9593\
     \ [l,r) \u306E\u6F14\u7B97\u7D50\u679C\u3092\u8FD4\u3059\n    def prod(s, l, r):\n\
-    \        assert 0 <= l <= r <= s.n\n        if l == r:\n            return s.e\n\
-    \        d, op, push = s.d, s.op, s._push\n        l += s.z\n        r += s.z\n\
-    \        # \u5883\u754C\u304C\u63C3\u308F\u305A\u3001\u4F1D\u64AD\u30FB\u518D\u8A08\
-    \u7B97\u304C\u5FC5\u8981\u306B\u306A\u308B\u6700\u521D\u306E\u6BB5\n        left\
-    \ = (l & -l).bit_length()\n        right = (r & -r).bit_length()\n        for\
-    \ i in range(s.log, 0, -1):\n            if i >= left:\n                push(l\
-    \ >> i)\n            if i >= right:\n                push(r >> i)\n        sml\
-    \ = smr = s.e\n        while l < r:\n            if l & 1:\n                sml\
-    \ = op(sml, d[l])\n                l += 1\n            if r & 1:\n           \
-    \     smr = op(d[r - 1], smr)\n            l >>= 1\n            r >>= 1\n    \
-    \    return op(sml, smr)\n\n    # \u533A\u9593\u64CD\u4F5C\n    # f \u306F mp\
-    \ \u306B\u4E0E\u3048\u308B\u5F15\u6570\u306E f\n    def apply(s, l, r, f):\n \
-    \       assert 0 <= l <= r <= s.n\n        if l == r:\n            return\n  \
-    \      d, lz = s.d, s.lz\n        op, mp, comp = s.op, s.mp, s.comp\n        push,\
-    \ z = s._push, s.z\n        l += z\n        r += z\n        # \u5883\u754C\u304C\
-    \u63C3\u308F\u305A\u3001\u4F1D\u64AD\u30FB\u518D\u8A08\u7B97\u304C\u5FC5\u8981\
-    \u306B\u306A\u308B\u6700\u521D\u306E\u6BB5\n        left = (l & -l).bit_length()\n\
-    \        right = (r & -r).bit_length()\n        for i in range(s.log, 0, -1):\n\
-    \            if i >= left:\n                push(l >> i)\n            if i >=\
-    \ right:\n                push(r >> i)\n        l2, r2 = l, r\n        while l\
-    \ < r:\n            if l & 1:\n                d[l] = mp(f, d[l])\n          \
-    \      if l < z:\n                    lz[l] = comp(f, lz[l])\n               \
-    \ l += 1\n            if r & 1:\n                r -= 1\n                d[r]\
-    \ = mp(f, d[r])\n                if r < z:\n                    lz[r] = comp(f,\
-    \ lz[r])\n            l >>= 1\n            r >>= 1\n        for i in range(1,\
-    \ s.log + 1):\n            if i >= left:\n                k = l2 >> i\n      \
-    \          d[k] = op(d[2 * k], d[2 * k + 1])\n            if i >= right:\n   \
-    \             k = r2 >> i\n                d[k] = op(d[2 * k], d[2 * k + 1])\n\
-    \n    # option: \u4E00\u70B9\u66F4\u65B0\n    def set(s, p, x):\n        assert\
-    \ 0 <= p < s.n\n        d, op, push = s.d, s.op, s._push\n        p += s.z\n \
-    \       for i in range(s.log, 0, -1):\n            push(p >> i)\n        d[p]\
-    \ = x\n        p >>= 1\n        while p:\n            d[p] = op(d[2 * p], d[2\
-    \ * p + 1])\n            p >>= 1\n\n    # option: d[p] \u3092\u53D6\u5F97\u3059\
-    \u308B\n    def get(s, p):\n        assert 0 <= p < s.n\n        push = s._push\n\
+    \        assert 0 <= l <= r <= s.n\n        d, op, push = s.d, s.op, s._push\n\
+    \        l += s.z\n        r += s.z\n        # \u5883\u754C\u304C\u63C3\u308F\u305A\
+    \u3001\u4F1D\u64AD\u30FB\u518D\u8A08\u7B97\u304C\u5FC5\u8981\u306B\u306A\u308B\
+    \u6700\u521D\u306E\u6BB5\n        left = (l & -l).bit_length()\n        right\
+    \ = (r & -r).bit_length()\n        for i in range(s.log, 0, -1):\n           \
+    \ if i >= left:\n                push(l >> i)\n            if i >= right:\n  \
+    \              push(r >> i)\n        sml = smr = s.e\n        while l < r:\n \
+    \           if l & 1:\n                sml = op(sml, d[l])\n                l\
+    \ += 1\n            if r & 1:\n                smr = op(d[r - 1], smr)\n     \
+    \       l >>= 1\n            r >>= 1\n        return op(sml, smr)\n\n    # \u533A\
+    \u9593\u64CD\u4F5C\n    # f \u306F mp \u306B\u4E0E\u3048\u308B\u5F15\u6570\u306E\
+    \ f\n    def apply(s, l, r, f):\n        assert 0 <= l <= r <= s.n\n        if\
+    \ l == r:\n            return\n        d, lz = s.d, s.lz\n        op, mp, comp\
+    \ = s.op, s.mp, s.comp\n        push, z = s._push, s.z\n        l += z\n     \
+    \   r += z\n        # \u5883\u754C\u304C\u63C3\u308F\u305A\u3001\u4F1D\u64AD\u30FB\
+    \u518D\u8A08\u7B97\u304C\u5FC5\u8981\u306B\u306A\u308B\u6700\u521D\u306E\u6BB5\
+    \n        left = (l & -l).bit_length()\n        right = (r & -r).bit_length()\n\
+    \        for i in range(s.log, 0, -1):\n            if i >= left:\n          \
+    \      push(l >> i)\n            if i >= right:\n                push(r >> i)\n\
+    \        l2, r2 = l, r\n        while l < r:\n            if l & 1:\n        \
+    \        d[l] = mp(f, d[l])\n                if l < z:\n                    lz[l]\
+    \ = comp(f, lz[l])\n                l += 1\n            if r & 1:\n          \
+    \      r -= 1\n                d[r] = mp(f, d[r])\n                if r < z:\n\
+    \                    lz[r] = comp(f, lz[r])\n            l >>= 1\n           \
+    \ r >>= 1\n        for i in range(1, s.log + 1):\n            if i >= left:\n\
+    \                k = l2 >> i\n                d[k] = op(d[2 * k], d[2 * k + 1])\n\
+    \            if i >= right:\n                k = r2 >> i\n                d[k]\
+    \ = op(d[2 * k], d[2 * k + 1])\n\n    # option: \u4E00\u70B9\u66F4\u65B0\n   \
+    \ def set(s, p, x):\n        assert 0 <= p < s.n\n        d, op, push = s.d, s.op,\
+    \ s._push\n        p += s.z\n        for i in range(s.log, 0, -1):\n         \
+    \   push(p >> i)\n        d[p] = x\n        p >>= 1\n        while p:\n      \
+    \      d[p] = op(d[2 * p], d[2 * p + 1])\n            p >>= 1\n\n    # option:\
+    \ d[p] \u3092\u53D6\u5F97\u3059\u308B\n    def get(s, p):\n        assert 0 <=\
+    \ p < s.n\n        push = s._push\n        p += s.z\n        for i in range(s.log,\
+    \ 0, -1):\n            push(p >> i)\n        return s.d[p]\n\n    # option: \u4E00\
+    \u70B9\u306B\u5BFE\u3057\u3066\u64CD\u4F5C\u3059\u308B\n    def apply_point(s,\
+    \ p, f):\n        assert 0 <= p < s.n\n        d, op, push = s.d, s.op, s._push\n\
     \        p += s.z\n        for i in range(s.log, 0, -1):\n            push(p >>\
-    \ i)\n        return s.d[p]\n\n    # option: \u4E00\u70B9\u306B\u5BFE\u3057\u3066\
-    \u64CD\u4F5C\u3059\u308B\n    def apply_point(s, p, f):\n        assert 0 <= p\
-    \ < s.n\n        d, op, push = s.d, s.op, s._push\n        p += s.z\n        for\
-    \ i in range(s.log, 0, -1):\n            push(p >> i)\n        d[p] = s.mp(f,\
-    \ d[p])\n        p >>= 1\n        while p:\n            d[p] = op(d[2 * p], d[2\
-    \ * p + 1])\n            p >>= 1\n    \n    # option: \u5168\u533A\u9593\u306E\
-    \u6F14\u7B97\u7D50\u679C\u3092\u8FD4\u3059\n    def all_prod(s):\n        return\
-    \ s.d[1]\n\n    # option: check(operate(data[l],data[l+1],...,data[r-1])) = True\n\
-    \    # \u3092\u6E80\u305F\u3059\u6700\u5927\u306E r \u3092\u8FD4\u3059\n    def\
-    \ max_right(s, l, check):\n        assert 0 <= l <= s.n\n        assert check(s.e)\n\
-    \        if l == s.n:\n            return s.n\n        d, op, push = s.d, s.op,\
-    \ s._push\n        z = s.z\n        l += z\n        for i in range(s.log, 0, -1):\n\
-    \            push(l >> i)\n        sm = s.e\n        while True:\n           \
-    \ while l % 2 == 0:\n                l >>= 1\n            nxt = op(sm, d[l])\n\
-    \            if not check(nxt):\n                while l < z:\n              \
-    \      push(l)\n                    l *= 2\n                    nxt = op(sm, d[l])\n\
-    \                    if check(nxt):\n                        sm = nxt\n      \
-    \                  l += 1\n                return l - z\n            sm = nxt\n\
-    \            l += 1\n            if (l & -l) == l:\n                return s.n\n\
-    \n    # option: check(operate(data[l],data[l+1],...,data[r-1])) = True\n    #\
-    \ \u3092\u6E80\u305F\u3059\u6700\u5C0F\u306E l \u3092\u8FD4\u3059\n    def min_left(s,\
-    \ r, check):\n        assert 0 <= r <= s.n\n        assert check(s.e)\n      \
-    \  if r == 0:\n            return 0\n        d, op, push = s.d, s.op, s._push\n\
-    \        z = s.z\n        r += z\n        for i in range(s.log, 0, -1):\n    \
-    \        push((r - 1) >> i)\n        sm = s.e\n        while True:\n         \
-    \   r -= 1\n            while r > 1 and (r % 2):\n                r >>= 1\n  \
-    \          nxt = op(d[r], sm)\n            if not check(nxt):\n              \
-    \  while r < z:\n                    push(r)\n                    r = 2 * r +\
-    \ 1\n                    nxt = op(d[r], sm)\n                    if check(nxt):\n\
+    \ i)\n        d[p] = s.mp(f, d[p])\n        p >>= 1\n        while p:\n      \
+    \      d[p] = op(d[2 * p], d[2 * p + 1])\n            p >>= 1\n    \n    # option:\
+    \ \u5168\u533A\u9593\u306E\u6F14\u7B97\u7D50\u679C\u3092\u8FD4\u3059\n    def\
+    \ all_prod(s):\n        return s.d[1]\n\n    # option: check(operate(data[l],data[l+1],...,data[r-1]))\
+    \ = True\n    # \u3092\u6E80\u305F\u3059\u6700\u5927\u306E r \u3092\u8FD4\u3059\
+    \n    def max_right(s, l, check):\n        assert 0 <= l <= s.n\n        assert\
+    \ check(s.e)\n        if l == s.n:\n            return s.n\n        d, op, push\
+    \ = s.d, s.op, s._push\n        z = s.z\n        l += z\n        for i in range(s.log,\
+    \ 0, -1):\n            push(l >> i)\n        sm = s.e\n        while True:\n \
+    \           while l % 2 == 0:\n                l >>= 1\n            nxt = op(sm,\
+    \ d[l])\n            if not check(nxt):\n                while l < z:\n      \
+    \              push(l)\n                    l *= 2\n                    nxt =\
+    \ op(sm, d[l])\n                    if check(nxt):\n                        sm\
+    \ = nxt\n                        l += 1\n                return l - z\n      \
+    \      sm = nxt\n            l += 1\n            if (l & -l) == l:\n         \
+    \       return s.n\n\n    # option: check(operate(data[l],data[l+1],...,data[r-1]))\
+    \ = True\n    # \u3092\u6E80\u305F\u3059\u6700\u5C0F\u306E l \u3092\u8FD4\u3059\
+    \n    def min_left(s, r, check):\n        assert 0 <= r <= s.n\n        assert\
+    \ check(s.e)\n        if r == 0:\n            return 0\n        d, op, push =\
+    \ s.d, s.op, s._push\n        z = s.z\n        r += z\n        for i in range(s.log,\
+    \ 0, -1):\n            push((r - 1) >> i)\n        sm = s.e\n        while True:\n\
+    \            r -= 1\n            while r > 1 and (r % 2):\n                r >>=\
+    \ 1\n            nxt = op(d[r], sm)\n            if not check(nxt):\n        \
+    \        while r < z:\n                    push(r)\n                    r = 2\
+    \ * r + 1\n                    nxt = op(d[r], sm)\n                    if check(nxt):\n\
     \                        sm = nxt\n                        r -= 1\n          \
     \      return r + 1 - z\n            sm = nxt\n            if (r & -r) == r:\n\
     \                return 0\n\n    # option: print(seg) \u3067\u9045\u5EF6\u3092\
@@ -112,7 +111,7 @@ data:
   isVerificationFile: false
   path: algorithm_library/python/data_structure/LazySegtree.py
   requiredBy: []
-  timestamp: '2026-11-06 23:20:20+09:00'
+  timestamp: '2026-11-18 22:17:14+09:00'
   verificationStatus: LIBRARY_NO_TESTS
   verifiedWith: []
 documentation_of: algorithm_library/python/data_structure/LazySegtree.py

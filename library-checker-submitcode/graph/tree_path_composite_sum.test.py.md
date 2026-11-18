@@ -67,13 +67,17 @@ data:
     # \u4F8B\uFF1A\u5404\u9802\u70B9\u304B\u3089\u306E\u8DDD\u96E2\u306E\u7DCF\u548C\
     \u3002g[v] = [(\u96A3\u63A5\u9802\u70B9, \u8FBA\u306E\u9577\u3055), ...]\n# \u72B6\
     \u614B\u306F (\u8DDD\u96E2\u306E\u7DCF\u548C, \u9802\u70B9\u6570)\u3002\n# def\
-    \ merge(a, b):\n#     return (a[0] + b[0], a[1] + b[1])\n# def add_vertex(x, v):\n\
-    #     return (x[0], x[1] + 1)\n# def add_edge(x, w):\n#     return (x[0] + w *\
-    \ x[1], x[1])\n# dp = rerooting(g, (0, 0), merge, add_vertex, add_edge)\n# ans\
-    \ = [x[0] for x in dp]\n# END LIBRARY\n\n\ndef main():\n    N = int(readline())\n\
-    \    values = list(map(int, readline().split()))\n    g = [[] for _ in range(N)]\n\
-    \    for _ in range(N - 1):\n        u, v, b, c = map(int, readline().split())\n\
-    \        g[u].append((v, (b, c)))\n        g[v].append((u, (b, c)))\n\n    # \u72B6\
+    \ merge(a, b):\n#     return (a[0] + b[0], a[1] + b[1])\n# def add_edge(x, w):\n\
+    #     return (x[0] + w * x[1], x[1])\n\n# x \u3092\u69CB\u6210\u3059\u308B\u9802\
+    \u70B9\u96C6\u5408 S \u3068 v \u3092\u7D50\u3076\u8FBA\u306E\u60C5\u5831\u307E\
+    \u3067\u53CD\u6620\u3055\u308C\u305F (add_edge\u5F8C\u306E) v\u3068S\u304C\u96A3\
+    \u63A5\u3059\u308B\u8FBA\u306E\u60C5\u5831\u307E\u3067\u5165\u3063\u305F x \u304C\
+    \u6E21\u3055\u308C\u3066\u308B\n# def add_vertex(x, v):\n#     return (x[0], x[1]\
+    \ + 1)\n# dp = rerooting(g, (0, 0), merge, add_vertex, add_edge)\n# ans = [x[0]\
+    \ for x in dp]\n# END LIBRARY\n\n\ndef main():\n    N = int(readline())\n    values\
+    \ = list(map(int, readline().split()))\n    g = [[] for _ in range(N)]\n    for\
+    \ _ in range(N - 1):\n        u, v, b, c = map(int, readline().split())\n    \
+    \    g[u].append((v, (b, c)))\n        g[v].append((u, (b, c)))\n\n    # \u72B6\
     \u614B\u306F (\u5024\u306E\u7DCF\u548C, \u9802\u70B9\u6570)\u3002\n    def merge(a,\
     \ b):\n        return ((a[0] + b[0]) % mod, a[1] + b[1])\n\n    def add_vertex(x,\
     \ v):\n        return ((x[0] + values[v]) % mod, x[1] + 1)\n\n    def add_edge(x,\
@@ -84,7 +88,7 @@ data:
   isVerificationFile: true
   path: library-checker-submitcode/graph/tree_path_composite_sum.test.py
   requiredBy: []
-  timestamp: '2026-11-11 22:38:10+09:00'
+  timestamp: '2026-11-18 22:17:14+09:00'
   verificationStatus: TEST_ACCEPTED
   verifiedWith: []
 documentation_of: library-checker-submitcode/graph/tree_path_composite_sum.test.py

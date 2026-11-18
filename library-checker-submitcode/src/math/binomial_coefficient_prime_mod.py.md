@@ -1,0 +1,36 @@
+---
+data:
+  _extendedDependsOn: []
+  _extendedRequiredBy: []
+  _extendedVerifiedWith: []
+  _isVerificationFailed: false
+  _pathExtension: py
+  _verificationStatusIcon: ':warning:'
+  attributes:
+    links:
+    - https://judge.yosupo.jp/problem/binomial_coefficient_prime_mod
+  bundledCode: "Traceback (most recent call last):\n  File \"/opt/hostedtoolcache/PyPy/3.11.17/x64/lib/pypy3.11/site-packages/onlinejudge_verify/documentation/build.py\"\
+    , line 71, in _render_source_code_stat\n    bundled_code = language.bundle(stat.path,\
+    \ basedir=basedir, options={'include_paths': [basedir]}).decode()\n          \
+    \                  ^^^^^^\n  File \"/opt/hostedtoolcache/PyPy/3.11.17/x64/lib/pypy3.11/site-packages/onlinejudge_verify/languages/python.py\"\
+    , line 96, in bundle\n    raise NotImplementedError\nNotImplementedError\n"
+  code: "# problem: https://judge.yosupo.jp/problem/binomial_coefficient_prime_mod\n\
+    # include: algorithm_library/python/math/modComb.py:Comb:1\n\n\ndef main():\n\
+    \    T, mod = map(int, readline().split())\n    queries = [tuple(map(int, readline().split()))\
+    \ for _ in range(T)]\n    comb = Comb(max(n for n, _ in queries), mod)\n    print(\"\
+    \\n\".join(str(comb.C(n, k)) for n, k in queries))\n\n\nif __name__ == \"__main__\"\
+    :\n    main()\n"
+  dependsOn: []
+  isVerificationFile: false
+  path: library-checker-submitcode/src/math/binomial_coefficient_prime_mod.py
+  requiredBy: []
+  timestamp: '2026-11-17 17:11:54+09:00'
+  verificationStatus: LIBRARY_NO_TESTS
+  verifiedWith: []
+documentation_of: library-checker-submitcode/src/math/binomial_coefficient_prime_mod.py
+layout: document
+redirect_from:
+- /library/library-checker-submitcode/src/math/binomial_coefficient_prime_mod.py
+- /library/library-checker-submitcode/src/math/binomial_coefficient_prime_mod.py.html
+title: library-checker-submitcode/src/math/binomial_coefficient_prime_mod.py
+---

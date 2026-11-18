@@ -17,14 +17,13 @@ data:
     # 22 \u3067 3 \u3064\u3068\u304B\u306A\u3089\u3044\u3051\u308B\n# \u30BF\u30A4\
     \u30D7\u6570\u3092\u6E1B\u3089\u3059\u305F\u3081\u306B\u30B0\u30ED\u30FC\u30D0\
     \u30EB\u5909\u6570\n\nSIZE = 3\nLEN = 0\nMASK = (1 << 22) - 1\n\n\ndef to_hash(x,\
-    \ y, z):\n    res = 0\n    res |= x << 44\n    res |= y << 22\n    res |= z\n\
-    \    return res\n\n\ndef rev(h):\n    x = (h >> 44) & mask\n    y = (h >> 22)\
-    \ & mask\n    z = h & mask\n    return x, y, z\n"
+    \ y, z):\n    return (x << 44) | (y << 22) | z\n\n\ndef rev(h):\n    x = (h >>\
+    \ 44) & MASK\n    y = (h >> 22) & MASK\n    z = h & MASK\n    return x, y, z\n"
   dependsOn: []
   isVerificationFile: false
   path: algorithm_library/python/hash/tupleToHash.py
   requiredBy: []
-  timestamp: '2026-08-23 01:02:55+09:00'
+  timestamp: '2026-11-17 18:24:35+09:00'
   verificationStatus: LIBRARY_NO_TESTS
   verifiedWith: []
 documentation_of: algorithm_library/python/hash/tupleToHash.py

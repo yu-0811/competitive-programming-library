@@ -40,6 +40,12 @@ python3 library-checker-submitcode/generate.py --check
 展開します。同じライブラリは一度だけ埋め込まれます。
 内部ライブラリの import には絶対パスを使い、別名や `*` は使いません。
 
+同じファイルに写経用の同名クラスが複数ある場合は、
+`# include: algorithm_library/python/math/modComb.py:Comb:1` のように
+クラス名と定義順（1 始まり）を指定して、そのクラスだけを埋め込めます。
+クラス内のコメントも残ります。クラス外の import や補助定義が必要な場合は、
+別途含めてください。
+
 ```python
 # problem: https://judge.yosupo.jp/problem/unionfind
 # include: algorithm_library/python/graph/UnionFind.py
@@ -56,7 +62,7 @@ if __name__ == "__main__":
 
 ## 追加済みの提出コード
 
-35 個のライブラリを、34 問・43 本の提出コードで確認できます。
+37 個のライブラリを、36 問・49 本の提出コードで確認できます。
 同じ問題に複数の実装を用意しているものもあります。
 
 | ライブラリ | 提出コード | Library Checker 問題 |
@@ -73,12 +79,14 @@ if __name__ == "__main__":
 | `graph/Rerooting.py` | [graph/tree_path_composite_sum.test.py](graph/tree_path_composite_sum.test.py) | [Tree Path Composite Sum](https://judge.yosupo.jp/problem/tree_path_composite_sum) |
 | `graph/cycle_detect.py` | [graph/cycle_detection_undirected.test.py](graph/cycle_detection_undirected.test.py) | [Cycle Detection (Undirected)](https://judge.yosupo.jp/problem/cycle_detection_undirected) |
 | `graph/maxflow.py` | [graph/bipartitematching.test.py](graph/bipartitematching.test.py) | [Bipartite Matching](https://judge.yosupo.jp/problem/bipartitematching) |
+| `data_structure/TupleHeap.py`（距離だけで比較） | [graph/shortest_path_tuple_heap.test.py](graph/shortest_path_tuple_heap.test.py) | [Shortest Path](https://judge.yosupo.jp/problem/shortest_path) |
 | `data_structure/BIT.py` | [data_structure/point_add_range_sum_bit.test.py](data_structure/point_add_range_sum_bit.test.py) | [Point Add Range Sum](https://judge.yosupo.jp/problem/point_add_range_sum) |
 | `data_structure/BIT.py` | [data_structure/predecessor_problem_bit.test.py](data_structure/predecessor_problem_bit.test.py) | [Predecessor Problem](https://judge.yosupo.jp/problem/predecessor_problem) |
 | `data_structure/BucketList.py` | [data_structure/deque_bucket_list.test.py](data_structure/deque_bucket_list.test.py) | [Deque](https://judge.yosupo.jp/problem/deque) |
 | `data_structure/SortedSet.py` | [data_structure/ordered_set.test.py](data_structure/ordered_set.test.py) | [Ordered Set](https://judge.yosupo.jp/problem/ordered_set) |
 | `data_structure/SortedMultiset.py` | [data_structure/ordered_set_multiset.test.py](data_structure/ordered_set_multiset.test.py) | [Ordered Set](https://judge.yosupo.jp/problem/ordered_set) |
 | `data_structure/SortedMultiset.py` | [data_structure/double_ended_priority_queue_multiset.test.py](data_structure/double_ended_priority_queue_multiset.test.py) | [Double-Ended Priority Queue](https://judge.yosupo.jp/problem/double_ended_priority_queue) |
+| `data_structure/TupleHeap.py`（先頭1・2成分で比較） | [data_structure/double_ended_priority_queue_tuple_heap.test.py](data_structure/double_ended_priority_queue_tuple_heap.test.py) | [Double-Ended Priority Queue](https://judge.yosupo.jp/problem/double_ended_priority_queue) |
 | `data_structure/Segtree.py` | [data_structure/point_add_range_sum_segtree.test.py](data_structure/point_add_range_sum_segtree.test.py) | [Point Add Range Sum](https://judge.yosupo.jp/problem/point_add_range_sum) |
 | `data_structure/Segtree.py` | [data_structure/point_set_range_composite.test.py](data_structure/point_set_range_composite.test.py) | [Point Set Range Composite](https://judge.yosupo.jp/problem/point_set_range_composite) |
 | `data_structure/Segtree.py`（左右の境界探索） | [data_structure/predecessor_problem_segtree.test.py](data_structure/predecessor_problem_segtree.test.py) | [Predecessor Problem](https://judge.yosupo.jp/problem/predecessor_problem) |
@@ -95,12 +103,16 @@ if __name__ == "__main__":
 | `string/RollingHash.py`（クラス版） | [string/longest_common_substring_rollinghash.test.py](string/longest_common_substring_rollinghash.test.py) | [Longest Common Substring](https://judge.yosupo.jp/problem/longest_common_substring) |
 | `string/Z_algo.py` | [string/zalgorithm.test.py](string/zalgorithm.test.py) | [Z Algorithm](https://judge.yosupo.jp/problem/zalgorithm) |
 | `math/FFT.py` | [math/convolution_mod.test.py](math/convolution_mod.test.py) | [Convolution](https://judge.yosupo.jp/problem/convolution_mod) |
+| `math/modComb.py`（階乗表版） | [math/binomial_coefficient_prime_mod.test.py](math/binomial_coefficient_prime_mod.test.py) | [Binomial Coefficient (Prime Mod)](https://judge.yosupo.jp/problem/binomial_coefficient_prime_mod) |
+| `math/modComb.py`（小さい k 用・大きい k は階乗表の `H` を使用） | [math/binomial_coefficient_prime_mod_small_k.test.py](math/binomial_coefficient_prime_mod_small_k.test.py) | [Binomial Coefficient (Prime Mod)](https://judge.yosupo.jp/problem/binomial_coefficient_prime_mod) |
 | `math/MatrixPower.py` | [math/matrix_product.test.py](math/matrix_product.test.py) | [Matrix Product](https://judge.yosupo.jp/problem/matrix_product) |
 | `math/MatrixPower.py` | [math/pow_of_matrix.test.py](math/pow_of_matrix.test.py) | [Power of Matrix](https://judge.yosupo.jp/problem/pow_of_matrix) |
 | `math/MatrixPower.py`（`vec_mul`） | [math/pow_of_matrix_vec.test.py](math/pow_of_matrix_vec.test.py) | [Power of Matrix](https://judge.yosupo.jp/problem/pow_of_matrix) |
 | `math/mobius.py` | [math/bitwise_and_convolution.test.py](math/bitwise_and_convolution.test.py) | [Bitwise And Convolution](https://judge.yosupo.jp/problem/bitwise_and_convolution) |
 | `math/PIE.py` | [math/gcd_convolution.test.py](math/gcd_convolution.test.py) | [Gcd Convolution](https://judge.yosupo.jp/problem/gcd_convolution) |
 | `math/factorization.py`（素数列挙） | [math/enumerate_primes.test.py](math/enumerate_primes.test.py) | [Enumerate Primes](https://judge.yosupo.jp/problem/enumerate_primes) |
+| `math/factorization.py`（最小素因数表・大きいケースは奇数の篩） | [math/enumerate_primes_spf.test.py](math/enumerate_primes_spf.test.py) | [Enumerate Primes](https://judge.yosupo.jp/problem/enumerate_primes) |
+| `math/factorization.py`（素数フラグ表・大きいケースは奇数の篩） | [math/enumerate_primes_eratosthenes.test.py](math/enumerate_primes_eratosthenes.test.py) | [Enumerate Primes](https://judge.yosupo.jp/problem/enumerate_primes) |
 | `math/AngularSort.py` + `techniques/CmpSort.py` | [math/sort_points_by_argument.test.py](math/sort_points_by_argument.test.py) | [Sort Points by Argument](https://judge.yosupo.jp/problem/sort_points_by_argument) |
 | `techniques/2-SAT.py` | [techniques/two_sat.test.py](techniques/two_sat.test.py) | [2 Sat](https://judge.yosupo.jp/problem/two_sat) |
 | `techniques/Compression.py` + `data_structure/BIT.py`（Mo テンプレートの具体化） | [techniques/static_range_inversions_query.test.py](techniques/static_range_inversions_query.test.py) | [Static Range Inversions Query](https://judge.yosupo.jp/problem/static_range_inversions_query) |

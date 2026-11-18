@@ -20,7 +20,7 @@ data:
     \u30D7\u30EC\u30FC\u30C8\u3092\u533A\u9593\u8EE2\u5012\u6570\u7528\u306B\u5177\
     \u4F53\u5316\u3059\u308B\u3002\"\"\"\n    from math import ceil, sqrt\n\n    n\
     \ = len(data)\n    q = len(que)\n    if q == 0:\n        return []\n    B = max(1,\
-    \ ceil(sqrt(1.5) * n / sqrt(q)))\n\n    data = compression(data)\n    bit = fenwick_tree(max(data)\
+    \ ceil(sqrt(1.5) * n / sqrt(q)))\n\n    data = compression(data)\n    bit = BIT(max(data)\
     \ + 1 if data else 0)\n    add = bit.add\n    prefix = bit.sum0\n    inversions\
     \ = size = 0\n\n    # \u5DE6\u7AEF\u3067\u306F\u81EA\u5206\u3088\u308A\u5C0F\u3055\
     \u3044\u8981\u7D20\u3001\u53F3\u7AEF\u3067\u306F\u81EA\u5206\u3088\u308A\u5927\
@@ -56,7 +56,7 @@ data:
   isVerificationFile: false
   path: library-checker-submitcode/src/techniques/static_range_inversions_query.py
   requiredBy: []
-  timestamp: '2026-11-08 19:01:56+09:00'
+  timestamp: '2026-11-15 12:34:50+09:00'
   verificationStatus: LIBRARY_NO_TESTS
   verifiedWith: []
 documentation_of: library-checker-submitcode/src/techniques/static_range_inversions_query.py
