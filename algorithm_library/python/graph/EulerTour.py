@@ -84,7 +84,7 @@ class EulerTour:
     def path_sum(s, u):
         if s.fen is None:
             s._build_fentree()
-        return s.fen.sum0(s._in[u] + 1)
+        return s.fen.prod0(s._in[u] + 1)
 
     def lca(s, u, v):
         if s._in[u] > s._in[v]:

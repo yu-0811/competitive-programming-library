@@ -27,7 +27,7 @@ def main():
         if query[0] == 0:
             bit.add(tin[v], query[2])
         else:
-            ans.append(bit.sum(tin[v], tout[v]))
+            ans.append(bit.prod(tin[v], tout[v]))
     for i in range(0, len(ans), 8192):
         sys.stdout.write("\n".join(map(str, ans[i:i + 8192])) + "\n")
 

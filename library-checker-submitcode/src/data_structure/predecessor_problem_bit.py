@@ -10,7 +10,7 @@ def main():
     for r in range(N + 1):
         if r == N or T[r] == 48:
             if l < r:
-                bit.add(l, r, 1)
+                bit.rangeadd(l, r, 1)
             l = r + 1
     ans = []
     for _ in range(Q):
@@ -18,7 +18,7 @@ def main():
         if t < 2:
             value = 1 - t
             if T[k] - 48 != value:
-                bit.add(k, k + 1, 2 * value - 1)
+                bit.rangeadd(k, k + 1, 2 * value - 1)
                 T[k] = 48 + value
         elif t == 2:
             ans.append(str(T[k] - 48))

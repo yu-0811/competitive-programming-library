@@ -16,7 +16,7 @@ def mos_inversions(data, que):
     data = compression(data)
     bit = BIT([0] * (max(data, default=-1) + 1))
     add = bit.add
-    prefix = bit.sum0
+    prefix = bit.prod0
     inversions = size = 0
 
     # 左端では自分より小さい要素、右端では自分より大きい要素を数える。

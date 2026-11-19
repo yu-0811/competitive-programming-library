@@ -4,14 +4,14 @@
 
 def main():
     _, Q = map(int, readline().split())
-    bit = BIT(map(int, readline().split()))
+    bit = BIT(list(map(int, readline().split())))
     ans = []
     for _ in range(Q):
         t, x, y = map(int, readline().split())
         if t == 0:
             bit.add(x, y)
         else:
-            ans.append(str(bit.sum(x, y)))
+            ans.append(str(bit.prod(x, y)))
     sys.stdout.write("\n".join(ans) + ("\n" if ans else ""))
 
 
