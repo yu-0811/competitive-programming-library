@@ -45,6 +45,9 @@ def euler_tour(G, r=0):
     return tin, tout, od
 # END LIBRARY
 # BEGIN LIBRARY: algorithm_library/python/data_structure/BIT.py
+from operator import gt, lt
+
+
 class RangeAddBIT: # 区間加算区間和
     def __init__(s, n):
         s.n = n
@@ -180,60 +183,76 @@ class XorBIT:  # 1点XOR区間XOR
     def prod(s, l, r):
         assert 0 <= l <= r <= s.n
         return s.prod0(r) ^ s.prod0(l)
+    
 
+class MinBIT:  # 1点代入（減少のみ）・1点取得・区間最小値
+    op = min
+    cmp = lt
+    e = 10**18  # 値域は -10**18 以上 10**18 以下。
 
-class ProductBIT:  # 1点乗算・1点代入・1点取得・区間積（整数、ゼロ可）
     def __init__(s, a):
-        s.z = BIT([int(x == 0) for x in a])
-        d = s.d = a
-        n = s.n = len(d)
-        for i in range(n):
-            # 積を持つ配列では、ゼロを単位元の 1 として扱う。
-            d[i] = d[i] or 1
-            j = i | (i + 1)
-            if j < n:
-                d[j] = (d[j] or 1) * d[i]
-
-    def add(s, p, x):  # a[p] *= x
-        assert 0 <= p < s.n
-        if x == 0:
-            s.set(p, 0)
-            return
-        if s.z.get(p):
-            return
-        d = s.d
-        while p < s.n:
-            d[p] *= x
-            p |= p + 1
+        s.a = a
+        n = s.n = len(a)
+        op = s.op
+        # 内部は 1-indexed。b0[i] は i が右端、b1[i] は i が左端。
+        b0 = s.b0 = [s.e] + a
+        b1 = s.b1 = b0[:]
+        for i in range(1, n + 1):
+            j = i + (i & -i)
+            if j <= n:
+                b0[j] = op(b0[j], b0[i])
+        for i in range(n, 0, -1):
+            j = i & (i - 1)
+            if j:
+                b1[j] = op(b1[j], b1[i])
 
     def set(s, p, x):
-        z = s.z.get(p)
-        a = 1 if z else s._prod0(p + 1) // s._prod0(p)
-        s.z.add(p, int(x == 0) - z)
-        d = s.d
-        x = x or 1
-        while p < s.n:
-            d[p] = d[p] // a * x
-            p |= p + 1
+        n = s.n
+        assert 0 <= p < n
+        a, b0, b1, cmp = s.a, s.b0, s.b1, s.cmp
+        y = a[p]
+        assert cmp(x, y) or x == y
+        a[p] = x
+        # 親は子の区間を含むので、極値が変わらない時点で止める。
+        i = p + 1
+        while i <= n and cmp(x, b0[i]):
+            b0[i] = x
+            i += i & -i
+        i = p + 1
+        while i and cmp(x, b1[i]):
+            b1[i] = x
+            i &= i - 1
 
     def get(s, p):
-        return s.prod(p, p + 1)
-
-    def _prod0(s, r):
-        res = 1
-        while r:
-            res *= s.d[r - 1]
-            r &= r - 1
-        return res
+        assert 0 <= p < s.n
+        return s.a[p]
 
     def prod0(s, r):
         return s.prod(0, r)
 
     def prod(s, l, r):
         assert 0 <= l <= r <= s.n
-        if s.z.prod(l, r):
-            return 0
-        return s._prod0(r) // s._prod0(l)
+        res = s.e
+        if l == r:
+            return res
+        b0, b1, op = s.b0, s.b1, s.op
+        l += 1
+        while l < r:
+            j = l + (l & -l)
+            if j > r:
+                break
+            res = op(res, b1[l])
+            l = j
+        while l < r:
+            res = op(res, b0[r])
+            r &= r - 1
+        return op(res, s.a[l - 1])
+
+
+class MaxBIT(MinBIT):  # 1点代入（増加のみ）・1点取得・区間最大値
+    op = max
+    cmp = gt
+    e = -10**18
 # END LIBRARY
 
 
