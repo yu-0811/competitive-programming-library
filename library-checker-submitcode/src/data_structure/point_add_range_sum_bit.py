@@ -3,17 +3,15 @@
 
 
 def main():
-    N, Q = map(int, readline().split())
-    bit = RangeAddBIT(N)
-    for i, value in enumerate(map(int, readline().split())):
-        bit.add(i, i + 1, value)
+    _, Q = map(int, readline().split())
+    bit = BIT(map(int, readline().split()))
     ans = []
     for _ in range(Q):
         t, x, y = map(int, readline().split())
         if t == 0:
-            bit.add(x, x + 1, y)
+            bit.add(x, y)
         else:
-            ans.append(str(bit.range_sum(x, y)))
+            ans.append(str(bit.sum(x, y)))
     sys.stdout.write("\n".join(ans) + ("\n" if ans else ""))
 
 

@@ -14,7 +14,7 @@ def mos_inversions(data, que):
     B = max(1, ceil(sqrt(1.5) * n / sqrt(q)))
 
     data = compression(data)
-    bit = BIT(max(data) + 1 if data else 0)
+    bit = BIT([0] * (max(data, default=-1) + 1))
     add = bit.add
     prefix = bit.sum0
     inversions = size = 0

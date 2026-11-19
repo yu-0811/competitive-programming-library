@@ -17,8 +17,8 @@ class EulerTour:
         s.G[v].append((u, w, s.m))
 
     def _build_fentree(s):
-        n = len(s.ws)
-        s.fen = BIT(n)
+        s.fen = BIT([])
+        n = s.fen.n = len(s.ws)
         d = s.fen.d = s.ws[:]
         for i in range(n):
             j = i | (i + 1)
