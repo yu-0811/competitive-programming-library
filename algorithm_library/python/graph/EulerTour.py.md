@@ -23,10 +23,10 @@ data:
     \ = [-1] * (N + 1)\n        s._out = [-1] * (N + 1)\n        s.m = 0\n       \
     \ s.vs, s.ws, s.es, s.depth = [], [], [], []\n\n    def add_edge(s, u, v, w):\n\
     \        s.m += 1\n        s.G[u].append((v, w, s.m))\n        s.G[v].append((u,\
-    \ w, s.m))\n\n    def _build_fentree(s):\n        n = len(s.ws)\n        s.fen\
-    \ = BIT(n)\n        d = s.fen.d = s.ws[:]\n        for i in range(n):\n      \
-    \      j = i | (i + 1)\n            if j < n:\n                d[j] += d[i]\n\n\
-    \    def _build_lca(s):\n        order = s.order = [v for v, e in zip(s.vs, s.es)\
+    \ w, s.m))\n\n    def _build_fentree(s):\n        s.fen = BIT([])\n        n =\
+    \ s.fen.n = len(s.ws)\n        d = s.fen.d = s.ws[:]\n        for i in range(n):\n\
+    \            j = i | (i + 1)\n            if j < n:\n                d[j] += d[i]\n\
+    \n    def _build_lca(s):\n        order = s.order = [v for v, e in zip(s.vs, s.es)\
     \ if e >= 0]\n        rank = s.rank = [0] * (s.N + 1)\n        for i, v in enumerate(order):\n\
     \            rank[v] = i\n        # \u884C\u304D\u304C\u3051\u9806\u3067 u<v \u306A\
     \u3089\u3001\u533A\u9593 (u,v] \u306E\u89AA\u306E\u6700\u5C0F\u9806\u4F4D\u304C\
@@ -53,7 +53,7 @@ data:
     \   depth[t] = d\n            t += 1\n        for a in (vs, ws, es, depth):\n\
     \            del a[t:]\n        if path_sum:\n            s._build_fentree()\n\
     \        if lca:\n            s._build_lca()\n\n    def path_sum(s, u):\n    \
-    \    if s.fen is None:\n            s._build_fentree()\n        return s.fen.sum0(s._in[u]\
+    \    if s.fen is None:\n            s._build_fentree()\n        return s.fen.prod0(s._in[u]\
     \ + 1)\n\n    def lca(s, u, v):\n        if s._in[u] > s._in[v]:\n           \
     \ u, v = v, u\n        if s._in[v] <= s._out[u]:\n            return u\n     \
     \   if s.lca_tab is None:\n            s._build_lca()\n        l, r = s.rank[u],\
@@ -66,7 +66,7 @@ data:
   isVerificationFile: false
   path: algorithm_library/python/graph/EulerTour.py
   requiredBy: []
-  timestamp: '2026-11-17 18:24:35+09:00'
+  timestamp: '2026-11-19 23:50:25+09:00'
   verificationStatus: LIBRARY_NO_TESTS
   verifiedWith: []
 documentation_of: algorithm_library/python/graph/EulerTour.py

@@ -93,8 +93,8 @@ data:
   isVerificationFile: false
   path: algorithm_library/python/math/line.py
   requiredBy:
-  - algorithm_library/python/math/Polygon.py
   - algorithm_library/python/math/circle.py
+  - algorithm_library/python/math/Polygon.py
   timestamp: '2026-08-23 01:02:55+09:00'
   verificationStatus: LIBRARY_NO_TESTS
   verifiedWith: []

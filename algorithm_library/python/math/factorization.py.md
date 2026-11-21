@@ -14,8 +14,9 @@ data:
     \ basedir=basedir, options={'include_paths': [basedir]}).decode()\n          \
     \                  ^^^^^^\n  File \"/opt/hostedtoolcache/PyPy/3.11.17/x64/lib/pypy3.11/site-packages/onlinejudge_verify/languages/python.py\"\
     , line 96, in bundle\n    raise NotImplementedError\nNotImplementedError\n"
-  code: "from collections import defaultdict\nfrom math import isqrt\n\n\"\"\"\n\u9AD8\
-    \u901F\u7D20\u56E0\u6570\u5206\u89E3 https://atcoder.jp/contests/abc177/editorial/82\n\
+  code: "from collections import defaultdict\nfrom math import isqrt\n\ndef is_prime(n):\n\
+    \    if n < 2:\n        return False\n    return all(n % d != 0 for d in range(2,\
+    \ math.isqrt(n) + 1))\n\n\"\"\"\n\u9AD8\u901F\u7D20\u56E0\u6570\u5206\u89E3 https://atcoder.jp/contests/abc177/editorial/82\n\
     \u7D20\u56E0\u6570\u5206\u89E3\u3092\u3057\u305F\u3044\u6700\u5927\u306E\u6570\
     \u3092 N \u3068\u3057\u3066\n\u69CB\u7BC9 O(N log log N)\n\u7D20\u56E0\u6570\u5206\
     \u89E3 O(log N)\ninit_factorization \u306E\u5F15\u6570\u306B\u6700\u5927\u306E\
@@ -46,7 +47,7 @@ data:
   isVerificationFile: false
   path: algorithm_library/python/math/factorization.py
   requiredBy: []
-  timestamp: '2026-11-17 18:24:35+09:00'
+  timestamp: '2026-11-21 20:44:52+09:00'
   verificationStatus: LIBRARY_NO_TESTS
   verifiedWith: []
 documentation_of: algorithm_library/python/math/factorization.py
