@@ -22,6 +22,11 @@ mod = 998244353
 from collections import defaultdict
 from math import isqrt
 
+def is_prime(n):
+    if n < 2:
+        return False
+    return all(n % d != 0 for d in range(2, math.isqrt(n) + 1))
+
 """
 高速素因数分解 https://atcoder.jp/contests/abc177/editorial/82
 素因数分解をしたい最大の数を N として
