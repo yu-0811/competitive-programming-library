@@ -437,9 +437,6 @@ data:
       path: algorithm_library/python/techniques/RunLengthCompression.py
       title: algorithm_library/python/techniques/RunLengthCompression.py
     - icon: ':warning:'
-      path: algorithm_library/python/techniques/c_is_buween_a_to_b.py
-      title: algorithm_library/python/techniques/c_is_buween_a_to_b.py
-    - icon: ':warning:'
       path: algorithm_library/python/techniques/imos.py
       title: algorithm_library/python/techniques/imos.py
   - name: heuristic_library/cpp

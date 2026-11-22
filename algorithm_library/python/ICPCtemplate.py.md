@@ -13,19 +13,43 @@ data:
     \ basedir=basedir, options={'include_paths': [basedir]}).decode()\n          \
     \                  ^^^^^^\n  File \"/opt/hostedtoolcache/PyPy/3.11.17/x64/lib/pypy3.11/site-packages/onlinejudge_verify/languages/python.py\"\
     , line 96, in bundle\n    raise NotImplementedError\nNotImplementedError\n"
-  code: "import sys\ndef input():return sys.stdin.readline().rstrip()\n\n# \u5165\u529B\
-    \u306A\u3069\ndef ii(): return int(input())\ndef ms(): return map(int, input().split())\n\
-    def li(): return list(map(int,input().split()))\ninf = pow(10,18)\nmod = 998244353\n\
-    \n# \u30E9\u30A4\u30D6\u30E9\u30EA\u7CFB\n# import pypyjit\n# pypyjit.set_param('max_unroll_recursion=-1')\n\
-    sys.setrecursionlimit(10**9)\nfrom collections import defaultdict,deque\nfrom\
-    \ itertools import combinations,permutations,accumulate,product\nfrom bisect import\
-    \ bisect_left,bisect_right\nfrom heapq import heappop,heappush,heapify\nfrom functools\
-    \ import cache\n# @cache"
+  code: 'import sys
+
+    def input():return sys.stdin.readline().rstrip()
+
+    def ii(): return int(input())
+
+    def ms(): return map(int, input().split())
+
+    def li(): return list(map(int,input().split()))
+
+    inf = pow(10,18)
+
+    mod = 998244353
+
+
+    # import pypyjit
+
+    # pypyjit.set_param(''max_unroll_recursion=-1'')
+
+    sys.setrecursionlimit(10**9)
+
+    from collections import defaultdict,deque
+
+    from itertools import combinations,permutations,accumulate,product
+
+    from bisect import bisect_left,bisect_right
+
+    from heapq import heappop,heappush,heapify
+
+    from functools import cache
+
+    # @cache'
   dependsOn: []
   isVerificationFile: false
   path: algorithm_library/python/ICPCtemplate.py
   requiredBy: []
-  timestamp: '2026-10-29 11:11:05+09:00'
+  timestamp: '2026-11-22 20:55:47+09:00'
   verificationStatus: LIBRARY_NO_TESTS
   verifiedWith: []
 documentation_of: algorithm_library/python/ICPCtemplate.py
