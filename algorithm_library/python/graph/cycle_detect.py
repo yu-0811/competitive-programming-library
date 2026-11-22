@@ -1,9 +1,5 @@
 def cycle_detect(n, edges):
-    """無向グラフの閉路を (頂点列, 辺 ID 列) で返す。なければ ([], [])。
-
-    頂点は 0-indexed、辺 ID は edges 内の位置。自己ループ・多重辺に対応。
-    時間・空間計算量 O(n + m)。
-    """
+    # 無向グラフの閉路を (頂点列, 辺 ID 列) で返す
     g = [[] for _ in range(n)]
     to = []
     for i, (u, v) in enumerate(edges):

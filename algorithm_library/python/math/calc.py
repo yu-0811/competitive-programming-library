@@ -7,3 +7,8 @@ def ceilDiv(p: int, q: int) -> int:
 # 初項 a1, 項数 n, 公差 d
 def cal(a1, n, d):
     return (n * (2 * a1 + (n - 1) * d)) // 2
+
+
+# https://atcoder.jp/contests/abc367/editorial/10712
+def c_is_buween_a_to_b(a, b, c):
+    return (a - b) * (b - c) * (c - a) > 0

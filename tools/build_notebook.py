@@ -140,7 +140,7 @@ def main():
     # the randomly named temporary build directory.
     preamble = r"""\pdfvariable suppressoptionalinfo 767\relax
 \documentclass[a4paper,9pt,twocolumn]{extarticle}
-\usepackage[margin=10mm,top=15mm,bottom=15mm]{geometry}
+\usepackage[margin=10mm,top=9mm,bottom=9mm,footskip=5mm]{geometry}
 \usepackage{luatexja-fontspec}
 \setmainjfont{IPAexGothic}
 \setsansjfont{IPAexGothic}
@@ -151,22 +151,21 @@ def main():
 \usepackage[hidelinks,unicode]{hyperref}
 \pagestyle{fancy}
 \fancyhf{}
-\fancyhead[L]{Python Algorithm Library}
-\fancyhead[R]{\thepage}
-\setlength{\headheight}{12pt}
+\renewcommand{\headrulewidth}{0pt}
+\fancyfoot[R]{\fontsize{11}{13}\selectfont\thepage}
 \setlength{\columnsep}{7mm}
 \setcounter{tocdepth}{2}
 \begin{document}
 \pdfbookmark[0]{Python Algorithm Library}{title}
-\section*{Python Algorithm Library}
-\tableofcontents
-\clearpage
+\makeatletter
+\@starttoc{toc}
+\makeatother
 """
     with tempfile.TemporaryDirectory(prefix="python-notebook-") as directory:
         work = Path(directory)
         formatter = LatexFormatter(
             style="friendly",
-            verboptions=r"fontsize=\fontsize{8}{8}\selectfont,numbers=left,numbersep=3pt,breaklines=true,breakanywhere=true,tabsize=4",
+            verboptions=r"fontsize=\fontsize{9}{9}\selectfont,numbers=left,numbersep=3pt,breaklines=true,breakanywhere=true,tabsize=4",
         )
         parts = [
             preamble.replace(
@@ -178,11 +177,13 @@ def main():
         for path in files:
             relative = path.relative_to(source)
             group = relative.parent.as_posix()
+            if group in {".", "gen"}:
+                group = "Templates, gen"
             if group != category:
                 category = group
                 parts.append(
                     r"\section{"
-                    + escape(group if group != "." else "Templates")
+                    + escape(group)
                     + "}\n"
                 )
             title = path.name
