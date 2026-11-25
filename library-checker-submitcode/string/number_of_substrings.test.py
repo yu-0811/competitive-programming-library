@@ -19,6 +19,9 @@ mod = 998244353
 
 # problem: https://judge.yosupo.jp/problem/number_of_substrings
 # BEGIN LIBRARY: algorithm_library/python/string/SuffixArray.py
+from itertools import accumulate
+
+
 # SA の構築：O(|S|)
 # SA[i]: int で S の SA[i] から始まる suffix がソートされてる
 
@@ -27,39 +30,38 @@ def sa_is(s, upper):
     n = len(s)
     if n < 2:
         return list(range(n))
-    ls = [0] * n
+    ls = bytearray(n)
     for i in range(n - 2, -1, -1):
         ls[i] = ls[i + 1] if s[i] == s[i + 1] else s[i] < s[i + 1]
-    sum_l = [0] * (upper + 1)
-    sum_s = [0] * (upper + 1)
-    for i in range(n):
-        if not ls[i]:
-            sum_s[s[i]] += 1
-        else:
-            sum_l[s[i] + 1] += 1
-    for i in range(upper + 1):
-        sum_s[i] += sum_l[i]
-        if i < upper:
-            sum_l[i + 1] += sum_s[i]
+    count = [0] * (upper + 1)
+    for x in s:
+        count[x] += 1
+    # 文字 x のバケットは [bounds[x], bounds[x + 1])。
+    bounds = list(accumulate(count, initial=0))
 
     def induce(lms):
         sa = [-1] * n
-        buf = sum_s[:]
-        for d in lms:
-            sa[buf[s[d]]] = d
-            buf[s[d]] += 1
-        buf = sum_l[:]
+        buf = bounds[1:]
+        for i in reversed(lms):
+            c = s[i]
+            buf[c] -= 1
+            sa[buf[c]] = i
+        buf = bounds[:-1]
         sa[buf[s[-1]]] = n - 1
         buf[s[-1]] += 1
         for v in sa:
-            if v > 0 and not ls[v - 1]:
-                sa[buf[s[v - 1]]] = v - 1
-                buf[s[v - 1]] += 1
-        buf = sum_l[:]
+            i = v - 1
+            if i >= 0 and not ls[i]:
+                c = s[i]
+                sa[buf[c]] = i
+                buf[c] += 1
+        buf = bounds[1:]
         for v in reversed(sa):
-            if v > 0 and ls[v - 1]:
-                buf[s[v - 1] + 1] -= 1
-                sa[buf[s[v - 1] + 1]] = v - 1
+            i = v - 1
+            if i >= 0 and ls[i]:
+                c = s[i]
+                buf[c] -= 1
+                sa[buf[c]] = i
         return sa
 
     lms = [i for i in range(1, n) if not ls[i - 1] and ls[i]]
@@ -94,8 +96,11 @@ def suffix_array_upper(s, upper):
 
 def suffix_array(s) -> list[int]:
     n = len(s)
-    if type(s) == str:
-        return sa_is(list(map(ord, s)), 255)
+    # 1 文字 1 バイトにできるときは座標圧縮を省く。
+    if isinstance(s, str) and max(s, default="") <= "\xff":
+        s = s.encode("latin1")
+    if isinstance(s, (bytes, bytearray)):
+        return sa_is(s, 255)
     idx = sorted(range(n), key=s.__getitem__)
     s2 = [0] * n
     now = 0

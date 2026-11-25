@@ -4,28 +4,21 @@ class SCC:
         self.edges = []  # 辺
 
     def addEdge(self, frm: int, to: int):
-        assert 0 <= frm <= self.N
-        assert 0 <= to <= self.N
+        assert 0 <= frm < self.N and 0 <= to < self.N
         self.edges.append((frm, to))
 
     # 辺を CSR 形式にする
     def _csr(self, N: int, edges: list[tuple]):
         start = [0] * (N + 1)
-        # dst := 辺を始点の昇順にソートした時の終点のリスト
+        for u, _ in edges:
+            start[u] += 1
+        for i in range(N):
+            start[i + 1] += start[i]
         dst = [0] * len(edges)
-
-        # start[i+1] := 頂点 i を始点とする辺の数 となるように構築
-        for u, _ in edges:  # u を始点とする辺
-            start[u + 1] += 1
-        for i in range(1, N + 1):
-            start[i] += start[i - 1]
-
-        # pos[i] := 始点を i とする辺の dst への挿入位置
-        pos = start[:]
-        for u, v in edges:
-            dst[pos[u]] = v
-            pos[u] += 1
-
+        # 終端から埋めると start がそのまま各頂点の開始位置になる。
+        for u, v in reversed(edges):
+            start[u] -= 1
+            dst[start[u]] = v
         return start, dst
 
     # ids=True なら成分ID、False なら成分ごとの頂点リストを計算する

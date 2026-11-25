@@ -19,48 +19,29 @@ mod = 998244353
 
 # problem: https://judge.yosupo.jp/problem/matrix_product
 # BEGIN LIBRARY: algorithm_library/python/math/MatrixPower.py
+# 行ベクトル v と行列 M の積。M は長方形でもよい。
 def vec_mul(v: list[int], M: list[list[int]], mod: int):
-    n = len(v)
-    assert n == len(M)
+    k = len(v)
+    assert k == len(M)
+    n = len(M[0]) if M else 0
     res = [0] * n
-    for i in range(n):
-        x, row = v[i], M[i]
-        for j in range(n):
-            res[j] += x * row[j]
-        if i % 8 == 7:
-            res = [x % mod for x in res]
-    return [x % mod for x in res]
-
-
-# 行列 A と 行列 B の積を返す
-def mat_mul(A: list[list[int]], B: list[list[int]], mod):
-    assert len(A[0]) == len(B)
-    K = len(B)
-    end = K & -8
-    BT = list(zip(*B))
-    res = []
-    for row in A:
-        out = []
-        for col in BT:
-            total = 0
-            # 多倍長整数の成長を抑えるため、8項ごとに剰余を取る
-            for k in range(0, end, 8):
-                total = (
-                    total
-                    + row[k] * col[k]
-                    + row[k + 1] * col[k + 1]
-                    + row[k + 2] * col[k + 2]
-                    + row[k + 3] * col[k + 3]
-                    + row[k + 4] * col[k + 4]
-                    + row[k + 5] * col[k + 5]
-                    + row[k + 6] * col[k + 6]
-                    + row[k + 7] * col[k + 7]
-                ) % mod
-            for k in range(end, K):
-                total += row[k] * col[k]
-            out.append(total % mod)
-        res.append(out)
+    rem = k % 4
+    for x, row in zip(v[:rem], M):
+        res = [(t + x*y) % mod for t, y in zip(res, row)]
+    # 4 行ずつまとめ、各列の読み書きと剰余の回数を減らす。
+    for i in range(rem, k, 4):
+        a, b, c, d = v[i:i + 4]
+        if a or b or c or d:
+            A, B, C, D = M[i:i + 4]
+            for j in range(n):
+                res[j] = (res[j] + a*A[j] + b*B[j]
+                          + c*C[j] + d*D[j]) % mod
     return res
+
+
+# 行列 A と行列 B の積を返す
+def mat_mul(A: list[list[int]], B: list[list[int]], mod):
+    return [vec_mul(row, B, mod) for row in A]
 
 
 # 行列累乗 M^K

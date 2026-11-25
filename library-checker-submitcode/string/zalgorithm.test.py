@@ -19,32 +19,19 @@ mod = 998244353
 
 # problem: https://judge.yosupo.jp/problem/zalgorithm
 # BEGIN LIBRARY: algorithm_library/python/string/Z_algo.py
-# O(|S|), Z[i] := S[0:|S|) と S[i:|S|) の最長共通接頭辞の長さ
+# O(|S|)。Z[i] は S と S[i:] の最長共通接頭辞の長さ。
 def z_algo(S):
     n = len(S)
-    Z = [0] * n
-    Z[0] = n
-    i, j = 1, 0
-    while i < n:
-        while i + j < n and S[j] == S[i + j]: # 一致する限り延長する
-            j += 1
-        Z[i] = j
-
-        if j == 0: # 一文字も一致しないならコピーできないので次に進む
-            i += 1
+    Z = [n] * n
+    l = r = 0  # S[l:r] は接頭辞と一致する区間。r はここまでで最大
+    for i in range(1, n):
+        if i < r and Z[i - l] < r - i:
+            Z[i] = Z[i - l]
             continue
-
-        k = 1
-        # k+Z[k]>j なら1回目の登場の際にはみ出してしまっている
-        # k+Z[k]=j なら2回目の登場の際にはみ出す可能性がある
-        while k < j and k + Z[k] < j:
-            Z[i + k] = Z[k]
-            k += 1
-        # まだ未確定なところまで i を進める
-        i += k
-        # j を i に合わせる
-        j -= k
-
+        l, r = i, max(i, r)
+        while r < n and S[r - l] == S[r]:
+            r += 1
+        Z[i] = r - l
     return Z
 # END LIBRARY
 
