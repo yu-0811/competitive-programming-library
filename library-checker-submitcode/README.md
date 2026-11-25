@@ -62,7 +62,7 @@ if __name__ == "__main__":
 
 ## 追加済みの提出コード
 
-37 個のライブラリを、36 問・49 本の提出コードで確認できます。
+39 個のライブラリを、37 問・51 本の提出コードで確認できます。
 同じ問題に複数の実装を用意しているものもあります。
 
 | ライブラリ | 提出コード | Library Checker 問題 |
@@ -79,6 +79,8 @@ if __name__ == "__main__":
 | `graph/Rerooting.py` | [graph/tree_path_composite_sum.test.py](graph/tree_path_composite_sum.test.py) | [Tree Path Composite Sum](https://judge.yosupo.jp/problem/tree_path_composite_sum) |
 | `graph/cycle_detect.py` | [graph/cycle_detection_undirected.test.py](graph/cycle_detection_undirected.test.py) | [Cycle Detection (Undirected)](https://judge.yosupo.jp/problem/cycle_detection_undirected) |
 | `graph/maxflow.py` | [graph/bipartitematching.test.py](graph/bipartitematching.test.py) | [Bipartite Matching](https://judge.yosupo.jp/problem/bipartitematching) |
+| `graph/hopcroft_karp.py` | [graph/bipartitematching_hopcroft_karp.test.py](graph/bipartitematching_hopcroft_karp.test.py) | [Bipartite Matching](https://judge.yosupo.jp/problem/bipartitematching) |
+| `graph/hungarian.py` | [graph/assignment.test.py](graph/assignment.test.py) | [Assignment Problem](https://judge.yosupo.jp/problem/assignment) |
 | `data_structure/TupleHeap.py`（距離だけで比較） | [graph/shortest_path_tuple_heap.test.py](graph/shortest_path_tuple_heap.test.py) | [Shortest Path](https://judge.yosupo.jp/problem/shortest_path) |
 | `data_structure/BIT.py` | [data_structure/point_add_range_sum_bit.test.py](data_structure/point_add_range_sum_bit.test.py) | [Point Add Range Sum](https://judge.yosupo.jp/problem/point_add_range_sum) |
 | `data_structure/BIT.py` | [data_structure/predecessor_problem_bit.test.py](data_structure/predecessor_problem_bit.test.py) | [Predecessor Problem](https://judge.yosupo.jp/problem/predecessor_problem) |

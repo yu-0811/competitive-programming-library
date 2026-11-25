@@ -4,21 +4,17 @@ from random import randint
 class MultisetHash:
     # 比較したい配列を引数に渡す
     def __init__(self, A: list, B: list) -> None:
-        self.mod = (1 << 61) - 1
+        mod = self.mod = (1 << 61) - 1
         h = self.hash = {}
-        for x in A + B:
-            if x not in h:
-                h[x] = randint(1, self.mod - 1)
-        # ハッシュを取る
         self.hashA, self.hashB = [0], [0]
-        for a in A:
-            self.hashA.append((self.hashA[-1] + self.hash[a]) % self.mod)
-        for b in B:
-            self.hashB.append((self.hashB[-1] + self.hash[b]) % self.mod)
+        for values, prefix in ((A, self.hashA), (B, self.hashB)):
+            for x in values:
+                v = h.get(x)
+                if v is None:
+                    v = h[x] = randint(1, mod - 1)
+                prefix.append((prefix[-1] + v) % mod)
 
-    # 1-index(A_1, A_2, ...)
-    # A[al:ar+1)==B[bl:br+1) を返す
+    # 0-index の半開区間 A[al:ar] と B[bl:br] の多重集合を比較する。
     def isEqual(self, al, ar, bl, br):
-        return (self.hashA[ar] - self.hashA[al - 1]) % self.mod == (
-            self.hashB[br] - self.hashB[bl - 1]
-        ) % self.mod
+        diff = self.hashA[ar] - self.hashA[al] - self.hashB[br] + self.hashB[bl]
+        return diff % self.mod == 0
