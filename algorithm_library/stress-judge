@@ -1,0 +1,20 @@
+# gen.py、main.py、judge.py と同じディレクトリに置く。
+# そのディレクトリで `bash stress-judge` を実行する。
+#
+# judge.py の書き方
+# import sys
+# from pathlib import Path
+#
+# inp = Path(sys.argv[1]).read_text().splitlines()  # in.txt の中身の行ごとの配列
+# out = Path(sys.argv[2]).read_text().splitlines()  # out.txt
+#
+# 判定して AC なら sys.exit(0)、WA なら sys.exit(1)。
+
+set -e
+for ((i = 1; ; i++)); do
+    pypy3 gen.py > in.txt
+    pypy3 main.py < in.txt > out.txt
+    if pypy3 judge.py in.txt out.txt; then echo "pass $i"; continue; fi
+    echo "WA"
+    exit 1
+done

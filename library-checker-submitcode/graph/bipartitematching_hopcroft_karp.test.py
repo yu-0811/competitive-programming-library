@@ -24,7 +24,7 @@ from array import array
 
 def hopcroft_karp(g, m):
     # g[u] は左頂点 u の隣接先。右頂点は 0 以上 m 未満。
-    # 左頂点ごとの相手を返す。未マッチは -1。
+    # 左頂点ごとの相手を返す。未マッチは -1。O((V+E)√(V))
     n = len(g)
     neg, zero = array("i", [-1]), array("i", [0])
     left, right = neg * n, neg * m

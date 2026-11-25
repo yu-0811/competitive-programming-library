@@ -92,17 +92,22 @@ def main():
         )
         return priority, relative.as_posix()
 
-    files = sorted(
+    python_files = sorted(
         (
             path
             for path in source.rglob("*.py")
             if path.relative_to(source).as_posix() not in excluded
-            and path.relative_to(ROOT).as_posix() not in excluded
         ),
         key=file_order,
     )
+    runners = [source.parent / name for name in ("stress", "stress-spj", "stress-judge")]
+    files = [
+        path
+        for path in [*runners, *python_files]
+        if path.relative_to(ROOT).as_posix() not in excluded
+    ]
     if not files:
-        parser.error(f"No Python files found in {source}")
+        parser.error("No notebook sources found")
 
     # Check contents rather than mtimes: pre-commit temporarily restores files.
     digest = hashlib.sha256()
@@ -134,7 +139,7 @@ def main():
         parser.error("lualatex is required (see README.md)")
     from pygments import highlight
     from pygments.formatters import LatexFormatter
-    from pygments.lexers import PythonLexer
+    from pygments.lexers import BashLexer, PythonLexer
 
     # Suppress volatile PDF metadata, including the trailer ID derived from
     # the randomly named temporary build directory.
@@ -175,10 +180,16 @@ def main():
         ]
         category = None
         for path in files:
-            relative = path.relative_to(source)
-            group = relative.parent.as_posix()
-            if group in {".", "gen"}:
-                group = "Templates, gen"
+            if path.parent == source.parent:
+                relative = Path(path.name)
+                group = "ランテス"
+                lexer = BashLexer()
+            else:
+                relative = path.relative_to(source)
+                group = relative.parent.as_posix()
+                if group in {".", "gen"}:
+                    group = "Templates, gen"
+                lexer = PythonLexer()
             if group != category:
                 category = group
                 parts.append(
@@ -192,12 +203,12 @@ def main():
             parts.append(r"\subsection{" + escape(title) + "}\n")
             # Pygments escapes TeX characters; source code is never executed.
             parts.append(
-                highlight(notebook_code(path, relative), PythonLexer(), formatter)
+                highlight(notebook_code(path, relative), lexer, formatter)
             )
         parts.append(r"\end{document}")
         (work / "notebook.tex").write_text("".join(parts), encoding="utf-8")
-        # Two passes resolve the table of contents and PDF links.
-        for _ in range(2):
+        # Lay out the table of contents before reading its updated page numbers.
+        for _ in range(3):
             result = subprocess.run(
                 [
                     "lualatex",

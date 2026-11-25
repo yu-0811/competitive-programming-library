@@ -12,4 +12,4 @@ repos:
         entry: python3 tools/build_notebook.py --stage
         language: system
         pass_filenames: false
-        files: ^(algorithm_library/python/.*\.py$|tools/build_notebook\.py$|tools/notebook-exclude\.txt$)
+        files: ^(algorithm_library/python/.*\.py$|algorithm_library/stress(-spj|-judge)?$|tools/build_notebook\.py$|tools/notebook-exclude\.txt$)
