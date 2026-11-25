@@ -315,6 +315,9 @@ data:
       path: algorithm_library/python/graph/cycle_detect.py
       title: algorithm_library/python/graph/cycle_detect.py
     - icon: ':warning:'
+      path: algorithm_library/python/graph/hamiltonian.py
+      title: algorithm_library/python/graph/hamiltonian.py
+    - icon: ':warning:'
       path: algorithm_library/python/graph/maxflow.py
       title: algorithm_library/python/graph/maxflow.py
   - name: algorithm_library/python/hash
