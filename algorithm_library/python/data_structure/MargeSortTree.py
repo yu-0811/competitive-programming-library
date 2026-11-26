@@ -2,9 +2,23 @@ from array import array
 from bisect import bisect_left, bisect_right
 
 
+# 静的な配列 A の区間 [l, r) に、値 x が何回出現するかを答える関数 count を返す
+# count = range_frequency(data) で前処理（期待 O(n)）。
+# count(l, r, x) は半開区間 [l, r) 内の x の個数を返す。
+def range_frequency(data):
+    pos = {}
+    for i, x in enumerate(data):
+        pos.setdefault(x, []).append(i)
+
+    def count(l, r, x):
+        indices = pos.get(x, ())
+        return bisect_left(indices, r) - bisect_left(indices, l)
+
+    return count
+
+
 class MergeSortTree:
     """構築 O(n log n)、区間内の個数クエリ O(log n)。"""
-
     def __init__(s, data):
         s.n = len(data)
         s.size = size = 1 << max(0, s.n - 1).bit_length()

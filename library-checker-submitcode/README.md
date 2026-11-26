@@ -62,7 +62,7 @@ if __name__ == "__main__":
 
 ## 追加済みの提出コード
 
-39 個のライブラリを、37 問・51 本の提出コードで確認できます。
+39 個のライブラリを、38 問・53 本の提出コードで確認できます。
 同じ問題に複数の実装を用意しているものもあります。
 
 | ライブラリ | 提出コード | Library Checker 問題 |
@@ -96,6 +96,7 @@ if __name__ == "__main__":
 | `data_structure/SparseTable.py` | [data_structure/staticrmq.test.py](data_structure/staticrmq.test.py) | [Static RMQ](https://judge.yosupo.jp/problem/staticrmq) |
 | `data_structure/DisjointSparseTable.py` | [data_structure/static_range_sum.test.py](data_structure/static_range_sum.test.py) | [Static Range Sum](https://judge.yosupo.jp/problem/static_range_sum) |
 | `data_structure/MargeSortTree.py` | [data_structure/static_range_frequency.test.py](data_structure/static_range_frequency.test.py) | [Static Range Frequency](https://judge.yosupo.jp/problem/static_range_frequency) |
+| `data_structure/MargeSortTree.py`（値ごとの出現位置） | [data_structure/static_range_frequency_positions.test.py](data_structure/static_range_frequency_positions.test.py) | [Static Range Frequency](https://judge.yosupo.jp/problem/static_range_frequency) |
 | `data_structure/CartesianTree.py` | [data_structure/cartesian_tree.test.py](data_structure/cartesian_tree.test.py) | [Cartesian Tree](https://judge.yosupo.jp/problem/cartesian_tree) |
 | `data_structure/LazySegtree.py` | [data_structure/range_affine_range_sum.test.py](data_structure/range_affine_range_sum.test.py) | [Range Affine Range Sum](https://judge.yosupo.jp/problem/range_affine_range_sum) |
 | `data_structure/TupleLazySegtree.py` | [data_structure/range_affine_range_sum_tuple.test.py](data_structure/range_affine_range_sum_tuple.test.py) | [Range Affine Range Sum](https://judge.yosupo.jp/problem/range_affine_range_sum) |
@@ -113,6 +114,7 @@ if __name__ == "__main__":
 | `math/mobius.py` | [math/bitwise_and_convolution.test.py](math/bitwise_and_convolution.test.py) | [Bitwise And Convolution](https://judge.yosupo.jp/problem/bitwise_and_convolution) |
 | `math/PIE.py` | [math/gcd_convolution.test.py](math/gcd_convolution.test.py) | [Gcd Convolution](https://judge.yosupo.jp/problem/gcd_convolution) |
 | `math/factorization.py`（素数列挙） | [math/enumerate_primes.test.py](math/enumerate_primes.test.py) | [Enumerate Primes](https://judge.yosupo.jp/problem/enumerate_primes) |
+| `math/factorization.py`（試し割り・64 ビット素数判定） | [math/primality_test.test.py](math/primality_test.test.py) | [Primality Test](https://judge.yosupo.jp/problem/primality_test) |
 | `math/factorization.py`（最小素因数表・大きいケースは奇数の篩） | [math/enumerate_primes_spf.test.py](math/enumerate_primes_spf.test.py) | [Enumerate Primes](https://judge.yosupo.jp/problem/enumerate_primes) |
 | `math/factorization.py`（素数フラグ表・大きいケースは奇数の篩） | [math/enumerate_primes_eratosthenes.test.py](math/enumerate_primes_eratosthenes.test.py) | [Enumerate Primes](https://judge.yosupo.jp/problem/enumerate_primes) |
 | `math/AngularSort.py` + `techniques/CmpSort.py` | [math/sort_points_by_argument.test.py](math/sort_points_by_argument.test.py) | [Sort Points by Argument](https://judge.yosupo.jp/problem/sort_points_by_argument) |

@@ -4,16 +4,16 @@ class CartesianTree:
         left = s.left = [-1] * n
         right = s.right = [-1] * n
         parent = s.parent = [-1] * n
-        stack = []
-        for i in range(n):
-            last = -1
-            while stack and A[stack[-1]] > A[i]:
-                last = stack.pop()
-            if stack:
-                p = parent[i] = stack[-1]
+        s.root = -1
+        for i, x in enumerate(A):
+            p = i - 1
+            while p >= 0 and A[p] > x:
+                left[i] = p
+                p = parent[p]
+            if left[i] >= 0:
+                parent[left[i]] = i
+            if p >= 0:
                 right[p] = i
-            if last >= 0:
-                left[i] = last
-                parent[last] = i
-            stack.append(i)
-        s.root = stack[0]
+                parent[i] = p
+            else:
+                s.root = i

@@ -1,20 +1,47 @@
 from collections import defaultdict
 from math import isqrt
 
+
+# 小さい整数用の試し割り O(√n)
 def is_prime(n):
+    if n < 2 or n % 2 == 0:
+        return n == 2
+    for d in range(3, isqrt(n) + 1, 2):
+        if n % d == 0:
+            return False
+    return True
+
+
+# 64 ビット整数用の決定的 Miller–Rabin。単独で写せる。
+# 判定 1 回につき O(k log n) 回の剰余乗算（k は基数の個数、最大 7）。
+def is_prime64(n):
+    assert n < 1 << 64
     if n < 2:
         return False
-    return all(n % d != 0 for d in range(2, math.isqrt(n) + 1))
+    for p in (2, 3, 5, 7):
+        if n % p == 0:
+            return n == p
+    d = n - 1
+    r = (d & -d).bit_length() - 1
+    d >>= r  # n - 1 = d * 2**r、d は奇数
+    bases = (2, 7, 61) if n < 1 << 32 else (
+        2, 325, 9375, 28178, 450775, 9780504, 1795265022
+    )
+    for a in bases:
+        x = pow(a, d, n)
+        if x == 1 or a % n == 0:
+            continue
+        for _ in range(r):
+            if x == n - 1:
+                break
+            x = x * x % n
+        else:
+            return False
+    return True
 
-"""
-高速素因数分解 https://atcoder.jp/contests/abc177/editorial/82
-素因数分解をしたい最大の数を N として
-構築 O(N log log N)
-素因数分解 O(log N)
-init_factorization の引数に最大の数 N を入れて初期化
-"""
 
-
+# 最小素因数表の前計算。時間 O(N log log N)、空間 O(N)。
+# 参考 https://atcoder.jp/contests/abc177/editorial/82
 def init_factorization(N: int) -> list[int]:
     # N 以下の整数に対して最小の素因数を求める
     # D[i] = i の最小の素因数
@@ -30,7 +57,8 @@ def init_factorization(N: int) -> list[int]:
 D = []  # 使用前に D = init_factorization(N) で初期化する
 
 
-# 素因数分解
+# 1 <= x <= N を素因数分解する。1 回あたり最悪 O(log x)。
+# ループ回数は重複を含む素因数の個数。
 def factorization(x: int) -> dict[int, int]:
     res = defaultdict(int)
     while x != 1:
@@ -56,11 +84,20 @@ def eratosthenes(N: int):
 def res_primeList(M):
     if M < 2:
         return []
-    s = bytearray(b"\1") * ((M + 1) // 2)  # s[k] は奇数 2*k+1 のフラグ
-    for i in range(3, isqrt(M) + 1, 2):
-        if s[i // 2]:
-            j = i * i // 2
-            s[j::i] = bytes((len(s) - 1 - j) // i + 1)
-    res = [i for i in range(1, M + 1, 2) if s[i // 2]]
-    res[0] = 2
+    root = isqrt(M)
+    small = res_primeList(root)[1:]  # √M 以下の奇素数
+    width = max(1 << 18, root)
+    limit = (M + 1) // 2
+    res = [2]
+    for lo in range(1, limit, width):
+        n = min(width, limit - lo)
+        flags = bytearray(b"\1") * n  # flags[i] は 2*(lo+i)+1 に対応
+        for p in small:
+            j = p * p // 2 - lo
+            if j >= n:
+                break
+            if j < 0:
+                j %= p
+            flags[j::p] = bytes((n - 1 - j) // p + 1)
+        res.extend([2 * (lo + i) + 1 for i in range(n) if flags[i]])
     return res

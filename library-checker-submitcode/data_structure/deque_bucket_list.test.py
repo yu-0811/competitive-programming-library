@@ -47,79 +47,57 @@ class BucketList:
                 return True
         return False
 
-    def _insert(s, a, b, i, x):
+    # i 番目の要素を含むバケット、バケット番号、その中での添字
+    def _locate(s, i):
+        if i < 0:
+            for b in range(len(s.a) - 1, -1, -1):
+                a = s.a[b]
+                i += len(a)
+                if i >= 0:
+                    return a, b, i
+        else:
+            for b, a in enumerate(s.a):
+                if i < len(a):
+                    return a, b, i
+                i -= len(a)
+        raise IndexError
+
+    def insert(s, i, x):
+        "i 番目の位置に x を挿入する。 / O(√N)"
+        if i == s.size or (not s.size and i == -1):
+            if not s.a:
+                s.a.append([])
+            b = len(s.a) - 1
+            a = s.a[b]
+            i = len(a)
+        else:
+            a, b, i = s._locate(i)
         a.insert(i, x)
         s.size += 1
         if len(a) > len(s.a) * s.sr:
             mid = len(a) >> 1
-            s.a[b : b + 1] = [a[:mid], a[mid:]]
-
-    def insert(s, i, x):
-        "i 番目の位置に x を挿入する。 / O(√N)"
-        if s.size == 0:
-            if i != 0 and i != -1:
-                raise IndexError
-            s.a = [[x]]
-            s.size = 1
-            return
-        if i < 0:
-            for b, a in enumerate(reversed(s.a)):
-                i += len(a)
-                if i >= 0:
-                    return s._insert(a, len(s.a) + ~b, i, x)
-        else:
-            for b, a in enumerate(s.a):
-                if i <= len(a):
-                    return s._insert(a, b, i, x)
-                i -= len(a)
-        raise IndexError
+            s.a[b:b + 1] = [a[:mid], a[mid:]]
 
     def append(s, x):
         "末尾に x を追加する。 / 償却 O(1)"
-        if s.size == 0:
-            s.a = [[x]]
-            s.size = 1
-            return
-        a = s.a[-1]
-        return s._insert(a, len(s.a) - 1, len(a), x)
+        s.insert(s.size, x)
 
     def extend(s, a):
         for x in a:
             s.append(x)
 
     def __getitem__(s, i):
-        if i < 0:
-            for a in reversed(s.a):
-                i += len(a)
-                if i >= 0:
-                    return a[i]
-        else:
-            for a in s.a:
-                if i < len(a):
-                    return a[i]
-                i -= len(a)
-        raise IndexError
+        a, _, i = s._locate(i)
+        return a[i]
 
-    def _pop(s, a, b, i):
+    def pop(s, i=-1):
+        "i 番目の要素を削除して返す。 / O(√N) / i < 0 なら O(-i)"
+        a, b, i = s._locate(i)
         ans = a.pop(i)
         s.size -= 1
         if not a:
             del s.a[b]
         return ans
-
-    def pop(s, i=-1):
-        "i 番目の要素を削除して返す。 / O(√N) / i < 0 なら O(-i)"
-        if i < 0:
-            for b, a in enumerate(reversed(s.a)):
-                i += len(a)
-                if i >= 0:
-                    return s._pop(a, ~b, i)
-        else:
-            for b, a in enumerate(s.a):
-                if i < len(a):
-                    return s._pop(a, b, i)
-                i -= len(a)
-        raise IndexError
 
     def count(s, x):
         "x の出現回数を返す。 / O(N)"
