@@ -35,60 +35,54 @@ data:
     \   def __iter__(s):\n        for a in s.a:\n            yield from a\n\n    def\
     \ __contains__(s, x):\n        \"x \u304C\u542B\u307E\u308C\u3066\u3044\u308C\u3070\
     \ True \u3092\u8FD4\u3059\u3002 / O(N)\"\n        for y in s:\n            if\
-    \ x == y:\n                return True\n        return False\n\n    def _insert(s,\
-    \ a, b, i, x):\n        a.insert(i, x)\n        s.size += 1\n        if len(a)\
-    \ > len(s.a) * s.sr:\n            mid = len(a) >> 1\n            s.a[b : b + 1]\
-    \ = [a[:mid], a[mid:]]\n\n    def insert(s, i, x):\n        \"i \u756A\u76EE\u306E\
-    \u4F4D\u7F6E\u306B x \u3092\u633F\u5165\u3059\u308B\u3002 / O(\u221AN)\"\n   \
-    \     if s.size == 0:\n            if i != 0 and i != -1:\n                raise\
-    \ IndexError\n            s.a = [[x]]\n            s.size = 1\n            return\n\
-    \        if i < 0:\n            for b, a in enumerate(reversed(s.a)):\n      \
-    \          i += len(a)\n                if i >= 0:\n                    return\
-    \ s._insert(a, len(s.a) + ~b, i, x)\n        else:\n            for b, a in enumerate(s.a):\n\
-    \                if i <= len(a):\n                    return s._insert(a, b, i,\
-    \ x)\n                i -= len(a)\n        raise IndexError\n\n    def append(s,\
-    \ x):\n        \"\u672B\u5C3E\u306B x \u3092\u8FFD\u52A0\u3059\u308B\u3002 / \u511F\
-    \u5374 O(1)\"\n        if s.size == 0:\n            s.a = [[x]]\n            s.size\
-    \ = 1\n            return\n        a = s.a[-1]\n        return s._insert(a, len(s.a)\
-    \ - 1, len(a), x)\n\n    def extend(s, a):\n        for x in a:\n            s.append(x)\n\
-    \n    def __getitem__(s, i):\n        if i < 0:\n            for a in reversed(s.a):\n\
-    \                i += len(a)\n                if i >= 0:\n                   \
-    \ return a[i]\n        else:\n            for a in s.a:\n                if i\
-    \ < len(a):\n                    return a[i]\n                i -= len(a)\n  \
-    \      raise IndexError\n\n    def _pop(s, a, b, i):\n        ans = a.pop(i)\n\
-    \        s.size -= 1\n        if not a:\n            del s.a[b]\n        return\
-    \ ans\n\n    def pop(s, i=-1):\n        \"i \u756A\u76EE\u306E\u8981\u7D20\u3092\
-    \u524A\u9664\u3057\u3066\u8FD4\u3059\u3002 / O(\u221AN) / i < 0 \u306A\u3089 O(-i)\"\
-    \n        if i < 0:\n            for b, a in enumerate(reversed(s.a)):\n     \
-    \           i += len(a)\n                if i >= 0:\n                    return\
-    \ s._pop(a, ~b, i)\n        else:\n            for b, a in enumerate(s.a):\n \
-    \               if i < len(a):\n                    return s._pop(a, b, i)\n \
-    \               i -= len(a)\n        raise IndexError\n\n    def count(s, x):\n\
-    \        \"x \u306E\u51FA\u73FE\u56DE\u6570\u3092\u8FD4\u3059\u3002 / O(N)\"\n\
-    \        return sum(1 for y in s if x == y)\n\n    def index(s, x):\n        \"\
-    \u6700\u521D\u306B\u73FE\u308C\u308B x \u306E\u6DFB\u5B57\u3092\u8FD4\u3059\u3002\
-    \u898B\u3064\u304B\u3089\u306A\u3051\u308C\u3070 ValueError \u3092\u9001\u51FA\
-    \u3059\u308B\u3002 / O(N)\"\n        for i, y in enumerate(s):\n            if\
-    \ x == y:\n                return i\n        raise ValueError\n\n    def remove(s,\
-    \ x):\n        \"\u6700\u521D\u306B\u73FE\u308C\u308B x \u3092\u524A\u9664\u3059\
-    \u308B\u3002\u898B\u3064\u304B\u3089\u306A\u3051\u308C\u3070 ValueError \u3092\
-    \u9001\u51FA\u3059\u308B\u3002 / O(N)\"\n        s.pop(s.index(x))\n\n    def\
-    \ clear(s):\n        s.a = []\n        s.size = 0\n\n    def reverse(s):\n   \
-    \     s.a.reverse()\n        for a in s.a:\n            a.reverse()\n\n    def\
-    \ copy(s):\n        return BucketList(s)\n\n    def __len__(s):\n        return\
-    \ s.size\n\n    def __str__(s):\n        return str(list(s))\n# END LIBRARY\n\n\
-    \ndef main():\n    Q = int(readline())\n    a = BucketList()\n    ans = []\n \
-    \   for _ in range(Q):\n        query = list(map(int, readline().split()))\n \
-    \       t = query[0]\n        if t == 0:\n            a.insert(0, query[1])\n\
-    \        elif t == 1:\n            a.append(query[1])\n        elif t == 2:\n\
-    \            a.pop(0)\n        elif t == 3:\n            a.pop()\n        else:\n\
-    \            ans.append(str(a[query[1]]))\n    sys.stdout.write(\"\\n\".join(ans)\
-    \ + (\"\\n\" if ans else \"\"))\n\n\nif __name__ == \"__main__\":\n    main()\n"
+    \ x == y:\n                return True\n        return False\n\n    # i \u756A\
+    \u76EE\u306E\u8981\u7D20\u3092\u542B\u3080\u30D0\u30B1\u30C3\u30C8\u3001\u30D0\
+    \u30B1\u30C3\u30C8\u756A\u53F7\u3001\u305D\u306E\u4E2D\u3067\u306E\u6DFB\u5B57\
+    \n    def _locate(s, i):\n        if i < 0:\n            for b in range(len(s.a)\
+    \ - 1, -1, -1):\n                a = s.a[b]\n                i += len(a)\n   \
+    \             if i >= 0:\n                    return a, b, i\n        else:\n\
+    \            for b, a in enumerate(s.a):\n                if i < len(a):\n   \
+    \                 return a, b, i\n                i -= len(a)\n        raise IndexError\n\
+    \n    def insert(s, i, x):\n        \"i \u756A\u76EE\u306E\u4F4D\u7F6E\u306B x\
+    \ \u3092\u633F\u5165\u3059\u308B\u3002 / O(\u221AN)\"\n        if i == s.size\
+    \ or (not s.size and i == -1):\n            if not s.a:\n                s.a.append([])\n\
+    \            b = len(s.a) - 1\n            a = s.a[b]\n            i = len(a)\n\
+    \        else:\n            a, b, i = s._locate(i)\n        a.insert(i, x)\n \
+    \       s.size += 1\n        if len(a) > len(s.a) * s.sr:\n            mid = len(a)\
+    \ >> 1\n            s.a[b:b + 1] = [a[:mid], a[mid:]]\n\n    def append(s, x):\n\
+    \        \"\u672B\u5C3E\u306B x \u3092\u8FFD\u52A0\u3059\u308B\u3002 / \u511F\u5374\
+    \ O(1)\"\n        s.insert(s.size, x)\n\n    def extend(s, a):\n        for x\
+    \ in a:\n            s.append(x)\n\n    def __getitem__(s, i):\n        a, _,\
+    \ i = s._locate(i)\n        return a[i]\n\n    def pop(s, i=-1):\n        \"i\
+    \ \u756A\u76EE\u306E\u8981\u7D20\u3092\u524A\u9664\u3057\u3066\u8FD4\u3059\u3002\
+    \ / O(\u221AN) / i < 0 \u306A\u3089 O(-i)\"\n        a, b, i = s._locate(i)\n\
+    \        ans = a.pop(i)\n        s.size -= 1\n        if not a:\n            del\
+    \ s.a[b]\n        return ans\n\n    def count(s, x):\n        \"x \u306E\u51FA\
+    \u73FE\u56DE\u6570\u3092\u8FD4\u3059\u3002 / O(N)\"\n        return sum(1 for\
+    \ y in s if x == y)\n\n    def index(s, x):\n        \"\u6700\u521D\u306B\u73FE\
+    \u308C\u308B x \u306E\u6DFB\u5B57\u3092\u8FD4\u3059\u3002\u898B\u3064\u304B\u3089\
+    \u306A\u3051\u308C\u3070 ValueError \u3092\u9001\u51FA\u3059\u308B\u3002 / O(N)\"\
+    \n        for i, y in enumerate(s):\n            if x == y:\n                return\
+    \ i\n        raise ValueError\n\n    def remove(s, x):\n        \"\u6700\u521D\
+    \u306B\u73FE\u308C\u308B x \u3092\u524A\u9664\u3059\u308B\u3002\u898B\u3064\u304B\
+    \u3089\u306A\u3051\u308C\u3070 ValueError \u3092\u9001\u51FA\u3059\u308B\u3002\
+    \ / O(N)\"\n        s.pop(s.index(x))\n\n    def clear(s):\n        s.a = []\n\
+    \        s.size = 0\n\n    def reverse(s):\n        s.a.reverse()\n        for\
+    \ a in s.a:\n            a.reverse()\n\n    def copy(s):\n        return BucketList(s)\n\
+    \n    def __len__(s):\n        return s.size\n\n    def __str__(s):\n        return\
+    \ str(list(s))\n# END LIBRARY\n\n\ndef main():\n    Q = int(readline())\n    a\
+    \ = BucketList()\n    ans = []\n    for _ in range(Q):\n        query = list(map(int,\
+    \ readline().split()))\n        t = query[0]\n        if t == 0:\n           \
+    \ a.insert(0, query[1])\n        elif t == 1:\n            a.append(query[1])\n\
+    \        elif t == 2:\n            a.pop(0)\n        elif t == 3:\n          \
+    \  a.pop()\n        else:\n            ans.append(str(a[query[1]]))\n    sys.stdout.write(\"\
+    \\n\".join(ans) + (\"\\n\" if ans else \"\"))\n\n\nif __name__ == \"__main__\"\
+    :\n    main()\n"
   dependsOn: []
   isVerificationFile: true
   path: library-checker-submitcode/data_structure/deque_bucket_list.test.py
   requiredBy: []
-  timestamp: '2026-11-06 23:20:20+09:00'
+  timestamp: '2026-11-26 13:10:00+09:00'
   verificationStatus: TEST_ACCEPTED
   verifiedWith: []
 documentation_of: library-checker-submitcode/data_structure/deque_bucket_list.test.py

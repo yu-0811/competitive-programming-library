@@ -318,6 +318,12 @@ data:
       path: algorithm_library/python/graph/hamiltonian.py
       title: algorithm_library/python/graph/hamiltonian.py
     - icon: ':warning:'
+      path: algorithm_library/python/graph/hopcroft_karp.py
+      title: algorithm_library/python/graph/hopcroft_karp.py
+    - icon: ':warning:'
+      path: algorithm_library/python/graph/hungarian.py
+      title: algorithm_library/python/graph/hungarian.py
+    - icon: ':warning:'
       path: algorithm_library/python/graph/maxflow.py
       title: algorithm_library/python/graph/maxflow.py
   - name: algorithm_library/python/hash
@@ -413,6 +419,9 @@ data:
       path: algorithm_library/python/techniques/2-SAT.py
       title: algorithm_library/python/techniques/2-SAT.py
     - icon: ':warning:'
+      path: algorithm_library/python/techniques/2Dimos.py
+      title: algorithm_library/python/techniques/2Dimos.py
+    - icon: ':warning:'
       path: algorithm_library/python/techniques/3buntansaku.py
       title: algorithm_library/python/techniques/3buntansaku.py
     - icon: ':warning:'
@@ -439,9 +448,6 @@ data:
     - icon: ':warning:'
       path: algorithm_library/python/techniques/RunLengthCompression.py
       title: algorithm_library/python/techniques/RunLengthCompression.py
-    - icon: ':warning:'
-      path: algorithm_library/python/techniques/imos.py
-      title: algorithm_library/python/techniques/imos.py
   - name: heuristic_library/cpp
     pages:
     - icon: ':warning:'
@@ -535,6 +541,9 @@ data:
       path: library-checker-submitcode/src/data_structure/static_range_frequency.py
       title: library-checker-submitcode/src/data_structure/static_range_frequency.py
     - icon: ':warning:'
+      path: library-checker-submitcode/src/data_structure/static_range_frequency_positions.py
+      title: library-checker-submitcode/src/data_structure/static_range_frequency_positions.py
+    - icon: ':warning:'
       path: library-checker-submitcode/src/data_structure/static_range_sum.py
       title: library-checker-submitcode/src/data_structure/static_range_sum.py
     - icon: ':warning:'
@@ -543,8 +552,14 @@ data:
   - name: library-checker-submitcode/src/graph
     pages:
     - icon: ':warning:'
+      path: library-checker-submitcode/src/graph/assignment.py
+      title: library-checker-submitcode/src/graph/assignment.py
+    - icon: ':warning:'
       path: library-checker-submitcode/src/graph/bipartitematching.py
       title: library-checker-submitcode/src/graph/bipartitematching.py
+    - icon: ':warning:'
+      path: library-checker-submitcode/src/graph/bipartitematching_hopcroft_karp.py
+      title: library-checker-submitcode/src/graph/bipartitematching_hopcroft_karp.py
     - icon: ':warning:'
       path: library-checker-submitcode/src/graph/cycle_detection_undirected.py
       title: library-checker-submitcode/src/graph/cycle_detection_undirected.py
@@ -616,6 +631,9 @@ data:
     - icon: ':warning:'
       path: library-checker-submitcode/src/math/pow_of_matrix_vec.py
       title: library-checker-submitcode/src/math/pow_of_matrix_vec.py
+    - icon: ':warning:'
+      path: library-checker-submitcode/src/math/primality_test.py
+      title: library-checker-submitcode/src/math/primality_test.py
     - icon: ':warning:'
       path: library-checker-submitcode/src/math/sort_points_by_argument.py
       title: library-checker-submitcode/src/math/sort_points_by_argument.py
@@ -781,6 +799,9 @@ data:
       path: library-checker-submitcode/data_structure/static_range_frequency.test.py
       title: library-checker-submitcode/data_structure/static_range_frequency.test.py
     - icon: ':heavy_check_mark:'
+      path: library-checker-submitcode/data_structure/static_range_frequency_positions.test.py
+      title: library-checker-submitcode/data_structure/static_range_frequency_positions.test.py
+    - icon: ':heavy_check_mark:'
       path: library-checker-submitcode/data_structure/static_range_sum.test.py
       title: library-checker-submitcode/data_structure/static_range_sum.test.py
     - icon: ':heavy_check_mark:'
@@ -789,8 +810,14 @@ data:
   - name: library-checker-submitcode/graph
     pages:
     - icon: ':heavy_check_mark:'
+      path: library-checker-submitcode/graph/assignment.test.py
+      title: library-checker-submitcode/graph/assignment.test.py
+    - icon: ':heavy_check_mark:'
       path: library-checker-submitcode/graph/bipartitematching.test.py
       title: library-checker-submitcode/graph/bipartitematching.test.py
+    - icon: ':heavy_check_mark:'
+      path: library-checker-submitcode/graph/bipartitematching_hopcroft_karp.test.py
+      title: library-checker-submitcode/graph/bipartitematching_hopcroft_karp.test.py
     - icon: ':heavy_check_mark:'
       path: library-checker-submitcode/graph/cycle_detection_undirected.test.py
       title: library-checker-submitcode/graph/cycle_detection_undirected.test.py
@@ -862,6 +889,9 @@ data:
     - icon: ':heavy_check_mark:'
       path: library-checker-submitcode/math/pow_of_matrix_vec.test.py
       title: library-checker-submitcode/math/pow_of_matrix_vec.test.py
+    - icon: ':heavy_check_mark:'
+      path: library-checker-submitcode/math/primality_test.test.py
+      title: library-checker-submitcode/math/primality_test.test.py
     - icon: ':heavy_check_mark:'
       path: library-checker-submitcode/math/sort_points_by_argument.test.py
       title: library-checker-submitcode/math/sort_points_by_argument.test.py

@@ -51,7 +51,7 @@ data:
   isVerificationFile: false
   path: algorithm_library/python/string/sort_by_concat.py
   requiredBy: []
-  timestamp: '2026-11-06 23:36:52+09:00'
+  timestamp: '2026-11-26 00:25:20+09:00'
   verificationStatus: LIBRARY_NO_TESTS
   verifiedWith: []
 documentation_of: algorithm_library/python/string/sort_by_concat.py

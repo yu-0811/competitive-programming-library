@@ -34,15 +34,15 @@ data:
     \           cur[j] = prev[j] + total\n        return grid\n"
   dependsOn: []
   isVerificationFile: false
-  path: algorithm_library/python/techniques/imos.py
+  path: algorithm_library/python/techniques/2Dimos.py
   requiredBy: []
-  timestamp: '2026-10-20 11:41:54+09:00'
+  timestamp: '2026-11-26 14:24:49+09:00'
   verificationStatus: LIBRARY_NO_TESTS
   verifiedWith: []
-documentation_of: algorithm_library/python/techniques/imos.py
+documentation_of: algorithm_library/python/techniques/2Dimos.py
 layout: document
 redirect_from:
-- /library/algorithm_library/python/techniques/imos.py
-- /library/algorithm_library/python/techniques/imos.py.html
-title: algorithm_library/python/techniques/imos.py
+- /library/algorithm_library/python/techniques/2Dimos.py
+- /library/algorithm_library/python/techniques/2Dimos.py.html
+title: algorithm_library/python/techniques/2Dimos.py
 ---

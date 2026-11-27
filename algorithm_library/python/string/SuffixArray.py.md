@@ -13,38 +13,41 @@ data:
     \ basedir=basedir, options={'include_paths': [basedir]}).decode()\n          \
     \                  ^^^^^^\n  File \"/opt/hostedtoolcache/PyPy/3.11.17/x64/lib/pypy3.11/site-packages/onlinejudge_verify/languages/python.py\"\
     , line 96, in bundle\n    raise NotImplementedError\nNotImplementedError\n"
-  code: "# SA \u306E\u69CB\u7BC9\uFF1AO(|S|)\n# SA[i]: int \u3067 S \u306E SA[i] \u304B\
-    \u3089\u59CB\u307E\u308B suffix \u304C\u30BD\u30FC\u30C8\u3055\u308C\u3066\u308B\
-    \n\n\ndef sa_is(s, upper):\n    n = len(s)\n    if n < 2:\n        return list(range(n))\n\
-    \    ls = [0] * n\n    for i in range(n - 2, -1, -1):\n        ls[i] = ls[i +\
-    \ 1] if s[i] == s[i + 1] else s[i] < s[i + 1]\n    sum_l = [0] * (upper + 1)\n\
-    \    sum_s = [0] * (upper + 1)\n    for i in range(n):\n        if not ls[i]:\n\
-    \            sum_s[s[i]] += 1\n        else:\n            sum_l[s[i] + 1] += 1\n\
-    \    for i in range(upper + 1):\n        sum_s[i] += sum_l[i]\n        if i <\
-    \ upper:\n            sum_l[i + 1] += sum_s[i]\n\n    def induce(lms):\n     \
-    \   sa = [-1] * n\n        buf = sum_s[:]\n        for d in lms:\n           \
-    \ sa[buf[s[d]]] = d\n            buf[s[d]] += 1\n        buf = sum_l[:]\n    \
-    \    sa[buf[s[-1]]] = n - 1\n        buf[s[-1]] += 1\n        for v in sa:\n \
-    \           if v > 0 and not ls[v - 1]:\n                sa[buf[s[v - 1]]] = v\
-    \ - 1\n                buf[s[v - 1]] += 1\n        buf = sum_l[:]\n        for\
-    \ v in reversed(sa):\n            if v > 0 and ls[v - 1]:\n                buf[s[v\
-    \ - 1] + 1] -= 1\n                sa[buf[s[v - 1] + 1]] = v - 1\n        return\
-    \ sa\n\n    lms = [i for i in range(1, n) if not ls[i - 1] and ls[i]]\n    m =\
-    \ len(lms)\n    sa = induce(lms)\n    if m:\n        ids = [-1] * n\n        for\
-    \ i, v in enumerate(lms):\n            ids[v] = i\n        order = [v for v in\
-    \ sa if ids[v] != -1]\n        lms.append(n)\n        rec = [0] * m\n        rank\
-    \ = 0\n        # LMS \u90E8\u5206\u6587\u5B57\u5217\u306F\u6B21\u306E LMS \u4F4D\
-    \u7F6E\u306E\u6587\u5B57\u307E\u3067\u542B\u3081\u3066\u6BD4\u8F03\u3059\u308B\
-    \u3002\n        # \u5404\u533A\u9593\u306E\u6BD4\u8F03\u306F\u9AD8\u3005 2 \u56DE\
-    \u306A\u306E\u3067\u3001\u30B9\u30E9\u30A4\u30B9\u306E\u5408\u8A08\u9577\u3082\
-    \ O(n)\u3002\n        for l, r in zip(order, order[1:]):\n            el, er =\
-    \ lms[ids[l] + 1], lms[ids[r] + 1]\n            rank += s[l : el + 1] != s[r :\
-    \ er + 1]\n            rec[ids[r]] = rank\n        if rank + 1 < m:\n        \
-    \    order = [lms[i] for i in sa_is(rec, rank)]\n        sa = induce(order)\n\
-    \    return sa\n\n\ndef suffix_array_upper(s, upper):\n    assert 0 <= upper\n\
-    \    for d in s:\n        assert 0 <= d <= upper\n    return sa_is(s, upper)\n\
-    \n\ndef suffix_array(s) -> list[int]:\n    n = len(s)\n    if type(s) == str:\n\
-    \        return sa_is(list(map(ord, s)), 255)\n    idx = sorted(range(n), key=s.__getitem__)\n\
+  code: "from itertools import accumulate\n\n\n# SA \u306E\u69CB\u7BC9\uFF1AO(|S|)\n\
+    # SA[i]: int \u3067 S \u306E SA[i] \u304B\u3089\u59CB\u307E\u308B suffix \u304C\
+    \u30BD\u30FC\u30C8\u3055\u308C\u3066\u308B\n\n\ndef sa_is(s, upper):\n    n =\
+    \ len(s)\n    if n < 2:\n        return list(range(n))\n    ls = bytearray(n)\n\
+    \    for i in range(n - 2, -1, -1):\n        ls[i] = ls[i + 1] if s[i] == s[i\
+    \ + 1] else s[i] < s[i + 1]\n    count = [0] * (upper + 1)\n    for x in s:\n\
+    \        count[x] += 1\n    # \u6587\u5B57 x \u306E\u30D0\u30B1\u30C3\u30C8\u306F\
+    \ [bounds[x], bounds[x + 1])\u3002\n    bounds = list(accumulate(count, initial=0))\n\
+    \n    def induce(lms):\n        sa = [-1] * n\n        buf = bounds[1:]\n    \
+    \    for i in reversed(lms):\n            c = s[i]\n            buf[c] -= 1\n\
+    \            sa[buf[c]] = i\n        buf = bounds[:-1]\n        sa[buf[s[-1]]]\
+    \ = n - 1\n        buf[s[-1]] += 1\n        for v in sa:\n            i = v -\
+    \ 1\n            if i >= 0 and not ls[i]:\n                c = s[i]\n        \
+    \        sa[buf[c]] = i\n                buf[c] += 1\n        buf = bounds[1:]\n\
+    \        for v in reversed(sa):\n            i = v - 1\n            if i >= 0\
+    \ and ls[i]:\n                c = s[i]\n                buf[c] -= 1\n        \
+    \        sa[buf[c]] = i\n        return sa\n\n    lms = [i for i in range(1, n)\
+    \ if not ls[i - 1] and ls[i]]\n    m = len(lms)\n    sa = induce(lms)\n    if\
+    \ m:\n        ids = [-1] * n\n        for i, v in enumerate(lms):\n          \
+    \  ids[v] = i\n        order = [v for v in sa if ids[v] != -1]\n        lms.append(n)\n\
+    \        rec = [0] * m\n        rank = 0\n        # LMS \u90E8\u5206\u6587\u5B57\
+    \u5217\u306F\u6B21\u306E LMS \u4F4D\u7F6E\u306E\u6587\u5B57\u307E\u3067\u542B\u3081\
+    \u3066\u6BD4\u8F03\u3059\u308B\u3002\n        # \u5404\u533A\u9593\u306E\u6BD4\
+    \u8F03\u306F\u9AD8\u3005 2 \u56DE\u306A\u306E\u3067\u3001\u30B9\u30E9\u30A4\u30B9\
+    \u306E\u5408\u8A08\u9577\u3082 O(n)\u3002\n        for l, r in zip(order, order[1:]):\n\
+    \            el, er = lms[ids[l] + 1], lms[ids[r] + 1]\n            rank += s[l\
+    \ : el + 1] != s[r : er + 1]\n            rec[ids[r]] = rank\n        if rank\
+    \ + 1 < m:\n            order = [lms[i] for i in sa_is(rec, rank)]\n        sa\
+    \ = induce(order)\n    return sa\n\n\ndef suffix_array_upper(s, upper):\n    assert\
+    \ 0 <= upper\n    for d in s:\n        assert 0 <= d <= upper\n    return sa_is(s,\
+    \ upper)\n\n\ndef suffix_array(s) -> list[int]:\n    n = len(s)\n    # 1 \u6587\
+    \u5B57 1 \u30D0\u30A4\u30C8\u306B\u3067\u304D\u308B\u3068\u304D\u306F\u5EA7\u6A19\
+    \u5727\u7E2E\u3092\u7701\u304F\u3002\n    if isinstance(s, str) and max(s, default=\"\
+    \") <= \"\\xff\":\n        s = s.encode(\"latin1\")\n    if isinstance(s, (bytes,\
+    \ bytearray)):\n        return sa_is(s, 255)\n    idx = sorted(range(n), key=s.__getitem__)\n\
     \    s2 = [0] * n\n    now = 0\n    for i, j in zip(idx, idx[1:]):\n        now\
     \ += s[i] != s[j]\n        s2[j] = now\n    return sa_is(s2, now)\n\n\n# lcp[i]\
     \ = S \u306E SA[i] \u6587\u5B57\u76EE\u304B\u3089\u59CB\u307E\u308B suffix \u3068\
@@ -66,7 +69,7 @@ data:
   isVerificationFile: false
   path: algorithm_library/python/string/SuffixArray.py
   requiredBy: []
-  timestamp: '2026-11-08 19:01:56+09:00'
+  timestamp: '2026-11-26 00:25:20+09:00'
   verificationStatus: LIBRARY_NO_TESTS
   verifiedWith: []
 documentation_of: algorithm_library/python/string/SuffixArray.py

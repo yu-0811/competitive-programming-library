@@ -1,0 +1,52 @@
+---
+data:
+  _extendedDependsOn: []
+  _extendedRequiredBy: []
+  _extendedVerifiedWith: []
+  _isVerificationFailed: false
+  _pathExtension: py
+  _verificationStatusIcon: ':warning:'
+  attributes:
+    links: []
+  bundledCode: "Traceback (most recent call last):\n  File \"/opt/hostedtoolcache/PyPy/3.11.17/x64/lib/pypy3.11/site-packages/onlinejudge_verify/documentation/build.py\"\
+    , line 71, in _render_source_code_stat\n    bundled_code = language.bundle(stat.path,\
+    \ basedir=basedir, options={'include_paths': [basedir]}).decode()\n          \
+    \                  ^^^^^^\n  File \"/opt/hostedtoolcache/PyPy/3.11.17/x64/lib/pypy3.11/site-packages/onlinejudge_verify/languages/python.py\"\
+    , line 96, in bundle\n    raise NotImplementedError\nNotImplementedError\n"
+  code: "def hungarian(a):\n    \"\"\"\n    \u4E8C\u90E8\u30B0\u30E9\u30D5\u306E\u6700\
+    \u5C0F\u91CD\u307F\u5B8C\u5168\u30DE\u30C3\u30C1\u30F3\u30B0 O(n^3) \u6642\u9593\
+    \n    \u6B63\u65B9\u6574\u6570\u884C\u5217 a[i][j] = \u5DE6\u9802\u70B9 i \u3068\
+    \u53F3\u9802\u70B9 j \u3092\u7D50\u3076\u8FBA\u306E\u91CD\u307F, \u8FBA\u304C\u306A\
+    \u3051\u308C\u3070 inf\n    \u5B8C\u5168\u30DE\u30C3\u30C1\u30F3\u30B0\u306A\u306E\
+    \u3067\u5DE6\u9802\u70B9\u3068\u53F3\u9802\u70B9\u306E\u6570\u306F\u540C\u3058\
+    \u3067\u306A\u3044\u3068\u3044\u3051\u306A\u3044\n    (\u6700\u5C0F\u8CBB\u7528\
+    , P) \u3092\u8FD4\u3059\u3002P[i] = \u5DE6\u9802\u70B9 i \u3068\u30DE\u30C3\u30C1\
+    \u3057\u305F\u53F3\u9802\u70B9\u306E\u756A\u53F7\n    \"\"\"\n    n = len(a)\n\
+    \    v, p = list(map(min, zip(*a))), [-1] * n\n    for s in range(n):\n      \
+    \  dist = [x - y for x, y in zip(a[s], v)]\n        prev = [-1] * n\n        rest\
+    \ = list(range(n))\n        j = min(rest, key=dist.__getitem__)\n        while\
+    \ p[j] >= 0:\n            rest.remove(j)\n            row = a[p[j]]\n        \
+    \    shift = dist[j] - row[j] + v[j]\n            last, j = j, rest[0]\n     \
+    \       best = dist[j]\n            for k in rest:\n                d = dist[k]\n\
+    \                x = row[k] - v[k] + shift\n                if x < d:\n      \
+    \              dist[k] = d = x\n                    prev[k] = last\n         \
+    \       if d < best or (d == best and p[k] < 0):\n                    best, j\
+    \ = d, k\n        end = dist[j]\n        for k, d in enumerate(dist):\n      \
+    \      if d < end:\n                v[k] += d - end\n        while prev[j] >=\
+    \ 0:\n            k = prev[j]\n            p[j], j = p[k], k\n        p[j] = s\n\
+    \    ans = [0] * n\n    for j, i in enumerate(p):\n        ans[i] = j\n    return\
+    \ sum(row[j] for row, j in zip(a, ans)), ans\n"
+  dependsOn: []
+  isVerificationFile: false
+  path: algorithm_library/python/graph/hungarian.py
+  requiredBy: []
+  timestamp: '2026-11-25 22:52:02+09:00'
+  verificationStatus: LIBRARY_NO_TESTS
+  verifiedWith: []
+documentation_of: algorithm_library/python/graph/hungarian.py
+layout: document
+redirect_from:
+- /library/algorithm_library/python/graph/hungarian.py
+- /library/algorithm_library/python/graph/hungarian.py.html
+title: algorithm_library/python/graph/hungarian.py
+---

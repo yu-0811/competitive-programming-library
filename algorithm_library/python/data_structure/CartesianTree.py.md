@@ -15,17 +15,17 @@ data:
     , line 96, in bundle\n    raise NotImplementedError\nNotImplementedError\n"
   code: "class CartesianTree:\n    def __init__(s, A):\n        n = len(A)\n     \
     \   left = s.left = [-1] * n\n        right = s.right = [-1] * n\n        parent\
-    \ = s.parent = [-1] * n\n        stack = []\n        for i in range(n):\n    \
-    \        last = -1\n            while stack and A[stack[-1]] > A[i]:\n       \
-    \         last = stack.pop()\n            if stack:\n                p = parent[i]\
-    \ = stack[-1]\n                right[p] = i\n            if last >= 0:\n     \
-    \           left[i] = last\n                parent[last] = i\n            stack.append(i)\n\
-    \        s.root = stack[0]\n"
+    \ = s.parent = [-1] * n\n        s.root = -1\n        for i, x in enumerate(A):\n\
+    \            p = i - 1\n            while p >= 0 and A[p] > x:\n             \
+    \   left[i] = p\n                p = parent[p]\n            if left[i] >= 0:\n\
+    \                parent[left[i]] = i\n            if p >= 0:\n               \
+    \ right[p] = i\n                parent[i] = p\n            else:\n           \
+    \     s.root = i\n"
   dependsOn: []
   isVerificationFile: false
   path: algorithm_library/python/data_structure/CartesianTree.py
   requiredBy: []
-  timestamp: '2026-11-08 19:01:56+09:00'
+  timestamp: '2026-11-26 13:10:00+09:00'
   verificationStatus: LIBRARY_NO_TESTS
   verifiedWith: []
 documentation_of: algorithm_library/python/data_structure/CartesianTree.py

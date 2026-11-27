@@ -52,13 +52,15 @@ data:
     \        priority = (\n            0\n            if relative.parent == Path(\"\
     .\")\n            else 1\n            if relative.parts[0] == \"gen\"\n      \
     \      else 2\n        )\n        return priority, relative.as_posix()\n\n   \
-    \ files = sorted(\n        (\n            path\n            for path in source.rglob(\"\
-    *.py\")\n            if path.relative_to(source).as_posix() not in excluded\n\
-    \            and path.relative_to(ROOT).as_posix() not in excluded\n        ),\n\
-    \        key=file_order,\n    )\n    if not files:\n        parser.error(f\"No\
-    \ Python files found in {source}\")\n\n    # Check contents rather than mtimes:\
-    \ pre-commit temporarily restores files.\n    digest = hashlib.sha256()\n    for\
-    \ path in [Path(__file__).resolve(), exclude_file, *files]:\n        digest.update(path.relative_to(ROOT).as_posix().encode())\n\
+    \ python_files = sorted(\n        (\n            path\n            for path in\
+    \ source.rglob(\"*.py\")\n            if path.relative_to(source).as_posix() not\
+    \ in excluded\n        ),\n        key=file_order,\n    )\n    runners = [source.parent\
+    \ / name for name in (\"stress\", \"stress-spj\", \"stress-judge\")]\n    files\
+    \ = [\n        path\n        for path in [*runners, *python_files]\n        if\
+    \ path.relative_to(ROOT).as_posix() not in excluded\n    ]\n    if not files:\n\
+    \        parser.error(\"No notebook sources found\")\n\n    # Check contents rather\
+    \ than mtimes: pre-commit temporarily restores files.\n    digest = hashlib.sha256()\n\
+    \    for path in [Path(__file__).resolve(), exclude_file, *files]:\n        digest.update(path.relative_to(ROOT).as_posix().encode())\n\
     \        digest.update(b\"\\0\")\n        digest.update(path.read_bytes())\n \
     \       digest.update(b\"\\0\")\n    source_hash = digest.hexdigest()\n    cache_key\
     \ = hashlib.sha256(str(output).encode()).hexdigest()\n    cache_path = ROOT /\
@@ -72,9 +74,9 @@ data:
     \        return\n\n    if not shutil.which(\"lualatex\"):\n        parser.error(\"\
     lualatex is required (see README.md)\")\n    from pygments import highlight\n\
     \    from pygments.formatters import LatexFormatter\n    from pygments.lexers\
-    \ import PythonLexer\n\n    # Suppress volatile PDF metadata, including the trailer\
-    \ ID derived from\n    # the randomly named temporary build directory.\n    preamble\
-    \ = r\"\"\"\\pdfvariable suppressoptionalinfo 767\\relax\n\\documentclass[a4paper,9pt,twocolumn]{extarticle}\n\
+    \ import BashLexer, PythonLexer\n\n    # Suppress volatile PDF metadata, including\
+    \ the trailer ID derived from\n    # the randomly named temporary build directory.\n\
+    \    preamble = r\"\"\"\\pdfvariable suppressoptionalinfo 767\\relax\n\\documentclass[a4paper,9pt,twocolumn]{extarticle}\n\
     \\usepackage[margin=10mm,top=9mm,bottom=9mm,footskip=5mm]{geometry}\n\\usepackage{luatexja-fontspec}\n\
     \\setmainjfont{IPAexGothic}\n\\setsansjfont{IPAexGothic}\n\\setmonojfont{IPAexGothic}\n\
     \\usepackage{fvextra}\n\\usepackage{xcolor}\n\\usepackage{fancyhdr}\n\\usepackage[hidelinks,unicode]{hyperref}\n\
@@ -88,9 +90,12 @@ data:
     ,\n        )\n        parts = [\n            preamble.replace(\n             \
     \   r\"\\begin{document}\",\n                formatter.get_style_defs() + \"\\\
     n\" + r\"\\begin{document}\",\n            )\n        ]\n        category = None\n\
-    \        for path in files:\n            relative = path.relative_to(source)\n\
-    \            group = relative.parent.as_posix()\n            if group in {\".\"\
-    , \"gen\"}:\n                group = \"Templates, gen\"\n            if group\
+    \        for path in files:\n            if path.parent == source.parent:\n  \
+    \              relative = Path(path.name)\n                group = \"\u30E9\u30F3\
+    \u30C6\u30B9\"\n                lexer = BashLexer()\n            else:\n     \
+    \           relative = path.relative_to(source)\n                group = relative.parent.as_posix()\n\
+    \                if group in {\".\", \"gen\"}:\n                    group = \"\
+    Templates, gen\"\n                lexer = PythonLexer()\n            if group\
     \ != category:\n                category = group\n                parts.append(\n\
     \                    r\"\\section{\"\n                    + escape(group)\n  \
     \                  + \"}\\n\"\n                )\n            title = path.name\n\
@@ -98,10 +103,10 @@ data:
     \ += \"\uFF08\u5DEE\u5206\uFF09\"\n            parts.append(r\"\\subsection{\"\
     \ + escape(title) + \"}\\n\")\n            # Pygments escapes TeX characters;\
     \ source code is never executed.\n            parts.append(\n                highlight(notebook_code(path,\
-    \ relative), PythonLexer(), formatter)\n            )\n        parts.append(r\"\
-    \\end{document}\")\n        (work / \"notebook.tex\").write_text(\"\".join(parts),\
-    \ encoding=\"utf-8\")\n        # Two passes resolve the table of contents and\
-    \ PDF links.\n        for _ in range(2):\n            result = subprocess.run(\n\
+    \ relative), lexer, formatter)\n            )\n        parts.append(r\"\\end{document}\"\
+    )\n        (work / \"notebook.tex\").write_text(\"\".join(parts), encoding=\"\
+    utf-8\")\n        # Lay out the table of contents before reading its updated page\
+    \ numbers.\n        for _ in range(3):\n            result = subprocess.run(\n\
     \                [\n                    \"lualatex\",\n                    \"\
     -interaction=nonstopmode\",\n                    \"-halt-on-error\",\n       \
     \             \"notebook.tex\",\n                ],\n                cwd=work,\n\
@@ -120,7 +125,7 @@ data:
   isVerificationFile: false
   path: tools/build_notebook.py
   requiredBy: []
-  timestamp: '2026-11-22 20:55:47+09:00'
+  timestamp: '2026-11-26 00:04:18+09:00'
   verificationStatus: LIBRARY_NO_TESTS
   verifiedWith: []
 documentation_of: tools/build_notebook.py

@@ -14,40 +14,49 @@ data:
     \                  ^^^^^^\n  File \"/opt/hostedtoolcache/PyPy/3.11.17/x64/lib/pypy3.11/site-packages/onlinejudge_verify/languages/python.py\"\
     , line 96, in bundle\n    raise NotImplementedError\nNotImplementedError\n"
   code: "from array import array\nfrom bisect import bisect_left, bisect_right\n\n\
-    \nclass MergeSortTree:\n    \"\"\"\u69CB\u7BC9 O(n log n)\u3001\u533A\u9593\u5185\
-    \u306E\u500B\u6570\u30AF\u30A8\u30EA O(log n)\u3002\"\"\"\n\n    def __init__(s,\
-    \ data):\n        s.n = len(data)\n        s.size = size = 1 << max(0, s.n - 1).bit_length()\n\
-    \        s.tree = tree = [[]] * (2 * size)\n        s.link = links = [None] *\
-    \ size\n\n        tree[size : size + s.n] = [[x] for x in data]\n        # \u5B50\
-    \u30CE\u30FC\u30C9\u306E\u8981\u7D20\u3092\u30BD\u30FC\u30C8\u3057\u3066\u3059\
-    \u3079\u3066\u6301\u3064\u3088\u3046\u306B\u69CB\u7BC9\n        for i in range(size\
-    \ - 1, 0, -1):\n            left = tree[2 * i]\n            values = tree[i] =\
-    \ sorted(left + tree[2 * i + 1])\n            left_size = len(left)\n        \
-    \    # \u89AA\u306E\u5148\u982D k \u8981\u7D20\u306B\u542B\u307E\u308C\u308B\u5DE6\
-    \u306E\u5B50\u306E\u8981\u7D20\u6570\u3092\u8A18\u9332\u3059\u308B\u3002\n   \
-    \         # \u540C\u5024\u306E\u8981\u7D20\u306F\u3001\u5B89\u5B9A\u30BD\u30FC\
-    \u30C8\u3068\u540C\u3058\u304F\u5DE6\u306E\u5B50\u3092\u5148\u306B\u6570\u3048\
-    \u308B\u3002\n            prefix = array(\"I\", [0])\n            rank = 0\n \
-    \           for value in values:\n                if rank < left_size and not\
-    \ value < left[rank]:\n                    rank += 1\n                prefix.append(rank)\n\
-    \            links[i] = prefix\n\n    def _count(s, l, r, lo, hi, node, height):\n\
-    \        links = s.link\n        width = 1 << height\n        mask = width - 1\n\
-    \        # \u4E21\u7AEF\u306E\u7D2F\u7A4D\u500B\u6570\u3092\u540C\u3058\u30EB\u30FC\
-    \u30D7\u3067\u6C42\u3081\u3001\u305D\u306E\u5DEE\u3092\u53D6\u308B\u3002\n   \
-    \     res = hi - lo if r & mask == 0 else 0\n        for pos, sign in ((l & mask,\
-    \ -1), (r & mask, 1)):\n            v, a, b, bit = node, lo, hi, width\n     \
-    \       count = 0\n            while pos and a != b:\n                bit >>=\
-    \ 1\n                link = links[v]\n                x, y = link[a], link[b]\n\
-    \                v <<= 1\n                if pos & bit:\n                    count\
-    \ += y - x\n                    a -= x\n                    b -= y\n         \
-    \           v += 1\n                    pos -= bit\n                else:\n  \
-    \                  a, b = x, y\n            res += sign * count\n        return\
-    \ res\n\n    # \u533A\u9593 [l, r) \u3067\u5024\u304C x \u4EE5\u4E0B\u306E\u8981\
-    \u7D20\u6570\u3092\u6C42\u3081\u308B\n    def query_leq(s, l, r, x):\n       \
-    \ if l >= r:\n            return 0\n        # \u4E21\u7AEF\u306E\u8449\u3092\u542B\
-    \u3080\u6700\u5C0F\u30CE\u30FC\u30C9\u3067\u3060\u3051\u4E8C\u5206\u63A2\u7D22\
-    \u3059\u308B\u3002\n        height = (l ^ (r - 1)).bit_length()\n        node\
-    \ = (l + s.size) >> height\n        values = s.tree[node]\n        hi = bisect_right(values,\
+    \n# \u9759\u7684\u306A\u914D\u5217 A \u306E\u533A\u9593 [l, r) \u306B\u3001\u5024\
+    \ x \u304C\u4F55\u56DE\u51FA\u73FE\u3059\u308B\u304B\u3092\u7B54\u3048\u308B\u95A2\
+    \u6570 count \u3092\u8FD4\u3059\n# count = range_frequency(data) \u3067\u524D\u51E6\
+    \u7406\uFF08\u671F\u5F85 O(n)\uFF09\u3002\n# count(l, r, x) \u306F\u534A\u958B\
+    \u533A\u9593 [l, r) \u5185\u306E x \u306E\u500B\u6570\u3092\u8FD4\u3059\u3002\n\
+    def range_frequency(data):\n    pos = {}\n    for i, x in enumerate(data):\n \
+    \       pos.setdefault(x, []).append(i)\n\n    def count(l, r, x):\n        indices\
+    \ = pos.get(x, ())\n        return bisect_left(indices, r) - bisect_left(indices,\
+    \ l)\n\n    return count\n\n\nclass MergeSortTree:\n    \"\"\"\u69CB\u7BC9 O(n\
+    \ log n)\u3001\u533A\u9593\u5185\u306E\u500B\u6570\u30AF\u30A8\u30EA O(log n)\u3002\
+    \"\"\"\n    def __init__(s, data):\n        s.n = len(data)\n        s.size =\
+    \ size = 1 << max(0, s.n - 1).bit_length()\n        s.tree = tree = [[]] * (2\
+    \ * size)\n        s.link = links = [None] * size\n\n        tree[size : size\
+    \ + s.n] = [[x] for x in data]\n        # \u5B50\u30CE\u30FC\u30C9\u306E\u8981\
+    \u7D20\u3092\u30BD\u30FC\u30C8\u3057\u3066\u3059\u3079\u3066\u6301\u3064\u3088\
+    \u3046\u306B\u69CB\u7BC9\n        for i in range(size - 1, 0, -1):\n         \
+    \   left = tree[2 * i]\n            values = tree[i] = sorted(left + tree[2 *\
+    \ i + 1])\n            left_size = len(left)\n            # \u89AA\u306E\u5148\
+    \u982D k \u8981\u7D20\u306B\u542B\u307E\u308C\u308B\u5DE6\u306E\u5B50\u306E\u8981\
+    \u7D20\u6570\u3092\u8A18\u9332\u3059\u308B\u3002\n            # \u540C\u5024\u306E\
+    \u8981\u7D20\u306F\u3001\u5B89\u5B9A\u30BD\u30FC\u30C8\u3068\u540C\u3058\u304F\
+    \u5DE6\u306E\u5B50\u3092\u5148\u306B\u6570\u3048\u308B\u3002\n            prefix\
+    \ = array(\"I\", [0])\n            rank = 0\n            for value in values:\n\
+    \                if rank < left_size and not value < left[rank]:\n           \
+    \         rank += 1\n                prefix.append(rank)\n            links[i]\
+    \ = prefix\n\n    def _count(s, l, r, lo, hi, node, height):\n        links =\
+    \ s.link\n        width = 1 << height\n        mask = width - 1\n        # \u4E21\
+    \u7AEF\u306E\u7D2F\u7A4D\u500B\u6570\u3092\u540C\u3058\u30EB\u30FC\u30D7\u3067\
+    \u6C42\u3081\u3001\u305D\u306E\u5DEE\u3092\u53D6\u308B\u3002\n        res = hi\
+    \ - lo if r & mask == 0 else 0\n        for pos, sign in ((l & mask, -1), (r &\
+    \ mask, 1)):\n            v, a, b, bit = node, lo, hi, width\n            count\
+    \ = 0\n            while pos and a != b:\n                bit >>= 1\n        \
+    \        link = links[v]\n                x, y = link[a], link[b]\n          \
+    \      v <<= 1\n                if pos & bit:\n                    count += y\
+    \ - x\n                    a -= x\n                    b -= y\n              \
+    \      v += 1\n                    pos -= bit\n                else:\n       \
+    \             a, b = x, y\n            res += sign * count\n        return res\n\
+    \n    # \u533A\u9593 [l, r) \u3067\u5024\u304C x \u4EE5\u4E0B\u306E\u8981\u7D20\
+    \u6570\u3092\u6C42\u3081\u308B\n    def query_leq(s, l, r, x):\n        if l >=\
+    \ r:\n            return 0\n        # \u4E21\u7AEF\u306E\u8449\u3092\u542B\u3080\
+    \u6700\u5C0F\u30CE\u30FC\u30C9\u3067\u3060\u3051\u4E8C\u5206\u63A2\u7D22\u3059\
+    \u308B\u3002\n        height = (l ^ (r - 1)).bit_length()\n        node = (l +\
+    \ s.size) >> height\n        values = s.tree[node]\n        hi = bisect_right(values,\
     \ x)\n        if hi == len(values):\n            return r - l\n        return\
     \ s._count(l, r, 0, hi, node, height)\n\n    # \u533A\u9593[l, r) \u3067\u5024\
     \u304C a \u4EE5\u4E0A b \u672A\u6E80\u306E\u8981\u7D20\u6570\u3092\u6C42\u3081\
@@ -60,7 +69,7 @@ data:
   isVerificationFile: false
   path: algorithm_library/python/data_structure/MargeSortTree.py
   requiredBy: []
-  timestamp: '2026-11-17 18:24:35+09:00'
+  timestamp: '2026-11-26 13:10:00+09:00'
   verificationStatus: LIBRARY_NO_TESTS
   verifiedWith: []
 documentation_of: algorithm_library/python/data_structure/MargeSortTree.py

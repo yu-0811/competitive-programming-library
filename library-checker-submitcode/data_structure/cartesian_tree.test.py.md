@@ -29,20 +29,19 @@ data:
     \ LIBRARY: algorithm_library/python/data_structure/CartesianTree.py\nclass CartesianTree:\n\
     \    def __init__(s, A):\n        n = len(A)\n        left = s.left = [-1] * n\n\
     \        right = s.right = [-1] * n\n        parent = s.parent = [-1] * n\n  \
-    \      stack = []\n        for i in range(n):\n            last = -1\n       \
-    \     while stack and A[stack[-1]] > A[i]:\n                last = stack.pop()\n\
-    \            if stack:\n                p = parent[i] = stack[-1]\n          \
-    \      right[p] = i\n            if last >= 0:\n                left[i] = last\n\
-    \                parent[last] = i\n            stack.append(i)\n        s.root\
-    \ = stack[0]\n# END LIBRARY\n\n\ndef main():\n    _N = int(readline())\n    tree\
-    \ = CartesianTree(list(map(int, readline().split())))\n    parents = tree.parent\n\
-    \    parents[tree.root] = tree.root\n    print(*parents)\n\n\nif __name__ == \"\
-    __main__\":\n    main()\n"
+    \      s.root = -1\n        for i, x in enumerate(A):\n            p = i - 1\n\
+    \            while p >= 0 and A[p] > x:\n                left[i] = p\n       \
+    \         p = parent[p]\n            if left[i] >= 0:\n                parent[left[i]]\
+    \ = i\n            if p >= 0:\n                right[p] = i\n                parent[i]\
+    \ = p\n            else:\n                s.root = i\n# END LIBRARY\n\n\ndef main():\n\
+    \    _N = int(readline())\n    tree = CartesianTree(list(map(int, readline().split())))\n\
+    \    parents = tree.parent\n    parents[tree.root] = tree.root\n    print(*parents)\n\
+    \n\nif __name__ == \"__main__\":\n    main()\n"
   dependsOn: []
   isVerificationFile: true
   path: library-checker-submitcode/data_structure/cartesian_tree.test.py
   requiredBy: []
-  timestamp: '2026-11-08 19:01:56+09:00'
+  timestamp: '2026-11-26 13:10:00+09:00'
   verificationStatus: TEST_ACCEPTED
   verifiedWith: []
 documentation_of: library-checker-submitcode/data_structure/cartesian_tree.test.py
