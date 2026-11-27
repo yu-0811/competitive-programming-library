@@ -4,11 +4,11 @@
 
 def main():
     N, M = map(int, readline().split())
-    graph = SCC(N)
+    edges = []
     for _ in range(M):
         u, v = map(int, readline().split())
-        graph.addEdge(u, v)
-    groups = graph.build_scc()
+        edges.append((u, v))
+    groups, _ = scc_dag(N, edges)
     ans = [str(len(groups))]
     ans.extend(f"{len(group)} " + " ".join(map(str, group)) for group in groups)
     sys.stdout.write("\n".join(ans) + "\n")
